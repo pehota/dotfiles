@@ -1,0 +1,78 @@
+[core]
+	excludesfile = /Users/dimitarapostolov/.gitignore
+	quotepath = false
+[user]
+	name =
+	email =
+	useconfigonly = true
+[merge]
+	ff = no
+	tool = diffmerge
+[diff]
+	tool = diffmerge
+[difftool "diffmerge"]
+	cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
+[mergetool "diffmerge"]
+	trustExitCode = true
+	cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[credential]
+	helper = osxkeychain
+[filter "lfs"]
+	smudge = git-lfs smudge %f
+	required = true
+	clean = git-lfs clean %f
+[alias]
+	cp = cherry-pick
+	co = checkout
+	cm = "!sh -c 'git bm | grep -v \"\\*\" | grep -v master | grep -v edge | grep -v development | xargs -n 1 git branch -d'"
+ 	richlog = log --all --graph --decorate --oneline --simplify-by-decoration
+ 	update = "!sh -c 'git fetch --prune && git pull --rebase'"
+ 	poop = "!sh -c 'git diff-index HEAD --quiet --exit-code; NEEDS_STASH=$?; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash; else echo \"Nothing to stash.\"; fi; git checkout \"$0\" && git pull origin \"$0\"; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash pop; fi;'"
+	cbn = "!sh -c 'git symbolic-ref --short HEAD | pbcopy'"
+ 	ss = stash save -u
+ 	sl = stash list
+ 	sd = stash drop
+ 	sa = stash apply
+ 	sp = stash pop
+ 	ssh = stash show
+ 	db = branch -D
+  rb = branch -m
+ 	unstage = reset HEAD
+ 	bm = branch --merged
+ 	ulc = reset --soft HEAD~ #undoes the last, not-pushed commit
+ 	pss = "!sh -c 'BRANCH_NAME=`git symbolic-ref --short HEAD`;git push -u origin $BRANCH_NAME'"
+ 	deployed = "!f(){ git branch -r --contains $1 | cut -f1 -d'/' | sort | uniq; }; f"
+ 	ri = "!sh -c 'git rebase -i HEAD~$0'"
+	ai = add -i
+	ls = branch
+  ; lsa = "!sh -c 'git for-each-ref --format=\'%(committerdate) %09 %(authorname) %09 %(refname)\' | sort -k5n -k2M -k3n -k4n'"
+	cc = "!sh -c 'git cherry -v $0 | grep +'"
+	# GIT glow aliases
+	ff = flow feature
+	fsf = flow feature start
+	fef = flow feature finish
+	fb = flow bugfix
+	fsb = flow bugfix start
+	feb = flow bugfix finish
+	fr = flow release
+	fsr = flow release start
+	fer = flow release finish
+	fh = flow hotfix
+	fsh = flow hotfix start
+	feh = flow hotfix finish
+	fs = flow support
+	fss = flow support start
+	fes = flow support finish
+	commend = commit --amend --no-edit
+	please = push --force-with-lease
+	st = status --short --branch
+[help]
+	autocorrect = -1
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/dimitarapostolov/.stCommitMsg
