@@ -18,11 +18,11 @@ export TERM=screen-256color
 
 # Git branch in prompt.
 # Nicer bash prefix with git branch
+GIT_PS1_SHOWDIRTYSTATE=1
 source ~/.git-prompt.sh
 # Custom bash prompt via kirsle.net/wizards/ps1.html
 export PS1="\[$(tput bold)\]\[$(tput setaf 2)\]\[$(tput setaf 3)\]\w\$(__git_ps1 '\[\033[1;35;1m\] (%s)\[\033[0m\]')\[$(tput setaf 2)\]\\$ \[$(tput sgr0)\]"
 
-alias g='git'
 alias bup='brew update && brew upgrade && brew cleanup -s && brew doctor'
 alias reboot-shell='source ~/.bash_profile'
 alias tmux='tmux -2'
