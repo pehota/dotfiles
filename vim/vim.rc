@@ -1,0 +1,15 @@
+set nocompatible
+
+call plug#begin()
+
+try
+  source ~/.dotfiles/vim.rc.plugs
+catch
+endtry
+
+call plug#end()
+
+syntax enable
+
+" enable line numbers
+set number
