@@ -1,0 +1,34 @@
+" enable mapping for Alt key on Ubuntu
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+
+set timeout ttimeoutlen=50
+
+let mapleader = "\<space>"
+let g:mapleader = "\<space>"
+
+" == scrooloose/nerdtree ==
+let NERDTreeShowHidden=1
+map <silent> <F3> :NERDTreeToggle<CR>
+nmap <silent> <F2> :NERDTreeFind<CR>
+nmap <silent> <Leader>t :!npm run test<CR>
+
+nmap <silent> <A-w> :bp\|bd#<CR>
+nmap <silent> <A-k> :wincmd k<CR>
+nmap <silent> <A-j> :wincmd j<CR>
+nmap <silent> <A-h> :wincmd h<CR>
+nmap <silent> <A-l> :wincmd l<CR>
+nmap <silent> <Leader><Esc> :noh<CR>
+
+nmap <silent> <F9> :Gblame<CR>
+nmap <Tab> :b#<CR>
+
+nmap <silent> <C-j> :+10<CR>
+nnoremap <silent> <C-k> :-10<CR>
+
+
+set pastetoggle=<F4>

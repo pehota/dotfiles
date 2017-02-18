@@ -7,7 +7,20 @@ Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'itchyny/lightline.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tpope/vim-fugitive'
+
+" == vim-airline/vim-airline ==
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+let g:airline_powerline_fonts=1
+let g:airline_theme='badwolf'
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#fnamemod=':t'
+
+let g:tmuxline_powerline_separators=1
+
 
 " == Autocomplete plugins ==
 Plug 'ervandew/supertab'
@@ -39,3 +52,10 @@ Plug 'othree/javascript-libraries-syntax.vim'
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tomasr/molokai'
+
+" == 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|meteor)$|node_modules'
+let g:ctrlp_max_height=25
+let g:ctrlp_clear_cache_on_exit=0
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
