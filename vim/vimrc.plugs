@@ -1,6 +1,6 @@
 " == General editor plugins ==
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
+Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-repeat'
