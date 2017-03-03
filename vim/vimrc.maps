@@ -25,7 +25,8 @@ nmap <silent> <A-l> :wincmd l<CR>
 nmap <silent> <Leader><Esc> :noh<CR>
 
 nmap <silent> <F9> :Gblame<CR>
-nmap <Tab> :b#<CR>
+nmap <silent> <Tab> :b#<CR>
+nmap <silent> <S-Tab> :bn<CR>
 
 nmap <silent> <C-j> :+10<CR>
 nnoremap <silent> <C-k> :-10<CR>
