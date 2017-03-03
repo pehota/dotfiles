@@ -56,7 +56,11 @@ Plug 'flowtype/vim-flow'
 " == JavaScript syntax highlighting ==
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
+
+" == mxw/vim-jsx ==
 Plug 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
+
 Plug 'othree/javascript-libraries-syntax.vim'
 
 Plug 'ctrlpvim/ctrlp.vim'
@@ -68,3 +72,8 @@ let g:ctrlp_max_height=25
 let g:ctrlp_clear_cache_on_exit=0
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
+
+
+" == alvan/vim-closetag ==
+Plug 'alvan/vim-closetag'
+let g:closetag_filenames = "*.html,*.ejs,*.php,*.js"
