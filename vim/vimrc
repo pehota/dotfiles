@@ -19,9 +19,6 @@ set visualbell
 set t_Co=256
 " set termguicolors
 colorscheme molokai
-set colorcolumn=80
-" highlight ColorColumn ctermbg=darkgrey
-" highlight Directory ctermfg=grey
 
 " Highlight current line
 augroup CursorLine
@@ -58,6 +55,10 @@ autocmd BufEnter * silent! lcd %:p:h
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
+
+" == Identation and Spaces
+autocmd FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=80
+autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4 colorcolumn=80
 
 " Session Management
 " automatically load and save session on start/exit.
