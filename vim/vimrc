@@ -19,8 +19,9 @@ set visualbell
 set t_Co=256
 " set termguicolors
 colorscheme molokai
-highlight ColorColumn ctermbg=darkgrey
-highlight Directory ctermfg=grey
+set colorcolumn=80
+" highlight ColorColumn ctermbg=darkgrey
+" highlight Directory ctermfg=grey
 
 " Highlight current line
 augroup CursorLine
