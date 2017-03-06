@@ -2,17 +2,23 @@
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-fugitive'
+Plug 'mileszs/ack.vim'
+Plug 'google/vim-searchindex'
+Plug 'Yggdroot/indentLine'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'Valloric/YouCompleteMe'
+
+" == elm stuff ==
 Plug 'elmcast/elm-vim'
-
-
-" == avh4/elm-format ==
-Plug 'avh4/elm-format'
 let g:elm_format_autosave = 1
 
 " == ryanoasis/vim-devicons ==
