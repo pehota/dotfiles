@@ -15,10 +15,19 @@ Plug 'Yggdroot/indentLine'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'Olical/vim-enmasse'
 " Plug 'Valloric/YouCompleteMe'
 
 " == elm stuff ==
 Plug 'elmcast/elm-vim'
+
+Plug 'mileszs/ack.vim'
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" == avh4/elm-format ==
+Plug 'avh4/elm-format'
 let g:elm_format_autosave = 1
 
 " == ryanoasis/vim-devicons ==
