@@ -20,6 +20,9 @@ set t_Co=256
 " set termguicolors
 colorscheme molokai
 
+" Highlight matching parenthesis
+DoMatchParen
+
 " Highlight current line
 augroup CursorLine
   au!
