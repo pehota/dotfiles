@@ -21,7 +21,7 @@ set t_Co=256
 colorscheme molokai
 
 " Highlight matching parenthesis
-DoMatchParen
+au VimEnter * DoMatchParen 
 
 " Highlight current line
 augroup CursorLine
@@ -45,7 +45,6 @@ set ignorecase
 set smartcase
 set nu
 set mouse=
-let loaded_matchparen=1
 set splitright
 set clipboard=unnamedplus
 
