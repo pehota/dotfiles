@@ -16,7 +16,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Olical/vim-enmasse'
-" Plug 'Valloric/YouCompleteMe'
 
 " == elm stuff ==
 Plug 'elmcast/elm-vim'
@@ -49,8 +48,21 @@ let g:tmuxline_powerline_separators=1
 " == Autocomplete plugins ==
 Plug 'ervandew/supertab'
 
-" == scrooloose/syntastic ==
-Plug 'scrooloose/syntastic'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
+  Plug 'steelsojka/deoplete-flow'
+
+  " == carlitux/deoplete-ternjs ==
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  let g:deoplete#enable_at_startup = 1
+  let g:SuperTabDefaultCompletionType = "<c-n>"
+  " let g:deoplete#sources#flow#flow_bin = g:flow_path
+  let g:tern_request_timeout = 1
+  let g:tern_show_signature_in_pum = 0
+  set completeopt-=preview
+else
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+endif
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
