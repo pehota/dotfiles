@@ -16,6 +16,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Olical/vim-enmasse'
+Plug 'alvan/vim-closetag'
 
 " == elm stuff ==
 Plug 'elmcast/elm-vim'
