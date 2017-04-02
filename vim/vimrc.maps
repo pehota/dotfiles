@@ -38,3 +38,4 @@ set pastetoggle=<F4>
 
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
+nnoremap <C-p> :FZF<cr>

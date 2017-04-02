@@ -1,8 +1,6 @@
 " == General editor plugins ==
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
@@ -17,6 +15,14 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Olical/vim-enmasse'
 Plug 'alvan/vim-closetag'
+
+" == junegunn/fzf ==
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+let g:fzf_action = {
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit'
+      \ }
 
 " == elm stuff ==
 Plug 'elmcast/elm-vim'
