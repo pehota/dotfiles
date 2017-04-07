@@ -15,6 +15,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Olical/vim-enmasse'
 Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-sleuth'
 
 " == junegunn/fzf ==
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
