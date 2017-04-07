@@ -2,6 +2,7 @@
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+export PATH="$HOME/.mongodb/bin:$PATH"
 
 eval "$(thefuck --alias)"
 
@@ -27,3 +28,6 @@ alias bup='brew update && brew upgrade && brew cleanup -s && brew doctor'
 alias reboot-shell='source ~/.bash_profile'
 alias tmux='tmux -2'
 alias f*='fuck'
+alias vim='vim -u ~/.dotfiles/vim/vimrc'
+alias cdg='cd ~/Work/Shore/git'
+alias cdw='cd ~/Work'
