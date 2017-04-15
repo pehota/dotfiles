@@ -1,5 +1,5 @@
 [core]
-	excludesfile = /Users/dimitarapostolov/.gitignore
+	excludesfile = ~/.gitignore
 	quotepath = false
 [user]
 	name =
@@ -76,4 +76,4 @@
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [commit]
-	template = /Users/dimitarapostolov/.stCommitMsg
+	template = ~/.stCommitMsg
