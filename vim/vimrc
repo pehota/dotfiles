@@ -94,6 +94,12 @@ endfunction
 au VimEnter * nested :call LoadSession()
 au VimLeave * :call MakeSession()
 
+" Try to improve scrolling speed
+set lazyredraw
+
+if !has('nvim')
+  set ttyfast
+endif
 
 "============ mappings
 source ~/.dotfiles/vim/vimrc.maps
