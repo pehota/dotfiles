@@ -1,1 +1,0 @@
-/Users/dimitarapostolov/.vimrc.js/vimrc
