@@ -8,6 +8,8 @@ if has('vim')
   endw
 endif
 
+let s:uname = system("uname")
+
 set timeout ttimeoutlen=50
 
 let mapleader = "\<space>"
@@ -19,11 +21,19 @@ map <silent> <F3> :NERDTreeToggle<CR>
 nmap <silent> <F2> :NERDTreeFind<CR>
 nmap <silent> <Leader>t :!npm run test<CR>
 
-nmap <silent> <A-w> :bp\|bd#<CR>
 nmap <silent> <A-k> :wincmd k<CR>
 nmap <silent> <A-j> :wincmd j<CR>
 nmap <silent> <A-h> :wincmd h<CR>
 nmap <silent> <A-l> :wincmd l<CR>
+
+if s:uname == "Darwin\n"
+  nmap <silent> ˚ :wincmd k<CR>
+  nmap <silent> ª :wincmd j<CR>
+  nmap <silent> ˙ :wincmd h<CR>
+  nmap <silent> ¬ :wincmd l<CR>
+endif
+
+nmap <silent> <A-w> :bp\|bd#<CR>
 nmap <silent> <Leader><Esc> :noh<CR>
 
 nmap <silent> <F9> :Gblame<CR>
