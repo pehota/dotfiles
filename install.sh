@@ -7,13 +7,12 @@
 ########## Variables
 
 dir=$HOME/.dotfiles                    # dotfiles directory
-olddir=$HOME/.dotfiles_bkp             # old dotfiles backup directory
-# files="bashrc vimrc vim zshrc oh-my-zsh"    # list of files/folders to symlink in homedir
-
+dstdir=$HOME                           # folder to copy the files to
+olddir=$dstdir/.dotfiles_bkp           # old dotfiles backup directory
 ##########
 
 # create dotfiles_old in homedir
-echo "Creating $olddir for backup of any existing dotfiles in ~"
+echo "Creating $olddir for backup of any existing dotfiles in $dir"
 mkdir -p $olddir
 echo "...done"
 
@@ -24,14 +23,49 @@ echo "...done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 # for file in $files; do
-for location in $(find $dir -maxdepth 1 -name '*' ! -path '*.git'| sort); do
+for location in $(find "$dir/copy" -maxdepth 1 -name '*' ! -path '*.git'| sort); do
   file=$(basename $location)
-  if [[ $file =~ ^\. || $file == $(basename "$0") ]]; then
+
+  if [[ "copy" == $file ]]; then
     continue;
   fi
 
-  echo "Moving any existing dotfiles $file to $olddir"
-  mv -f $HOME/.$file $olddir 
-  echo "Creating symlink to $file in home directory."
-  ln -s $dir/$file ~/.$file
+  echo "Moving .$file to $olddir"
+  mv -f $dstdir/.$file $olddir 
+
+  echo "Creating symlink to $dir/copy/$file in $dstdir/.$file"
+  ln -s $dir/copy/$file $dstdir/.$file
 done
+
+for location in $(find "$dir/merge" -maxdepth 1 -name '*' ! -path '*.git'| sort); do
+  dirToMerge=$(basename $location)
+
+  if [[ "merge" == $dirToMerge ]]; then
+    continue;
+  fi
+
+  for fileInDir in $(find "$location" -maxdepth 1 -name '*' ! -path '*.git'| sort); do
+    fileToMerge=$(basename $fileInDir)
+    destination=$dstdir/.$dirToMerge/$fileToMerge;
+    backupDir=$olddir/$dirToMerge;
+
+    if [[ $dirToMerge == $fileToMerge ]]; then
+      continue;
+    fi
+
+    if [[ ! -d $(dirname $destination) ]]; then
+      mkdir -p $(dirname $destination);
+    fi
+
+    if [[ -e $destination  ]]; then
+      echo "Moving $destination to $backupDir"
+      mkdir -p $backupDir;
+      mv -f $destination $backupDir;
+    fi
+    echo "Creating symlink to $fileInDir in home $destination"
+    ln -s $fileInDir $destination
+  done
+done
+cd $dir > /dev/null
+
+echo "Done"
