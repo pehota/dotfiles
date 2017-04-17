@@ -1,0 +1,39 @@
+# ~/.tmuxinator/core.yml
+
+
+name: booking-service
+root: ~/Work/Shore/git/booking-service/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: logs
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t core
+
+tmux_options: -f ~/.tmux.conf
+windows:
+  - editor: nvim
+  - server:
+      layout: tiled
+      panes:
+        - git ls
+        - PAYMENT_SERVICE_URL='https://payment-edge.shore.com' SECRET_KEY_BASE='875f765df526313139cf1ecf87f390bb238ffa86a00ca30dd218dc5b89d03e086bb4c93ed909ecd9c301b862f39bfbeea638b89cb2d4037c591ad4a32eb69e72' rails s -e edge -p 3000
+
