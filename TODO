@@ -1,3 +1,5 @@
+Use OS specific files where necessary and possible
+Install git credential helpers
 Install nvim
 Install vimrc.js
 Install nvim Plugins
