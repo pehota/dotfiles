@@ -16,6 +16,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Olical/vim-enmasse'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-sleuth'
+Plug 'vim-scripts/BufOnly.vim'
 
 " == junegunn/fzf ==
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
