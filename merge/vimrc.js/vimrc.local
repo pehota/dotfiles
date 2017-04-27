@@ -179,7 +179,7 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 
 
 " Better Whitespace
-autocmd FileType css,sass,less,scss,coffee,python,html,javascript,htmldjango,markdown autocmd BufWritePre <buffer> StripWhitespace
+autocmd FileType sh,css,sass,less,scss,coffee,python,html,javascript,htmldjango,markdown autocmd BufWritePre <buffer> StripWhitespace
 
 " Autocomplete with tern
 set omnifunc=syntaxcomplete#Complete
