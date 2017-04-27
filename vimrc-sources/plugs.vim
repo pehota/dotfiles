@@ -17,6 +17,8 @@ Plug 'Olical/vim-enmasse'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-sleuth'
 Plug 'vim-scripts/BufOnly.vim'
+Plug 'kshenoy/vim-signature'
+Plug 'mustache/vim-mustache-handlebars'
 
 " == junegunn/fzf ==
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -25,6 +27,8 @@ let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit'
       \ }
+" disable statusline overwriting
+let g:fzf_nvim_statusline=0
 
 " == elm stuff ==
 Plug 'elmcast/elm-vim'

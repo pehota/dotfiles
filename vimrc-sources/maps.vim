@@ -41,7 +41,9 @@ nmap <silent> <Tab> :b#<CR>
 nmap <silent> <S-Tab> :bn<CR>
 
 nmap <silent> <C-j> :+10<CR>
+vmap <silent> <C-j> 10j<CR>
 nnoremap <silent> <C-k> :-10<CR>
+vnoremap <silent> <C-k> 10k<CR>
 
 
 set pastetoggle=<F4>
