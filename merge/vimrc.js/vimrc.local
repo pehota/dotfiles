@@ -126,6 +126,10 @@ nmap <silent> <M-k> :wincmd k<CR>
 nmap <silent> <M-j> :wincmd j<CR>
 nmap <silent> <M-h> :wincmd h<CR>
 nmap <silent> <M-l> :wincmd l<CR>
+nmap <silent> <M-K> :wincmd K<CR>
+nmap <silent> <M-J> :wincmd J<CR>
+nmap <silent> <M-H> :wincmd H<CR>
+nmap <silent> <M-L> :wincmd L<CR>
 nmap <silent> <Leader><Esc> :noh<CR>
 
 set pastetoggle=<F4>
