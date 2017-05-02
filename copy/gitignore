@@ -37,3 +37,4 @@ node_modules/
 .vscode
 .tern-port
 elm-stuff
+bower_components
