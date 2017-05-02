@@ -115,7 +115,9 @@ nmap <silent> <F9> :Gblame<CR>
 nmap <Tab> :b#<CR>
 tmap <Esc> <C-\><C-n><cr>
 nmap <silent> <C-j> :+10<CR>
+vmap <silent> <C-j> 10j<CR>
 nnoremap <silent> <C-k> :-10<CR>
+vnoremap <silent> <C-k> 10k<CR>
 
 " == scrooloose/nerdtree ==
 nmap <silent> <Leader>t :!npm run test<CR>
