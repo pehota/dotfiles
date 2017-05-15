@@ -120,7 +120,6 @@ nnoremap <silent> <C-k> :-10<CR>
 vnoremap <silent> <C-k> 10k<CR>
 
 " == scrooloose/nerdtree ==
-nmap <silent> <Leader>t :!npm run test<CR>
 nmap <silent> <M-w> :bp\|bd#<CR>
 nmap <silent> <M-k> :wincmd k<CR>
 nmap <silent> <M-j> :wincmd j<CR>
@@ -131,6 +130,7 @@ nmap <silent> <M-J> :wincmd J<CR>
 nmap <silent> <M-H> :wincmd H<CR>
 nmap <silent> <M-L> :wincmd L<CR>
 nmap <silent> <Leader><Esc> :noh<CR>
+nmap <silent> <Leader>bd :bufdo bd<CR>
 
 set pastetoggle=<F4>
 
