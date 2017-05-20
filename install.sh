@@ -80,6 +80,11 @@ if (!(which tmux > /dev/null)); then
   else
     sudo apt-get install tmux
   fi
+
+  # Install the tmux plugin manager
+  if [[ ! -d $DST_DIR/.tmux/plugins/tpm ]]; then
+    git clone https://github.com/tmux-plugins/tpm $DST_DIR/.tmux/plugins/tpm
+  fi
 fi
 
 # Install tmuxinator if necessary
