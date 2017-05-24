@@ -31,7 +31,7 @@ root: ./
 # post: tmux -CC attach -t merchant-app
 tmux_options: -f ~/.tmux.conf
 windows:
-  - editor: nvim
+  - editor: nvim . +e +NERDTreeClose
   - tools:
       layout: tiled
       panes:
