@@ -76,7 +76,7 @@ fi
 # Install tmux if necessary
 if (!(which tmux > /dev/null)); then
   if [[ $IS_MAC ]]; then
-    brew install tmux
+    brew install tmux reattach-to-user-namespace
   else
     sudo apt-get install tmux
   fi
