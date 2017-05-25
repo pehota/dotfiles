@@ -78,7 +78,7 @@ if (!(which tmux > /dev/null)); then
   if [[ $IS_MAC ]]; then
     brew install tmux reattach-to-user-namespace urlview
   else
-    sudo apt-get install tmux
+    sudo apt-get install tmux urlview
   fi
 
   # Install the tmux plugin manager
