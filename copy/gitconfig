@@ -67,6 +67,7 @@
   please = push --force-with-lease origin HEAD
   st = status --short --branch
   cam = commit -am
+  lb = "!sh -c 'git shortlog -s | sort -nr'"
 [help]
   autocorrect = -1
 [difftool "sourcetree"]
