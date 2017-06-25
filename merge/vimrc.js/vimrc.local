@@ -5,7 +5,7 @@ if has('nvim')
   let g:neomake_javascript_enabled_makers=['eslint']
   let g:neomake_jsx_enabled_makers=['eslint']
 
-  autocmd! BufWritePost,BufReadPost * Neomake
+  autocmd! BufWritePost * Neomake
 
   " DevIcon
   let g:webdevicons_conceal_nerdtree_brackets=1
