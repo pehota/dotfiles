@@ -35,5 +35,5 @@ windows:
   - tools:
       layout: tiled
       panes:
-        - git ls
+        - git status --short --branch
         - npm start
