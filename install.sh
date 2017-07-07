@@ -45,12 +45,16 @@ fi
 # Install nvim if necessary
 if (!(which nvim > /dev/null)); then
   if [[ $IS_MAC ]]; then
-    brew install neovim/neovim/neovim
+    brew install neovim
   else
     sudo apt-get -y install software-properties-common
     sudo add-apt-repository ppa:neovim-ppa/stable
     sudo apt-get -y update
     sudo apt-get -y install neovim python-dev python-pip python3-dev python3-pip
+  fi
+
+  if (!(which pip > /dev/null)); then
+    sudo easy_install pip
   fi
 
   pip install python-neovim
@@ -89,32 +93,33 @@ fi
 
 # Install tmuxinator if necessary
 if (!(which tmuxinator > /dev/null)); then
-  gem install tmuxinator
+  sudo gem install tmuxinator
   mkdir ~/.bin
-  curl -o $tmuxinatorCompletionPath https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.bash
+  sudo curl -o $tmuxinatorCompletionPath https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.bash
 fi
 
 # clone the .dotfiles repo
 if [[ ! -d $DOTFILES_DIR  ]]; then
   git clone --quiet https://github.com/pehota/dotfiles.git $DOTFILES_DIR
-  . "$DOTFILES_DIR/link-files.sh"
-  # Rerun plug installation on nvim
-  nvim +PlugInstall +qall
-  echo "source $tmuxinatorCompletionPath" >> .bash_profile
+fi
 
-  if [[ $IS_MAC ]]; then
+. "$DOTFILES_DIR/link-files.sh"
+
+# Rerun plug installation on nvim
+nvim +PlugInstall +qall
+echo "source $tmuxinatorCompletionPath" >> .bash_profile
+
+if [[ $IS_MAC ]]; then
 cat <<brewConfig
-    if [ -f \$(brew --prefix)/etc/bash_completion ]; then
-      . \$(brew --prefix)/etc/bash_completion
-    fi
-    alias bup='brew update && brew upgrade && brew cleanup -s && brew doctor'
+if [ -f \$(brew --prefix)/etc/bash_completion ]; then
+	. \$(brew --prefix)/etc/bash_completion
+fi
+alias bup='brew update && brew upgrade && brew cleanup -s && brew doctor'
 brewConfig
-    $brewCompletion >> ~/.bash_profile
+$brewCompletion >> ~/.bash_profile
 
-    if [[ -d "/Applications/Postgres.app/Contents/Versions/latest/bin" ]]; then
-      echo "export PATH=\$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin" >> ~/.bash_profile
-    fi
-  fi
+if [[ -d "/Applications/Postgres.app/Contents/Versions/latest/bin" ]]; then
+  echo "export PATH=\$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin" >> ~/.bash_profile
 fi
 
 if [[ $IS_MAC ]]; then
