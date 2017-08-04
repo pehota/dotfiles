@@ -68,6 +68,7 @@
   st = status --short --branch
   cam = commit -am
   lb = "!sh -c 'git shortlog -s | sort -nr'"
+  debranch = "!sh -c 'git branch | grep -v master | xargs git branch -D'"
 [help]
   autocorrect = -1
 [difftool "sourcetree"]
