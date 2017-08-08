@@ -1,7 +1,7 @@
 # ~/.tmuxinator/merchant-app.yml
 
-name: app-runner
-root: ./
+name: <%= ARGV[1] %>
+root: ~/Work/Shore/git/<%= ARGV[1] %>-app
 
 # Optional tmux socket
 # socket_name: foo
