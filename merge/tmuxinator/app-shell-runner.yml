@@ -1,8 +1,7 @@
-# ~/.tmuxinator/core.yml
+# ~/.tmuxinator/merchant-app.yml
 
-
-name: core
-root: ~/Work/Shore/git/core/
+name: app-shell-runner
+root: ~/Work/Shore/git/app-shell
 
 # Optional tmux socket
 # socket_name: foo
@@ -20,22 +19,21 @@ root: ~/Work/Shore/git/core/
 # tmux_command: byobu
 
 # Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
-# startup_window: logs
+# startup_window: editor
+
+# Specitifes (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
+# startup_pane: 1
 
 # Controls whether the tmux session should be attached to automatically. Defaults to true.
 # attach: false
 
 # Runs after everything. Use it to attach to tmux with custom options etc.
-# post: tmux -CC attach -t core
-
+# post: tmux -CC attach -t merchant-app
 tmux_options: -f ~/.tmux.conf
 windows:
-  - editor: nvim
-  - server:
+  - editor: nvim . +e +NERDTreeClose
+  - tools:
       layout: tiled
       panes:
-        - git ls
-        - sleep 5 && sh ../.tools/update-core.sh && sh ../.tools/run-core.sh
-        - rabbitmq-server
-        - elasticsearch
-        # - redis-server
+        - git status --short --branch
+        - yarn run dev
