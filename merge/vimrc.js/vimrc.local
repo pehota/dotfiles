@@ -31,6 +31,9 @@ nmap <silent> <F2> :NERDTreeFind<CR>
 
 " == Fzf
 let g:fzf_command_prefix = 'Fzf'
+" disable statusline overriding
+let g:fzf_nvim_statusline = 0
+
 
 " Session Management
 " automatically load and save session on start/exit.
@@ -113,11 +116,12 @@ let mapleader = "\<space>"
 let g:mapleader = "\<space>"
 nmap <silent> <F9> :Gblame<CR>
 nmap <Tab> :b#<CR>
-tmap <Esc> <C-\><C-n><cr>
 nmap <silent> <C-j> :+10<CR>
 vmap <silent> <C-j> 10j<CR>
 nnoremap <silent> <C-k> :-10<CR>
 vnoremap <silent> <C-k> 10k<CR>
+imap <silent> jj <ESC>
+imap jjw <ESC>:w<CR>
 
 " == scrooloose/nerdtree ==
 nmap <silent> <M-w> :bp\|bd#<CR>
@@ -132,7 +136,12 @@ nmap <silent> <M-L> :wincmd L<CR>
 nmap <silent> <Leader><Esc> :noh<CR>
 nmap <silent> <Leader>bd :bufdo bd<CR>
 
-set pastetoggle=<F4>
+nnoremap <silent> <C-p> :FzfFiles<CR>
+nnoremap <silent> <C-h> :FzfHistory<CR>
+nnoremap <silent> <Leader>a :FzfAg<CR>
+nnoremap <silent> <Leader>bc :FzfBCommits<CR>
+
+" set pastetoggle=<F4>
 
 " == Identation and Spaces
 autocmd FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=80
@@ -168,12 +177,6 @@ if executable('ag')
   let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
 
-" Ack
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
-let g:ack_autoclose = 1
-
-
 " Rooter
 " make rooter set working folder to a one that contains .git
 let g:rooter_patterns = ['Rakefile', '.git/']
@@ -201,6 +204,13 @@ let g:vim_json_syntax_conceal=0
 " CSSComb
 
 autocmd BufWritePre,FileWritePre *.css,*.less,*.scss,*.sass silent! :CSScomb
+
+" Template highlight
+autocmd FileType typescript JsPreTmpl html
+autocmd FileType typescript syn clear foldBraces
+
+" Autoformat
+" au BufWrite *.js :Autoformat
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
