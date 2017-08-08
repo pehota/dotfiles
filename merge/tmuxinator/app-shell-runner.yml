@@ -1,6 +1,6 @@
 # ~/.tmuxinator/merchant-app.yml
 
-name: app-shell
+name: app-shell-runner
 root: ~/Work/Shore/git/app-shell
 
 # Optional tmux socket
@@ -37,7 +37,3 @@ windows:
       panes:
         - git status --short --branch
         - yarn run dev
-  - apps:
-      layout: tiled
-      panes:
-        - cd ../calendar-app && npm start
