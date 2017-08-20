@@ -1,4 +1,6 @@
-set nocompatible
+if &compatible
+  set nocompatible
+endif
 
 if has('nvim')
   set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
@@ -33,6 +35,7 @@ nmap <silent> <F2> :NERDTreeFind<CR>
 let g:fzf_command_prefix = 'Fzf'
 " disable statusline overriding
 let g:fzf_nvim_statusline = 0
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 
 " Session Management
