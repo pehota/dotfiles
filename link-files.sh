@@ -21,7 +21,7 @@ echo "Changing to the $dir directory"
 cd $dir
 echo "...done"
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
+# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
 # for file in $files; do
 for location in $(find "$dir/copy" -maxdepth 1 -name '*' ! -path '*.git'| sort); do
   file=$(basename $location)
@@ -30,8 +30,19 @@ for location in $(find "$dir/copy" -maxdepth 1 -name '*' ! -path '*.git'| sort);
     continue;
   fi
 
-  echo "Moving .$file to $olddir"
-  mv -f $dstdir/.$file $olddir 
+  if [[ -L $dstdir/.$file ]]; then
+    continue;
+  fi
+
+  if [[ -e $dstdir/.$file ]]; then
+    echo "Moving .$file to $olddir"
+
+    if [[ -d $dstdir/.$file ]]; then
+      mv -f $dstdir/.$file -t="$olddir/"
+    else
+      mv -f $dstdir/.$file $olddir
+    fi
+  fi
 
   echo "Creating symlink to $dir/copy/$file in $dstdir/.$file"
   ln -s $dir/copy/$file $dstdir/.$file
@@ -55,6 +66,10 @@ for location in $(find "$dir/merge" -maxdepth 1 -name '*' ! -path '*.git'| sort)
 
     if [[ ! -d $(dirname $destination) ]]; then
       mkdir -p $(dirname $destination);
+    fi
+
+    if [[ -L $destination ]]; then
+      continue;
     fi
 
     if [[ -e $destination  ]]; then
