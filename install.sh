@@ -29,11 +29,14 @@ if [[ $IS_MAC ]]; then
   if (! (which brew > /dev/null) ); then
     echo "Installing brew ..."
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  else
+    echo "Brew is already installed"
   fi
 fi
 
 # Install git if necessary
 if (! (which git > /dev/null) ); then
+  echo "Installing git ..."
   if [[ $IS_MAC ]]; then
     brew install git
   else
@@ -41,8 +44,50 @@ if (! (which git > /dev/null) ); then
   fi
 fi
 
+# Install python if necessary
+if (! (which python > /dev/null) ); then
+  echo "Installing python ..."
+  if [[ $IS_MAC ]]; then
+    brew install python
+  else
+    sudo apt install python
+  fi
+
+fi
+
+if (! (which pip > /dev/null) ); then
+  echo "Installing pip ..."
+  sudo easy_install pip
+fi
+
+if (! (pip list --format=columns | grep neovim)); then
+  pip install python-neovim || echo "Install python-neovim manually"
+fi
+
+# Install python3 if necessary
+if (! (which python3 > /dev/null) ); then
+  echo "Installing python3 ..."
+  if [[ $IS_MAC ]]; then
+    brew install python3
+  else
+    sudo apt install python3
+  fi
+
+fi
+
+if (! (which pip3 > /dev/null) ); then
+  echo "Installing pip ..."
+  sudo easy_install3 pip3
+fi
+
+if (! (pip3 list --format=columns | grep neovim)); then
+  pip3 install python3-neovim || echo "Install python3-neovim manually"
+fi
+
 # Install nvim if necessary
 if (! (which nvim > /dev/null) ); then
+  echo "Installing Neovim ..."
+
   if [[ $IS_MAC ]]; then
     brew install neovim
   else
@@ -53,14 +98,6 @@ if (! (which nvim > /dev/null) ); then
   fi
 
 fi
-
-
-if (! (which pip > /dev/null) ); then
-  sudo easy_install pip
-fi
-
-# pip install python-neovim
-# pip3 install python3-neovim
 
 # Install vimrc.js if necessary
 if [[ ! -d ~/.vimrc.js ]]; then
@@ -106,7 +143,7 @@ fi
 # Rerun plug installation on nvim
 nvim +PlugInstall +qall
 
-echo "source $tmuxinatorCompletionPath" >> ~/.bash_profile
+alias mux 2>/dev/null || echo "source $tmuxinatorCompletionPath" >> ~/.bash_profile
 
 if [[ $IS_MAC ]]; then
   echo "if [ -f \$(brew --prefix)/etc/bash_completion ]; then" >> ~/.bash_profile
@@ -120,7 +157,6 @@ if [[ -d "/Applications/Postgres.app/Contents/Versions/latest/bin" ]]; then
 fi
 
 if [[ $IS_MAC ]]; then
-  # if (git credential-osxkeychain); then
   git config --global credential.helper osxkeychain
 else
   # Install the keyring if necessary
@@ -175,6 +211,10 @@ if (! (which cmus > /dev/null) ); then
   else
     sudo apt-get install cmus
   fi
+fi
+
+if (! (alias cmus 2>/dev/null)); then
+  echo "alias cmus='tmux new-session -A -D -s CMUS \$(which cmus)'"
 fi
 
 
