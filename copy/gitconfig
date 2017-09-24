@@ -15,8 +15,6 @@
 [mergetool "diffmerge"]
   trustExitCode = true
   cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
-[credential]
-	helper = osxkeychain
 [filter "lfs"]
   smudge = git-lfs smudge %f
   required = true
