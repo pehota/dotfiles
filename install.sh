@@ -95,6 +95,14 @@ fi
 
 . "$DOTFILES_DIR/link-files.sh"
 
+
+if [[ $IS_MAC ]]; then
+  # TODO: Consider adding a script param to enable adding this line
+  echo "export PATH=\$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin" >> ~/.bash_profile
+else
+  echo "export PATH='\$PATH:$HOME/.local/bin'" >> ~/.bash_profile
+fi
+
 # Rerun plug installation on nvim
 nvim +PlugInstall +qall
 

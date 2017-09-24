@@ -1,7 +1,6 @@
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
 
 export PATH="/usr/local/sbin:$PATH"
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 export PATH="$HOME/.mongodb/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
 
@@ -22,3 +21,4 @@ alias reboot-shell='source ~/.bash_profile'
 alias tmux='tmux -2'
 alias cdg='cd ~/Work/Shore/git'
 alias cdw='cd ~/Work'
+alias ll='ls -al'
