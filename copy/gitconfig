@@ -2,7 +2,7 @@
   excludesfile = ~/.gitignore
   quotepath = false
 [user]
-  name =
+	name = Dimitar Apostolov
   email =
   useconfigonly = true
 [merge]
@@ -67,6 +67,7 @@
   cam = commit -am
   lb = "!sh -c 'git shortlog -s | sort -nr'"
   debranch = "!sh -c 'git branch | grep -v master | xargs git branch -D'"
+	cim = commit -m
 [help]
   autocorrect = -1
 [difftool "sourcetree"]
