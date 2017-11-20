@@ -4,20 +4,26 @@ endif
 
 call plug#begin()
 
-" source ~/.dotfiles/vimrc-sources/plugs.vim
 " == NERDTree
 Plug 'scrooloose/nerdtree'
 let NERDTreeShowHidden=1
 
+" == Colorsheme
 Plug 'tomasr/molokai'
 
-" == Airiline settings
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-let g:airline_powerline_fonts=1
-let g:airline_theme='badwolf'
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#fnamemod=':t'
+" == Git related plugins
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+" == Lightline
+Plug 'itchyny/lightline.vim'
+let g:lightline = {}
+let g:lightline.active = { 'left': [ ['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified'] ] }
+let g:lightline.component_function = { 'gitbranch': 'fugitive#head' }
+let g:lightline.separator = { 'left': '', 'right': '' }
+let g:lightline.subseparator = { 'left': '', 'right': '' }
+let g:lightline.colorscheme = 'solarized dark'
+let g:lightline.tabline = { 'left': [[ 'tabs' ]], 'right': [[ 'close' ]] }
 
 let g:tmuxline_powerline_separators=1
 
@@ -43,13 +49,15 @@ Plug 'Olical/vim-enmasse'
 Plug 'tpope/vim-sleuth'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'airblade/vim-gitgutter'
 
 " == JavaScript syntax highlighting ==
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
 Plug 'mxw/vim-jsx'
 Plug 'othree/javascript-libraries-syntax.vim'
+
+Plug 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
 
 " == NERDCommenter
 Plug 'scrooloose/nerdcommenter'
@@ -62,8 +70,17 @@ Plug 'elmcast/elm-vim'
 let g:elm_format_autosave=1
 
 
-Plug 'scrooloose/syntastic'
-Plug 'flowtype/vim-flow'
+Plug 'airblade/vim-rooter'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'airblade/vim-gitgutter'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  Plug 'steelsojka/deoplete-flow'
+else
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+endif
 
 call plug#end()
 
