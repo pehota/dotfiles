@@ -15,6 +15,9 @@ Plug 'tomasr/molokai'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
+" == Buffer Line
+Plug 'bling/vim-bufferline'
+
 " == Lightline
 Plug 'itchyny/lightline.vim'
 let g:lightline = {}
@@ -22,7 +25,7 @@ let g:lightline.active = { 'left': [ ['mode', 'paste'], ['gitbranch', 'readonly'
 let g:lightline.component_function = { 'gitbranch': 'fugitive#head' }
 let g:lightline.separator = { 'left': '', 'right': '' }
 let g:lightline.subseparator = { 'left': '', 'right': '' }
-let g:lightline.colorscheme = 'solarized dark'
+let g:lightline.colorscheme = 'powerline'
 let g:lightline.tabline = { 'left': [[ 'tabs' ]], 'right': [[ 'close' ]] }
 
 let g:tmuxline_powerline_separators=1
@@ -67,10 +70,12 @@ let g:NERDSpaceDelims = 1
 
 " == elm
 Plug 'elmcast/elm-vim'
-let g:elm_format_autosave=1
+let g:elm_format_autosave = 1
 
-
+" == Rooter
 Plug 'airblade/vim-rooter'
+let g:rooter_silent_chdir = 1
+
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 
@@ -196,28 +201,28 @@ autocmd FileType sh,css,sass,less,scss,coffee,python,html,javascript,htmldjango,
 " Bindings
 let mapleader = "\<space>"
 let g:mapleader = "\<space>"
-nmap <silent> <F9> :Gblame<CR>
-nmap <Tab> :b#<CR>
-nmap <silent> <C-j> :+10<CR>
-vmap <silent> <C-j> 10j<CR>
-nnoremap <silent> <C-k> :-10<CR>
-vnoremap <silent> <C-k> 10k<CR>
-imap <silent> jj <ESC>
-nnoremap <silent> <Leader><Leader>s <ESC>:w<CR>
-nmap <silent> <M-w> :bp\|bd#<CR>
-nmap <silent> <M-k> :wincmd k<CR>
-nmap <silent> <M-j> :wincmd j<CR>
-nmap <silent> <M-h> :wincmd h<CR>
-nmap <silent> <M-l> :wincmd l<CR>
-nmap <silent> <M-K> :wincmd K<CR>
-nmap <silent> <M-J> :wincmd J<CR>
-nmap <silent> <M-H> :wincmd H<CR>
-nmap <silent> <M-L> :wincmd L<CR>
-nmap <silent> <Leader><Esc> :noh<CR>
-nmap <silent> <Leader>bd :bufdo bd<CR>
-map <silent> <F3> :NERDTreeToggle<CR>
-nmap <silent> <F2> :NERDTreeFind<CR>
-nnoremap <silent> <C-p> :FzfFiles<CR>
-nnoremap <silent> <C-h> :FzfHistory<CR>
-nnoremap <silent> <Leader>a :FzfAg<CR>
-nnoremap <silent> <Leader>bc :FzfBCommits<CR>
+nmap      <silent> <F9> :Gblame<CR>
+nmap      <Tab> :b#<CR>
+nmap      <silent> <C-j> :+10<CR>
+vmap      <silent> <C-j> 10j<CR>
+nnoremap  <silent> <C-k> :-10<CR>
+vnoremap  <silent> <C-k> 10k<CR>
+imap      <silent> jj <ESC>
+nnoremap  <silent> <Leader><Leader>s <ESC>:w<CR>
+nmap      <silent> <M-w> :bp\|bd#<CR>
+nmap      <silent> <M-k> :wincmd k<CR>
+nmap      <silent> <M-j> :wincmd j<CR>
+nmap      <silent> <M-h> :wincmd h<CR>
+nmap      <silent> <M-l> :wincmd l<CR>
+nmap      <silent> <M-K> :wincmd K<CR>
+nmap      <silent> <M-J> :wincmd J<CR>
+nmap      <silent> <M-H> :wincmd H<CR>
+nmap      <silent> <M-L> :wincmd L<CR>
+nmap      <silent> <Leader><Esc> :noh<CR>
+nmap      <silent> <Leader>bd :bufdo bd<CR>
+map       <silent> <F3> :NERDTreeToggle<CR>
+nmap      <silent> <F2> :NERDTreeFind<CR>
+nnoremap  <silent> <C-p> :FzfFiles<CR>
+nnoremap  <silent> <C-h> :FzfHistory<CR>
+nnoremap  <silent> <Leader>a :FzfAg<CR>
+nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
