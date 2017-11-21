@@ -99,11 +99,6 @@ if (! (which nvim > /dev/null) ); then
 
 fi
 
-# Install vimrc.js if necessary
-if [[ ! -d ~/.vimrc.js ]]; then
-  curl -o- https://raw.githubusercontent.com/zperrault/vimrc.js/master/install.sh | bash
-fi
-
 # Install tmux if necessary
 if (! (which tmux > /dev/null) ); then
   if [[ $IS_MAC ]]; then

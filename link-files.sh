@@ -81,6 +81,11 @@ for location in $(find "$dir/merge" -maxdepth 1 -name '*' ! -path '*.git'| sort)
     ln -s $fileInDir $destination
   done
 done
+
+if [[ -d $dstdir/.config/nvim ]]; then
+  ln -s $dstdir/.vimrc $dstdir/.config/nvim/init.vim
+fi
+
 cd $dir > /dev/null
 
 echo "Done"
