@@ -59,6 +59,11 @@ Plug 'othree/es.next.syntax.vim'
 Plug 'mxw/vim-jsx'
 Plug 'othree/javascript-libraries-syntax.vim'
 
+" == Fixmyjs
+Plug 'ruanyl/vim-fixmyjs'
+let g:fixmyjs_use_local = 1
+let g:fixmyjs_rc_local = 1
+
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
@@ -81,11 +86,15 @@ Plug 'airblade/vim-gitgutter'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
+  let g:deoplete#enable_at_startup = 1
+
   Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
   Plug 'steelsojka/deoplete-flow'
 else
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 endif
+
+Plug 'ervandew/supertab'
 
 call plug#end()
 
@@ -226,3 +235,4 @@ nnoremap  <silent> <C-p> :FzfFiles<CR>
 nnoremap  <silent> <C-h> :FzfHistory<CR>
 nnoremap  <silent> <Leader>a :FzfAg<CR>
 nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
+nnoremap  <silent> <Leader>f :Fixmyjs<CR>
