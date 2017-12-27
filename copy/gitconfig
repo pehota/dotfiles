@@ -68,14 +68,13 @@
   cam = commit -am
   lb = "!sh -c 'git shortlog -s | sort -nr'"
   debranch = "!sh -c 'git branch | grep -v master | xargs git branch -D'"
-	cim = commit -m
-[help]
-  autocorrect = -1
+  cim = commit -m
+  dc = "!sh -c 'git diff --name-only $0 | wc -l'" [help] autocorrect = -1
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
 [commit]
   template = ~/.stCommitMsg
