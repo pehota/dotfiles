@@ -16,7 +16,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " == Buffer Line
-Plug 'bling/vim-bufferline'
+" Plug 'bling/vim-bufferline'
 
 " == Lightline
 Plug 'itchyny/lightline.vim'
@@ -60,9 +60,20 @@ Plug 'mxw/vim-jsx'
 Plug 'othree/javascript-libraries-syntax.vim'
 
 " == Fixmyjs
-Plug 'ruanyl/vim-fixmyjs'
-let g:fixmyjs_use_local = 1
-let g:fixmyjs_rc_local = 1
+" Plug 'ruanyl/vim-fixmyjs'
+" let g:fixmyjs_use_local = 1
+" let g:fixmyjs_rc_local = 1
+
+" == Prettier
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown'] }
+let g:prettier#quickfix_enabled = 0
+let g:prettier#autoformat = 0
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#trailing_comma = 'all'
+" autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
+
 
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
@@ -84,15 +95,15 @@ let g:rooter_silent_chdir = 1
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
-  let g:deoplete#enable_at_startup = 1
+" if has('nvim')
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
+  " let g:deoplete#enable_at_startup = 1
 
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-  Plug 'steelsojka/deoplete-flow'
-else
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
-endif
+  " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  " Plug 'steelsojka/deoplete-flow'
+" else
+  " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+" endif
 
 Plug 'ervandew/supertab'
 
@@ -143,7 +154,7 @@ set ignorecase
 set smartcase
 set nu
 set mouse=
-set clipboard+=unnamedplus
+set clipboard+=unnamed
 set guifont=DroidSansMonoForPowerline\ Nerd\ Font:h12
 " Position splits below and right
 set splitright
@@ -228,11 +239,12 @@ nmap      <silent> <M-J> :wincmd J<CR>
 nmap      <silent> <M-H> :wincmd H<CR>
 nmap      <silent> <M-L> :wincmd L<CR>
 nmap      <silent> <Leader><Esc> :noh<CR>
-nmap      <silent> <Leader>bd :bufdo bd<CR>
+nmap      <silent> <Leader>bd :bufdo bd<CR><CR>
 map       <silent> <F3> :NERDTreeToggle<CR>
 nmap      <silent> <F2> :NERDTreeFind<CR>
 nnoremap  <silent> <C-p> :FzfFiles<CR>
 nnoremap  <silent> <C-h> :FzfHistory<CR>
 nnoremap  <silent> <Leader>a :FzfAg<CR>
 nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
-nnoremap  <silent> <Leader>f :Fixmyjs<CR>
+" nnoremap  <silent> <Leader>f :Fixmyjs<CR>
+nnoremap  <silent> <Leader>f :Prettier<CR>
