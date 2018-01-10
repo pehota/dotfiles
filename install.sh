@@ -17,8 +17,6 @@ function checkOs {
 IS_MAC=$(checkOs "Darwin")
 IS_LINUX=$(checkOs "Linux")
 
-tmuxinatorCompletionPath=~/.bin/tmuxinator.bash
-
 if [[ ! $IS_MAC && ! $IS_LINUX  ]]; then
   echo "Unsupported OS"
   exit 1
@@ -43,6 +41,8 @@ if (! (which git > /dev/null) ); then
     sudo apt install git-all
   fi
 fi
+
+# TODO: Add GIT completion
 
 # Install python if necessary
 if (! (which python > /dev/null) ); then
@@ -113,13 +113,6 @@ if [[ ! -d $DST_DIR/.tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm "$DST_DIR"/.tmux/plugins/tpm
 fi
 
-# Install tmuxinator if necessary
-if (! (which tmuxinator > /dev/null) ); then
-  sudo gem install tmuxinator
-  mkdir ~/.bin
-  sudo curl -o $tmuxinatorCompletionPath https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.bash
-fi
-
 # clone the .dotfiles repo
 if [[ ! -d $DOTFILES_DIR  ]]; then
   git clone --quiet https://github.com/pehota/dotfiles.git $DOTFILES_DIR
@@ -137,8 +130,6 @@ fi
 
 # Rerun plug installation on nvim
 nvim +PlugInstall +qall
-
-alias mux 2>/dev/null || echo "source $tmuxinatorCompletionPath" >> ~/.bash_profile
 
 if [[ $IS_MAC ]]; then
   echo "if [ -f \$(brew --prefix)/etc/bash_completion ]; then" >> ~/.bash_profile
