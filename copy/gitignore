@@ -38,3 +38,6 @@ node_modules/
 .tern-port
 elm-stuff
 bower_components
+
+# Project specific vim files
+.exrc
