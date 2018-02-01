@@ -69,7 +69,9 @@
   lb = "!sh -c 'git shortlog -s | sort -nr'"
   debranch = "!sh -c 'git branch | grep -v master | xargs git branch -D'"
   cim = commit -m
-  dc = "!sh -c 'git diff --name-only $0 | wc -l'" [help] autocorrect = -1
+  dc = "!sh -c 'git diff --name-only $0 | wc -l'" 
+[help] 
+  autocorrect = -1
 [difftool "sourcetree"]
   cmd = opendiff \"$LOCAL\" \"$REMOTE\"
   path = 
