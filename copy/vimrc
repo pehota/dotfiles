@@ -2,6 +2,10 @@ if &compatible
   set nocompatible
 endif
 
+" Allow project specific configurations
+set exrc
+set secure
+
 call plug#begin()
 
 " == NERDTree
