@@ -107,6 +107,10 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'ervandew/supertab'
 
+
+
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
 call plug#end()
 
 
