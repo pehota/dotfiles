@@ -149,6 +149,9 @@ endfunction
 au VimEnter * nested :call LoadSession()
 au VimLeave * :call MakeSession()
 
+" Auto-resize splits when vim resizes
+au VimResized * wincmd =
+
 
 
 set backupdir=~/.vimfiles/backup/
@@ -164,9 +167,11 @@ set nu
 set mouse=
 set clipboard+=unnamed
 set guifont=DroidSansMonoForPowerline\ Nerd\ Font:h12
+set backspace=2
 " Position splits below and right
 set splitright
 set splitbelow
+set whichwrap+=<,>,h,l,[,]
 
 filetype plugin indent on
 
@@ -210,11 +215,7 @@ au CursorMoved,CursorHold,FocusGained,BufEnter,InsertEnter * :checkt
 autocmd BufEnter * silent! lcd %:p:h
 
 " Highlight current line
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
-augroup END
+set cursorline
 
 " Remember last location in file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
