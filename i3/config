@@ -158,8 +158,9 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         # status_command i3status
-        status_command i3blocks
-        position top
+        # status_command i3blocks
+        # position bottom
+        mode invisible
 }
 
 
@@ -172,12 +173,13 @@ workspace_auto_back_and_forth yes
 
 
 # in case of layout change event - send signal to i3blocks
-bindsym ISO_Next_Group exec pkill -SIGRTMIN+1 i3blocks
-bindsym ISO_Prev_Group exec pkill -SIGRTMIN+1 i3blocks
+# bindsym ISO_Next_Group exec pkill -SIGRTMIN+1 i3blocks
+# bindsym ISO_Prev_Group exec pkill -SIGRTMIN+1 i3blocks
 
 
 # Startup apps
-exec "setxkbmap 'us,bg(phonetic)'"
-exec "setxkbmap -option 'grp:alt_shift_toggle'"
-exec_always nm-applet
+# exec "setxkbmap 'us,bg(phonetic)'"
+# exec "setxkbmap -option 'grp:alt_shift_toggle'"
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id nm-applet
 exec --no-startup-id /opt/Enpass/bin/runenpass.sh;i3-msg 'kill'
