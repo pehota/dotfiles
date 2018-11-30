@@ -11,6 +11,9 @@ call plug#begin()
 " == NERDTree
 Plug 'scrooloose/nerdtree'
 let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\.bs.js$', '\.git', '\.exrc', '\.DS_Store', 'node_modules', 'elm-stuff', 'package-lock.json', 'yarn.lock']
+
+" Plug 'tpope/vim-vinegar'
 
 " == Colorsheme
 Plug 'tomasr/molokai'
@@ -50,7 +53,11 @@ endif
 Plug 'tpope/vim-surround'
 Plug 'alvan/vim-closetag'
 Plug 'google/vim-searchindex'
+
+" Better Whitespace
 Plug 'ntpeters/vim-better-whitespace'
+autocmd FileType *.* autocmd BufWritePre <buffer> StripWhitespace
+
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Olical/vim-enmasse'
 Plug 'tpope/vim-sleuth'
@@ -121,6 +128,7 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier', 'eslint'],
 \   'elm': ['elm-format'],
+\   'css': ['prettier'],
 \}
 
 " Do not lint or fix minified files.
@@ -159,6 +167,10 @@ let g:ale_set_quickfix = 1
 " let g:lightline#ale#indicator_errors = "\uf05e"
 " let g:lightline#ale#indicator_info = "\uf05a"
 " let g:lightline#ale#indicator_ok = ""
+
+
+" == Autotags
+Plug 'craigemery/vim-autotag'
 
 call plug#end()
 
@@ -266,8 +278,6 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
       \| exe "normal g'\"" | endif
 
 
-" Better Whitespace
-autocmd FileType sh,css,sass,less,scss,coffee,python,html,javascript,htmldjango,markdown autocmd BufWritePre <buffer> StripWhitespace
 
 
 
@@ -295,9 +305,10 @@ nmap      <silent> <Leader><Esc> :noh<CR>
 nmap      <silent> <Leader>bd :bufdo bd<CR><CR>
 map       <silent> <F3> :NERDTreeToggle<CR>
 nmap      <silent> <F2> :NERDTreeFind<CR>
-nnoremap  <silent> <C-p> :FzfFiles<CR>
+" nnoremap  <silent> <C-p> :FzfFiles<CR>
+nnoremap  <silent> <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
 nnoremap  <silent> <C-h> :FzfHistory<CR>
 nnoremap  <silent> <Leader>a :FzfAg<CR>
 nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
-nnoremap  <silent> <Leader>f :Fixmyjs<CR>
+nnoremap  <silent> <Leader>t :FzfBTags<CR>
 nnoremap  <silent> <Leader>= <C-w>=
