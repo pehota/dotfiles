@@ -11,15 +11,16 @@ call plug#begin()
 " == NERDTree
 Plug 'scrooloose/nerdtree'
 let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\.bs.js$', '\.git', '\.exrc', '\.DS_Store', 'node_modules', 'elm-stuff', 'package-lock.json', 'yarn.lock']
-
-" Plug 'tpope/vim-vinegar'
+let NERDTreeIgnore=['\.bs.js$', '\.git', '\.exrc', '\.DS_Store', 'node_modules', 'elm-stuff', 'package-lock.json', 'yarn.lock', '.cache']
 
 " == Colorsheme
 Plug 'tomasr/molokai'
+Plug 'sjl/badwolf'
 
 " == Git related plugins
 Plug 'airblade/vim-gitgutter'
+let g:gitgutter_override_sign_column_highlight = 0
+
 Plug 'tpope/vim-fugitive'
 
 " == Buffer Line
@@ -45,8 +46,10 @@ let g:fzf_command_prefix = 'Fzf'
 let g:fzf_nvim_statusline = 0
 
 if executable('ag')
-  let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+  let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
   let g:ackprg = 'ag --nogroup --nocolor --column'
+elseif executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*" --no-line-number'
 endif
 
 
@@ -76,14 +79,11 @@ let g:fixmyjs_use_local = 1
 let g:fixmyjs_rc_local = 1
 
 " == Prettier
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'npm install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown'] }
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 let g:prettier#quickfix_enabled = 0
-let g:prettier#autoformat = 0
-let g:prettier#config#bracket_spacing = 'true'
-let g:prettier#config#trailing_comma = 'all'
-" autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
+" let g:prettier#config#config_precedence = 'prefer-file'
+let g:prettier#config#config_precedence = 'file-override'
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
 
 
 Plug 'mxw/vim-jsx'
@@ -153,20 +153,29 @@ let g:ale_echo_msg_format = '%severity%: %s'
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 
-" == ALE lightline
-" Plug 'maximbaz/lightline-ale'
+" == Autotags
+Plug 'craigemery/vim-autotag'
+let g:autotagCtagsCmd = 'ctags'
 
-" let g:lightline.component_expand = {
-      " \  'linter_checking': 'lightline#ale#checking',
-      " \  'linter_warnings': 'lightline#ale#warnings',
-      " \  'linter_errors': 'lightline#ale#errors',
-      " \  'linter_ok': 'lightline#ale#ok',
-      " \ }
+" == TypeScript start
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
-" let g:lightline#ale#indicator_warnings = "\uf071"
-" let g:lightline#ale#indicator_errors = "\uf05e"
-" let g:lightline#ale#indicator_info = "\uf05a"
-" let g:lightline#ale#indicator_ok = ""
+" For async completion
+Plug 'Shougo/deoplete.nvim'
+" Enable deoplete at startup
+let g:deoplete#enable_at_startup = 1
+
+" For Denite features
+Plug 'Shougo/denite.nvim'
+
+" == TypeScript end
+
+" == Rust
+Plug 'rust-lang/rust.vim'
+
+" == GraphQL
+Plug 'jparise/vim-graphql'
 
 
 " == Autotags
@@ -221,7 +230,7 @@ set ignorecase
 set smartcase
 set nu
 set mouse=
-set clipboard+=unnamed
+set clipboard+=unnamedplus
 set guifont=DroidSansMonoForPowerline\ Nerd\ Font:h12
 set backspace=2
 " Position splits below and right
@@ -229,6 +238,7 @@ set splitright
 set splitbelow
 set whichwrap+=<,>,h,l,[,]
 
+filetype indent on
 filetype plugin indent on
 
 
@@ -242,20 +252,28 @@ set shiftwidth=2
 set autoindent
 set expandtab
 set visualbell
+set showcmd
+set cursorline " Highlight current line
+set laststatus=2
+set wildmenu
 set t_Co=256
+set diffopt-=internal
 "set termguicolors
 colorscheme molokai
-highlight ColorColumn ctermbg=darkgrey
-highlight Directory ctermfg=grey
+highlight ColorColumn guibg=NONE ctermbg=NONE
+highlight SignColumn guibg=NONE ctermbg=NONE
+highlight Directory guibg=darkgrey ctermfg=darkgrey
+" transparent background for vim
+highlight Normal ctermbg=NONE
 
-" Powerline
-set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
-set laststatus=2
+highlight GitGutterAdd ctermfg=green ctermbg=NONE
+highlight GitGutterChange ctermfg=yellow ctermbg=NONE
+highlight GitGutterDelete ctermfg=red ctermbg=NONE
+highlight GitGutterChangeDelete ctermfg=red ctermbg=NONE
 
 
 " == Identation and Spaces
 autocmd FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=80
-autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4 colorcolumn=80
 
 
 " == Filetypes
@@ -270,23 +288,17 @@ au CursorMoved,CursorHold,FocusGained,BufEnter,InsertEnter * :checkt
 " Autochange currdir
 autocmd BufEnter * silent! lcd %:p:h
 
-" Highlight current line
-set cursorline
 
 " Remember last location in file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
       \| exe "normal g'\"" | endif
-
-
-
-
 
 " Bindings
 let mapleader = "\<space>"
 let g:mapleader = "\<space>"
 nmap      <silent> <F9> :Gblame<CR>
 nmap      <Tab> :b#<CR>
-nmap      <silent> <C-j> :+10<CR>
+nnoremap  <silent> <C-j> :+10<CR>
 vmap      <silent> <C-j> 10j<CR>
 nnoremap  <silent> <C-k> :-10<CR>
 vnoremap  <silent> <C-k> 10k<CR>
@@ -305,10 +317,12 @@ nmap      <silent> <Leader><Esc> :noh<CR>
 nmap      <silent> <Leader>bd :bufdo bd<CR><CR>
 map       <silent> <F3> :NERDTreeToggle<CR>
 nmap      <silent> <F2> :NERDTreeFind<CR>
-" nnoremap  <silent> <C-p> :FzfFiles<CR>
+nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
 nnoremap  <silent> <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
+" nnoremap  <silent> <C-p> :FzfFiles<CR>
+nnoremap  <silent> <Leader><Leader>h :FzfHistory<CR>
 nnoremap  <silent> <C-h> :FzfHistory<CR>
 nnoremap  <silent> <Leader>a :FzfAg<CR>
-nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
+nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
 nnoremap  <silent> <Leader>t :FzfBTags<CR>
 nnoremap  <silent> <Leader>= <C-w>=

@@ -42,7 +42,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start rofi launcher if present
-bindsym $mod+space exec "(rofi && rofi -combi-modi \\"window,drun\\" -show combi -modi combi) || dmenu-run"
+bindsym $mod+space exec "(rofi && rofi -combi-modi \\"window,drun\\" -show combi -modi combi -show-icons -drun-match-fields name) || dmenu-run"
 
 # change focus
 bindsym $mod+h focus left
@@ -194,6 +194,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id /opt/Enpass/bin/runenpass.sh;i3-msg 'kill'
 exec_always --no-startup-id nm-applet
 
+exec --no-startup-id compton -b --config ~/.config/compton/compton.conf
 
 # -------------- I3-GAPS
 # disable window title bars
