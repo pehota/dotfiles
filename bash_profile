@@ -7,8 +7,7 @@ export PATH="$PATH:$HOME/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 export EDITOR=nvim
-export NVM_DIR="$HOME/.nvm"
-export TERM=screen-256color
+# export TERM=screen-256color
 
 # Git branch in prompt.
 # Nicer bash prefix with git branch
@@ -27,3 +26,5 @@ alias wsof='curl -4 http://wttr.in/Sofia'
 alias wcph='curl -4 http://wttr.in/Fredensborg'
 alias wobnova='curl -4 http://wttr.in/Obnova'
 alias weather='curl -4 http://wttr.in/'
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
