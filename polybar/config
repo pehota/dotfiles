@@ -59,9 +59,10 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;2
 font-2 = siji:pixelsize=10;3
 font-3 = fontawesome:pixelsize:12;3
 
-modules-left = bspwm i3 xwindow
-; modules-center = pulseaudio
-modules-right = xbacklight xkeyboard memory cpu wlan eth battery pulseaudio temperature date powermenu
+modules-left = i3 player-cmus
+; bspwm
+modules-center = xwindow
+modules-right = xbacklight xkeyboard memory cpu isactive-bluetooth wlan eth battery pulseaudio temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -150,13 +151,16 @@ label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %index%
+label-focused = %name%
+; label-focused = %icon%  %name%
+; label-focused = %index%
 label-focused-background = ${module/bspwm.label-focused-background}
 ; label-focused-underline = ${module/bspwm.label-focused-underline}
 label-focused-padding = ${module/bspwm.label-focused-padding}
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
+label-unfocused = %name%
+; label-unfocused = %index%
 label-unfocused-padding = ${module/bspwm.label-occupied-padding}
 
 ; visible = Active workspace on unfocused monitor
@@ -237,7 +241,8 @@ label-connected = %essid% (%signal%%)
 ; format-disconnected =
 format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
-label-disconnected = %ifname% disconnected
+; label-disconnected = %ifname% disconnected
+label-disconnected = wifi disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
 ramp-signal-0 = 
@@ -444,3 +449,16 @@ margin-top = 5
 margin-bottom = 5
 
 ; vim:ft=dosini
+
+[module/isactive-bluetooth]
+type = custom/script
+exec = ~/.config/polybar/scripts/isactive-bluetooth.sh
+interval = 10
+
+[module/player-cmus]
+type = custom/script
+exec = ~/.config/polybar/scripts/cmus.sh
+interval = 5
+click-left = cmus-remote -n
+click-right = cmus-remote -r
+click-middle = cmus-remote -u
