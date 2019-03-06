@@ -2,19 +2,23 @@
   excludesfile = ~/.gitignore
   quotepath = false
 [user]
-	name = Dimitar Apostolov
+  name = Dimitar Apostolov
   email =
   useconfigonly = true
 [merge]
   ff = no
-  tool = diffmerge
+  tool = vimdiff
 [diff]
-  tool = diffmerge
-[difftool "diffmerge"]
-  cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
+  tool = vimdiff
+[difftool]
+  prompt = false
+[mergetool]
+  prompt = true
 [mergetool "diffmerge"]
   trustExitCode = true
   cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [filter "lfs"]
   smudge = git-lfs smudge %f
   required = true
@@ -44,24 +48,9 @@
   ri = "!sh -c 'git rebase -i HEAD~$0'"
   ai = add -i
   ls = branch
+  sb = "!sh -c '(git branch | fzf-tmux -d 20) || git branch'"
   ; lsa = "!sh -c 'git for-each-ref --format=\'%(committerdate) %09 %(authorname) %09 %(refname)\' | sort -k5n -k2M -k3n -k4n'"
   cc = "!sh -c 'git cherry -v $0 | grep +'"
-	# GIT glow aliases
-  ff = flow feature
-  fsf = flow feature start
-  fef = flow feature finish
-  fb = flow bugfix
-  fsb = flow bugfix start
-  feb = flow bugfix finish
-  fr = flow release
-  fsr = flow release start
-  fer = flow release finish
-  fh = flow hotfix
-  fsh = flow hotfix start
-  feh = flow hotfix finish
-  fs = flow support
-  fss = flow support start
-  fes = flow support finish
   commend = commit --amend --no-edit
   please = push --force-with-lease origin HEAD
   st = status --short --branch
@@ -69,15 +58,7 @@
   lb = "!sh -c 'git shortlog -s | sort -nr'"
   debranch = "!sh -c 'git branch | grep -v master | xargs git branch -D'"
   cim = commit -m
-  dc = "!sh -c 'git diff --name-only $0 | wc -l'" 
+  dc = "!sh -c 'git diff --name-only $0 | wc -l'"
 	lsr = branch -r
-[help] 
+[help]
   autocorrect = -1
-[difftool "sourcetree"]
-  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-  path = 
-[mergetool "sourcetree"]
-  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-  trustExitCode = true
-[commit]
-  template = ~/.stCommitMsg
