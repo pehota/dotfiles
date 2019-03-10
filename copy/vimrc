@@ -271,6 +271,11 @@ highlight GitGutterChange ctermfg=yellow ctermbg=NONE
 highlight GitGutterDelete ctermfg=red ctermbg=NONE
 highlight GitGutterChangeDelete ctermfg=red ctermbg=NONE
 
+if g:colors_name == 'molokai'
+  highlight MatchParen cterm=bold ctermbg=none ctermfg=208
+endif
+
+
 
 " == Identation and Spaces
 autocmd FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=80
