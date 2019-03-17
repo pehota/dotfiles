@@ -20,3 +20,7 @@ ln -sf ~/.dotfiles/copy/tmux ~/.tmux
 # Neovim
 mv ~/.vimrc ~/.dotfiles_bkp/.vimrc
 ln -sf ~/.dotfiles/copy/vimrc ~/.vimrc
+
+
+# Bash
+echo "source ~/.dotfiles/bashrc" >> ~/.bashrc
