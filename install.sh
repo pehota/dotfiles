@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 DOTFILES_DIR=~/.dotfiles
@@ -17,19 +17,22 @@ function checkOs {
 IS_MAC=$(checkOs "Darwin")
 IS_LINUX=$(checkOs "Linux")
 
-if [[ ! $IS_MAC && ! $IS_LINUX  ]]; then
-  echo "Unsupported OS"
-  exit 1
-fi
+echo "IS_MAC=$IS_MAC"
+echo "IS_LINUX=$IS_LINUX"
+exit 1
+
+. ./link.sh
 
 # Install brew if necessary
 if [[ $IS_MAC ]]; then
-  if (! (which brew > /dev/null) ); then
-    echo "Installing brew ..."
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  else
-    echo "Brew is already installed"
-  fi
+  ./mac.sh
+else
+  ./linux.sh
+fi
+
+if [[ $IS_LINUX  ]]; then
+  echo "Instaling rofi ..."
+  sudo apt install rofi
 fi
 
 # Install git if necessary
@@ -60,11 +63,7 @@ if (! (which pip > /dev/null) ); then
   sudo easy_install pip
 fi
 
-if (! (pip list --format=columns | grep neovim)); then
-  pip install python-neovim || echo "Install python-neovim manually"
-fi
-
-# Install python3 if necessary
+if (! (pip list --format=columns | grep neovim)); then pip install python-neovim || echo "Install python-neovim manually" fi # Install python3 if necessary
 if (! (which python3 > /dev/null) ); then
   echo "Installing python3 ..."
   if [[ $IS_MAC ]]; then
