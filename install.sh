@@ -4,10 +4,9 @@ set -e
 DOTFILES_DIR=~/.dotfiles
 DST_DIR=$HOME
 
-HOST_OS=$(uname)
 
 function checkOs {
-  if [[ $HOST_OS == "$1" ]]; then
+  if [[ "$(uname)" == "$1" ]]; then
     echo true
   else
     echo false
@@ -21,7 +20,7 @@ echo "IS_MAC=$IS_MAC"
 echo "IS_LINUX=$IS_LINUX"
 exit 1
 
-. ./link.sh
+./link.sh
 
 # Install brew if necessary
 if [[ $IS_MAC ]]; then
@@ -30,9 +29,12 @@ else
   ./linux.sh
 fi
 
+./common.sh
+
+echo "Done"
+exit 0
+
 if [[ $IS_LINUX  ]]; then
-  echo "Instaling rofi ..."
-  sudo apt install rofi
 fi
 
 # Install git if necessary
@@ -41,7 +43,7 @@ if (! (which git > /dev/null) ); then
   if [[ $IS_MAC ]]; then
     brew install git
   else
-    sudo apt install git-all
+    sudo pacman -S git-all
   fi
 fi
 
@@ -53,7 +55,7 @@ if (! (which python > /dev/null) ); then
   if [[ $IS_MAC ]]; then
     brew install python
   else
-    sudo apt install python
+    sudo pacman -S python
   fi
 
 fi
@@ -69,7 +71,7 @@ if (! (which python3 > /dev/null) ); then
   if [[ $IS_MAC ]]; then
     brew install python3
   else
-    sudo apt install python3
+    sudo pacman -S python3
   fi
 
 fi

@@ -1,6 +1,14 @@
+# Install the font for Powerline
+cp ~/.dotfiles/Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete.otf /Users/$(whoami)/Library/Fonts
+
 if (! (which brew > /dev/null) ); then
   echo "Installing brew ..."
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+  echo "if [ -f \$(brew --prefix)/etc/bash_completion ]; then" >> ~/.bashrc
+  echo " . \$(brew --prefix)/etc/bash_completion" >> ~/.bashrc
+  echo "fi" >> ~/.bashrc
+  echo "alias bup='brew update && brew upgrade && brew cleanup -s && brew doctor'" >> ~/.bashrc
 else
   echo "Brew is already installed"
 fi
@@ -49,7 +57,18 @@ if (! (which tmux > /dev/null) ); then
   brew install tmux reattach-to-user-namespace urlview
 fi
 
-echo "if [ -f \$(brew --prefix)/etc/bash_completion ]; then" >> ~/.dotfiles/bashrc
-echo " . \$(brew --prefix)/etc/bash_completion" >> ~/.dotfiles/bashrc
-echo "fi" >> ~/.dotfiles/bashrc
-echo "alias bup='brew update && brew upgrade && brew cleanup -s && brew doctor'" >> ~/.dotfiles/bashrc
+# Configure git to use the credentials from the keychain
+git config --global credential.helper osxkeychain
+
+
+# Install nvm if necessary
+if (!(command -v nvm > /dev/null)); then
+  brew install nvm
+  echo "source \$(brew --prefix nvm)/nvm.sh" >> ~/.bashrc
+fi
+
+# Install CMUS
+if (! (which cmus > /dev/null) ); then
+  echo "Installing CMUS ..."
+  brew install cmus
+fi

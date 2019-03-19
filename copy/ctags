@@ -19,6 +19,7 @@
 --exclude=elm-stuff
 --exclude=.coverage
 --exclude=package-lock.json
+--exclude=package.json
 --exclude=.history
 
 --langdef=Elm
