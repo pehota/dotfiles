@@ -1,11 +1,12 @@
-[[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
+[ -s "$HOME/.profile" ] && source "$HOME/.profile" # Load the default .profile
+[ -s "$HOME/.bashrc" ] && source "$HOME/.bashrc" # Load the default .bashrc
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.mongodb/bin:$PATH"
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/.local/bin"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+[ -s "$HOME/.rvm/scripts/rvm" ] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 export EDITOR=nvim
 # export TERM=screen-256color
