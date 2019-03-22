@@ -14,8 +14,7 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.bs.js$', '\.git', '\.exrc', '\.DS_Store', 'node_modules', 'elm-stuff', 'package-lock.json', 'yarn.lock', '.cache']
 
 " == Colorsheme
-Plug 'tomasr/molokai'
-Plug 'sjl/badwolf'
+Plug 'morhetz/gruvbox'
 
 " == Git related plugins
 Plug 'airblade/vim-gitgutter'
@@ -45,11 +44,11 @@ let g:fzf_command_prefix = 'Fzf'
 " disable statusline overriding
 let g:fzf_nvim_statusline = 0
 
-if executable('ag')
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*" --no-line-number'
+elseif executable('ag')
   let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
   let g:ackprg = 'ag --nogroup --nocolor --column'
-elseif executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*" --no-line-number'
 endif
 
 
@@ -71,6 +70,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
 Plug 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
 Plug 'othree/javascript-libraries-syntax.vim'
 
 " == Fixmyjs
@@ -81,13 +81,10 @@ let g:fixmyjs_rc_local = 1
 " == Prettier
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 let g:prettier#quickfix_enabled = 0
-" let g:prettier#config#config_precedence = 'prefer-file'
 let g:prettier#config#config_precedence = 'file-override'
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
 
 
-Plug 'mxw/vim-jsx'
-let g:jsx_ext_required = 0
 
 " == NERDCommenter
 Plug 'scrooloose/nerdcommenter'
@@ -136,6 +133,7 @@ let g:ale_pattern_options = {
 \ '\.min\.*$': {'ale_linters': [], 'ale_fixers': []},
 \}
 
+let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
 let g:ale_set_highlights = 0
@@ -160,16 +158,12 @@ let g:autotagCtagsCmd = 'ctags'
 " == TypeScript start
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+" == TypeScript end
 
 " For async completion
 Plug 'Shougo/deoplete.nvim'
 " Enable deoplete at startup
 let g:deoplete#enable_at_startup = 1
-
-" For Denite features
-Plug 'Shougo/denite.nvim'
-
-" == TypeScript end
 
 " == Rust
 Plug 'rust-lang/rust.vim'
@@ -177,9 +171,10 @@ Plug 'rust-lang/rust.vim'
 " == GraphQL
 Plug 'jparise/vim-graphql'
 
+" For Denite features
+Plug 'Shougo/denite.nvim'
 
-" == Autotags
-Plug 'craigemery/vim-autotag'
+Plug 'jceb/vim-orgmode'
 
 call plug#end()
 
@@ -259,7 +254,7 @@ set wildmenu
 set t_Co=256
 set diffopt-=internal
 "set termguicolors
-colorscheme molokai
+colorscheme gruvbox
 highlight ColorColumn guibg=NONE ctermbg=NONE
 highlight SignColumn guibg=NONE ctermbg=NONE
 highlight Directory guibg=darkgrey ctermfg=darkgrey
@@ -327,7 +322,8 @@ nnoremap  <silent> <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<
 " nnoremap  <silent> <C-p> :FzfFiles<CR>
 nnoremap  <silent> <Leader><Leader>h :FzfHistory<CR>
 nnoremap  <silent> <C-h> :FzfHistory<CR>
-nnoremap  <silent> <Leader>a :FzfAg<CR>
+nnoremap  <silent> <Leader>a :FzfRg<CR>
 nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
 nnoremap  <silent> <Leader>t :FzfBTags<CR>
 nnoremap  <silent> <Leader>= <C-w>=
+nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
