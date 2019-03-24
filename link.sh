@@ -4,28 +4,26 @@
 mkdir -p ~/.dotfiles_bkp
 
 #Git
-mv ~/.gitconfig ~/.dotfiles_bkp/.gitconfig
-ln -s ~/.dotfiles/gitconfig ~/.gitconfig
+mv ~/.gitconfig ~/.dotfiles_bkp/
+ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 
-mv ~/.gitignore ~/.dotfiles_bkp/.gitignore
-ln -s ~/.dotfiles/gitignore ~/.gitignore
+mv ~/.gitignore ~/.dotfiles_bkp/
+ln -sf ~/.dotfiles/gitignore ~/.gitignore
 
-ln -s ~/.dotfiles/git-prompt.sh ~/.git-prompt.sh
+mv ~/.git-prompt.sh ~/.dotfiles_bkp/
+ln -sf ~/.dotfiles/git-prompt.sh ~/.git-prompt.sh
 
-ln -s ~/.dotfiles/git_templates ~/.git_templates
+ln -sf ~/.dotfiles/git_templates ~/.git_templates
 
 # Tmux
 mv ~/.tmux.conf ~/.dotfiles_bkp/.tmux.conf
-ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
+ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 # ln -s ~/.dotfiles/tmux ~/.tmux
 
 
 # Neovim
-mv ~/.vimrc ~/.dotfiles_bkp/.vimrc
-ln -s ~/.dotfiles/vimrc ~/.vimrc
+mv ~/.vimrc ~/.dotfiles_bkp/
+ln -sf ~/.dotfiles/vimrc ~/.vimrc
 
 # ctags
-ln -s ~/.dotfiles/ctags.d ~/.ctags.d
-
-# Bash
-echo "source ~/.dotfiles/bashrc" >> ~/.bashrc
+ln -sf ~/.dotfiles/ctags.d ~/.ctags.d
