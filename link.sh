@@ -5,27 +5,27 @@ mkdir -p ~/.dotfiles_bkp
 
 #Git
 mv ~/.gitconfig ~/.dotfiles_bkp/.gitconfig
-ln -s ~/.dotfiles/copy/gitconfig ~/.gitconfig
+ln -s ~/.dotfiles/gitconfig ~/.gitconfig
 
 mv ~/.gitignore ~/.dotfiles_bkp/.gitignore
-ln -s ~/.dotfiles/copy/gitignore ~/.gitignore
+ln -s ~/.dotfiles/gitignore ~/.gitignore
 
-ln -s ~/.dotfiles/copy/git-prompt.sh ~/.git-prompt.sh
+ln -s ~/.dotfiles/git-prompt.sh ~/.git-prompt.sh
 
-ln -s ~/.dotfiles/copy/git_templates ~/.git_templates
+ln -s ~/.dotfiles/git_templates ~/.git_templates
 
 # Tmux
 mv ~/.tmux.conf ~/.dotfiles_bkp/.tmux.conf
-ln -s ~/.dotfiles/copy/tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/copy/tmux ~/.tmux
+ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
+# ln -s ~/.dotfiles/tmux ~/.tmux
 
 
 # Neovim
 mv ~/.vimrc ~/.dotfiles_bkp/.vimrc
-ln -s ~/.dotfiles/copy/vimrc ~/.vimrc
+ln -s ~/.dotfiles/vimrc ~/.vimrc
 
 # ctags
-ln -s ~/.dotfiles/copy/ctags.d ~/.ctags.d
+ln -s ~/.dotfiles/ctags.d ~/.ctags.d
 
 # Bash
 echo "source ~/.dotfiles/bashrc" >> ~/.bashrc
