@@ -5,6 +5,9 @@ if [[ ! -d ~/.tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
+# Install the tmux plugins
+. ~/.tmux/plugins/tpm/bindings/install_plugins
+
 # Install vim-plug
 if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
   echo "Installing vim-plug ..."
@@ -12,8 +15,8 @@ if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-if [[ ! -f ~/.config/nvim/init.vim.orig ]]; then
-  cp -T ~/.config/nvim/init.vim ~/.config/nvim/init.vim.orig
+if [[ ! -f ~/.dotfiles_bkp/init.vim ]]; then
+  cp ~/.config/nvim/init.vim ~/.dotfiles_bkp/
   echo "source ~/.dotfiles/vimrc" >> ~/.config/nvim/init.vim
 fi
 
