@@ -14,20 +14,17 @@ if (! (command -v brew > /dev/null) ); then
     echo "fi"
     echo "alias bup='brew update && brew upgrade && brew cleanup -s && brew doctor'"
   } >> ~/.bashrc
-else
-  echo "Brew is already installed"
 fi
 
 commands=(
   git
   python3
-  neovim
   tmux
   reattach-to-user-namespace
   urlview
-  nvm
   rg
   exa
+  shellcheck
 )
 
 
@@ -46,6 +43,12 @@ fi
 
 if (! (pip3 list --format=columns | grep neovim)); then
   pip3 install --user --upgrade pynvim || echo "Install python3-neovim manually"
+fi
+
+# Install Neovim
+if (! (command -v nvim > /dev/null)); then
+  echo "Installing Neovim ..."
+  brew install neovim
 fi
 
 # Configure git to use the credentials from the keychain

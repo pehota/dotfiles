@@ -38,8 +38,8 @@ for c in "${commands[@]}"
 
 # Install Neovim
 if (! (command -v nvim > /dev/null)); then
-	echo "Installing Neovim ..."
-	sudo pacman -S neovim
+  echo "Installing Neovim ..."
+  sudo pacman -S neovim
 fi
 
 
