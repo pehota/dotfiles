@@ -1,2 +1,2 @@
-copy/tmux/plugins
-copy/tmux/resurrect
+tmux/plugins
+tmux/resurrect
