@@ -18,7 +18,7 @@ ln -sf ~/.dotfiles/git_templates ~/.git_templates
 # Tmux
 mv ~/.tmux.conf ~/.dotfiles_bkp/.tmux.conf
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
-# ln -s ~/.dotfiles/tmux ~/.tmux
+ln -sf ~/.dotfiles/tmux ~/.tmux
 
 
 # Neovim
