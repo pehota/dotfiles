@@ -3,31 +3,53 @@
 # Create a backup folder where all existing dotfiles will be saved to
 mkdir -p ~/.dotfiles_bkp
 
+#Bash
+[ ! -L ~/.bash_profile ] && {
+  mv ~/.bash_profile ~/.dotfiles_bkp/ &> /dev/null
+  ln -sf ~/.dotfiles/bash_profile ~/.bash_profile
+}
+
 #Git
-mv ~/.gitconfig ~/.dotfiles_bkp/
-ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
+[ ! -L ~/.gitconfig ] && {
+  mv ~/.gitconfig ~/.dotfiles_bkp/ &> /dev/null
+  ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
+}
 
-mv ~/.gitignore ~/.dotfiles_bkp/
-ln -sf ~/.dotfiles/gitignore ~/.gitignore
+[ ! -L ~/.gitignore ] && {
+  mv ~/.gitignore ~/.dotfiles_bkp/ &> /dev/null
+  ln -sf ~/.dotfiles/gitignore ~/.gitignore
+}
 
-mv ~/.git-prompt.sh ~/.dotfiles_bkp/
-ln -sf ~/.dotfiles/git-prompt.sh ~/.git-prompt.sh
-
-ln -sf ~/.dotfiles/git_templates ~/.git_templates
+[ ! -L  ~/.git_templates ] && {
+  mv ~/.git_templates ~/.dotfiles_bkp/ &> /dev/null
+  ln -s ~/.dotfiles/git_templates ~/.git_templates
+}
 
 # Tmux
-mv ~/.tmux.conf ~/.dotfiles_bkp/.tmux.conf
-ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
-ln -sf ~/.dotfiles/tmux ~/.tmux
+[ ! -L ~/.tmux.conf ] && {
+  mv ~/.tmux.conf ~/.dotfiles_bkp/ &> /dev/null
+  ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
+}
 
+[ ! -L ~/.tmux ] && {
+  mv ~/.tmux ~/.dotfiles_bkp/ &> /dev/null
+  ln -sf ~/.dotfiles/tmux ~/.tmux
+}
 
 # Neovim
-mv ~/.vimrc ~/.dotfiles_bkp/
-ln -sf ~/.dotfiles/vimrc ~/.vimrc
+[ ! -L ~/.vimrc ] && {
+  mv ~/.vimrc ~/.dotfiles_bkp/ &> /dev/null
+  ln -sf ~/.dotfiles/vimrc ~/.vimrc
+}
 
 # ctags
-ln -sf ~/.dotfiles/ctags.d ~/.ctags.d
+[ ! -L ~/.ctags.d ] && {
+  mv ~/.ctags.d ~/.dotfiles_bkp/ &> /dev/null
+  ln -sf ~/.dotfiles/ctags.d ~/.ctags.d
+}
 
 # cmus
-mv ~/.config/cmus ~/.dotfiles_bkp/
-ln -sf ~/.dotfiles/cmus ~/.config
+[ ! -L  ~/.config/cmus ] && {
+  mv ~/.config/cmus ~/.dotfiles_bkp/ &> /dev/null
+  ln -sf ~/.dotfiles/cmus ~/.config
+}

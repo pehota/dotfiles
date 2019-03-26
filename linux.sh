@@ -44,9 +44,13 @@ if (! (command -v nvim > /dev/null)); then
 fi
 
 # link rofi
-mv ~/.config/rofi ~/.dotfiles_bkp/
-ln -sf ~/.dotfiles/rofi ~/.config
+[ ! -L ~/.config/rofi ] && {
+  mv ~/.config/rofi ~/.dotfiles_bkp/ &> /dev/null
+  ln -sf ~/.dotfiles/rofi ~/.config
+}
 
 # link Alacritty
-mv ~/.config/alacritty ~/.dotfiles_bkp/
-ln -sf ~/.dotfiles/alacritty ~/.config
+[ ! -L ~/.config/alacritty ] && {
+  mv ~/.config/alacritty ~/.dotfiles_bkp/ &> /dev/null
+  ln -sf ~/.dotfiles/alacritty ~/.config
+}

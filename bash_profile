@@ -14,7 +14,7 @@ export EDITOR=nvim
 # Git branch in prompt.
 # Nicer bash prefix with git branch
 export GIT_PS1_SHOWDIRTYSTATE=1
-source ~/.git-prompt.sh
+source ~/.dotfiles/git-prompt.sh
 # Custom bash prompt via kirsle.net/wizards/ps1.html
 PS1="\[$(tput bold)\]\[$(tput setaf 2)\]\[$(tput setaf 3)\]\w\$(__git_ps1 '\[\033[1;35;1m\] (%s)\[\033[0m\]')\[$(tput setaf 2)\]\\$ \[$(tput sgr0)\]"
 export PS1
