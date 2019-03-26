@@ -36,15 +36,6 @@ for c in "${commands[@]}"
     fi
   done
 
-if (! (command -v pip3 > /dev/null) ); then
-  echo "Installing pip ..."
-  sudo easy_install3 pip3
-fi
-
-if (! (pip3 list --format=columns | grep neovim)); then
-  pip3 install --user --upgrade pynvim || echo "Install python3-neovim manually"
-fi
-
 # Install Neovim
 if (! (command -v nvim > /dev/null)); then
   echo "Installing Neovim ..."

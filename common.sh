@@ -15,9 +15,18 @@ if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
+if (! (command -v pip > /dev/null) ); then
+	echo "Installing pip ..."
+	sudo easy_install pip
+fi
+
+if (! (pip list --format=columns | grep pynvim)); then
+	pip install --upgrade --user pynvim || echo "Install python3-neovim manually"
+fi
+
 if [[ ! -f ~/.dotfiles_bkp/init.vim ]]; then
-  cp ~/.config/nvim/init.vim ~/.dotfiles_bkp/
-  echo "source ~/.dotfiles/vimrc" >> ~/.config/nvim/init.vim
+	cp ~/.config/nvim/init.vim ~/.dotfiles_bkp/
+	echo "source ~/.dotfiles/vimrc" >> ~/.config/nvim/init.vim
 fi
 
 # Rerun plug installation on nvim
@@ -31,12 +40,12 @@ if [[ ! -d ~/.nvm ]]; then
 fi
 
 # Export NVM_DIR and add nvm loading
-if [[ -n "$NVM_DIR" ]]; then
+if [[ -z "$NVM_DIR" ]]; then
   echo "Update NVM_DIR ..."
   {
     echo "export NVM_DIR=\"\$HOME/.nvm\""
-    echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\"  \# This loads nvm"
-    echo "[ -s \"\$NVM_DIR/bash_completion\" ] && \. \"\$NVM_DIR/bash_completion\"  \# This loads nvm bash_completion"
+    echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\"  # This loads nvm"
+    echo "[ -s \"\$NVM_DIR/bash_completion\" ] && \. \"\$NVM_DIR/bash_completion\"  # This loads nvm bash_completion"
   } >> ~/.bash_profile
 
   export NVM_DIR=~/.nvm

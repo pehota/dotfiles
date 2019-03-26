@@ -31,28 +31,7 @@ fi
 echo "Done"
 exit 0
 
-# Install git if necessary
-# if (! (which git > /dev/null) ); then
-  # echo "Installing git ..."
-  # if [[ $IS_MAC ]]; then
-    # brew install git
-  # else
-    # sudo pacman -S git-all
-  # fi
-# fi
-
 # # TODO: Add GIT completion
-
-# # Install python if necessary
-# if (! (which python > /dev/null) ); then
-  # echo "Installing python ..."
-  # if [[ $IS_MAC ]]; then
-    # brew install python
-  # else
-    # sudo pacman -S python
-  # fi
-
-# fi
 
 # if (! (which pip > /dev/null) ); then
   # echo "Installing pip ..."
@@ -75,9 +54,6 @@ exit 0
   # sudo easy_install3 pip3
 # fi
 
-# if (! (pip3 list --format=columns | grep neovim)); then
-  # pip3 install python3-neovim || echo "Install python3-neovim manually"
-# fi
 
 # # Install nvim if necessary
 # if (! (which nvim > /dev/null) ); then

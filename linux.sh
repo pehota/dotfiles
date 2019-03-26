@@ -20,10 +20,10 @@ commands=(
   git
   rofi
   alacritty
-	tmux
-	exa
-	nvm
-	rg
+  tmux
+  exa
+  nvm
+  rg
   preload
   python3
 )
