@@ -27,3 +27,7 @@ ln -sf ~/.dotfiles/vimrc ~/.vimrc
 
 # ctags
 ln -sf ~/.dotfiles/ctags.d ~/.ctags.d
+
+# cmus
+mv ~/.config/cmus ~/.dotfiles_bkp/
+ln -sf ~/.dotfiles/cmus ~/.config

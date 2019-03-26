@@ -26,6 +26,7 @@ commands=(
   rg
   preload
   python3
+  cmus
 )
 
 for c in "${commands[@]}"
@@ -42,10 +43,10 @@ if (! (command -v nvim > /dev/null)); then
   sudo pacman -S neovim
 fi
 
-
 # link rofi
 mv ~/.config/rofi ~/.dotfiles_bkp/
 ln -sf ~/.dotfiles/rofi ~/.config
 
+# link Alacritty
 mv ~/.config/alacritty ~/.dotfiles_bkp/
 ln -sf ~/.dotfiles/alacritty ~/.config

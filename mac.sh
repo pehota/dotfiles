@@ -25,6 +25,7 @@ commands=(
   rg
   exa
   shellcheck
+  cmus
 )
 
 

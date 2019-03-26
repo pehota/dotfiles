@@ -1,0 +1,29 @@
+q
+qa
+version
+w
+r
+set output_plugin=pulse
+set output_plugin=pulseaudio
+set output_plugin=ao
+set output_plugin=alsa
+set output_plugin=au
+add ~/Music
+
+colorsheme
+color list
+colorscheme
+color
+bind -f browser i toggle show_hidden1c
+!man cmus
+man
+help
+load https://pehota-seedbucket.cloud.seedboxes.cc/api/share/YbpRtA869qhHcPlXqSJj
+add https://pehota-seedbucket.cloud.seedboxes.cc/api/share/YbpRtA869qhHcPlXqSJj
+ki
+repeat
+add ~/Music/
+refresh 
+jkjkjkjkjkjkjjkjkjkjj
+load ~/Music/radio.m3u
+colorscheme zenburn
