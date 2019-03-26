@@ -58,5 +58,9 @@ if [[ -z "$NVM_DIR" ]]; then
   fi
 fi
 
-echo "Installing node.js ..."
-nvm install stable
+if (! (command -v nvm > /dev/null)); then
+  printf "NVM and node should be installed manually\n"
+else
+  echo "Installing node.js ..."
+  nvm install stable
+fi

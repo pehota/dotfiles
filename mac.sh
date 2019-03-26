@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # Install the font for Powerline
-cp "$HOME/.dotfiles/Droid Sans Mono for Powerline Nerd Font Complete.otf" "/Users/$(whoami)/Library/Fonts"
+if [ ! -f "/Users/$(whoami)/Library/Fonts/Droid Sans Mono for Powerline Nerd Font Complete.otf" ]; then
+	cp "$HOME/.dotfiles/Droid Sans Mono for Powerline Nerd Font Complete.otf" "/Users/$(whoami)/Library/Fonts"
+fi
 
 if (! (command -v brew > /dev/null) ); then
   echo "Installing brew ..."
@@ -31,7 +33,7 @@ commands=(
 
 for c in "${commands[@]}"
   do
-    if (! (command -v "$c" > /dev/null)); then
+    if (! (command -v "$c" &> /dev/null)); then
       echo "Installing $c ..."
       brew install "$c"
     fi

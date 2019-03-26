@@ -4,7 +4,7 @@ mkdir -p ~/.dotfiles_bkp
 
 # Install the font for Powerline
 if [ ! -f "$HOME/.local/share/fonts/Droid Sans Mono for Powerline Nerd Font Complete.otf" ]; then
-	cp "$HOME/.dotfiles/Droid Sans Mono for Powerline Nerd Font Complete.otf" ~/.local/share/fonts/
+  cp "$HOME/.dotfiles/Droid Sans Mono for Powerline Nerd Font Complete.otf" ~/.local/share/fonts/
 fi
 
 
@@ -22,7 +22,6 @@ commands=(
   alacritty
   tmux
   exa
-  nvm
   rg
   preload
   python3
@@ -31,7 +30,7 @@ commands=(
 
 for c in "${commands[@]}"
   do
-    if (! (command -v "$c" > /dev/null)); then
+    if (! (command -v "$c" &> /dev/null)); then
       echo "Installing $c ..."
       sudo pacman -S "$c"
     fi
