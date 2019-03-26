@@ -236,6 +236,9 @@ set whichwrap+=<,>,h,l,[,]
 filetype indent on
 filetype plugin indent on
 
+" set colorscheme before any other visual setting in order to make sure it
+" doesn't override any of them
+colorscheme gruvbox
 
 " Visual
 syntax on
@@ -254,7 +257,6 @@ set wildmenu
 set t_Co=256
 set diffopt-=internal
 "set termguicolors
-colorscheme gruvbox
 highlight ColorColumn guibg=NONE ctermbg=NONE
 highlight SignColumn guibg=NONE ctermbg=NONE
 highlight Directory guibg=darkgrey ctermfg=darkgrey
@@ -273,7 +275,7 @@ endif
 
 
 " == Identation and Spaces
-autocmd FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=80
+autocmd FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee,typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=80
 
 
 " == Filetypes
