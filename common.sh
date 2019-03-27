@@ -6,7 +6,7 @@ if [[ ! -d ~/.tmux/plugins/tpm ]]; then
 fi
 
 # Install the tmux plugins
-. ~/.tmux/plugins/tpm/bindings/install_plugins
+# . ~/.tmux/plugins/tpm/bindings/install_plugins
 
 # Install vim-plug
 if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
@@ -16,22 +16,27 @@ if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
 fi
 
 if (! (command -v pip > /dev/null) ); then
-	echo "Installing pip ..."
-	sudo easy_install pip
+  echo "Installing pip ..."
+  sudo easy_install pip
 fi
 
 if (! (pip list --format=columns | grep pynvim)); then
-	pip install --upgrade --user pynvim || echo "Install python3-neovim manually"
+  pip install --upgrade --user pynvim || echo "Install python3-neovim manually"
 fi
 
 if [[ ! -f ~/.dotfiles_bkp/init.vim ]]; then
-	cp ~/.config/nvim/init.vim ~/.dotfiles_bkp/
-	echo "source ~/.dotfiles/vimrc" >> ~/.config/nvim/init.vim
+  if [[ ! -d ~/.config/nvim ]]; then
+    mkdir -p ~/.config/nvim
+    touch ~/.config/nvim/init.vim
+  else
+    cp ~/.config/nvim/init.vim ~/.dotfiles_bkp/
+  fi
+  echo "source ~/.dotfiles/vimrc" >> ~/.config/nvim/init.vim
 fi
 
 # Rerun plug installation on nvim
 echo "Installing nvim plugins ..."
-nvim +PlugInstall +qall
+nvim --noplugin +PlugInstall +qall
 
 # Install nvm
 if [[ ! -d ~/.nvm ]]; then

@@ -4,6 +4,7 @@ mkdir -p ~/.dotfiles_bkp
 
 # Install the font for Powerline
 if [ ! -f "$HOME/.local/share/fonts/Droid Sans Mono for Powerline Nerd Font Complete.otf" ]; then
+  mkdir -p "$HOME/.local/share/fonts"
   cp "$HOME/.dotfiles/Droid Sans Mono for Powerline Nerd Font Complete.otf" ~/.local/share/fonts/
 fi
 
@@ -16,30 +17,41 @@ fi
 # fi
 # git config --global credential.helper /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring
 
-commands=(
-  git
-  rofi
-  alacritty
-  tmux
-  exa
-  rg
-  preload
-  python3
-  cmus
+declare -A commands_map=(
+  ["git"]="git"
+  ["rofi"]="rofi"
+  ["alacritty"]="alacritty"
+  ["tmux"]="tmux"
+  ["exa"]="exa"
+  ["preload"]="preload"
+  ["python3"]="python3"
+  ["nvim"]="neovim"
+  ["rg"]="ripgrep"
+  ["shellcheck"]="shellcheck"
+  ["cmus"]="cmus"
 )
 
-for c in "${commands[@]}"
+commands_to_install=""
+
+for c in "${!commands_map[@]}"
   do
     if (! (command -v "$c" &> /dev/null)); then
-      echo "Installing $c ..."
-      sudo pacman -S "$c"
+      if [[ -n "$commands_to_install" ]]; then
+	commands_to_install="$commands_to_install ${commands_map[$c]}"
+      else
+	commands_to_install="${commands_map[$c]}"
+      fi
     fi
   done
 
 # Install Neovim
 if (! (command -v nvim > /dev/null)); then
-  echo "Installing Neovim ..."
-  sudo pacman -S neovim
+  commands_to_install="$commands_to_install neovim"
+fi
+
+if [[ -n "$commands_to_install" ]]; then
+  echo "Installing $commands_to_install"
+  yes | sudo pacman -Sy $commands_to_install
 fi
 
 # link rofi

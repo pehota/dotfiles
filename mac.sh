@@ -18,31 +18,35 @@ if (! (command -v brew > /dev/null) ); then
   } >> ~/.bashrc
 fi
 
-commands=(
-  git
-  python3
-  tmux
-  reattach-to-user-namespace
-  urlview
-  rg
-  exa
-  shellcheck
-  cmus
+declare -A commands_map=(
+  ["git"]="git"
+  ["tmux"]="tmux"
+  ["exa"]="exa"
+  ["python3"]="python3"
+  ["nvim"]="neovim"
+  ["rg"]="ripgrep"
+  ["reattach-to-user-namespace"]="reattach-to-user-namespace"
+  ["urlview"]="urlview"
+  ["shellcheck"]="shellcheck"
+  ["cmus"]="cmus"
 )
 
+commands_to_install=""
 
-for c in "${commands[@]}"
+for c in "${!commands_map[@]}"
   do
     if (! (command -v "$c" &> /dev/null)); then
-      echo "Installing $c ..."
-      brew install "$c"
+      if [[ -n "$commands_to_install" ]]; then
+	commands_to_install="$commands_to_install ${commands_map[$c]}"
+      else
+	commands_to_install="${commands_map[$c]}"
+      fi
     fi
   done
 
-# Install Neovim
-if (! (command -v nvim > /dev/null)); then
-  echo "Installing Neovim ..."
-  brew install neovim
+if [[ -n "$commands_to_install" ]]; then
+  echo "Installing $commands_to_install"
+  brew install "$commands_to_install"
 fi
 
 # Configure git to use the credentials from the keychain
