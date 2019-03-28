@@ -1,5 +1,4 @@
 [ -s ~/.profile ] && source ~/.profile # Load the default .profile
-[ -s ~/.bashrc ] && source ~/.bashrc # Load the default .bashrc
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.mongodb/bin:$PATH"

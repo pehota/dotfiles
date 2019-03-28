@@ -9,6 +9,10 @@ mkdir -p ~/.dotfiles_bkp
   ln -sf ~/.dotfiles/bash_profile ~/.bash_profile
 }
 
+if [ -s ~/.bashrc ]; then
+  echo "source ~/.bash_profile" >> ~/.bashrc
+fi
+
 #Git
 [ ! -L ~/.gitconfig ] && {
   mv ~/.gitconfig ~/.dotfiles_bkp/ &> /dev/null
