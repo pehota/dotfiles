@@ -27,12 +27,13 @@ Plug 'tpope/vim-fugitive'
 
 " == Lightline
 Plug 'itchyny/lightline.vim'
+Plug 'shinchu/lightline-gruvbox.vim'
 let g:lightline = { 'active': {} }
 let g:lightline.active.left = [ ['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified'], [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ] ]
 let g:lightline.component_function = { 'gitbranch': 'fugitive#head' }
 let g:lightline.separator = { 'left': '', 'right': '' }
 let g:lightline.subseparator = { 'left': '', 'right': '' }
-let g:lightline.colorscheme = 'powerline'
+let g:lightline.colorscheme = 'gruvbox'
 let g:lightline.tabline = { 'left': [[ 'tabs' ]], 'right': [[ 'close' ]] }
 
 let g:tmuxline_powerline_separators=1
