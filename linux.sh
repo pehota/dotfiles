@@ -20,7 +20,7 @@ fi
 declare -A commands_map=(
   ["git"]="git"
   ["rofi"]="rofi"
-  ["alacritty"]="alacritty"
+  ["kitty"]="kitty"
   ["tmux"]="tmux"
   ["exa"]="exa"
   ["preload"]="preload"
@@ -58,10 +58,4 @@ fi
 [ ! -L ~/.config/rofi ] && {
   mv ~/.config/rofi ~/.dotfiles_bkp/ &> /dev/null
   ln -sf ~/.dotfiles/rofi ~/.config
-}
-
-# link Alacritty
-[ ! -L ~/.config/alacritty ] && {
-  mv ~/.config/alacritty ~/.dotfiles_bkp/ &> /dev/null
-  ln -sf ~/.dotfiles/alacritty ~/.config
 }

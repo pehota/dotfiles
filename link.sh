@@ -29,6 +29,11 @@ fi
   ln -s ~/.dotfiles/git_templates ~/.git_templates
 }
 
+[ ! -L  ~/.config/kitty ] && {
+  mv ~/.config/kitty ~/.dotfiles_bkp/ &> /dev/null
+  ln -s ~/.dotfiles/kitty ~/.config
+}
+
 # Tmux
 [ ! -L ~/.tmux.conf ] && {
   mv ~/.tmux.conf ~/.dotfiles_bkp/ &> /dev/null
