@@ -29,6 +29,7 @@ declare -A commands_map=(
   ["rg"]="ripgrep"
   ["shellcheck"]="shellcheck"
   ["cmus"]="cmus"
+  ["urlview"]="urlview"
 )
 
 commands_to_install=""
