@@ -16,6 +16,12 @@ if [[ "$IS_MAC" = false && "$IS_LINUX" = false ]]; then
   exit 1
 fi
 
+if [[ "${BASH_VERSINFO:-0}" -le 3 ]]; then
+  echo "Bash version is too old. Please upgrade to v4 or higher."
+  exit 1
+fi
+
+
 . ./link.sh
 
 # Install brew if necessary
