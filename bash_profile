@@ -23,7 +23,7 @@ if [ -f "$(command -v exa)" ]; then
 fi
 
 alias reboot-shell='source ~/.bash_profile'
-alias tmux='tmux -2'
+alias tmux='tmux -2 -u'
 alias cdg='cd ~/Work/Shore/git'
 alias cdw='cd ~/Work'
 alias ll='ls -al'
