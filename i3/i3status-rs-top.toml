@@ -1,0 +1,35 @@
+# theme = "gruvbox-dark"
+icons = "awesome"
+
+[[block]]
+block = "music"
+player = "spotify"
+buttons = ["play", "next"]
+
+[[block]]
+block = "sound"
+step_width = 1
+
+[[block]]
+block = "battery"
+# interval = 10
+upower=true
+format = "{percentage}% {time}"
+
+# [[block]]
+# block = "weather"
+# format = "{weather} ({location}) {temp}°, {wind} m/s {direction}"
+# service = { name = "openweathermap", api_key = "XXX", city_id = "5398563", units = "metric" }
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d %b %R"
+
+[theme]
+name = "gruvbox-dark"
+[theme.overrides]
+idle_bg = "#282828"
+info_bg = "#458588"
+good_bg = "#98971a"
+warning_fg = "#cc241d"
