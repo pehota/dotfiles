@@ -35,6 +35,7 @@ alias weather='curl -4 http://wttr.in/'
 alias vimdiff='nvim -d'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+source ~/.dotfiles/git-completion.bash
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 [ -s rbenv ] && eval "$(rbenv init -)"
