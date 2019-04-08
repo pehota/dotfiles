@@ -30,6 +30,7 @@ declare -A commands_map=(
   ["shellcheck"]="shellcheck"
   ["cmus"]="cmus"
   ["urlview"]="urlview"
+  ["ranger"]="ranger"
 )
 
 commands_to_install=""
