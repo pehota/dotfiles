@@ -45,11 +45,6 @@ for c in "${!commands_map[@]}"
     fi
   done
 
-# Install Neovim
-if (! (command -v nvim > /dev/null)); then
-  commands_to_install="$commands_to_install neovim"
-fi
-
 if [[ -n "$commands_to_install" ]]; then
   echo "Installing $commands_to_install"
   yes | sudo pacman -Sy $commands_to_install
