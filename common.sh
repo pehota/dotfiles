@@ -5,9 +5,6 @@ if [[ ! -d ~/.tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-# Install the tmux plugins
-# . ~/.tmux/plugins/tpm/bindings/install_plugins
-
 # Install vim-plug
 if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
   echo "Installing vim-plug ..."
@@ -68,4 +65,11 @@ if (! (command -v nvm > /dev/null)); then
 else
   echo "Installing node.js ..."
   nvm install stable
+fi
+
+# Install the tmux plugins if tmux is running (highly unlikely)
+if [ -n "$TMUX" ]; then
+  . ~/.tmux/plugins/tpm/bindings/install_plugins
+else
+  echo "Install tmux plugins by running: . ~/.tmux/plugins/tpm/bindings/install_plugins"
 fi
