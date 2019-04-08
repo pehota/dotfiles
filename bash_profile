@@ -19,7 +19,7 @@ PS1="\[$(tput bold)\]\[$(tput setaf 2)\]\[$(tput setaf 3)\]\w\$(__git_ps1 '\[\03
 export PS1
 
 if [ -f "$(command -v exa)" ]; then
-  alias ls='exa'
+  alias ls='exa --group-directories-first'
 fi
 
 alias reboot-shell='source ~/.bash_profile'
