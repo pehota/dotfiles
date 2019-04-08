@@ -110,6 +110,11 @@ Plug 'zivyangll/git-blame.vim'
 
 
 Plug 'neovimhaskell/haskell-vim'
+let g:haskell_classic_highlighting = 1
+let g:haskell_indent_disable = 1
+
+Plug 'nbouscal/vim-stylish-haskell'
+Plug 'eagletmt/neco-ghc'
 
 " == ALE
 " Enable completion where available.
@@ -120,14 +125,17 @@ Plug 'w0rp/ale'
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
+\   'haskell': ['hdevtools', 'hlint'],
 \}
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier', 'eslint'],
-\   'typescript': ['tslint'],
-\   'elm': ['elm-format'],
 \   'css': ['prettier'],
+\   'elm': ['elm-format'],
+\   'haskell': ['brittany'],
+\   'javascript': ['prettier'],
+\   'json': ['prettier'],
+\   'typescript': ['prettier'],
 \}
 
 " Do not lint or fix minified files.
@@ -149,7 +157,6 @@ let g:ale_echo_msg_error_str = 'Error'
 let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '%severity%: %s'
 
-" Write this in your vimrc file
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 
@@ -177,6 +184,8 @@ Plug 'jparise/vim-graphql'
 Plug 'Shougo/denite.nvim'
 
 Plug 'jceb/vim-orgmode'
+
+Plug 'cespare/vim-toml'
 
 call plug#end()
 
@@ -254,7 +263,8 @@ set laststatus=2
 set wildmenu
 set t_Co=256
 set diffopt-=internal
-"set termguicolors
+set nonu
+set relativenumber
 colorscheme gruvbox
 highlight ColorColumn guibg=NONE ctermbg=NONE
 highlight SignColumn guibg=NONE ctermbg=NONE
@@ -294,6 +304,13 @@ autocmd BufEnter * silent! lcd %:p:h
 " Remember last location in file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
       \| exe "normal g'\"" | endif
+
+" Folding
+" Set automatic folding for all files
+autocmd Syntax * setlocal foldmethod=syntax
+" Open all folds by default
+autocmd Syntax * normal zR
+
 
 " Bindings
 let mapleader = "\<space>"
