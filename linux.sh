@@ -1,21 +1,12 @@
 #!/usr/bin/env bash
 
-mkdir -p ~/.dotfiles_bkp
+mkdir -p ~/.dotfiles/.backup
 
 # Install the font for Powerline
 if [ ! -f "$HOME/.local/share/fonts/Droid Sans Mono for Powerline Nerd Font Complete.otf" ]; then
   mkdir -p "$HOME/.local/share/fonts"
   cp "$HOME/.dotfiles/Droid Sans Mono for Powerline Nerd Font Complete.otf" ~/.local/share/fonts/
 fi
-
-
-# Configure git to use the credentials from the keyring
-# Install the keyring if necessary
-# if (! (command -v libgnome-keyring-dev > /dev/null) ); then
-  # sudo pacman -S libgnome-keyring-dev
-  # sudo make --directory=/usr/share/doc/git/contrib/credential/gnome-keyring
-# fi
-# git config --global credential.helper /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring
 
 declare -A commands_map=(
   ["git"]="git"
@@ -53,6 +44,6 @@ fi
 
 # link rofi
 [ ! -L ~/.config/rofi ] && {
-  mv ~/.config/rofi ~/.dotfiles_bkp/ &> /dev/null
+  mv ~/.config/rofi ~/.dotfiles/.backup/ &> /dev/null
   ln -sf ~/.dotfiles/rofi ~/.config
 }

@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Create a backup folder where all existing dotfiles will be saved to
+mkdir -p ~/.dotfiles/.backup
+
 declare -A commands_map=(
   ["dunst"]="dunst"
   ["compton"]="compton"
@@ -26,14 +29,16 @@ if [[ -n "$commands_to_install" ]]; then
 fi
 
 if [ ! -L ~/.config/i3 ]; then
-  ln -sf ~/.dotfiles/i3 ~/.config
+  mv ~/.config/i3 ~/.dotfiles/.backup/ &> /dev/null
+  ln -s ~/.dotfiles/i3 ~/.config
 fi
 
 if [ ! -L ~/.config/compton ]; then
-  ln -sf ~/.dotfiles/compton ~/.config
+  mv ~/.config/compton ~/.dotfiles/.backup/ &> /dev/null
+  ln -s ~/.dotfiles/compton ~/.config
 fi
 
-if [ -n "$TERMINAL" ]; then
+if [ -z "$TERMINAL" ]; then
   echo "Adding \$TERMINAL environment variable which requires \`sudo\`"
   {
     echo "export TERMINAL=kitty" | sudo tee -a /etc/environment
