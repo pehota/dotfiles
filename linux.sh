@@ -60,10 +60,3 @@ fi
   mv ~/.config/rofi ~/.dotfiles_bkp/ &> /dev/null
   ln -sf ~/.dotfiles/rofi ~/.config
 }
-
-{
-  echo "if [ \"\$DESKTOP_SESSION\" = \"i3\" ]; then"
-  echo "  export \"\$(gnome-keyring-daemon --start --components=secrets,ssh)\""
-  echo "fi"
-  echo ""
-} >> ~/.bash_profile
