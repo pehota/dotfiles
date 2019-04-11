@@ -346,3 +346,6 @@ nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
 nnoremap  <silent> <Leader>t :FzfBTags<CR>
 nnoremap  <silent> <Leader>= <C-w>=
 nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
+
+nmap <silent> [w <Plug>(ale_previous_wrap)
+nmap <silent> ]w <Plug>(ale_next_wrap)
