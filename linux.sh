@@ -20,8 +20,8 @@ declare -A commands_map=(
   ["rg"]="ripgrep"
   ["shellcheck"]="shellcheck"
   ["cmus"]="cmus"
-  ["urlview"]="urlview"
   ["ranger"]="ranger"
+  ["xautolock"]="xautolock"
 )
 
 commands_to_install=""

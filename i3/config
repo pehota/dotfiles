@@ -59,10 +59,10 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
-bindsym $mod+minus split h
+bindsym $mod+Control+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+Control+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -83,6 +83,13 @@ bindsym $mod+a focus parent
 
 # focus the child container
 bindsym $mod+d focus child
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Tab move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+Shift+Tab scratchpad show
+
 # Workspace names
 
 # to display names or symbols instead of plain workspace numbers you can use
@@ -257,6 +264,9 @@ exec_always --no-startup-id feh --bg-fill $wallpaper
 
 # Start Redshift
 exec --no-startup-id redshift -t 6500:3500
+
+exec --no-startup-id xset dpms 60 300 600
+exec --no-startup-id xautolock -locker "$locker" -time 1
 
 
 # ----------- Generic windown configuration
