@@ -22,6 +22,7 @@ declare -A commands_map=(
   ["cmus"]="cmus"
   ["ranger"]="ranger"
   ["xautolock"]="xautolock"
+  ["redshift"]="redshift"
 )
 
 commands_to_install=""
