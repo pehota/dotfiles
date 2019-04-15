@@ -14,7 +14,7 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.bs.js$', '\.git', '\.exrc', '\.DS_Store', 'node_modules', 'elm-stuff', 'package-lock.json', 'yarn.lock', '.cache']
 
 " == Colorsheme
-Plug 'morhetz/gruvbox'
+Plug 'dkasak/gruvbox'
 
 " == Git related plugins
 Plug 'airblade/vim-gitgutter'
@@ -113,8 +113,8 @@ Plug 'neovimhaskell/haskell-vim'
 let g:haskell_classic_highlighting = 1
 let g:haskell_indent_disable = 1
 
-Plug 'nbouscal/vim-stylish-haskell'
-Plug 'eagletmt/neco-ghc'
+" Plug 'nbouscal/vim-stylish-haskell'
+" Plug 'eagletmt/neco-ghc'
 
 " == ALE
 " Enable completion where available.
@@ -134,6 +134,7 @@ let g:ale_fixers = {
 \   'elm': ['elm-format'],
 \   'haskell': ['brittany'],
 \   'javascript': ['prettier'],
+\   'js': ['prettier'],
 \   'json': ['prettier'],
 \   'typescript': ['prettier'],
 \}
