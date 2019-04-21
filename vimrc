@@ -100,7 +100,7 @@ let g:elm_format_autosave = 1
 " == Rooter
 Plug 'airblade/vim-rooter'
 let g:rooter_silent_chdir = 1
-let g:rooter_patterns = ['.git/', 'package.json', '.git', 'elm.json']
+let g:rooter_patterns = ['.git/', 'package.json', '.git', 'elm.json', 'stack.yaml']
 
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
