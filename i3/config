@@ -230,6 +230,17 @@ mode "$mode_system" {
 }
 bindsym $mod+Shift+e mode "$mode_system"
 
+set $mode_power DPMS on (+) / off (-)
+mode "$mode_power" {
+    bindsym plus exec --no-startup-id "xset +dpms && xautolock -enable && dunstify 'Screen suspend is enabled.'", mode "default"
+    bindsym minus exec --no-startup-id "xset -dpms && xautolock -disable && dunstify 'Screen suspend is disabled'", mode "default"
+
+    # Esc to go back to normal mode
+    bindsym Escape mode "default"
+    bindsym Control+bracketleft mode "default"
+}
+bindsym $mod+p mode "$mode_power"
+
 # Print a section of the screen and save it to the clipboard
 bindsym $mod+Control+Shift+4 --release exec "scrot -z -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 # Print a section of the screen and save it to a file on the Desktop
