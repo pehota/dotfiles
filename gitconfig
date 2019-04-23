@@ -61,6 +61,6 @@
   dc = "!sh -c 'git diff --name-only $0 | wc -l'"
 	lsr = branch -r
 [help]
-  autocorrect = -1
+	autocorrect = 0
 [init]
 	templatedir = ~/.git_templates
