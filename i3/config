@@ -217,7 +217,7 @@ set $locker i3lock-fancy -b=0x6 -n
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $locker, mode "default"
+    bindsym l exec --no-startup-id $locker && systemctl suspend, mode "default"
     bindsym e exec --no-startup-id (i3lock -c 000000) && i3-msg exit, mode "default"
     bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $locker && systemctl hibernate, mode "default"
@@ -232,8 +232,8 @@ bindsym $mod+Shift+e mode "$mode_system"
 
 set $mode_power DPMS on (+) / off (-)
 mode "$mode_power" {
-    bindsym plus exec --no-startup-id "xset +dpms && xautolock -enable && dunstify 'Screen suspend is enabled.'", mode "default"
-    bindsym minus exec --no-startup-id "xset -dpms && xautolock -disable && dunstify 'Screen suspend is disabled'", mode "default"
+    bindsym plus exec --no-startup-id xset +dpms && xautolock -enable && dunstify 'Screen suspend is enabled.', mode "default"
+    bindsym minus exec --no-startup-id xset -dpms && xautolock -disable && dunstify 'Screen suspend is disabled', mode "default"
 
     # Esc to go back to normal mode
     bindsym Escape mode "default"
@@ -258,14 +258,13 @@ workspace_auto_back_and_forth yes
 
 
 # Startup apps
-# exec --no-startup-id /opt/Enpass/bin/runenpass.sh;i3-msg 'kill'
 exec --no-startup-id /opt/enpass/Enpass; i3-msg 'kill'
 
 exec_always --no-startup-id nm-applet
 
 exec --no-startup-id compton -CGb --config ~/.config/compton/compton.conf
 
-exec_always --no-startup-id setxkbmap -option grp:alt_shift_toggle "us,bg(phonetic)"
+exec_always --no-startup-id setxkbmap -option grp:alt_shift_toggle -layout "us,bg(phonetic)"
 # Enable auth agent
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
