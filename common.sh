@@ -17,7 +17,7 @@ if (! (command -v pip > /dev/null) ); then
   sudo easy_install pip
 fi
 
-if (! (pip list --format=columns | grep pynvim)); then
+if (! (pip list --format=columns | grep pynvim > /dev/null)); then
   pip install --upgrade --user pynvim || echo "Install python3-neovim manually"
 fi
 
