@@ -269,7 +269,7 @@ set laststatus=2
 set wildmenu
 set t_Co=256
 set diffopt-=internal
-set nonu
+set number
 set relativenumber
 set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
