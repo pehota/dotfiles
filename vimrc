@@ -74,11 +74,6 @@ Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 Plug 'othree/javascript-libraries-syntax.vim'
 
-" == Fixmyjs
-Plug 'ruanyl/vim-fixmyjs'
-let g:fixmyjs_use_local = 1
-let g:fixmyjs_rc_local = 1
-
 " == Prettier
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 let g:prettier#quickfix_enabled = 0
@@ -134,6 +129,7 @@ Plug 'w0rp/ale'
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'haskell': ['hdevtools', 'hlint'],
+\   'typescript': ['tslint', 'eslint'],
 \}
 
 let g:ale_fixers = {
@@ -141,10 +137,10 @@ let g:ale_fixers = {
 \   'css': ['prettier'],
 \   'elm': ['elm-format'],
 \   'haskell': ['brittany'],
-\   'javascript': ['prettier'],
+\   'javascript': ['prettier', 'eslint'],
 \   'js': ['prettier'],
 \   'json': ['prettier'],
-\   'typescript': ['prettier'],
+\   'typescript': ['prettier', 'tslint', 'eslint'],
 \}
 
 " Do not lint or fix minified files.
@@ -156,6 +152,7 @@ let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
 let g:ale_set_highlights = 0
+let g:ale_linters_explicit = 1
 
 let g:ale_sign_error = "\uf05e"
 let g:ale_sign_warning = "\uf071"
