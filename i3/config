@@ -278,6 +278,8 @@ exec --no-startup-id redshift -t 6500:3500
 exec --no-startup-id xset dpms 60 300 600
 exec --no-startup-id xautolock -locker "$locker" -time 1
 
+# Update retina display scale
+exec --no-startup-id xrandr --output eDP1 --scale 0.6x0.6
 
 # ----------- Generic windown configuration
 floating_maximum_size 900 x 600
