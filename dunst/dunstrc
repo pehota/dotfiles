@@ -1,6 +1,5 @@
 [global]
-    font = Monospace 8
-
+    font = DejaVu Sans Mono, FontAwesome 10
     # allow a small subset of html markup:
     # <b>bold</b>
     # <i>italic</i>
@@ -115,13 +114,13 @@
     # print a notification on startup
     # This is mainly for error detection, since dbus (re-)starts dunst
     # automatically after a crash.
-    startup_notification = true
+    startup_notification = false
 
     # dmenu path
     dmenu = /usr/bin/dmenu -p dunst:
 
     # browser for opening urls in context menu
-    browser = /usr/bin/firefox -new-tab
+    browser = /usr/bin/opera -new-tab
 
   frame_width = 0
   frame_color = "#000000"
@@ -147,18 +146,18 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the '#' and following  would be interpreted as a comment.
-    background = "#222222"
-    foreground = "#888888"
-    timeout = 10
+    background = "#83a598"
+    foreground = "#ebdbb2"
+    timeout = 5
 
 [urgency_normal]
-    background = "#285577"
-    foreground = "#ffffff"
-    timeout = 10
+    background = "#98971a"
+    foreground = "#ebdbb2"
+    timeout = 5
 
 [urgency_critical]
-    background = "#900000"
-    foreground = "#ffffff"
+    background = "#cc241d"
+    foreground = "#ebdbb2"
     timeout = 0
 
 
@@ -192,30 +191,3 @@
 ## This notification will not be displayed
 #    summary = "foobar"
 #    format = ""
-
-[signed_on]
-    appname = Pidgin
-    summary = "*signed on*"
-    urgency = low
-
-[signed_off]
-    appname = Pidgin
-    summary = *signed off*
-    urgency = low
-
-[says]
-    appname = Pidgin
-    summary = *says*
-    urgency = critical
-    format  = "%s "%b""
-
-[music]
-    appname = Amarok
-    summary = "Now playing"
-    urgency = low
-
-#[twitter]
-#    appname = Pidgin
-#    summary = *twitter.com*
-#    urgency = normal
-#
