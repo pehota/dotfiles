@@ -145,6 +145,12 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound vo
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
 
+# Screen brightness controls
+# bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+# bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -269,7 +275,7 @@ exec_always --no-startup-id setxkbmap -option grp:alt_shift_toggle -layout "us,b
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Set the wallpaper
-set $wallpaper /usr/share/backgrounds/manjaro-budgie/manjaro-nologo.jpg
+set $wallpaper /usr/share/backgrounds/i3_default_background.jpg
 exec_always --no-startup-id feh --bg-fill $wallpaper
 
 # Start Redshift

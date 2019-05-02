@@ -8,19 +8,21 @@ declare -A commands_map=(
   ["dunst"]="dunst"
   ["compton"]="compton"
   ["i3status-rs"]="i3status-rust-git"
+  ["light"]="light"
+  ["redshift"]="redshift"
 )
 
 commands_to_install=""
 
 for c in "${!commands_map[@]}"
 do
-	if (! (command -v "$c" &> /dev/null)); then
-		if [[ -n "$commands_to_install" ]]; then
-			commands_to_install="$commands_to_install ${commands_map[$c]}"
-		else
-			commands_to_install="${commands_map[$c]}"
-		fi
-	fi
+  if (! (command -v "$c" &> /dev/null)); then
+    if [[ -n "$commands_to_install" ]]; then
+      commands_to_install="$commands_to_install ${commands_map[$c]}"
+    else
+      commands_to_install="${commands_map[$c]}"
+    fi
+  fi
 done
 
 if [[ -n "$commands_to_install" ]]; then

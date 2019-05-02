@@ -21,8 +21,6 @@ declare -A commands_map=(
   ["shellcheck"]="shellcheck"
   ["cmus"]="cmus"
   ["ranger"]="ranger"
-  ["xautolock"]="xautolock"
-  ["redshift"]="redshift"
 )
 
 commands_to_install=""
