@@ -20,7 +20,6 @@ fi
 
 declare -A commands_map=(
 ["git"]="git"
-["kitty"]="kitty"
 ["tmux"]="tmux"
 ["exa"]="exa"
 ["python3"]="python3"
@@ -32,7 +31,14 @@ declare -A commands_map=(
 ["cmus"]="cmus"
 )
 
+
+declare -A cask_commands_map=(
+["kitty"]="kitty"
+["alacritty"]="alacritty"
+)
+
 commands_to_install=""
+cask_commands_to_install=""
 
 for c in "${!commands_map[@]}"
 do
@@ -45,9 +51,20 @@ do
   fi
 done
 
-if [[ -n "$commands_to_install" ]]; then
-  echo "Installing $commands_to_install"
-  brew install "$commands_to_install"
+for c in "${!cask_commands_map[@]}"
+do
+  if (! (command -v "$c" &> /dev/null)); then
+    if [[ -n "$cask_commands_to_install" ]]; then
+      cask_commands_to_install="$cask_commands_to_install ${cask_commands_map[$c]}"
+    else
+      cask_commands_to_install="${cask_commands_map[$c]}"
+    fi
+  fi
+done
+
+if [[ -n "$cask_commands_to_install" ]]; then
+  echo "Installing $cask_commands_to_install"
+  brew install "$cask_commands_to_install"
 fi
 
 # Configure git to use the credentials from the keychain
