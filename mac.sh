@@ -33,6 +33,7 @@ declare -A commands_map=(
 
 
 declare -A cask_commands_map=(
+["karabiner-elements"]="karabiner-elements"
 ["kitty"]="kitty"
 ["alacritty"]="alacritty"
 )
@@ -66,6 +67,11 @@ if [[ -n "$cask_commands_to_install" ]]; then
   echo "Installing $cask_commands_to_install"
   brew install "$cask_commands_to_install"
 fi
+
+[ ! -L  ~/.config/karabiner ] && {
+  mv ~/.config/karabiner ~/.dotfiles/.backup/ &> /dev/null
+  ln -sf ~/.dotfiles/karabiner ~/.config
+}
 
 # Configure git to use the credentials from the keychain
 git config --global credential.helper osxkeychain
