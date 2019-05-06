@@ -74,3 +74,5 @@ fi
 
 # Configure git to use the credentials from the keychain
 git config --global credential.helper osxkeychain
+
+defaults write com.apple.finder AppleShowAllFiles YES
