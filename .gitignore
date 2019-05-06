@@ -2,6 +2,7 @@
 tmux/plugins
 tmux/resurrect
 cmus/autosave
+cmus/command-history
 karabiner/automatic_backups
 __pycache__
 */**/__init__.py
