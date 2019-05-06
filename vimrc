@@ -343,8 +343,8 @@ nmap      <silent> <M-H> :wincmd H<CR>
 nmap      <silent> <M-L> :wincmd L<CR>
 nmap      <silent> <Leader><Esc> :noh<CR>
 nmap      <silent> <Leader>bd :bufdo bd<CR><CR>
-map       <silent> <F3> :NERDTreeToggle<CR>
-nmap      <silent> <F2> :NERDTreeFind<CR>
+map       <silent> <C-b> :NERDTreeToggle<CR>
+nmap      <silent> <C-l> :NERDTreeFind<CR>
 nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
 nnoremap  <silent> <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
 " nnoremap  <silent> <C-p> :FzfFiles<CR>
