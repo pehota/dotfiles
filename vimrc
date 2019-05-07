@@ -89,7 +89,7 @@ let g:NERDSpaceDelims = 1
 
 
 " == elm
-Plug 'elmcast/elm-vim'
+Plug 'Zaptic/elm-vim'
 let g:elm_format_autosave = 1
 
 " == Rooter
