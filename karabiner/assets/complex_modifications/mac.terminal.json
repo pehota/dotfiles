@@ -265,6 +265,26 @@
           ]
         }
       ]
+    },
+    {
+      "description": "Map ctrl + [ to escape",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "open_bracket",
+            "modifiers": {
+              "mandatory": ["control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "escape"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
