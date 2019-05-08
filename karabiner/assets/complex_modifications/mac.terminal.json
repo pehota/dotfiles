@@ -267,20 +267,33 @@
       ]
     },
     {
-      "description": "Map ctrl + [ to escape",
+      "description": "Right cmd s | Remap to ctrl s",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "key_code": "open_bracket",
+            "key_code": "s",
             "modifiers": {
-              "mandatory": ["control"],
-              "optional": ["any"]
+              "mandatory": ["command"]
             }
           },
           "to": [
             {
-              "key_code": "escape"
+              "key_code": "s",
+              "modifiers": ["left_control"]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Terminal$",
+                "^com\\.googlecode\\.iterm2$",
+                "^co\\.zeit\\.hyperterm$",
+                "^co\\.zeit\\.hyper$",
+                "^io\\.alacritty$",
+                "^net\\.kovidgoyal\\.kitty$"
+              ]
             }
           ]
         }
