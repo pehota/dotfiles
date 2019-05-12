@@ -275,7 +275,7 @@ exec_always --no-startup-id setxkbmap -option grp:alt_shift_toggle -layout "us,b
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Set the wallpaper
-set $wallpaper /usr/share/backgrounds/i3_default_background.jpg
+set $wallpaper /usr/share/backgrounds/bluemountain.jpg
 exec_always --no-startup-id feh --bg-fill $wallpaper
 
 # Start Redshift
