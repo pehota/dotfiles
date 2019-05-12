@@ -22,6 +22,7 @@ declare -A commands_map=(
   ["shellcheck"]="shellcheck"
   ["cmus"]="cmus"
   ["ranger"]="ranger"
+  ["playerctl"]="playerctl"
 )
 
 commands_to_install=""
