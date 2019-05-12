@@ -21,12 +21,12 @@ if (! (pip list --format=columns | grep pynvim > /dev/null)); then
   pip install --upgrade --user pynvim || echo "Install python3-neovim manually"
 fi
 
-if [[ ! -f ~/.dotfiles_bkp/init.vim ]]; then
+if [[ ! -f ~/.dotfiles/backup/init.vim ]]; then
   if [[ ! -d ~/.config/nvim ]]; then
     mkdir -p ~/.config/nvim
     touch ~/.config/nvim/init.vim
   else
-    cp ~/.config/nvim/init.vim ~/.dotfiles_bkp/
+    cp ~/.config/nvim/init.vim ~/.dotfiles/backup/
   fi
   echo "source ~/.dotfiles/vimrc" >> ~/.config/nvim/init.vim
 fi
