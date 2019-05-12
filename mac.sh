@@ -20,6 +20,7 @@ fi
 
 declare -A commands_map=(
 ["git"]="git"
+["curl"]="curl"
 ["tmux"]="tmux"
 ["exa"]="exa"
 ["python3"]="python3"
