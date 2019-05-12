@@ -24,7 +24,7 @@ fi
 
 alias reboot-shell='source ~/.bash_profile'
 alias tmux='tmux -2 -u'
-alias cdg='cd ~/Work/Shore/git'
+alias cdg='cd ~/Work/job/git'
 alias cdw='cd ~/Work'
 alias ll='ls -al'
 alias wmuc='curl -4 http://wttr.in/Munich'
