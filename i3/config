@@ -295,6 +295,7 @@ floating_maximum_size 900 x 600
 # Put chats in their own window
 for_window [class="Franz"] move to workspace Chat
 for_window [class="Viber"] move to workspace Chat
+for_window [class="Rocket.Chat"] move to workspace Chat
 for_window [class="Spotify"] move to workspace Spotify
 
 # Apps to run in a floating window
