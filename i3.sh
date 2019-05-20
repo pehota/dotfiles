@@ -10,6 +10,8 @@ declare -A commands_map=(
   ["i3status-rs"]="i3status-rust-git"
   ["light"]="light"
   ["redshift"]="redshift"
+  ["scrot"]="scrot"
+  ["xclip"]="xclip"
 )
 
 commands_to_install=""
