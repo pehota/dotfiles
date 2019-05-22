@@ -358,3 +358,5 @@ nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
 
 nmap <silent> [w <Plug>(ale_previous_wrap)
 nmap <silent> ]w <Plug>(ale_next_wrap)
+
+nnoremap <silent> <Leader>+ :tab split<CR>
