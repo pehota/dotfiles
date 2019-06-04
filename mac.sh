@@ -36,6 +36,7 @@ declare -A commands_map=(
 declare -A cask_commands_map=(
 ["karabiner-elements"]="karabiner-elements"
 ["kitty"]="kitty"
+["alacritty"]="alacritty"
 )
 
 commands_to_install=""
