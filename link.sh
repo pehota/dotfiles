@@ -34,6 +34,11 @@ fi
   ln -s ~/.dotfiles/kitty ~/.config
 }
 
+[ ! -L  ~/.config/alacritty ] && {
+  mv ~/.config/alacritty ~/.dotfiles/.backup/ &> /dev/null
+  ln -s ~/.dotfiles/alacritty ~/.config
+}
+
 # Tmux
 [ ! -L ~/.tmux.conf ] && {
   mv ~/.tmux.conf ~/.dotfiles/.backup/ &> /dev/null
