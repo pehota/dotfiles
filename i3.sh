@@ -12,6 +12,7 @@ declare -A commands_map=(
   ["redshift"]="redshift"
   ["scrot"]="scrot"
   ["xclip"]="xclip"
+  ["xkblayout-state"]="xkblayout-state-git"
 )
 
 commands_to_install=""

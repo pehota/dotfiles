@@ -22,6 +22,11 @@ format = "{percentage}% {time}"
 # service = { name = "openweathermap", api_key = "XXX", city_id = "5398563", units = "metric" }
 
 [[block]]
+block = "custom"
+command = "xkblayout-state print %s"
+interval = 0.25
+
+[[block]]
 block = "time"
 interval = 60
 format = "%a %d %b %R"
