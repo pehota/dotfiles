@@ -129,6 +129,7 @@ Plug 'w0rp/ale'
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'haskell': ['hdevtools', 'hlint'],
+\   'sh': ['shellcheck'],
 \   'typescript': ['tslint', 'eslint'],
 \}
 
