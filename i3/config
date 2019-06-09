@@ -37,6 +37,9 @@ focus_follows_mouse no
 # Enable auto-focusing windows when activated
 focus_on_window_activation focus
 
+# Set default layout to tabbed
+workspace_layout tabbed
+
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
@@ -312,12 +315,11 @@ for_window [title="ranger"] floating enable
 
 
 # -------------- i3-gaps
-# disable window title bars
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 1
 
 
 smart_gaps on
 smart_borders on
 
-gaps inner 12
+gaps inner 6
 gaps outer -2
