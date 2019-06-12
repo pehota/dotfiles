@@ -291,7 +291,8 @@ if g:colors_name == 'molokai'
   highlight MatchParen cterm=bold ctermbg=none ctermfg=208
 endif
 
-
+" == Disable modeline
+set nomodeline
 
 " == Identation and Spaces
 autocmd FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee,typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=81
