@@ -89,8 +89,11 @@ let g:NERDSpaceDelims = 1
 
 
 " == elm
-Plug 'Zaptic/elm-vim'
+Plug 'andys8/vim-elm-syntax'
 let g:elm_format_autosave = 1
+
+Plug 'antew/vim-elm-language-server'
+
 
 " == Rooter
 Plug 'airblade/vim-rooter'
@@ -126,8 +129,10 @@ let g:ale_completion_enabled = 1
 
 Plug 'w0rp/ale'
 
+
 let g:ale_linters = {
-\   'javascript': ['eslint'],
+\   'elm': ['elm_ls'],
+\   'javascript': ['tslint'],
 \   'haskell': ['hdevtools', 'hlint'],
 \   'sh': ['shellcheck'],
 \   'typescript': ['tslint', 'eslint'],
@@ -138,16 +143,20 @@ let g:ale_fixers = {
 \   'css': ['prettier'],
 \   'elm': ['elm-format'],
 \   'haskell': ['brittany'],
+\   'html': ['prettier'],
 \   'javascript': ['prettier', 'eslint'],
 \   'js': ['prettier'],
 \   'json': ['prettier'],
-\   'typescript': ['prettier', 'tslint', 'eslint'],
+\   'typescript': ['prettier', 'tslint'],
 \}
+
 
 " Do not lint or fix minified files.
 let g:ale_pattern_options = {
 \ '\.min\.*$': {'ale_linters': [], 'ale_fixers': []},
 \}
+
+let g:ale_elm_ls_use_global = 1
 
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_lint_on_text_changed = 'never'
@@ -360,5 +369,6 @@ nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
 
 nmap <silent> [w <Plug>(ale_previous_wrap)
 nmap <silent> ]w <Plug>(ale_next_wrap)
+nmap <silent> gd <Plug>(ale_go_to_definition)
 
 nnoremap <silent> <Leader>+ :tab split<CR>
