@@ -75,9 +75,9 @@ let g:jsx_ext_required = 0
 Plug 'othree/javascript-libraries-syntax.vim'
 
 " == Prettier
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-let g:prettier#quickfix_enabled = 0
-let g:prettier#config#config_precedence = 'file-override'
+" Plug 'prettier/vim-prettier', { 'do': 'npm install', 'for': ['javascript', 'typescript', 'typescript.tsx', 'css'] }
+" let g:prettier#quickfix_enabled = 0
+" let g:prettier#config#config_precedence = 'file-override'
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
 
 
@@ -87,6 +87,15 @@ Plug 'scrooloose/nerdcommenter'
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
+" == coc.vim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  nmap <leader>rn <Plug>(coc-rename)
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  nmap <silent> ]w <Plug>(coc-diagnostic-next)
+  nmap <silent> [w <Plug>(coc-diagnostic-prev)
 
 " == elm
 Plug 'Zaptic/elm-vim'
@@ -136,7 +145,6 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'css': ['prettier'],
-\   'elm': ['elm-format'],
 \   'haskell': ['brittany'],
 \   'javascript': ['prettier', 'eslint'],
 \   'js': ['prettier'],
@@ -193,6 +201,8 @@ Plug 'Shougo/denite.nvim'
 Plug 'jceb/vim-orgmode'
 
 Plug 'cespare/vim-toml'
+
+Plug 'posva/vim-vue'
 
 call plug#end()
 
@@ -276,7 +286,7 @@ set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
 set go-=L " Removes left hand scroll bar
 colorscheme gruvbox
-highlight ColorColumn guibg=NONE ctermbg=NONE
+" highlight ColorColumn guibg=NONE ctermbg=NONE
 highlight SignColumn guibg=NONE ctermbg=NONE
 highlight Directory guibg=darkgrey ctermfg=darkgrey
 " transparent background for vim
@@ -295,7 +305,7 @@ endif
 set nomodeline
 
 " == Identation and Spaces
-autocmd FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee,typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=81
+autocmd FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee,typescript,typescript.tsx setlocal shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=81
 autocmd FileType sh setlocal expandtab
 
 
@@ -358,7 +368,7 @@ nnoremap  <silent> <Leader>t :FzfBTags<CR>
 nnoremap  <silent> <Leader>= <C-w>=
 nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
 
-nmap <silent> [w <Plug>(ale_previous_wrap)
-nmap <silent> ]w <Plug>(ale_next_wrap)
+" nmap <silent> [w <Plug>(ale_previous_wrap)
+" nmap <silent> ]w <Plug>(ale_next_wrap)
 
 nnoremap <silent> <Leader>+ :tab split<CR>

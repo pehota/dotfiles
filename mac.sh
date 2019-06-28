@@ -14,8 +14,11 @@ if (! (command -v brew > /dev/null) ); then
     echo "if [ -f \$(brew --prefix)/etc/bash_completion ]; then"
     echo "  . \$(brew --prefix)/etc/bash_completion"
     echo "fi"
-    echo "alias bup='brew update && brew upgrade && brew cleanup -s && brew doctor'"
-  } >> ~/.bashrc
+  } >> ~/.bash_profile
+fi
+
+if(! (command -v bup > /dev/null) ); then
+  echo "alias bup='brew update && brew upgrade && brew cleanup -s && brew doctor'" >> ~/.bash_profile
 fi
 
 declare -A commands_map=(

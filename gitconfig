@@ -64,3 +64,5 @@
 	autocorrect = 0
 [init]
 	templatedir = ~/.git_templates
+[credential]
+	helper = osxkeychain

@@ -48,3 +48,8 @@ export NVM_DIR="$HOME/.nvm"
 if [ "$DESKTOP_SESSION" = "i3" ]; then
   export "$(gnome-keyring-daemon -s)"
 fi
+alias bup='brew update && brew upgrade && brew cleanup -s && brew doctor'
+
+# if [ -f "$(command -v most)" ]; then
+  # export PAGER='most'
+# fi
