@@ -25,12 +25,15 @@ Plug 'tpope/vim-fugitive'
 " == Buffer Line
 " Plug 'bling/vim-bufferline'
 
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
 " == Lightline
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 let g:lightline = { 'active': {} }
-let g:lightline.active.left = [ ['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified'], [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ] ]
-let g:lightline.component_function = { 'gitbranch': 'fugitive#head' }
+let g:lightline.active.left = [ ['mode', 'paste'], ['cocstatus', 'currentfunction', 'gitbranch', 'readonly', 'filename', 'modified'], [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ] ]
+let g:lightline.component_function = { 'gitbranch': 'fugitive#head', 'cocstatus': 'coc#status', 'currentfunction': 'CocCurrentFunction' }
 let g:lightline.separator = { 'left': '', 'right': '' }
 let g:lightline.subseparator = { 'left': '', 'right': '' }
 let g:lightline.colorscheme = 'gruvbox'
@@ -89,23 +92,28 @@ let g:NERDSpaceDelims = 1
 
 
 " == elm
-Plug 'Zaptic/elm-vim'
-let g:elm_format_autosave = 1
+" Plug 'Zaptic/elm-vim'
+  " let g:elm_format_autosave = 1
+Plug 'andys8/vim-elm-syntax'
+
+Plug 'antew/vim-elm-language-server'
+  let g:ale_elm_ls_use_global = 1
+
 
 " == Rooter
 Plug 'airblade/vim-rooter'
-let g:rooter_silent_chdir = 1
-let g:rooter_patterns = ['.git/', 'package.json', '.git', 'elm.json', 'stack.yaml']
+  let g:rooter_silent_chdir = 1
+  let g:rooter_patterns = ['.git/', 'package.json', '.git', 'elm.json', 'stack.yaml']
 
 Plug 'terryma/vim-multiple-cursors'
 
 Plug 'mhinz/vim-signify'
-let g:signify_vcs_list = ['git']
-let g:signify_sign_add               = '+'
-let g:signify_sign_delete            = '-'
-let g:signify_sign_delete_first_line = g:signify_sign_delete
-let g:signify_sign_change            = '~'
-let g:signify_sign_changedelete      = g:signify_sign_change
+  let g:signify_vcs_list = ['git']
+  let g:signify_sign_add               = '+'
+  let g:signify_sign_delete            = '-'
+  let g:signify_sign_delete_first_line = g:signify_sign_delete
+  let g:signify_sign_change            = '~'
+  let g:signify_sign_changedelete      = g:signify_sign_change
 
 Plug 'ervandew/supertab'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -113,11 +121,20 @@ Plug 'zivyangll/git-blame.vim'
 
 
 Plug 'neovimhaskell/haskell-vim'
-let g:haskell_classic_highlighting = 1
-let g:haskell_indent_disable = 1
+  let g:haskell_classic_highlighting = 1
+  let g:haskell_indent_disable = 1
 
 " Plug 'nbouscal/vim-stylish-haskell'
 " Plug 'eagletmt/neco-ghc'
+
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gr <Plug>(coc-references)
+  nmap <leader>rn <Plug>(coc-rename)
+
+  autocmd BufWritePre *.* call CocAction('format')
 
 " == ALE
 " Enable completion where available.
@@ -194,6 +211,8 @@ Plug 'jceb/vim-orgmode'
 
 Plug 'cespare/vim-toml'
 
+Plug 'dag/vim-fish'
+
 call plug#end()
 
 " Session Management
@@ -250,6 +269,7 @@ set backspace=2
 set splitright
 set splitbelow
 set whichwrap+=<,>,h,l,[,]
+set formatoptions+=j " Delete comment character when joining commented lines
 
 filetype indent on
 filetype plugin indent on
@@ -318,7 +338,7 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 
 " Folding
 " Set automatic folding for all files
-autocmd Syntax * setlocal foldmethod=syntax
+autocmd Syntax * setlocal foldmethod=manual
 " Open all folds by default
 autocmd Syntax * normal zR
 
