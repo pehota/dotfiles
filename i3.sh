@@ -61,3 +61,5 @@ fi
   echo "fi"
   echo ""
 } >> ~/.bash_profile
+
+. ./bluetooth.sh
