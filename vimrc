@@ -87,6 +87,15 @@ Plug 'scrooloose/nerdcommenter'
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
+" == coc.vim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  nmap <leader>rn <Plug>(coc-rename)
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  nmap <silent> ]w <Plug>(coc-diagnostic-next)
+  nmap <silent> [w <Plug>(coc-diagnostic-prev)
 
 " == elm
 Plug 'Zaptic/elm-vim'
@@ -136,7 +145,6 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'css': ['prettier'],
-\   'elm': ['elm-format'],
 \   'haskell': ['brittany'],
 \   'javascript': ['prettier', 'eslint'],
 \   'js': ['prettier'],
@@ -295,7 +303,7 @@ endif
 set nomodeline
 
 " == Identation and Spaces
-autocmd FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee,typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=81
+autocmd FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee,typescript,typescript.tsx setlocal shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=81
 autocmd FileType sh setlocal expandtab
 
 
@@ -357,8 +365,5 @@ nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
 nnoremap  <silent> <Leader>t :FzfBTags<CR>
 nnoremap  <silent> <Leader>= <C-w>=
 nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
-
-nmap <silent> [w <Plug>(ale_previous_wrap)
-nmap <silent> ]w <Plug>(ale_next_wrap)
 
 nnoremap <silent> <Leader>+ :tab split<CR>
