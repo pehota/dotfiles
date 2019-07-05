@@ -43,6 +43,11 @@ if [ ! -L ~/.config/compton ]; then
   ln -s ~/.dotfiles/compton ~/.config
 fi
 
+if [ ! -L ~/.config/dunst ]; then
+  mv ~/.config/dunst ~/.dotfiles/.backup/ &> /dev/null
+  ln -s ~/.dotfiles/dunst ~/.config
+fi
+
 if [ -z "$TERMINAL" ]; then
   echo "Adding \$TERMINAL environment variable which requires \`sudo\`"
   {
