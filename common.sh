@@ -31,6 +31,12 @@ if [[ ! -f ~/.dotfiles/backup/init.vim ]]; then
   echo "source ~/.dotfiles/vimrc" >> ~/.config/nvim/init.vim
 fi
 
+[ ! -L ~/.config/nvim/coc-settings.json ] && {
+  mv ~/.config/nvim/coc-settings.json ~/.dotfiles/.backup/ &> /dev/null
+  ln -sf ~/.dotfiles/coc-settings.json ~/.config/nvim
+}
+
+
 # Rerun plug installation on nvim
 echo "Installing nvim plugins ..."
 nvim --noplugin +PlugInstall +qall
