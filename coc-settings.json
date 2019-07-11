@@ -1,0 +1,24 @@
+{
+  "languageserver": {
+    "elmLS": {
+      "enable": true,
+      "command": "elm-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["elm"],
+      "rootPatterns": ["elm.json"],
+      "trace.server": "verbose",
+      "initializationOptions": {
+        "runtime": "node",
+        "elmPath": "elm",
+        "elmFormatPath": "elm-format",
+        "elmTestPath": "elm-test"
+      }
+    }
+  },
+  "diagnostic.refreshAfterSave": true,
+  "coc.preferences.formatOnSaveFiletypes": ["elm"],
+  "coc.preferences.snippets.enable": false,
+  "suggest.minTriggerInputLength": 2,
+  "suggest.maxCompleteItemCount": 5,
+  "diagnostic.refreshOnInsertMode": false
+}
