@@ -75,9 +75,9 @@ let g:jsx_ext_required = 0
 Plug 'othree/javascript-libraries-syntax.vim'
 
 " == Prettier
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-let g:prettier#quickfix_enabled = 0
-let g:prettier#config#config_precedence = 'file-override'
+" Plug 'prettier/vim-prettier', { 'do': 'npm install', 'for': ['javascript', 'typescript', 'typescript.tsx', 'css'] }
+" let g:prettier#quickfix_enabled = 0
+" let g:prettier#config#config_precedence = 'file-override'
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
 
 
@@ -89,7 +89,7 @@ let g:NERDSpaceDelims = 1
 
 " == coc.vim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  nmap <leader>rn <Plug>(coc-rename)
+  nmap <leader>~ <Plug>(coc-rename)
   nmap <silent> gd <Plug>(coc-definition)
   nmap <silent> gy <Plug>(coc-type-definition)
   nmap <silent> gi <Plug>(coc-implementation)
@@ -202,6 +202,13 @@ Plug 'jceb/vim-orgmode'
 
 Plug 'cespare/vim-toml'
 
+Plug 'posva/vim-vue'
+  let g:vue_disable_pre_processors=1
+
+Plug 'digitaltoad/vim-pug'
+
+Plug 'dag/vim-fish'
+
 call plug#end()
 
 " Session Management
@@ -284,7 +291,7 @@ set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
 set go-=L " Removes left hand scroll bar
 colorscheme gruvbox
-highlight ColorColumn guibg=NONE ctermbg=NONE
+" highlight ColorColumn guibg=NONE ctermbg=NONE
 highlight SignColumn guibg=NONE ctermbg=NONE
 highlight Directory guibg=darkgrey ctermfg=darkgrey
 " transparent background for vim

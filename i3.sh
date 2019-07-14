@@ -34,12 +34,12 @@ if [[ -n "$commands_to_install" ]]; then
 fi
 
 if [ ! -L ~/.config/i3 ]; then
-  mv ~/.config/i3 ~/.dotfiles/.backup/ &> /dev/null
+  # mv ~/.config/i3 ~/.dotfiles/.backup/ &> /dev/null
   ln -s ~/.dotfiles/i3 ~/.config
 fi
 
 if [ ! -L ~/.config/compton ]; then
-  mv ~/.config/compton ~/.dotfiles/.backup/ &> /dev/null
+  # mv ~/.config/compton ~/.dotfiles/.backup/ &> /dev/null
   ln -s ~/.dotfiles/compton ~/.config
 fi
 

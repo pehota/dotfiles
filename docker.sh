@@ -11,8 +11,8 @@ if (! (command -v docker-compose &> /dev/null)); then
 fi
 
 echo "Fixing docker permissions ..."
-sudo gpasswd -a "$(whoami)" docker
 sudo groupadd -f docker || true
+sudo gpasswd -a "$(whoami)" docker
 sudo usermod -aG docker "$(whoami)"
 
 echo "Enabling docker service ..."

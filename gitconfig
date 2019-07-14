@@ -3,7 +3,7 @@
   quotepath = false
 [user]
   name = Dimitar Apostolov
-  email =
+  email = d.apostolov@gmail.com
   useconfigonly = true
 [merge]
   ff = no
@@ -60,6 +60,7 @@
   cim = commit -m
   dc = "!sh -c 'git diff --name-only $0 | wc -l'"
 	lsr = branch -r
+	email-guess = !. ~/.dotfiles/git-email-guess.sh
 [help]
 	autocorrect = 0
 [init]

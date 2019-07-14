@@ -199,7 +199,8 @@ bar {
     $bar_font
     i3bar_command i3bar -t
     position top
-    status_command i3status-rs ~/.config/i3/i3status-rs-top.toml
+    # status_command i3status-rs ~/.config/i3/i3status-rs-top.toml
+    status_command i3status --config ~/.config/i3/i3status.conf
     height $bar_height
     colors {
         background $bar_background
@@ -214,19 +215,20 @@ bar {
     }
 }
 
-bar {
-    $bar_font
-    i3bar_command i3bar -t
-    position bottom
-    status_command i3status-rs ~/.config/i3/i3status-rs-bottom.toml
-    workspace_buttons no
-    height $bar_height
-    colors {
-        background $bar_background
-        statusline $bar_statusline
-        separator  $bar_separator
-    }
-}
+# bar {
+    # $bar_font
+    # i3bar_command i3bar -t
+    # position bottom
+    # mode hide
+    # status_command i3status-rs ~/.config/i3/i3status-rs-bottom.toml
+    # workspace_buttons no
+    # height $bar_height
+    # colors {
+        # background $bar_background
+        # statusline $bar_statusline
+        # separator  $bar_separator
+    # }
+# }
 
 set $locker i3lock-fancy -b=0x6 -n
 
@@ -275,6 +277,8 @@ workspace_auto_back_and_forth yes
 # Startup apps
 exec --no-startup-id /opt/enpass/Enpass; i3-msg 'kill'
 
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
 exec_always --no-startup-id nm-applet
 
 exec --no-startup-id compton -CGb --config ~/.config/compton/compton.conf
@@ -284,7 +288,7 @@ exec_always --no-startup-id setxkbmap -option grp:alt_shift_toggle -layout "us,b
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Set the wallpaper
-set $wallpaper /usr/share/backgrounds/bluemountain.jpg
+set $wallpaper "/home/dimitar/Pictures/e-bot7 Wallpaper.png"
 exec_always --no-startup-id feh --bg-fill $wallpaper
 
 # Start Redshift
@@ -294,7 +298,7 @@ exec --no-startup-id xset dpms 60 300 600
 exec --no-startup-id xautolock -locker "$locker" -time 1
 
 # Update retina display scale
-exec --no-startup-id xrandr --output eDP1 --scale 0.7x0.7
+# exec --no-startup-id xrandr --output eDP1 --scale 0.7x0.7
 
 # ----------- Generic windown configuration
 floating_maximum_size 900 x 600

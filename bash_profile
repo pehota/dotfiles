@@ -1,11 +1,8 @@
 [ -s ~/.profile ] && source ~/.profile # Load the default .profile
 
 export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/.mongodb/bin:$PATH"
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/.local/bin"
-
-[ -s ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm # Load RVM into a shell session *as a function*
 
 export EDITOR=nvim
 # export TERM=screen-256color
@@ -43,8 +40,47 @@ export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 if [ "$DESKTOP_SESSION" = "i3" ]; then
-  export "$(gnome-keyring-daemon -s)"
+  export "$(gnome-keyring-daemon --start --components=secrets,ssh)"
 fi
+if [ "$DESKTOP_SESSION" = "i3" ]; then
+  export "$(gnome-keyring-daemon --start --components=secrets,ssh)"
+fi
+if [ "$DESKTOP_SESSION" = "i3" ]; then
+  export "$(gnome-keyring-daemon --start --components=secrets,ssh)"
+fi
+
+if [ "$DESKTOP_SESSION" = "i3" ]; then
+  export "$(gnome-keyring-daemon --start --components=secrets,ssh)"
+fi
+
+if [ "$DESKTOP_SESSION" = "i3" ]; then
+  export "$(gnome-keyring-daemon --start --components=secrets,ssh)"
+fi
+
+if [ "$DESKTOP_SESSION" = "i3" ]; then
+  export "$(gnome-keyring-daemon --start --components=secrets,ssh)"
+fi
+
+if [ "$DESKTOP_SESSION" = "i3" ]; then
+  export "$(gnome-keyring-daemon --start --components=secrets,ssh)"
+fi
+
+if [ "$DESKTOP_SESSION" = "i3" ]; then
+  export "$(gnome-keyring-daemon --start --components=secrets,ssh)"
+fi
+
+if [ "$DESKTOP_SESSION" = "i3" ]; then
+  export "$(gnome-keyring-daemon --start --components=secrets,ssh)"
+fi
+
+if [ "$DESKTOP_SESSION" = "i3" ]; then
+  export "$(gnome-keyring-daemon --start --components=secrets,ssh)"
+fi
+
+if [ "$DESKTOP_SESSION" = "i3" ]; then
+  export "$(gnome-keyring-daemon --start --components=secrets,ssh)"
+fi
+
