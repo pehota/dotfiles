@@ -378,3 +378,14 @@ nnoremap  <silent> <Leader>= <C-w>=
 nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
 
 nnoremap <silent> <Leader>+ :tab split<CR>
+
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Qall! qall!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev Qall qall
