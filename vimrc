@@ -75,9 +75,6 @@ let g:jsx_ext_required = 0
 Plug 'othree/javascript-libraries-syntax.vim'
 
 " == Prettier
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-let g:prettier#quickfix_enabled = 0
-let g:prettier#config#config_precedence = 'file-override'
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
 
 
@@ -87,7 +84,7 @@ Plug 'scrooloose/nerdcommenter'
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
-" == coc.vim
+" == coc.nvim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nmap <leader>rn <Plug>(coc-rename)
   nmap <silent> gd <Plug>(coc-definition)
@@ -97,14 +94,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nmap <silent> ]w <Plug>(coc-diagnostic-next)
   nmap <silent> [w <Plug>(coc-diagnostic-prev)
 
-" == elm
-Plug 'Zaptic/elm-vim'
-let g:elm_format_autosave = 1
+" == Elm
+Plug 'andys8/vim-elm-syntax'
 
 " == Rooter
 Plug 'airblade/vim-rooter'
 let g:rooter_silent_chdir = 1
-let g:rooter_patterns = ['.git/', 'package.json', '.git', 'elm.json', 'stack.yaml']
+let g:rooter_patterns = ['.git/', 'package.json', 'elm-package.json', 'elm.json', 'stack.yaml']
 
 Plug 'terryma/vim-multiple-cursors'
 
@@ -135,45 +131,45 @@ let g:ale_completion_enabled = 1
 
 Plug 'w0rp/ale'
 
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'haskell': ['hdevtools', 'hlint'],
-\   'sh': ['shellcheck'],
-\   'typescript': ['tslint', 'eslint'],
-\}
+  let g:ale_linters = {
+  \   'javascript': ['eslint'],
+  \   'haskell': ['hdevtools', 'hlint'],
+  \   'sh': ['shellcheck'],
+  \   'typescript': ['tslint', 'eslint'],
+  \}
 
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'css': ['prettier'],
-\   'haskell': ['brittany'],
-\   'javascript': ['prettier', 'eslint'],
-\   'js': ['prettier'],
-\   'json': ['prettier'],
-\   'typescript': ['prettier', 'tslint', 'eslint'],
-\}
+  let g:ale_fixers = {
+  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'css': ['prettier'],
+  \   'haskell': ['brittany'],
+  \   'javascript': ['prettier', 'eslint'],
+  \   'js': ['prettier'],
+  \   'json': ['prettier'],
+  \   'typescript': ['prettier', 'tslint', 'eslint'],
+  \}
 
-" Do not lint or fix minified files.
-let g:ale_pattern_options = {
-\ '\.min\.*$': {'ale_linters': [], 'ale_fixers': []},
-\}
+  " Do not lint or fix minified files.
+  let g:ale_pattern_options = {
+  \ '\.min\.*$': {'ale_linters': [], 'ale_fixers': []},
+  \}
 
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_fix_on_save = 1
-let g:ale_set_highlights = 0
-let g:ale_linters_explicit = 1
+  let g:ale_javascript_prettier_use_local_config = 1
+  let g:ale_lint_on_text_changed = 'never'
+  let g:ale_fix_on_save = 1
+  let g:ale_set_highlights = 0
+  let g:ale_linters_explicit = 1
 
-let g:ale_sign_error = "\uf05e"
-let g:ale_sign_warning = "\uf071"
-let g:ale_sign_info = "\uf05a"
+  let g:ale_sign_error = "\uf05e"
+  let g:ale_sign_warning = "\uf071"
+  let g:ale_sign_info = "\uf05a"
 
 
-let g:ale_echo_msg_error_str = 'Error'
-let g:ale_echo_msg_warning_str = 'Warning'
-let g:ale_echo_msg_format = '%severity%: %s'
+  let g:ale_echo_msg_error_str = 'Error'
+  let g:ale_echo_msg_warning_str = 'Warning'
+  let g:ale_echo_msg_format = '%severity%: %s'
 
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
+  let g:ale_set_loclist = 0
+  let g:ale_set_quickfix = 1
 
 " == Autotags
 Plug 'craigemery/vim-autotag'
@@ -182,12 +178,6 @@ let g:autotagCtagsCmd = 'ctags'
 " == TypeScript start
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-" == TypeScript end
-
-" For async completion
-Plug 'Shougo/deoplete.nvim'
-" Enable deoplete at startup
-let g:deoplete#enable_at_startup = 1
 
 " == Rust
 Plug 'rust-lang/rust.vim'
@@ -196,11 +186,12 @@ Plug 'rust-lang/rust.vim'
 Plug 'jparise/vim-graphql'
 
 " For Denite features
-Plug 'Shougo/denite.nvim'
 
 Plug 'jceb/vim-orgmode'
 
 Plug 'cespare/vim-toml'
+
+Plug 'mbbill/undotree'
 
 call plug#end()
 
@@ -239,10 +230,29 @@ au VimLeave * :call MakeSession()
 au VimResized * wincmd =
 
 
+" Protect changes between writes. Default values of
+" updatecount (200 keystrokes) and updatetime
+" (4 seconds) are fine
+set swapfile
+set directory=~/.vim/backup//
 
-set backupdir=~/.vimfiles/backup/
-set directory=~/.vimfiles/backup/
-set backupcopy=yes
+" protect against crash-during-write
+set writebackup
+" but do not persist backup after successful write
+set nobackup
+" use rename-and-write-new method whenever safe
+set backupcopy=auto
+" patch required to honor double slash at end
+if has("patch-8.1.0251")
+  " consolidate the writebackups -- not a big
+  " deal either way, since they usually get deleted
+  set backupdir=~/.vim/backup//
+end
+
+" persist the undo tree for each file
+set undofile
+set undodir^=~/.vim/undo//
+
 set fileencoding=utf-8
 set hidden
 set hlsearch
@@ -250,7 +260,7 @@ set incsearch
 set ignorecase
 set smartcase
 set nu
-set mouse=
+set mouse=n
 set clipboard+=unnamedplus
 set guifont=DroidSansMonoForPowerline\ Nerd\ Font:h12
 set backspace=2
@@ -274,6 +284,7 @@ set expandtab
 set visualbell
 set showcmd
 set cursorline " Highlight current line
+set guicursor=n:blinkon1
 set laststatus=2
 set wildmenu
 set t_Co=256
