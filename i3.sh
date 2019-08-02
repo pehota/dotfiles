@@ -5,6 +5,7 @@ set -e
 mkdir -p ~/.dotfiles/.backup
 
 declare -A commands_map=(
+  ["xautolock"]="xautolock"
   ["dunst"]="dunst"
   ["compton"]="compton"
   ["i3status-rs"]="i3status-rust-git"
@@ -13,6 +14,7 @@ declare -A commands_map=(
   ["scrot"]="scrot"
   ["xclip"]="xclip"
   ["xkblayout-state"]="xkblayout-state-git"
+  ["feh"]="feh"
 )
 
 commands_to_install=""
@@ -48,7 +50,7 @@ if [ ! -L ~/.config/dunst ]; then
   ln -s ~/.dotfiles/dunst ~/.config
 fi
 
-if [ -z "$TERMINAL" ]; then
+if [[ -z "$TERMINAL" ]]; then
   echo "Adding \$TERMINAL environment variable which requires \`sudo\`"
   {
     echo "export TERMINAL=kitty" | sudo tee -a /etc/environment
