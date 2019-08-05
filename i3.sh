@@ -8,6 +8,7 @@ declare -A commands_map=(
   ["xautolock"]="xautolock"
   ["dunst"]="dunst"
   ["compton"]="compton"
+  ["i3lock"]="i3lock"
   ["i3status-rs"]="i3status-rust-git"
   ["light"]="light"
   ["redshift"]="redshift"

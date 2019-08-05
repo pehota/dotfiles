@@ -228,7 +228,7 @@ bar {
     }
 }
 
-set $locker i3lock-fancy -b=0x6 -n
+set $locker i3lock -c 000000
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
