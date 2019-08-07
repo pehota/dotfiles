@@ -181,17 +181,13 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Windows colors        border  bground text    indicator child_border
-client.focused          #076678 #076678 #F8F8F2 #F8F8F2   #F8F8F2
-client.focused_inactive #282828 #282828 #928374 #F8F8F2   #F8F8F2
-client.unfocused        #282828 #282828 #928374 #44475A   #44475A
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+client.focused          #458588 #458588 #ebdbb2 #ebdbb2   #ebdbb2
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 set $bar_font font pango:DejaVu Sans Mono, FontAwesome 10
 set $bar_height 20
-set $bar_background #1d202196
+set $bar_background #282828
 set $bar_statusline #ebdbb2
 set $bar_separator  #44475A
 
@@ -206,25 +202,11 @@ bar {
         statusline $bar_statusline
         separator  $bar_separator
 
-        focused_workspace  #076678 #076678 #FFFFFF
-        active_workspace   #928374 #282A36 #FFFFFF
-        inactive_workspace #44475A #44475A #928374
-        urgent_workspace   #FF5555 #FF5555 #FFFFFF
+        focused_workspace  #458588 #458588 #ebdbb2
+        active_workspace   #458588 #458588 #FFFFFF
+        inactive_workspace $bar_background $bar_background #a89984
+        urgent_workspace   #cc241d #cc241d #ebdbb2
         binding_mode       #d79921 #d79921 #FFFFFF
-    }
-}
-
-bar {
-    $bar_font
-    i3bar_command i3bar -t
-    position bottom
-    status_command i3status-rs ~/.config/i3/i3status-rs-bottom.toml
-    workspace_buttons no
-    height $bar_height
-    colors {
-        background $bar_background
-        statusline $bar_statusline
-        separator  $bar_separator
     }
 }
 
@@ -293,18 +275,15 @@ exec --no-startup-id redshift -t 6500:3500
 exec --no-startup-id xset dpms 60 300 600
 exec --no-startup-id xautolock -locker "$locker" -time 1
 
-# Update retina display scale
-exec --no-startup-id xrandr --output eDP1 --scale 0.7x0.7
-
 # ----------- Generic windown configuration
 floating_maximum_size 900 x 600
 
 
 # ----------- App windows config
 # Put chats in their own window
-for_window [class="Franz"] move to workspace Chat
-for_window [class="Viber"] move to workspace Chat
-for_window [class="Rocket.Chat"] move to workspace Chat
+set $chat_ws Chat
+for_window [class="Franz"] move to workspace $chat_ws
+for_window [class="Viber"] move to workspace $chat_ws
 for_window [class="Spotify"] move to workspace Spotify
 
 # Apps to run in a floating window
