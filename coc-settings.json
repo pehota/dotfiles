@@ -6,12 +6,17 @@
       "filetypes": ["elm"],
       "rootPatterns": ["elm.json"],
       "initializationOptions": {
-        "runtime": "node",
         "elmPath": "elm",
         "elmFormatPath": "elm-format",
-        "elmTestPath": "elm-test"
+        "elmTestPath": "elm-test",
+        "diagnosticsOnSaveOnly": true
       }
     }
   },
-  "coc.preferences.codeLens.enable": true
+  "diagnostic.refreshOnInsertMode": false,
+  "diagnostic.refreshAfterSave": false,
+  "diagnostic.maxWindowHeight": 20,
+  "suggest.maxCompleteItemCount": 5,
+  "coc.preferences.formatOnSaveFiletypes": ["elm", "typescript", "javascript", "haskell", "css", "vue", "scss", "sass"],
+  "codeLens.enable": true
 }
