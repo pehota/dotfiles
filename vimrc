@@ -10,8 +10,16 @@ call plug#begin()
 
 " == NERDTree
 Plug 'scrooloose/nerdtree'
-let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\.bs.js$', '\.git', '\.exrc', '\.DS_Store', 'node_modules', 'elm-stuff', 'package-lock.json', 'yarn.lock', '.cache']
+let NERDTreeShowHidden = 1
+let NERDTreeMinimalUI = 0
+let NERDTreeDirArrows = 0
+let NERDTreeIgnore = ['\.bs.js$', '\.git', '\.exrc', '\.DS_Store', 'node_modules', 'elm-stuff', 'package-lock.json', 'yarn.lock', '.cache']
+" Automatically delete buffers for nodes deleted from the tree
+let NERDTreeAutoDeleteBuffer = 1
+" Automatically close NERDTree on file open
+let NERDTreeQuitOnOpen = 1
+" Automatically close NERDTree if it's the only open window
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " == Colorsheme
 Plug 'dkasak/gruvbox'
@@ -21,9 +29,6 @@ Plug 'airblade/vim-gitgutter'
 let g:gitgutter_override_sign_column_highlight = 0
 
 Plug 'tpope/vim-fugitive'
-
-" == Buffer Line
-" Plug 'bling/vim-bufferline'
 
 " == Lightline
 Plug 'itchyny/lightline.vim'
@@ -57,27 +62,17 @@ Plug 'tpope/vim-surround'
 Plug 'alvan/vim-closetag'
 Plug 'google/vim-searchindex'
 
-" Better Whitespace
-Plug 'ntpeters/vim-better-whitespace'
-autocmd FileType *.* autocmd BufWritePre <buffer> StripWhitespace
-
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'Olical/vim-enmasse'
 Plug 'tpope/vim-sleuth'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'jiangmiao/auto-pairs'
 
 " == JavaScript syntax highlighting ==
-Plug 'othree/yajs.vim'
-Plug 'othree/es.next.syntax.vim'
-Plug 'mxw/vim-jsx'
+let js_plug_opts = { 'for': ['javascript.jsx', 'javascript'], 'on': [] }
+Plug 'othree/yajs.vim', js_plug_opts
+Plug 'othree/es.next.syntax.vim', js_plug_opts
+Plug 'mxw/vim-jsx', js_plug_opts
 let g:jsx_ext_required = 0
-Plug 'othree/javascript-libraries-syntax.vim'
-
-" == Prettier
-" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
-
-
 
 " == NERDCommenter
 Plug 'scrooloose/nerdcommenter'
@@ -93,9 +88,12 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nmap <silent> gr <Plug>(coc-references)
   nmap <silent> ]w <Plug>(coc-diagnostic-next)
   nmap <silent> [w <Plug>(coc-diagnostic-prev)
+  nmap <silent> <leader>rf <Plug>(coc-refactor)
+  nmap <silent> <leader>? :call CocAction('doHover')<CR>
+  nmap <localleader>? :CocList diagnostics<CR>
 
 " == Elm
-Plug 'andys8/vim-elm-syntax'
+Plug 'andys8/vim-elm-syntax', { 'for': 'elm', 'on': []}
 
 " == Rooter
 Plug 'airblade/vim-rooter'
@@ -114,10 +112,10 @@ let g:signify_sign_changedelete      = g:signify_sign_change
 
 Plug 'ervandew/supertab'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'zivyangll/git-blame.vim'
+Plug 'zivyangll/git-blame.vim', { 'on': 'GitBlame' }
 
 
-Plug 'neovimhaskell/haskell-vim'
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell', 'on': [] }
 let g:haskell_classic_highlighting = 1
 let g:haskell_indent_disable = 1
 
@@ -176,20 +174,19 @@ Plug 'craigemery/vim-autotag'
 let g:autotagCtagsCmd = 'ctags'
 
 " == TypeScript start
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript', 'on': [] }
 
 " == Rust
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust', 'on': [] }
 
 " == GraphQL
-Plug 'jparise/vim-graphql'
+Plug 'jparise/vim-graphql', { 'for': ['graphql', 'gql'], 'on': [] }
 
 " For Denite features
 
-Plug 'jceb/vim-orgmode'
+Plug 'jceb/vim-orgmode', { 'for': 'org', 'on': [] }
 
-Plug 'cespare/vim-toml'
+Plug 'cespare/vim-toml', { 'for': 'toml', 'on': [] }
 
 Plug 'mbbill/undotree'
 
@@ -345,7 +342,6 @@ autocmd Syntax * normal zR
 " Bindings
 let mapleader = "\<space>"
 let g:mapleader = "\<space>"
-nmap      <silent> <F9> :Gblame<CR>
 nmap      <Tab> :b#<CR>
 nnoremap  <silent> <C-j> :+10<CR>
 vmap      <silent> <C-j> 10j<CR>
@@ -369,13 +365,18 @@ nmap      <silent> <C-l> :NERDTreeFind<CR>
 nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
 nnoremap  <silent> <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
 " nnoremap  <silent> <C-p> :FzfFiles<CR>
-nnoremap  <silent> <Leader><Leader>h :FzfHistory<CR>
 nnoremap  <silent> <C-h> :FzfHistory<CR>
 nnoremap  <silent> <Leader>a :FzfRg<CR>
-nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
-nnoremap  <silent> <Leader>t :FzfBTags<CR>
-nnoremap  <silent> <Leader>= <C-w>=
 nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
+nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
+
+if exists('g:did_coc_loaded')
+  nnoremap  <silent> <Leader>t :FzfBTags<CR>
+else
+  nnoremap  <silent> <Leader>t :CocList outline<CR>
+endif
+
+nnoremap  <silent> <Leader>= <C-w>=
 
 nnoremap <silent> <Leader>+ :tab split<CR>
 
