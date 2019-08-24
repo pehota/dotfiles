@@ -2,9 +2,20 @@
 icons = "awesome"
 
 [[block]]
-block = "music"
-player = "spotify"
-buttons = ["play", "next"]
+block = "net"
+device = "wlp3s0"
+ssid = true
+ip = true
+speed_up = false
+speed_down = false
+graph_up = false
+graph_down = false
+interval = 5
+
+
+[[block]]
+block = "cpu"
+interval = 1
 
 [[block]]
 block = "sound"
@@ -32,9 +43,14 @@ interval = 60
 format = "%a %d %b %R"
 
 [theme]
-name = "gruvbox-dark"
+name = "plain"
 [theme.overrides]
-idle_bg = "#282828"
-info_bg = "#458588"
-good_bg = "#98971a"
+separator_bg = "#1d2021"
+idle_bg = "#1d2021"
+info_bg = "#1d2021"
+good_bg = "#1d2021"
+warning_bg = "#1d2021"
+idle_fg = "#ffffff"
+info_fg = "#458588"
+good_fg = "#98971a"
 warning_fg = "#cc241d"

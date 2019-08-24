@@ -32,9 +32,14 @@ interval = 1
 format = "{1m}"
 
 [theme]
-name = "gruvbox-dark"
+name = "plain"
 [theme.overrides]
-idle_bg = "#282828"
-info_bg = "#458588"
-good_bg = "#98971a"
-warning_fg = "#282828"
+separator_bg = "#1d2021"
+idle_bg = "#1d2021"
+info_bg = "#1d2021"
+good_bg = "#1d2021"
+warning_bg = "#1d2021"
+idle_fg = "#ffffff"
+info_fg = "#458588"
+good_fg = "#98971a"
+warning_fg = "#cc241d"
