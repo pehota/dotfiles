@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 # Create a backup folder where all existing dotfiles will be saved to

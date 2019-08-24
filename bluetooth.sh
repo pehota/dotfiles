@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ "enabled" != $(systemctl is-enabled bluetooth) ]]; then
   echo "Enabling bluetooth service ..."
