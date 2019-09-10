@@ -1,21 +1,4 @@
-# theme = "gruvbox-dark"
 icons = "awesome"
-
-[[block]]
-block = "net"
-device = "wlp3s0"
-ssid = true
-ip = true
-speed_up = false
-speed_down = false
-graph_up = false
-graph_down = false
-interval = 5
-
-
-[[block]]
-block = "cpu"
-interval = 1
 
 [[block]]
 block = "sound"
@@ -23,14 +6,12 @@ step_width = 1
 
 [[block]]
 block = "battery"
-# interval = 10
 upower=true
 format = "{percentage}% {time}"
 
-# [[block]]
-# block = "weather"
-# format = "{weather} ({location}) {temp}°, {wind} m/s {direction}"
-# service = { name = "openweathermap", api_key = "XXX", city_id = "5398563", units = "metric" }
+[[block]]
+block = "cpu"
+interval = 1
 
 [[block]]
 block = "custom"
@@ -44,13 +25,14 @@ format = "%a %d %b %R"
 
 [theme]
 name = "plain"
+
 [theme.overrides]
-separator_bg = "#1d2021"
-idle_bg = "#1d2021"
-info_bg = "#1d2021"
-good_bg = "#1d2021"
-warning_bg = "#1d2021"
-idle_fg = "#ffffff"
+separator_fg = "#928374"
+separator_bg = "#282828"
+idle_bg = "#282828"
 info_fg = "#458588"
+info_bg = "#282828"
 good_fg = "#98971a"
+good_bg = "#282828"
 warning_fg = "#cc241d"
+warning_bg = "#282828"
