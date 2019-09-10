@@ -13,6 +13,13 @@ if [ -s ~/.bashrc ]; then
   echo "source ~/.bash_profile" >> ~/.bashrc
 fi
 
+#Fish
+[ ! -L ~/.config/fish ] && {
+  mv ~/.config/fish ~/.dotfiles/.backup/ &> /dev/null
+  ln -sf ~/.dotfiles/fish ~/.config
+}
+
+
 #Git
 [ ! -L ~/.gitconfig ] && {
   mv ~/.gitconfig ~/.dotfiles/.backup/ &> /dev/null
@@ -54,12 +61,6 @@ fi
 [ ! -L ~/.vimrc ] && {
   mv ~/.vimrc ~/.dotfiles/.backup/ &> /dev/null
   ln -sf ~/.dotfiles/vimrc ~/.vimrc
-}
-
-# ctags
-[ ! -L ~/.ctags.d ] && {
-  mv ~/.ctags.d ~/.dotfiles/.backup/ &> /dev/null
-  ln -sf ~/.dotfiles/ctags.d ~/.ctags.d
 }
 
 # cmus
