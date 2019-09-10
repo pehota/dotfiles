@@ -18,4 +18,4 @@ fi
 echo "AutoEnable=true" | sudo tee -a /etc/bluetooth/main.conf > /dev/null
 
 echo "Installing bluetooth utilities ..."
-sudo pacman -S pulseaudio-bluetooth blueman
+yes | sudo pacman -S pulseaudio-bluetooth blueman bluetoothctl
