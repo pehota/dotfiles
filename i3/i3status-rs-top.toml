@@ -5,6 +5,11 @@ block = "sound"
 step_width = 1
 
 [[block]]
+block = "custom"
+command = "xkblayout-state print %s"
+interval = 0.25
+
+[[block]]
 block = "battery"
 upower=true
 format = "{percentage}% {time}"
@@ -14,9 +19,9 @@ block = "cpu"
 interval = 1
 
 [[block]]
-block = "custom"
-command = "xkblayout-state print %s"
-interval = 0.25
+block = "memory"
+format_mem = "{Mug}GB/{MTg}GB({Mup}%)"
+format_swap = "{SUg}GB/{STg}GB({SUp}%)"
 
 [[block]]
 block = "time"
