@@ -51,7 +51,7 @@ let g:fzf_command_prefix = 'Fzf'
 let g:fzf_nvim_statusline = 0
 
 if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*" --no-line-number'
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!{.git,node_modules,.cache,elm-stuff}/*" --glob "!package-lock.json" --no-line-number'
 elseif executable('ag')
   let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
   let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -189,6 +189,8 @@ Plug 'jceb/vim-orgmode', { 'for': 'org', 'on': [] }
 Plug 'cespare/vim-toml', { 'for': 'toml', 'on': [] }
 
 Plug 'mbbill/undotree'
+
+Plug 'dag/vim-fish', { 'for': 'fish', 'on': [] }
 
 call plug#end()
 
