@@ -24,9 +24,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " == Colorsheme
 Plug 'dkasak/gruvbox'
 
-" == Git related plugins
-Plug 'airblade/vim-gitgutter'
-let g:gitgutter_override_sign_column_highlight = 0
 
 Plug 'tpope/vim-fugitive'
 
@@ -299,11 +296,6 @@ highlight SignColumn guibg=NONE ctermbg=NONE
 highlight Directory guibg=darkgrey ctermfg=darkgrey
 " transparent background for vim
 highlight Normal ctermbg=NONE
-
-highlight GitGutterAdd ctermfg=green ctermbg=NONE
-highlight GitGutterChange ctermfg=yellow ctermbg=NONE
-highlight GitGutterDelete ctermfg=red ctermbg=NONE
-highlight GitGutterChangeDelete ctermfg=red ctermbg=NONE
 
 if g:colors_name == 'molokai'
   highlight MatchParen cterm=bold ctermbg=none ctermfg=208
