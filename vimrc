@@ -366,9 +366,9 @@ nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
 nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
 
 if exists('g:did_coc_loaded')
-  nnoremap  <silent> <Leader>t :FzfBTags<CR>
-else
   nnoremap  <silent> <Leader>t :CocList outline<CR>
+else
+  nnoremap  <silent> <Leader>t :FzfBTags<CR>
 endif
 
 nnoremap  <silent> <Leader>= <C-w>=
