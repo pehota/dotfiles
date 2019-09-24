@@ -6,6 +6,9 @@ endif
 set exrc
 set secure
 
+let mapleader = "\<space>"
+let g:mapleader = "\<space>"
+
 call plug#begin()
 
 " == NERDTree
@@ -334,8 +337,6 @@ autocmd Syntax * normal zR
 
 
 " Bindings
-let mapleader = "\<space>"
-let g:mapleader = "\<space>"
 nmap      <Tab> :b#<CR>
 nnoremap  <silent> <C-j> :+10<CR>
 vmap      <silent> <C-j> 10j<CR>
