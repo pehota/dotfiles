@@ -33,6 +33,10 @@ fi
 
 . ./common.sh
 
+if [[ "$DESKTOP_SESSION" = "i3" ]]; then
+  . ./i3.sh
+fi
+
 echo "Done"
 
 # # TODO: Add GIT completion

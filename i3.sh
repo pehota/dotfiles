@@ -58,13 +58,6 @@ if [[ -z "$TERMINAL" ]]; then
   } >> /dev/null
 fi
 
-{
-  echo "if [ \"\$DESKTOP_SESSION\" = \"i3\" ]; then"
-  echo "  export \"\$(gnome-keyring-daemon --start --components=secrets,ssh)\""
-  echo "fi"
-  echo ""
-} >> ~/.bash_profile
-
 # Fix apps windows rendering
 {
   echo "export QT_AUTO_SCREEN_SCALE_FACTOR=0"
