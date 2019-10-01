@@ -8,3 +8,4 @@ __pycache__
 */**/__init__.py
 fish/*
 !fish/config.fish
+!fish/fishfile
