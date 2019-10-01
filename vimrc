@@ -91,6 +91,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nmap <silent> <leader>rf <Plug>(coc-refactor)
   nmap <silent> <leader>? :call CocAction('doHover')<CR>
   nmap <localleader>? :CocList diagnostics<CR>
+  nnoremap  <silent> <Leader>t :CocList outline<CR>
 
 " == Elm
 Plug 'andys8/vim-elm-syntax', { 'for': 'elm', 'on': []}
@@ -364,12 +365,6 @@ nnoremap  <silent> <C-h> :FzfHistory<CR>
 nnoremap  <silent> <Leader>a :FzfRg<CR>
 nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
 nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
-
-if exists('g:did_coc_loaded')
-  nnoremap  <silent> <Leader>t :CocList outline<CR>
-else
-  nnoremap  <silent> <Leader>t :FzfBTags<CR>
-endif
 
 nnoremap  <silent> <Leader>= <C-w>=
 
