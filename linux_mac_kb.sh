@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -e
+
 echo "Patching mac keyboard ..."
 
 if (! (command -v dkms &> /dev/null)); then
