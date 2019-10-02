@@ -11,6 +11,7 @@ fi
 declare -A commands_map=(
   ["git"]="git"
   ["curl"]="curl"
+  ["fish"]="fish"
   ["rofi"]="rofi"
   ["kitty"]="kitty"
   ["tmux"]="tmux"
