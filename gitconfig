@@ -27,6 +27,7 @@
   cp = cherry-pick
   co = checkout
   cm = "!sh -c 'git bm | grep -v \"\\*\" | grep -v master | grep -v edge | grep -v develop | xargs -n 1 git branch -d'"
+  clear-repo = "!sh -c 'git ls | grep -v \"\\*\" | grep -v master | grep -v develop | xargs -n 1 git branch -d'"
   richlog = log --all --graph --decorate --oneline --simplify-by-decoration
   update = "!sh -c 'git fetch --prune && git pull --rebase'"
   poop = "!sh -c 'git diff-index HEAD --quiet --exit-code; NEEDS_STASH=$?; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash; else echo \"Nothing to stash.\"; fi; git checkout \"$0\" && git pull origin \"$0\"; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash pop; fi;'"
