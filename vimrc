@@ -68,11 +68,10 @@ Plug 'vim-scripts/BufOnly.vim'
 Plug 'jiangmiao/auto-pairs'
 
 " == JavaScript syntax highlighting ==
-let js_plug_opts = { 'for': ['javascript.jsx', 'javascript'], 'on': [] }
+let js_plug_opts = { 'for': ['javascript'], 'on': [] }
+Plug 'MaxMEllon/vim-jsx-pretty', js_plug_opts
 Plug 'othree/yajs.vim', js_plug_opts
 Plug 'othree/es.next.syntax.vim', js_plug_opts
-Plug 'mxw/vim-jsx', js_plug_opts
-let g:jsx_ext_required = 0
 
 " == NERDCommenter
 Plug 'scrooloose/nerdcommenter'
