@@ -17,6 +17,8 @@
   "diagnostic.refreshAfterSave": false,
   "diagnostic.maxWindowHeight": 20,
   "suggest.maxCompleteItemCount": 5,
-  "coc.preferences.formatOnSaveFiletypes": ["elm", "typescript", "javascript", "haskell", "css", "vue", "scss", "sass"],
-  "codeLens.enable": true
+  "coc.preferences.formatOnSaveFiletypes": ["elm", "typescript", "javascript", "javascript.jsx", "haskell", "css", "scss", "sass", "html"],
+  "codeLens.enable": true,
+  "prettier.eslintIntegration": true,
+  "prettier.tslintIntegration": true
 }
