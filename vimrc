@@ -67,16 +67,13 @@ Plug 'tpope/vim-sleuth'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'jiangmiao/auto-pairs'
 
-" == JavaScript syntax highlighting ==
-let js_plug_opts = { 'for': ['javascript'], 'on': [] }
-Plug 'MaxMEllon/vim-jsx-pretty', js_plug_opts
-Plug 'othree/yajs.vim', js_plug_opts
-Plug 'othree/es.next.syntax.vim', js_plug_opts
-
 " == NERDCommenter
 Plug 'scrooloose/nerdcommenter'
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
+
+" == Vim polyglot
+Plug 'sheerun/vim-polyglot'
 
 " == coc.nvim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -92,8 +89,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nmap <localleader>? :CocList diagnostics<CR>
   nnoremap  <silent> <Leader>t :CocList outline<CR>
 
-" == Elm
-Plug 'andys8/vim-elm-syntax', { 'for': 'elm', 'on': []}
 
 " == Rooter
 Plug 'airblade/vim-rooter'
@@ -115,13 +110,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'zivyangll/git-blame.vim', { 'on': 'GitBlame' }
 
 
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell', 'on': [] }
-let g:haskell_classic_highlighting = 1
-let g:haskell_indent_disable = 1
-
-" Plug 'nbouscal/vim-stylish-haskell'
-" Plug 'eagletmt/neco-ghc'
-
 " == ALE
 " Enable completion where available.
 " This setting must be set before ALE is loaded.
@@ -130,7 +118,6 @@ let g:ale_completion_enabled = 1
 Plug 'w0rp/ale'
 
   let g:ale_linters = {
-  \   'javascript': ['eslint'],
   \   'haskell': ['hdevtools', 'hlint'],
   \   'sh': ['shellcheck'],
   \   'typescript': ['tslint', 'eslint'],
@@ -140,7 +127,6 @@ Plug 'w0rp/ale'
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
   \   'css': ['prettier'],
   \   'haskell': ['brittany'],
-  \   'javascript': ['prettier', 'eslint'],
   \   'js': ['prettier'],
   \   'json': ['prettier'],
   \   'typescript': ['prettier', 'tslint', 'eslint'],
@@ -174,23 +160,17 @@ Plug 'craigemery/vim-autotag'
 let g:autotagCtagsCmd = 'ctags'
 
 " == TypeScript start
-Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript', 'on': [] }
+" Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript', 'on': [] }
 
 " == Rust
-Plug 'rust-lang/rust.vim', { 'for': 'rust', 'on': [] }
 
 " == GraphQL
-Plug 'jparise/vim-graphql', { 'for': ['graphql', 'gql'], 'on': [] }
-
-" For Denite features
 
 Plug 'jceb/vim-orgmode', { 'for': 'org', 'on': [] }
 
-Plug 'cespare/vim-toml', { 'for': 'toml', 'on': [] }
 
 Plug 'mbbill/undotree'
 
-Plug 'dag/vim-fish', { 'for': 'fish', 'on': [] }
 
 call plug#end()
 
