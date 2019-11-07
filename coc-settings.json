@@ -17,8 +17,25 @@
   "diagnostic.refreshAfterSave": false,
   "diagnostic.maxWindowHeight": 20,
   "suggest.maxCompleteItemCount": 5,
-  "coc.preferences.formatOnSaveFiletypes": ["elm", "typescript", "javascript", "javascript.jsx", "haskell", "css", "scss", "sass", "html"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "elm",
+    "typescript",
+    "typescriptreact",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "haskell",
+    "css",
+    "scss",
+    "sass",
+    "html"
+  ],
   "codeLens.enable": true,
   "prettier.eslintIntegration": true,
-  "prettier.tslintIntegration": true
+  "prettier.requireConfig": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.quiet": true,
+  "eslint.options": {
+    "useEslintrc": true
+  }
 }
