@@ -87,6 +87,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
   nmap <silent> <leader>rf <Plug>(coc-refactor)
   nmap <silent> <leader>? :call CocAction('doHover')<CR>
   nmap <localleader>? :CocList diagnostics<CR>
+  nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
+  nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
   nnoremap  <silent> <Leader>t :CocList outline<CR>
 
 
@@ -120,7 +122,6 @@ Plug 'w0rp/ale'
   let g:ale_linters = {
   \   'haskell': ['hdevtools', 'hlint'],
   \   'sh': ['shellcheck'],
-  \   'typescript': ['tslint', 'eslint'],
   \}
 
   let g:ale_fixers = {
@@ -129,7 +130,6 @@ Plug 'w0rp/ale'
   \   'haskell': ['brittany'],
   \   'js': ['prettier'],
   \   'json': ['prettier'],
-  \   'typescript': ['prettier', 'tslint', 'eslint'],
   \}
 
   " Do not lint or fix minified files.
