@@ -296,6 +296,9 @@ autocmd FileType sh setlocal expandtab
 autocmd BufRead,BufNewFile *.jsx,*.ejs set filetype=javascript
 autocmd BufRead,BufNewFile *.md,markdown,*.mkd setlocal syntax=markdown
 autocmd BufRead,BufNewFile *.json set filetype=json
+" Set .rc (e.g. .eslintrc) files filetype to json but skip vimrc
+autocmd BufRead,BufNewFile * if expand('%:t') != ".vimrc" && expand('%:t') =~ "^.*rc$" | set ft=json | endif
+
 
 " == Autoreload file
 set autoread
