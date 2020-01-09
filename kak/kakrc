@@ -1,0 +1,15 @@
+source "%val{config}/plugins/plug.kak/rc/plug.kak"
+
+plug 'ul/kak-lsp'
+  lsp-enable
+
+plug 'andreyorst/fzf.kak'
+  map global normal <c-p> ': fzf-mode<ret>'
+
+plug "andreyorst/base16-gruvbox.kak" theme config %{
+    colorscheme base16-gruvbox-dark-soft
+}
+
+add-highlighter global/ number-lines -relative -hlcursor
+add-highlighter global/ show-matching
+add-highlighter global/ line '%val{cursor_line}' StatusLine

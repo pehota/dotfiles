@@ -1,0 +1,7 @@
+[language.elm]
+filetypes = ["elm"]
+roots = ["elm.json"]
+command = "elm-language-server"
+
+[language.elm.initialization_options]
+elmAnalyseTrigger = "change"
