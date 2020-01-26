@@ -49,16 +49,11 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 let g:fzf_command_prefix = 'Fzf'
 " disable statusline overriding
 let g:fzf_nvim_statusline = 0
-
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!{.git,node_modules,.cache,elm-stuff}/*" --glob "!package-lock.json" --no-line-number'
-elseif executable('ag')
-  let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-  let g:ackprg = 'ag --nogroup --nocolor --column'
-endif
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --no-line-number --ignore-file ~/.gitignore'
 
 
 Plug 'tpope/vim-surround'
+Plug 'unblevable/quick-scope'
 Plug 'alvan/vim-closetag'
 Plug 'google/vim-searchindex'
 
@@ -109,67 +104,28 @@ let g:signify_sign_changedelete      = g:signify_sign_change
 
 Plug 'ervandew/supertab'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+let g:NERDTreeLimitedSyntax = 1
+
+Plug 'ryanoasis/vim-devicons'
 Plug 'zivyangll/git-blame.vim', { 'on': 'GitBlame' }
 
-
-" == ALE
-" Enable completion where available.
-" This setting must be set before ALE is loaded.
-let g:ale_completion_enabled = 1
-
-Plug 'w0rp/ale'
-
-  let g:ale_linters = {
-  \   'haskell': ['hdevtools', 'hlint'],
-  \   'sh': ['shellcheck'],
-  \}
-
-  let g:ale_fixers = {
-  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \   'css': ['prettier'],
-  \   'haskell': ['brittany'],
-  \   'js': ['prettier'],
-  \   'json': ['prettier'],
-  \}
-
-  " Do not lint or fix minified files.
-  let g:ale_pattern_options = {
-  \ '\.min\.*$': {'ale_linters': [], 'ale_fixers': []},
-  \}
-
-  let g:ale_javascript_prettier_use_local_config = 1
-  let g:ale_lint_on_text_changed = 'never'
-  let g:ale_fix_on_save = 1
-  let g:ale_set_highlights = 0
-  let g:ale_linters_explicit = 1
-
-  let g:ale_sign_error = "\uf05e"
-  let g:ale_sign_warning = "\uf071"
-  let g:ale_sign_info = "\uf05a"
-
-
-  let g:ale_echo_msg_error_str = 'Error'
-  let g:ale_echo_msg_warning_str = 'Warning'
-  let g:ale_echo_msg_format = '%severity%: %s'
-
-  let g:ale_set_loclist = 0
-  let g:ale_set_quickfix = 1
-
-" == Autotags
-Plug 'craigemery/vim-autotag'
-let g:autotagCtagsCmd = 'ctags'
-
-" == TypeScript start
-" Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript', 'on': [] }
-
-" == Rust
-
-" == GraphQL
 
 Plug 'jceb/vim-orgmode', { 'for': 'org', 'on': [] }
 
 
 Plug 'mbbill/undotree'
+
+" Plug 'neovim/nvim-lsp'
+
+Plug 'benknoble/vim-auto-origami'
+augroup autofoldcolumn
+  au!
+  au BufWinEnter,WinEnter * AutoOrigamiFoldColumn
+augroup END
 
 
 call plug#end()
@@ -258,6 +214,7 @@ set gcr=a:blinkon1
 set tabstop=2
 set softtabstop=0
 set shiftwidth=2
+set switchbuf=usetab,vsplit
 set autoindent
 set expandtab
 set visualbell
@@ -273,8 +230,18 @@ set relativenumber
 set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
 set go-=L " Removes left hand scroll bar
+set nojoinspaces
+set showmatch
+set updatetime=100
+" fuzzy matching with :find *.ext*
+set path+=**
+" Ignore some folders
+set wildignore+=**/node_modules/**
+set wildignore+=**/.git/**
+set wildignore+=**/build/**
+set wildignore+=**/dist/**
+
 colorscheme gruvbox
-highlight ColorColumn guibg=NONE ctermbg=NONE
 highlight SignColumn guibg=NONE ctermbg=NONE
 highlight Directory guibg=darkgrey ctermfg=darkgrey
 " transparent background for vim
@@ -293,11 +260,10 @@ autocmd FileType sh setlocal expandtab
 
 
 " == Filetypes
-autocmd BufRead,BufNewFile *.jsx,*.ejs set filetype=javascript
+autocmd BufRead,BufNewFile *.jsx set filetype=javascript
 autocmd BufRead,BufNewFile *.md,markdown,*.mkd setlocal syntax=markdown
 autocmd BufRead,BufNewFile *.json set filetype=json
 " Set .rc (e.g. .eslintrc) files filetype to json but skip vimrc
-autocmd BufRead,BufNewFile * if expand('%:t') != ".vimrc" && expand('%:t') =~ "^.*rc$" | set ft=json | endif
 
 
 " == Autoreload file
@@ -314,13 +280,12 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 
 " Folding
 " Set automatic folding for all files
-autocmd Syntax * setlocal foldmethod=syntax
+autocmd BufEnter * setlocal foldmethod=indent
 " Open all folds by default
-autocmd Syntax * normal zR
+autocmd BufEnter * normal zR
 
 
 " Bindings
-nmap      <Tab> :b#<CR>
 nnoremap  <silent> <C-j> :+10<CR>
 vmap      <silent> <C-j> 10j<CR>
 nnoremap  <silent> <C-k> :-10<CR>
@@ -338,7 +303,7 @@ nmap      <silent> <M-H> :wincmd H<CR>
 nmap      <silent> <M-L> :wincmd L<CR>
 nmap      <silent> <Leader><Esc> :noh<CR>
 nmap      <silent> <Leader>bd :bufdo bd<CR><CR>
-map       <silent> <C-b> :NERDTreeToggle<CR>
+map       <silent> <C-b> :NERDTreeToggleVCS<CR>
 nmap      <silent> <C-l> :NERDTreeFind<CR>
 nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
 nnoremap  <silent> <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
