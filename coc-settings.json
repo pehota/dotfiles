@@ -28,7 +28,10 @@
     "css",
     "scss",
     "sass",
-    "html"
+    "html",
+    "html.handlebars",
+    "vue",
+    "rust"
   ],
   "codeLens.enable": true,
   "prettier.eslintIntegration": true,
@@ -37,5 +40,9 @@
   "eslint.quiet": true,
   "eslint.options": {
     "useEslintrc": true
-  }
+  },
+  "css.validate": false,
+  "stylelint.enable": true,
+  "stylelint.filetypes": ["css", "less", "scss", "sass", "vue", "html"],
+  "vetur.useWorkspaceDependencies": true
 }
