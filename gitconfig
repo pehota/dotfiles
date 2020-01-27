@@ -14,9 +14,6 @@
   prompt = false
 [mergetool]
   prompt = true
-[mergetool "diffmerge"]
-  trustExitCode = true
-  cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [filter "lfs"]
@@ -26,11 +23,10 @@
 [alias]
   cp = cherry-pick
   co = checkout
-  cm = "!sh -c 'git bm | grep -v \"\\*\" | grep -v master | grep -v edge | grep -v develop | xargs -n 1 git branch -d'"
-  clear-repo = "!sh -c 'git ls | grep -v \"\\*\" | grep -v master | grep -v develop | xargs -n 1 git branch -d'"
+  clear-repo = "!sh -c 'git ls | grep -v \"\\*\" | grep -v master | grep -v develop | xargs -n 1 git branch -D'"
   richlog = log --all --graph --decorate --oneline --simplify-by-decoration
   update = "!sh -c 'git fetch --prune && git pull --rebase'"
-  poop = "!sh -c 'git diff-index HEAD --quiet --exit-code; NEEDS_STASH=$?; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash; else echo \"Nothing to stash.\"; fi; git checkout \"$0\" && git pull origin \"$0\"; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash pop; fi;'"
+  rot = "!sh -c 'git diff-index HEAD --quiet --exit-code; NEEDS_STASH=$?; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash; else echo \"Nothing to stash.\"; fi; git checkout \"$0\" && git pull origin \"$0\"; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash pop; fi;'"
   cbn = "!sh -c 'git symbolic-ref --short HEAD | pbcopy'"
   ss = stash save -u
   sl = stash list
@@ -42,7 +38,8 @@
   rb = branch -m
   rcb = "!sh -c 'CURRENT_BRANCH=$(git symbolic-ref --short HEAD ) &&  git rb $CURRENT_BRANCH $0 && unset CURRENT_BRANCH'"
   unstage = reset HEAD
-  bm = branch --merged
+  bm = "!sh -c 'git branch --merged | grep -v \"\\*\" | grep -v master | grep -v edge | grep -v develop'"
+  cm = "!sh -c 'git bm | xargs -n 1 git branch -d'"
   ulc = reset --soft HEAD~ #undoes the last, not-pushed commit
   pss = "push -u origin HEAD"
   deployed = "!f(){ git branch -r --contains $1 | cut -f1 -d'/' | sort | uniq; }; f"
@@ -62,6 +59,6 @@
   dc = "!sh -c 'git diff --name-only $0 | wc -l'"
 	lsr = branch -r
 [help]
-	autocorrect = 0
+  autocorrect = 0
 [init]
-	templatedir = ~/.git_templates
+  templatedir = ~/.git_templates
