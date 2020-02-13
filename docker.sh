@@ -2,12 +2,12 @@
 
 if (! (command -v docker &> /dev/null)); then
   echo "Installing docker ..."
-  sudo pacman -S docker
+  pamac install --no-confirm docker
 fi
 
 if (! (command -v docker-compose &> /dev/null)); then
   echo "Installing docker-compose ..."
-  sudo pacman -S docker-compose
+  pamac install --no-confirm docker-compose
 fi
 
 echo "Fixing docker permissions ..."

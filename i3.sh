@@ -33,7 +33,7 @@ done
 
 if [[ -n "$commands_to_install" ]]; then
   echo "Installing $commands_to_install"
-  yes | sudo pacman -Sy $commands_to_install
+  pamac install --no-confirm $commands_to_install
 fi
 
 if [ ! -L ~/.config/i3 ]; then

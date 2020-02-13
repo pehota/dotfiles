@@ -8,6 +8,12 @@ if [ ! -f "$HOME/.local/share/fonts/Droid Sans Mono for Powerline Nerd Font Comp
   cp "$HOME/.dotfiles/Droid Sans Mono for Powerline Nerd Font Complete.otf" ~/.local/share/fonts/
 fi
 
+# Install pamac if needed
+if(! (command -v pamac &> /dev/null)); then
+  echo "Installing pamac ..."
+  sudo pacman -S pamac
+fi
+
 declare -A commands_map=(
   ["git"]="git"
   ["curl"]="curl"
@@ -41,7 +47,7 @@ for c in "${!commands_map[@]}"
 
 if [[ -n "$commands_to_install" ]]; then
   echo "Installing $commands_to_install"
-  yes | sudo pacman -Sy $commands_to_install
+  pamac install --no-confirm $commands_to_install
 fi
 
 # link rofi
