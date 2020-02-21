@@ -14,7 +14,7 @@ set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # font pango:monospace 10
-font pango:DejaVu Sans Mono, FontAwesome 10
+font pango:"Hack Regular Nerd Font Complete" 10
 # font pango:DroidSansMonoForPowerline Nerd Font:monospace 10
 
 
@@ -192,14 +192,15 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Windows colors        border  bground text    indicator child_border
-client.focused          #458588 #458588 #ebdbb2 #ebdbb2   #ebdbb2
+client.focused          #7c6f64 #7c6f64 #ebdbb2 #ebdbb2   #a89984
+client.unfocused        #3c3836 #3c3836 #928374 #928374   #928374
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 set $bar_font font pango:DejaVu Sans Mono, FontAwesome 10
 set $bar_height 20
 set $bar_background #282828
-set $bar_statusline #ebdbb2
+set $bar_statusline #a89984
 set $bar_separator  #44475A
 
 bar {
@@ -208,16 +209,19 @@ bar {
     position top
     status_command i3status-rs ~/.config/i3/i3status-rs-top.toml
     height $bar_height
+    # Disable mouse wheel in status bar 
+    bindsym button4 nop
+    bindsym button5 nop
     colors {
         background $bar_background
         statusline $bar_statusline
         separator  $bar_separator
 
-        focused_workspace  #458588 #458588 #ebdbb2
-        active_workspace   #458588 #458588 #FFFFFF
+        focused_workspace  #665c45 #665c45 #ebdbb2
+        active_workspace   #7c6f64 #7c6f64 #ebdbb2
         inactive_workspace $bar_background $bar_background #a89984
-        urgent_workspace   #cc241d #cc241d #ebdbb2
-        binding_mode       #d79921 #d79921 #FFFFFF
+        urgent_workspace   #cc241d #cc241d #a89984
+        binding_mode       #d79921 #d79921 $bar_background
     }
 }
 
@@ -270,7 +274,7 @@ exec --no-startup-id /opt/enpass/Enpass; i3-msg 'kill'
 
 exec_always --no-startup-id nm-applet
 
-exec --no-startup-id compton -CGb --config ~/.config/compton/compton.conf
+exec --no-startup-id picom -CGb --config ~/.config/picom/picom.conf
 
 exec_always --no-startup-id setxkbmap -option grp:alt_shift_toggle -layout "us,bg(phonetic)"
 # Enable auth agent
@@ -292,7 +296,7 @@ exec --no-startup-id xautolock -locker "$locker" -time 1
 
 # ----------- App windows config
 # Put chats in their own window
-for_window [class="Franz"] move to workspace $wsChat
+for_window [class="Ferdi"] move to workspace $wsChat
 for_window [class="Viber"] move to workspace $wsChat
 for_window [class="Spotify"] move to workspace $wsSpotify
 

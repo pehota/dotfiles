@@ -7,7 +7,7 @@ mkdir -p ~/.dotfiles/.backup
 declare -A commands_map=(
   ["xautolock"]="xautolock"
   ["dunst"]="dunst"
-  ["compton"]="compton"
+  ["picom"]="picom"
   ["i3lock"]="i3lock"
   ["i3status-rs"]="i3status-rust-git"
   ["light"]="light"
@@ -41,9 +41,9 @@ if [ ! -L ~/.config/i3 ]; then
   ln -s ~/.dotfiles/i3 ~/.config
 fi
 
-if [ ! -L ~/.config/compton ]; then
-  mv ~/.config/compton ~/.dotfiles/.backup/ &> /dev/null
-  ln -s ~/.dotfiles/compton ~/.config
+if [ ! -L ~/.config/picom ]; then
+  mv ~/.config/picom ~/.dotfiles/.backup/ &> /dev/null
+  ln -s ~/.dotfiles/picom ~/.config
 fi
 
 if [ ! -L ~/.config/dunst ]; then
