@@ -44,7 +44,7 @@ window:
   decorations: full
 
   # When true, alacritty starts maximized.
-  start_maximized: false
+  startup_mode: Maximized
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -62,7 +62,7 @@ scrolling:
   # to allow mouse scrolling for applications like `man`.
   #
   # Specifying `0` will disable faux scrolling.
-  faux_multiplier: 3
+  multiplier: 3
 
   # Scroll to the bottom when new text is written to the terminal.
   auto_scroll: false
@@ -86,7 +86,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux) monospace
     #   - (Windows) Consolas
-    family: DroidSansMonoForPowerline Nerd Font
+    family: Hack Regular Nerd Font Complete
 
     # The `style` can be specified to pick a specific face.
     # style: Regular
@@ -97,7 +97,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: DroidSansMonoForPowerline Nerd Font
+    family: Hack Regular Nerd Font Complete
 
     # The `style` can be specified to pick a specific face.
     #style: Bold
@@ -108,13 +108,13 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: DroidSansMonoForPowerline Nerd Font
+    family: Hack Regular Nerd Font Complete
 
     # The `style` can be specified to pick a specific face.
     #style: Italic
 
   # Point size
-  size: 7.0
+  size: 6.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -145,11 +145,6 @@ font:
   # effect.
   use_thin_strokes: true
 
-# Display the time it takes to redraw each frame.
-render_timer: false
-
-# Keep the log file after quitting Alacritty.
-persistent_logging: false
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -338,10 +333,19 @@ live_config_reload: true
 # Default:
 #   - (Linux/macOS) /bin/bash --login
 #   - (Windows) powershell
-shell:
- program: /bin/bash
- args:
-   - --login
+# shell:
+ # program: /bin/bash
+ # args:
+   # - --login
+
+
+debug:
+  # Display the time it takes to redraw each frame.
+  render_timer: false
+  # Keep the log file after quitting Alacritty.
+  persistent_logging: false
+
+
 
 # Windows 10 ConPTY backend (Windows only)
 #

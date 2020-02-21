@@ -3,9 +3,9 @@
 mkdir -p ~/.dotfiles/.backup
 
 # Install the font for Powerline
-if [ ! -f "$HOME/.local/share/fonts/Droid Sans Mono for Powerline Nerd Font Complete.otf" ]; then
+if [ ! -f "$HOME/.local/share/fonts/Hack Regular Nerd Font Complete.ttf" ]; then
   mkdir -p "$HOME/.local/share/fonts"
-  cp "$HOME/.dotfiles/Droid Sans Mono for Powerline Nerd Font Complete.otf" ~/.local/share/fonts/
+  cp "$HOME/.dotfiles/Hack Regular Nerd Font Complete.ttf" ~/.local/share/fonts/
 fi
 
 # Install pamac if needed

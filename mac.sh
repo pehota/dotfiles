@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Install the font for Powerline
-if [ ! -f "/Users/$(whoami)/Library/Fonts/Droid Sans Mono for Powerline Nerd Font Complete.otf" ]; then
-  cp "$HOME/.dotfiles/Droid Sans Mono for Powerline Nerd Font Complete.otf" "/Users/$(whoami)/Library/Fonts"
+if [ ! -f "/Users/$(whoami)/Library/Fonts/Hack Regular Nerd Font Complete.ttf" ]; then
+  cp "$HOME/.dotfiles/Hack Regular Nerd Font Complete.ttf" "/Users/$(whoami)/Library/Fonts"
 fi
 
 if (! (command -v brew > /dev/null) ); then
