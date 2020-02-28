@@ -55,3 +55,4 @@ fi
   mv ~/.config/rofi ~/.dotfiles/.backup/ &> /dev/null
   ln -sf ~/.dotfiles/rofi ~/.config
 }
+ . ./setup-fish.sh
