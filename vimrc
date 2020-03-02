@@ -2,6 +2,9 @@ if &compatible
   set nocompatible
 endif
 
+" Check if running in headless mode
+let g:isHeadlessMode = exists('*nvim_list_uis') && len(nvim_list_uis()) == 0
+
 " Allow project specific configurations
 set exrc
 set secure
@@ -26,7 +29,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " == Colorsheme
 Plug 'dkasak/gruvbox'
-
 
 Plug 'tpope/vim-fugitive'
 
@@ -111,28 +113,27 @@ let g:NERDTreePatternMatchHighlightFullName = 1
 let g:NERDTreeLimitedSyntax = 1
 
 Plug 'ryanoasis/vim-devicons'
+
 Plug 'zivyangll/git-blame.vim', { 'on': 'GitBlame' }
-
-
-Plug 'jceb/vim-orgmode', { 'for': 'org', 'on': [] }
-
 
 Plug 'mbbill/undotree'
 
-" Plug 'neovim/nvim-lsp'
-
 Plug 'benknoble/vim-auto-origami'
-augroup autofoldcolumn
-  au!
-  au BufWinEnter,WinEnter * AutoOrigamiFoldColumn
-augroup END
-
+  if !g:isHeadlessMode 
+    augroup autofoldcolumn
+      au!
+      au BufWinEnter,WinEnter * AutoOrigamiFoldColumn
+    augroup END
+  endif
 
 call plug#end()
 
 " Session Management
 " automatically load and save session on start/exit.
 function! MakeSession()
+  if g:isHeadlessMode
+    return
+  endif
   if g:sessionfile != ""
     echo "Saving."
     if (filewritable(g:sessiondir) != 2)
