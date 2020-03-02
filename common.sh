@@ -36,12 +36,10 @@ fi
   ln -sf ~/.dotfiles/coc-settings.json ~/.config/nvim
 }
 
-
 # Rerun plug installation on nvim
 echo "Installing nvim plugins ..."
 nvim --noplugin --headless +PlugInstall +qall
 
-. ./nvm.sh
 # Install the tmux plugins if tmux is running (highly unlikely)
 if [ -n "$TMUX" ]; then
   . ~/.tmux/plugins/tpm/bindings/install_plugins
