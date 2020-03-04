@@ -293,15 +293,6 @@ nnoremap  <silent> <C-k> :-10<CR>
 vnoremap  <silent> <C-k> 10k<CR>
 imap      <silent> jj <ESC>
 nnoremap  <silent> <Leader><Leader>s <ESC>:w<CR>
-nmap      <silent> <M-w> :bp\|bd#<CR>
-nmap      <silent> <M-k> :wincmd k<CR>
-nmap      <silent> <M-j> :wincmd j<CR>
-nmap      <silent> <M-h> :wincmd h<CR>
-nmap      <silent> <M-l> :wincmd l<CR>
-nmap      <silent> <M-K> :wincmd K<CR>
-nmap      <silent> <M-J> :wincmd J<CR>
-nmap      <silent> <M-H> :wincmd H<CR>
-nmap      <silent> <M-L> :wincmd L<CR>
 nmap      <silent> <Leader><Esc> :noh<CR>
 nmap      <silent> <Leader>bd :bufdo bd<CR><CR>
 map       <silent> <C-b> :NERDTreeToggleVCS<CR>
