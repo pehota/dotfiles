@@ -267,6 +267,8 @@ hide_edge_borders horizontal
 # Auto switch back to previous app
 workspace_auto_back_and_forth yes
 
+# Disable window cycling/wrapping
+focus_wrapping no
 
 # Startup apps
 exec --no-startup-id /opt/enpass/Enpass; i3-msg 'kill'
@@ -294,6 +296,8 @@ exec --no-startup-id xautolock -locker "$locker" -time 1
 
 
 # ----------- App windows config
+for_window [class=".*"] title_format "<span> %title</span>"
+
 # Put chats in their own window
 for_window [class="Ferdi"] move to workspace $wsChat
 for_window [class="Viber"] move to workspace $wsChat
