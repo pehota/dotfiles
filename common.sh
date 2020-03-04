@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+mkdir -p ~/.dotfiles/.backup
+
 # Install the tmux plugin manager
 if [[ ! -d ~/.tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -21,24 +23,32 @@ if (! (pip list --format=columns | grep pynvim > /dev/null)); then
   pip install --upgrade --user pynvim || echo "Install python3-neovim manually"
 fi
 
-if [[ ! -f ~/.dotfiles/backup/init.vim ]]; then
+if [[ ! -f ~/.dotfiles/.backup/init.vim ]]; then
   if [[ ! -d ~/.config/nvim ]]; then
     mkdir -p ~/.config/nvim
     touch ~/.config/nvim/init.vim
   else
-    cp ~/.config/nvim/init.vim ~/.dotfiles/backup/
+    cp ~/.config/nvim/init.vim ~/.dotfiles/.backup/
   fi
   echo "source ~/.dotfiles/vimrc" >> ~/.config/nvim/init.vim
 fi
 
 [ ! -L ~/.config/nvim/coc-settings.json ] && {
   mv ~/.config/nvim/coc-settings.json ~/.dotfiles/.backup/ &> /dev/null
-  ln -sf ~/.dotfiles/coc-settings.json ~/.config/nvim
+  ln -sf ~/.dotfiles/coc/settings.json ~/.config/nvim/coc-settings.json
+}
+
+[ ! -L ~/.config/coc/extensions/package.json ] && {
+  mv ~/.config/coc/extensions/package.json ~/.dotfiles/.backup/coc-extensions.json &> /dev/null
+  ln -sf ~/.dotfiles/coc/extensions.json ~/.config/coc/extensions/package.json
 }
 
 # Rerun plug installation on nvim
 echo "Installing nvim plugins ..."
 nvim --noplugin --headless +PlugInstall +qall
+
+echo "Installing coc extensions ..."
+nvim --headless +CocInstall +qall
 
 # Install the tmux plugins if tmux is running (highly unlikely)
 if [ -n "$TMUX" ]; then
