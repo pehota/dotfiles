@@ -191,7 +191,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Windows colors        border  bground text    indicator child_border
-client.focused          #7c6f64 #7c6f64 #ebdbb2 #ebdbb2   #a89984
+client.focused          #7c6f64 #7c6f64 #fbf1c7 #ebdbb2   #a89984
 client.unfocused        #3c3836 #3c3836 #928374 #928374   #928374
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -200,7 +200,7 @@ set $bar_font font pango:DejaVu Sans Mono, FontAwesome 10
 set $bar_height 20
 set $bar_background #282828
 set $bar_statusline #a89984
-set $bar_separator  #44475A
+set $bar_separator  #fbf1c7
 
 bar {
     $bar_font
@@ -216,8 +216,8 @@ bar {
         statusline $bar_statusline
         separator  $bar_separator
 
-        focused_workspace  #665c45 #665c45 #ebdbb2
-        active_workspace   #7c6f64 #7c6f64 #ebdbb2
+        focused_workspace  #665c45 #665c45 #fbf1c7
+        active_workspace   #7c6f64 #7c6f64 #fbf1c7
         inactive_workspace $bar_background $bar_background #a89984
         urgent_workspace   #cc241d #cc241d #a89984
         binding_mode       #d79921 #d79921 $bar_background

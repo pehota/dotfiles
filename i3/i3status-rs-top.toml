@@ -11,17 +11,20 @@ interval = 0.25
 
 [[block]]
 block = "battery"
-upower=true
+driver = "upower"
 format = "{percentage}% {time}"
 
 [[block]]
 block = "cpu"
-interval = 1
+interval = 2
 
 [[block]]
 block = "memory"
-format_mem = "{Mug}GB/{MTg}GB({Mup}%)"
-format_swap = "{SUg}GB/{STg}GB({SUp}%)"
+format_mem = "{Mup}%"
+format_swap = "{SUp}%"
+
+[[bluetooth]]
+block = "bluetooth"
 
 [[block]]
 block = "time"
@@ -32,13 +35,13 @@ format = "%a %d %b %R"
 name = "plain"
 
 [theme.overrides]
-separator_fg = "#a89984"
+separator_fg = "#282828"
 separator_bg = "#282828"
-idle_fg = "#a89984"
+idle_fg = "#fbf1c7"
 idle_bg = "#282828"
-info_fg = "#a89984"
+info_fg = "#fbf1c7"
 info_bg = "#282828"
-good_fg = "#a89984"
+good_fg = "#fbf1c7"
 good_bg = "#282828"
 warning_fg = "#cc241d"
 warning_bg = "#282828"
