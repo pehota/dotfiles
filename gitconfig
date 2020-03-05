@@ -23,10 +23,11 @@
 [alias]
   cp = cherry-pick
   co = checkout
-  clear-repo = "!sh -c 'git ls | grep -v \"\\*\" | grep -v master | grep -v develop | xargs -n 1 git branch -D'"
+  clear-repo = "!sh -c 'git branch | grep -v \"\\*\" | grep -v master | grep -v develop | xargs -n 1 git branch -D'"
   richlog = log --all --graph --decorate --oneline --simplify-by-decoration
   update = "!sh -c 'git fetch --prune && git pull --rebase'"
-  rot = "!sh -c 'git diff-index HEAD --quiet --exit-code; NEEDS_STASH=$?; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash; else echo \"Nothing to stash.\"; fi; git checkout \"$0\" && git pull origin \"$0\"; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash pop; fi;'"
+  rot = "!sh -c 'git diff-index HEAD --quiet --exit-code; NEEDS_STASH=$?; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash; else echo \"Nothing to stash.\"; fi; git checkout \"$0\" && git pull origin \"$0\";git co -;git rebase - && if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash pop; fi;'"
+  roti = "!sh -c 'git rebase -i HEAD~$(git rev-list --count $0..HEAD)'"
   cbn = "!sh -c 'git symbolic-ref --short HEAD | pbcopy'"
   ss = stash save -u
   sl = stash list
@@ -45,9 +46,8 @@
   deployed = "!f(){ git branch -r --contains $1 | cut -f1 -d'/' | sort | uniq; }; f"
   ri = "!sh -c 'git rebase -i HEAD~$0'"
   ai = add -i
-  ls = branch
+  ls = "!sh -c '(git brunch || git branch)'"
   sb = "!sh -c '(git branch | fzf-tmux -d 20) || git branch'"
-  ; lsa = "!sh -c 'git for-each-ref --format=\'%(committerdate) %09 %(authorname) %09 %(refname)\' | sort -k5n -k2M -k3n -k4n'"
   cc = "!sh -c 'git cherry -v $0 | grep +'"
   commend = commit --amend --no-edit
   please = push --force-with-lease origin HEAD
@@ -57,7 +57,10 @@
   debranch = "!sh -c 'git branch | grep -v master | xargs git branch -D'"
   cim = commit -m
   dc = "!sh -c 'git diff --name-only $0 | wc -l'"
-	lsr = branch -r
+  lsr = branch -r
+; This will show you all the commits at the tips of your commit graph which are no longer referenced from any branch or tag 
+; every lost commit, including every stash commit you’ve ever created, will be somewhere in that graph.
+  detached-commits = "!sh -c 'git log $0 --oneline --decorate $( git fsck --no-reflog | awk \"/dangling commit/ {print \\$3}\" )'"
 [help]
   autocorrect = 0
 [init]
