@@ -8,9 +8,10 @@
     "coc-prettier": ">=1.1.11",
     "coc-rls": ">=1.1.4",
     "coc-stylelint": ">=1.1.0",
-    "coc-tailwindcss": ">=0.4.0",
-    "coc-todolist": ">=1.2.3",
-    "coc-tsserver": ">=1.4.9",
-    "coc-vetur": ">=1.1.7"
+    "coc-tailwindcss": ">=0.5.0",
+    "coc-todolist": ">=1.2.4",
+    "coc-tsserver": ">=1.4.11",
+    "coc-vetur": ">=1.1.9",
+    "coc-yaml": ">=1.0.4"
   }
 }

@@ -56,3 +56,5 @@ fi
   ln -sf ~/.dotfiles/rofi ~/.config
 }
  . ./setup-fish.sh
+
+ . ./setup-ranger.sh

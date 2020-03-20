@@ -49,6 +49,7 @@ bindsym $mod+Shift+q kill
 # start rofi launcher if present
 bindsym $mod+space exec --no-startup-id "(rofi && rofi -combi-modi \\"window,drun\\" -show combi -modi combi -show-icons -drun-match-fields name) || dmenu-run"
 bindsym $mod+shift+n exec "(rofi && sh ~/.config/rofi/menus/wifi.sh)"
+bindsym $mod+shift+p exec "(rofi && sh ~/.config/rofi/menus/lastpass.sh)"
 
 # change focus
 bindsym $mod+h focus left

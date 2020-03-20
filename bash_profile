@@ -39,9 +39,11 @@ source ~/.dotfiles/git-completion.bash
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 [ -s rbenv ] && eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
 
 export PATH="$HOME/.cargo/bin:$PATH"
 if [ "$DESKTOP_SESSION" = "i3" ]; then
-  export "$(gnome-keyring-daemon -s)"
+  eval "$(ssh-agent -s)" &> /dev/null
+  # export "$(gnome-keyring-daemon -s)"
+  ssh-add ~/.ssh/*_rsa &> /dev/null
 fi

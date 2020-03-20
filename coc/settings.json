@@ -11,6 +11,36 @@
         "elmTestPath": "elm-test",
         "diagnosticsOnSaveOnly": true
       }
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "efm": {
+      "command": "efm-langserver",
+      "args": [],
+      "filetypes": ["vim", "erb", "eruby", "markdown"]
+    },
+    "haskell": {
+      "command": "hie-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": [
+        "stack.yaml",
+        "cabal.config",
+        "package.yaml"
+      ],
+      "filetypes": [
+        "hs",
+        "lhs",
+        "haskell"
+      ],
+      "initializationOptions": {
+        "languageServerHaskell": {
+          "hlintOn": true
+        }
+      }
     }
   },
   "diagnostic.refreshOnInsertMode": false,
@@ -31,8 +61,10 @@
     "html",
     "html.handlebars",
     "vue",
-    "rust"
+    "rust",
+    "sh"
   ],
+  "typescript.updateImportsOnFileMove.enable": true,
   "codeLens.enable": true,
   "prettier.eslintIntegration": true,
   "prettier.requireConfig": true,
