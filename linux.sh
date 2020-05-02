@@ -22,6 +22,7 @@ declare -A commands_map=(
   ["kitty"]="kitty"
   ["tmux"]="tmux"
   ["exa"]="exa"
+  ["bat"]="bat"
   ["preload"]="preload"
   ["python3"]="python3"
   ["nvim"]="neovim"

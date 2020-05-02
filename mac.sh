@@ -24,6 +24,7 @@ declare -A commands_map=(
 ["fish"]="fish"
 ["tmux"]="tmux"
 ["exa"]="exa"
+["bat"]="bat"
 ["python3"]="python3"
 ["nvim"]="neovim"
 ["rg"]="ripgrep"

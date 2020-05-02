@@ -1,17 +1,17 @@
 {
   "dependencies": {
-    "coc-css": ">=1.2.2",
+    "coc-css": ">=1.2.3",
     "coc-docker": ">=0.2.1",
     "coc-eslint": ">=1.2.6",
-    "coc-html": ">=1.2.3",
+    "coc-html": ">=1.2.4",
     "coc-json": ">=1.2.5",
-    "coc-prettier": ">=1.1.11",
-    "coc-rls": ">=1.1.4",
+    "coc-prettier": ">=1.1.12",
+    "coc-rls": ">=1.1.5",
     "coc-stylelint": ">=1.1.0",
-    "coc-tailwindcss": ">=0.5.0",
-    "coc-todolist": ">=1.2.4",
-    "coc-tsserver": ">=1.4.11",
-    "coc-vetur": ">=1.1.9",
+    "coc-tailwindcss": ">=0.6.0",
+    "coc-todolist": ">=1.2.6",
+    "coc-tsserver": ">=1.4.15",
+    "coc-vetur": ">=1.1.10",
     "coc-yaml": ">=1.0.4"
   }
 }

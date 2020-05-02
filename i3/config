@@ -43,6 +43,10 @@ workspace_layout tabbed
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+# Scratchpad terminal (small size, can be hidden)
+for_window [class="_scratchpad"] border 1pixel, sticky enable, floating enable, move scratchpad, fullscreen
+bindsym $mod+minus exec ~/.config/i3/i3-scratchpad-terminal.sh
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -198,17 +202,18 @@ client.unfocused        #3c3836 #3c3836 #928374 #928374   #928374
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 set $bar_font font pango:DejaVu Sans Mono, FontAwesome 10
-set $bar_height 20
-set $bar_background #282828
+set $bar_height 26
+set $bar_background #32302f
 set $bar_statusline #a89984
 set $bar_separator  #fbf1c7
 
 bar {
     $bar_font
-    i3bar_command i3bar -t
+    i3bar_command i3bar
     position top
     status_command i3status-rs ~/.config/i3/i3status-rs-top.toml
     height $bar_height
+    workspace_min_width $bar_height
     # Disable mouse wheel in status bar 
     bindsym button4 nop
     bindsym button5 nop
@@ -303,6 +308,7 @@ for_window [class=".*"] title_format "<span> %title</span>"
 for_window [class="Ferdi"] move to workspace $wsChat
 for_window [class="Viber"] move to workspace $wsChat
 for_window [class="Spotify"] move to workspace $wsSpotify
+for_window [class="Simplenote"] floating enable
 
 # Apps to run in a floating window
 for_window [window_role="pop-up"]                       floating enable
@@ -324,3 +330,7 @@ smart_borders on
 
 gaps inner 6
 gaps outer -2
+
+
+for_window [class="^.*"] border pixel 3
+new_window pixel 3
