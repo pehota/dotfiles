@@ -14,7 +14,7 @@ let g:mapleader = "\<space>"
 
 call plug#begin()
 
-" == NERDTree
+" NERDTree {{{
 Plug 'scrooloose/nerdtree'
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 0
@@ -25,14 +25,13 @@ let NERDTreeAutoDeleteBuffer = 1
 " Automatically close NERDTree on file open
 let NERDTreeQuitOnOpen = 1
 " Automatically close NERDTree if it's the only open window
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+au bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" }}}
 
-" == Colorsheme
+" Colorsheme
 Plug 'dkasak/gruvbox'
 
-Plug 'tpope/vim-fugitive'
-
-" == Lightline
+" Lightline {{{
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 let g:lightline = { 'active': {} }
@@ -42,89 +41,95 @@ let g:lightline.separator = { 'left': '', 'right': '' }
 let g:lightline.subseparator = { 'left': '', 'right': '' }
 let g:lightline.colorscheme = 'gruvbox'
 let g:lightline.tabline = { 'left': [[ 'tabs' ]], 'right': [[ 'close' ]] }
+" }}}
 
-let g:tmuxline_powerline_separators=1
-
-" == Fzf
+" Fzf {{{
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 let g:fzf_command_prefix = 'Fzf'
 " disable statusline overriding
 let g:fzf_nvim_statusline = 0
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --no-line-number --ignore-file ~/.gitignore'
-
+" }}}
 
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-fugitive'
+
 Plug 'unblevable/quick-scope'
 Plug 'alvan/vim-closetag'
 Plug 'google/vim-searchindex'
-
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'tpope/vim-sleuth'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'jiangmiao/auto-pairs'
-
-" == NERDCommenter
-Plug 'scrooloose/nerdcommenter'
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" == Vim polyglot
 Plug 'sheerun/vim-polyglot'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'ervandew/supertab'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'zivyangll/git-blame.vim', { 'on': 'GitBlame' }
+Plug 'mbbill/undotree'
 
-" == coc.nvim
+
+
+
+" NERDCommenter {{{
+Plug 'scrooloose/nerdcommenter'
+  " Add spaces after comment delimiters by default
+  let g:NERDSpaceDelims = 1
+" }}}
+
+" coc.nvim {{{
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  nmap <leader>rn <Plug>(coc-rename)
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
-  nmap <silent> ]w <Plug>(coc-diagnostic-next)
-  nmap <silent> [w <Plug>(coc-diagnostic-prev)
-  nmap <silent> <leader>rf <Plug>(coc-refactor)
-  nmap <silent> <leader>? :call CocAction('doHover')<CR>
-  nmap <localleader>? :CocList diagnostics<CR>
-  nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
-  nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
-  nnoremap  <silent> <Leader>t :CocList outline<CR>
+nmap <leader>rn <Plug>(coc-rename)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> ]w <Plug>(coc-diagnostic-next)
+nmap <silent> [w <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>rf <Plug>(coc-refactor)
+nmap <silent> <leader>? :call CocAction('doHover')<CR>
+nmap <localleader>? :CocList diagnostics<CR>
+nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
+nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
+nnoremap  <silent> <Leader>t :CocList outline<CR>
+" }}}
 
-
-" == Rooter
+" Rooter {{{
 Plug 'airblade/vim-rooter'
 let g:rooter_silent_chdir = 1
 let g:rooter_patterns = ['.git/', 'package.json', 'elm-package.json', 'elm.json', 'stack.yaml']
+" }}}
 
-Plug 'terryma/vim-multiple-cursors'
-
+" Signify {{{
 Plug 'mhinz/vim-signify'
-let g:signify_vcs_list = ['git']
-let g:signify_sign_add               = '+'
-let g:signify_sign_delete            = '-'
-let g:signify_sign_delete_first_line = g:signify_sign_delete
-let g:signify_sign_change            = '~'
-let g:signify_sign_changedelete      = g:signify_sign_change
+  let g:signify_vcs_list = ['git']
+  let g:signify_sign_add               = '+'
+  let g:signify_sign_delete            = '-'
+  let g:signify_sign_delete_first_line = g:signify_sign_delete
+  let g:signify_sign_change            = '~'
+  let g:signify_sign_changedelete      = g:signify_sign_change
+" }}}
 
-Plug 'ervandew/supertab'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" NERDTree Sytax Highlight {{{
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
-let g:NERDTreeLimitedSyntax = 1
+  let g:NERDTreeFileExtensionHighlightFullName = 1
+  let g:NERDTreeExactMatchHighlightFullName = 1
+  let g:NERDTreePatternMatchHighlightFullName = 1
+  let g:NERDTreeLimitedSyntax = 1
+" }}}
 
-Plug 'ryanoasis/vim-devicons'
 
-Plug 'zivyangll/git-blame.vim', { 'on': 'GitBlame' }
-
-Plug 'mbbill/undotree'
-
+" Auto Origami {{{
 Plug 'benknoble/vim-auto-origami'
-  if !g:isHeadlessMode 
-    augroup autofoldcolumn
-      au!
-      au BufWinEnter,WinEnter * AutoOrigamiFoldColumn
-    augroup END
-  endif
+if !g:isHeadlessMode 
+  augroup autofoldcolumn
+    au!
+    au BufWinEnter,WinEnter * AutoOrigamiFoldColumn
+  augroup END
+endif
+" }}}
 
 call plug#end()
 
@@ -177,7 +182,7 @@ set writebackup
 " but do not persist backup after successful write
 set nobackup
 " use rename-and-write-new method whenever safe
-set backupcopy=auto
+set backupcopy=yes
 " patch required to honor double slash at end
 if has("patch-8.1.0251")
   " consolidate the writebackups -- not a big
@@ -252,27 +257,16 @@ if g:colors_name == 'molokai'
   highlight MatchParen cterm=bold ctermbg=none ctermfg=208
 endif
 
-" == Disable modeline
+" Disable modeline
 set nomodeline
 
-" == Identation and Spaces
-autocmd FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee,typescript,typescript.tsx setlocal shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=81
-autocmd FileType sh setlocal expandtab
-
-
-" == Filetypes
-autocmd BufRead,BufNewFile *.jsx set filetype=javascript
-autocmd BufRead,BufNewFile *.md,markdown,*.mkd setlocal syntax=markdown
-autocmd BufRead,BufNewFile *.json set filetype=json
-" Set .rc (e.g. .eslintrc) files filetype to json but skip vimrc
-
-
-" == Autoreload file
+" Autoreload file {{{
 set autoread
 au CursorMoved,CursorHold,FocusGained,BufEnter,InsertEnter * :checkt
+" }}}
 
 " Autochange currdir
-autocmd BufEnter * silent! lcd %:p:h
+au BufEnter * silent! lcd %:p:h
 
 
 " Remember last location in file
@@ -281,12 +275,31 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 
 " Folding
 " Set automatic folding for all files
-autocmd BufEnter * setlocal foldmethod=indent
-" Open all folds by default
-autocmd BufEnter * normal zR
+augroup folding
+  au!
+  au BufEnter * setlocal foldmethod=indent
+  " Open all folds by default
+  au BufEnter * normal zR
+augroup END
 
+" File type specific settings {{{
+au FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee,typescript,typescript.tsx setlocal shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=81
+au FileType sh setlocal expandtab
+" Collapse folds for vim files
+augroup vimrc
+  au!
+  au BufEnter vim normal zM
+  au BufEnter vim setlocal foldmethod=marker
+augroup END
+" }}}
 
-" Bindings
+" Set correct filetypes {{{
+au BufRead,BufNewFile *.jsx set filetype=javascript
+au BufRead,BufNewFile *.md,markdown,*.mkd setlocal syntax=markdown
+au BufRead,BufNewFile *.json set filetype=json
+" }}}
+
+" Bindings {{{
 nnoremap  <silent> <C-j> :+10<CR>
 vmap      <silent> <C-j> 10j<CR>
 nnoremap  <silent> <C-k> :-10<CR>
@@ -308,7 +321,9 @@ nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
 nnoremap  <silent> <Leader>= <C-w>=
 
 nnoremap <silent> <Leader>+ :tab split<CR>
+" }}}
 
+" Commands abbreviations {{{
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
 cnoreabbrev Qall! qall!
@@ -319,3 +334,4 @@ cnoreabbrev WQ wq
 cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
+" }}}
