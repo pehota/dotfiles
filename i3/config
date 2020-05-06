@@ -67,6 +67,9 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
+# Center current floating window
+bindsym $mod+c move absolute position center
+
 # split in horizontal orientation
 bindsym $mod+Control+h split h
 
@@ -308,7 +311,8 @@ for_window [class=".*"] title_format "<span> %title</span>"
 for_window [class="Ferdi"] move to workspace $wsChat
 for_window [class="Viber"] move to workspace $wsChat
 for_window [class="Spotify"] move to workspace $wsSpotify
-for_window [class="Simplenote"] floating enable
+for_window [class="Simplenote"] floating enable resize set 1024 600 move absolute position center
+
 
 # Apps to run in a floating window
 for_window [window_role="pop-up"]                       floating enable
