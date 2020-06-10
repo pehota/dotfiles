@@ -46,8 +46,8 @@
   deployed = "!f(){ git branch -r --contains $1 | cut -f1 -d'/' | sort | uniq; }; f"
   ri = "!sh -c 'git rebase -i HEAD~$0'"
   ai = add -i
-  ls = "!sh -c '(git brunch || git branch)'"
-  sb = "!sh -c '(git branch | fzf-tmux -d 20) || git branch'"
+  ls = "!sh -c '(git branch | fzf-tmux -d 20 | xargs git checkout) || git branch'"
+  lsr = "!sh -c '(git branch -r | fzf-tmux -d 20 | xargs git checkout) || git branch'"
   cc = "!sh -c 'git cherry -v $0 | grep +'"
   commend = commit --amend --no-edit
   please = push --force-with-lease origin HEAD
@@ -57,7 +57,6 @@
   debranch = "!sh -c 'git branch | grep -v master | xargs git branch -D'"
   cim = commit -m
   dc = "!sh -c 'git diff --name-only $0 | wc -l'"
-  lsr = branch -r
 ; This will show you all the commits at the tips of your commit graph which are no longer referenced from any branch or tag 
 ; every lost commit, including every stash commit you’ve ever created, will be somewhere in that graph.
   detached-commits = "!sh -c 'git log $0 --oneline --decorate $( git fsck --no-reflog | awk \"/dangling commit/ {print \\$3}\" )'"
