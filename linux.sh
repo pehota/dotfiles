@@ -15,22 +15,24 @@ if(! (command -v pamac &> /dev/null)); then
 fi
 
 declare -A commands_map=(
-  ["git"]="git"
-  ["curl"]="curl"
-  ["fish"]="fish"
-  ["rofi"]="rofi"
-  ["kitty"]="kitty"
-  ["tmux"]="tmux"
-  ["exa"]="exa"
-  ["bat"]="bat"
-  ["preload"]="preload"
-  ["python3"]="python3"
-  ["nvim"]="neovim"
-  ["rg"]="ripgrep"
-  ["shellcheck"]="shellcheck"
+  ["autorandr"]="autorandr" # conigure monitors
+  ["bat"]="bat" # cat replacement
   ["cmus"]="cmus"
-  ["ranger"]="ranger"
+  ["curl"]="curl"
+  ["exa"]="exa" # ls replacement
+  ["fish"]="fish" # Friendly Interactive SHell
+  ["git"]="git"
+  ["kitty"]="kitty"
+  ["nvim"]="neovim"
   ["playerctl"]="playerctl"
+  ["preload"]="preload"
+  ["python3"]="python3" # needed for neovim
+  ["ranger"]="ranger" # file browser
+  ["rg"]="ripgrep" # fast file search
+  ["rofi"]="rofi" # dmenu
+  ["shellcheck"]="shellcheck" # shell LSP
+  ["tmux"]="tmux"
+  ["unclutter"]="unclutter" # Hides the mouse cursor
 )
 
 commands_to_install=""

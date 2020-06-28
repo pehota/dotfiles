@@ -46,6 +46,8 @@
   deployed = "!f(){ git branch -r --contains $1 | cut -f1 -d'/' | sort | uniq; }; f"
   ri = "!sh -c 'git rebase -i HEAD~$0'"
   ai = add -i
+  ; ls = "!sh -c '(git brunch || git branch)'"
+  ; ls = "branch"
   ls = "!sh -c '(git branch | fzf-tmux -d 20 | xargs git checkout) || git branch'"
   lsr = "!sh -c '(git branch -r | fzf-tmux -d 20 | xargs git checkout) || git branch'"
   cc = "!sh -c 'git cherry -v $0 | grep +'"
@@ -64,3 +66,5 @@
   autocorrect = 0
 [init]
   templatedir = ~/.git_templates
+[includeIf "gitdir:~/Work/job/git/"]
+  path = ~/Work/job/git/.gitconfig

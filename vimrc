@@ -54,7 +54,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --no-line-number --igno
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive', { 'on': ['Gdiffsplit', 'Gblame'] }
 
 Plug 'unblevable/quick-scope'
 Plug 'alvan/vim-closetag'
@@ -67,7 +67,6 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'ervandew/supertab'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-Plug 'zivyangll/git-blame.vim', { 'on': 'GitBlame' }
 Plug 'mbbill/undotree'
 
 
@@ -81,19 +80,24 @@ Plug 'scrooloose/nerdcommenter'
 
 " coc.nvim {{{
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-nmap <leader>rn <Plug>(coc-rename)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> ]w <Plug>(coc-diagnostic-next)
-nmap <silent> [w <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>rf <Plug>(coc-refactor)
-nmap <silent> <leader>? :call CocAction('doHover')<CR>
-nmap <localleader>? :CocList diagnostics<CR>
-nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
-nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
-nnoremap  <silent> <Leader>t :CocList outline<CR>
+  nmap <leader>rn <Plug>(coc-rename)
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  nmap <silent> <C-\> <Plug>(coc-codeaction-line)
+  nmap <silent> ]w <Plug>(coc-diagnostic-next)
+  nmap <silent> [w <Plug>(coc-diagnostic-prev)
+  nmap <silent> <leader>rf <Plug>(coc-refactor)
+  nmap <silent> <leader>? :call CocAction('doHover')<CR>
+  nmap <localleader>? :CocList diagnostics<CR>
+  nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
+  nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
+  nnoremap  <silent> <Leader>t :CocList outline<CR>
+" }}}
+
+" nvim-lsp {{{
+" Plug 'neovim/nvim-lsp'
 " }}}
 
 " Rooter {{{
@@ -113,11 +117,11 @@ Plug 'mhinz/vim-signify'
 " }}}
 
 " NERDTree Sytax Highlight {{{
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-  let g:NERDTreeFileExtensionHighlightFullName = 1
-  let g:NERDTreeExactMatchHighlightFullName = 1
-  let g:NERDTreePatternMatchHighlightFullName = 1
-  let g:NERDTreeLimitedSyntax = 1
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+  " let g:NERDTreeFileExtensionHighlightFullName = 1
+  " let g:NERDTreeExactMatchHighlightFullName = 1
+  " let g:NERDTreePatternMatchHighlightFullName = 1
+  " let g:NERDTreeLimitedSyntax = 1
 " }}}
 
 
@@ -131,7 +135,35 @@ if !g:isHeadlessMode
 endif
 " }}}
 
+Plug 'git@work:ebot7/botlang-vim'
+
+Plug 'vuciv/vim-bujo'
+
 call plug#end()
+
+" lsp {{{
+" :lua << END
+  " require'nvim_lsp'.cssls.setup{}
+  " require'nvim_lsp'.elmls.setup{}
+  " require'nvim_lsp'.hie.setup{}
+  " require'nvim_lsp'.html.setup{}
+  " require'nvim_lsp'.rls.setup{}
+  " require'nvim_lsp'.tsserver.setup{}
+  " require'nvim_lsp'.vimls.setup{}
+  " require'nvim_lsp'.vuels.setup{}
+" END
+
+
+" nnoremap <silent> <c-]>       <cmd>lua vim.lsp.buf.declaration()<CR>
+" nnoremap <silent> gd          <cmd>lua vim.lsp.buf.definition()<CR>
+" nnoremap <silent> <leader>?   <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> gD          <cmd>lua vim.lsp.buf.implementation()<CR>
+" nnoremap <silent> <c-k>       <cmd>lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <silent> gy          <cmd>lua vim.lsp.buf.type_definition()<CR>
+" nnoremap <silent> gr          <cmd>lua vim.lsp.buf.references()<CR>
+" nnoremap <silent> g0          <cmd>lua vim.lsp.buf.document_symbol()<CR>
+" nnoremap <silent> gW          <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+" }}}
 
 " Session Management
 " automatically load and save session on start/exit.
@@ -261,8 +293,8 @@ endif
 set nomodeline
 
 " Autoreload file {{{
-set autoread
-au CursorMoved,CursorHold,FocusGained,BufEnter,InsertEnter * :checkt
+  set autoread
+  au CursorMoved,CursorHold,FocusGained,BufEnter,InsertEnter * :checkt
 " }}}
 
 " Autochange currdir
@@ -283,8 +315,8 @@ augroup folding
 augroup END
 
 " File type specific settings {{{
-au FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee,typescript,typescript.tsx setlocal shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=81
-au FileType sh setlocal expandtab
+  au FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee,typescript,typescript.tsx setlocal shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=81
+  au FileType sh setlocal expandtab
 " Collapse folds for vim files
 augroup vimrc
   au!
@@ -294,44 +326,44 @@ augroup END
 " }}}
 
 " Set correct filetypes {{{
-au BufRead,BufNewFile *.jsx set filetype=javascript
-au BufRead,BufNewFile *.md,markdown,*.mkd setlocal syntax=markdown
-au BufRead,BufNewFile *.json set filetype=json
+  au BufRead,BufNewFile *.jsx set filetype=javascript
+  au BufRead,BufNewFile *.md,markdown,*.mkd setlocal syntax=markdown
+  au BufRead,BufNewFile *.json set filetype=json
 " }}}
 
 " Bindings {{{
-nnoremap  <silent> <C-j> :+10<CR>
-vmap      <silent> <C-j> 10j<CR>
-nnoremap  <silent> <C-k> :-10<CR>
-vnoremap  <silent> <C-k> 10k<CR>
-imap      <silent> jj <ESC>
-nnoremap  <silent> <Leader><Leader>s <ESC>:w<CR>
-nmap      <silent> <Leader><Esc> :noh<CR>
-nmap      <silent> <Leader>bd :bufdo bd<CR><CR>
-map       <silent> <C-b> :NERDTreeToggleVCS<CR>
-nmap      <silent> <C-l> :NERDTreeFind<CR>
-nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
-nnoremap  <silent> <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
-" nnoremap  <silent> <C-p> :FzfFiles<CR>
-nnoremap  <silent> <C-h> :FzfHistory<CR>
-nnoremap  <silent> <Leader>a :FzfRg<CR>
-nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
-nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
+  nnoremap  <silent> <C-j> :+10<CR>
+  vmap      <silent> <C-j> 10j<CR>
+  nnoremap  <silent> <C-k> :-10<CR>
+  vnoremap  <silent> <C-k> 10k<CR>
+  imap      <silent> jj <ESC>
+  nnoremap  <silent> <Leader><Leader>s <ESC>:w<CR>
+  nmap      <silent> <Leader><Esc> :noh<CR>
+  nmap      <silent> <Leader>bd :bufdo bd<CR><CR>
+  map       <silent> <C-b> :NERDTreeToggleVCS<CR>
+  nmap      <silent> <C-l> :NERDTreeFind<CR>
+  nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
+  nnoremap  <silent> <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
+  " nnoremap  <silent> <C-p> :FzfFiles<CR>
+  nnoremap  <silent> <C-h> :FzfHistory<CR>
+  nnoremap  <silent> <Leader>a :FzfRg<CR>
+  nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
+  nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
 
-nnoremap  <silent> <Leader>= <C-w>=
+  nnoremap  <silent> <Leader>= <C-w>=
 
-nnoremap <silent> <Leader>+ :tab split<CR>
+  nnoremap <silent> <Leader>+ :tab split<CR>
 " }}}
 
 " Commands abbreviations {{{
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
-cnoreabbrev Qall! qall!
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev wQ wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qall qall
+  cnoreabbrev W! w!
+  cnoreabbrev Q! q!
+  cnoreabbrev Qall! qall!
+  cnoreabbrev Wq wq
+  cnoreabbrev Wa wa
+  cnoreabbrev wQ wq
+  cnoreabbrev WQ wq
+  cnoreabbrev W w
+  cnoreabbrev Q q
+  cnoreabbrev Qall qall
 " }}}

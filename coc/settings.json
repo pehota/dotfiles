@@ -26,16 +26,8 @@
     "haskell": {
       "command": "hie-wrapper",
       "args": ["--lsp"],
-      "rootPatterns": [
-        "stack.yaml",
-        "cabal.config",
-        "package.yaml"
-      ],
-      "filetypes": [
-        "hs",
-        "lhs",
-        "haskell"
-      ],
+      "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
+      "filetypes": ["hs", "lhs", "haskell"],
       "initializationOptions": {
         "languageServerHaskell": {
           "hlintOn": true
@@ -43,6 +35,13 @@
       }
     }
   },
+  "yaml.schemas": {
+    "kubernetes": "/*.(yaml|yml)",
+    "docker": "/*.(yaml|yml)"
+  },
+  "docker.enable": true,
+  "yaml.hover": true,
+  "yaml.format.enable": true,
   "diagnostic.refreshOnInsertMode": false,
   "diagnostic.refreshAfterSave": false,
   "diagnostic.maxWindowHeight": 20,
@@ -67,7 +66,7 @@
   "typescript.updateImportsOnFileMove.enable": true,
   "codeLens.enable": true,
   "prettier.eslintIntegration": true,
-  "prettier.requireConfig": true,
+  "prettier.requireConfig": false,
   "eslint.autoFixOnSave": true,
   "eslint.quiet": true,
   "eslint.options": {

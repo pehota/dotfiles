@@ -26,11 +26,10 @@ fi
 if [[ ! -f ~/.dotfiles/.backup/init.vim ]]; then
   if [[ ! -d ~/.config/nvim ]]; then
     mkdir -p ~/.config/nvim
-    touch ~/.config/nvim/init.vim
-  else
-    cp ~/.config/nvim/init.vim ~/.dotfiles/.backup/
+  else if [[ -f ~/.config/nvim/init.vim ]]; then
+    mv ~/.config/nvim/init.vim ~/.dotfiles/.backup/
   fi
-  echo "source ~/.dotfiles/vimrc" >> ~/.config/nvim/init.vim
+  ln -s ~/.dotfiles/vimrc ~/.config/nvim/init.vim
 fi
 
 [ ! -L ~/.config/nvim/coc-settings.json ] && {
