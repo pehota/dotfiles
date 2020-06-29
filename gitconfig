@@ -46,8 +46,10 @@
   deployed = "!f(){ git branch -r --contains $1 | cut -f1 -d'/' | sort | uniq; }; f"
   ri = "!sh -c 'git rebase -i HEAD~$0'"
   ai = add -i
+  ; ls = "!sh -c '(git brunch || git branch)'"
+  ; ls = "branch"
   ls = "!sh -c '(git branch | fzf-tmux -d 20 | xargs git checkout) || git branch'"
-  lsr = "!sh -c '(git branch -r | fzf-tmux -d 20 | xargs git checkout) || git branch'"
+  lsr = "!sh -c '(git branch -r | fzf-tmux -d 20 | sed \"s/origin\\///g\" | xargs git checkout) || git branch -r'"
   cc = "!sh -c 'git cherry -v $0 | grep +'"
   commend = commit --amend --no-edit
   please = push --force-with-lease origin HEAD
