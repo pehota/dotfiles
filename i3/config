@@ -38,13 +38,12 @@ focus_follows_mouse no
 focus_on_window_activation focus
 
 # Set default layout to tabbed
-workspace_layout tabbed
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
 # Scratchpad terminal (small size, can be hidden)
-for_window [class="_scratchpad"] border 1pixel, sticky enable, floating enable, move scratchpad, fullscreen
+for_window [class="_scratchpad"] border 1pixel sticky enable floating enable move scratchpad absolute position center fullscreen
 bindsym $mod+minus exec ~/.config/i3/i3-scratchpad-terminal.sh
 
 # kill focused window
@@ -291,7 +290,7 @@ exec_always --no-startup-id setxkbmap -option grp:alt_shift_toggle -layout "us,b
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Set the wallpaper
-set $wallpaper /usr/share/backgrounds/bluemountain.jpg
+set $wallpaper ~/.dotfiles/wallpaper.jpg
 exec_always --no-startup-id feh --bg-fill $wallpaper
 
 # Start Redshift
@@ -300,6 +299,9 @@ exec --no-startup-id redshift -t 6500:3500
 exec --no-startup-id xset dpms 60 300 600
 exec --no-startup-id xautolock -locker "$locker" -time 1
 
+# Hide the mouse cursor
+exec --no-startup-id unclutter --timeout 2
+
 # ----------- Generic windown configuration
 # floating_maximum_size 900 x 600
 
@@ -307,7 +309,7 @@ exec --no-startup-id xautolock -locker "$locker" -time 1
 # ----------- App windows config
 for_window [class=".*"] title_format "<span> %title</span>"
 
-# Put chats in their own window
+# Put apps into designated workspaces
 for_window [class="Ferdi"] move to workspace $wsChat
 for_window [class="Viber"] move to workspace $wsChat
 for_window [class="Spotify"] move to workspace $wsSpotify
@@ -329,11 +331,11 @@ for_window [class="Enpass"]                             floating enable
 for_window [class="^.*"] border pixel 1
 
 
-smart_gaps on
+# smart_gaps on
 smart_borders on
 
 gaps inner 6
-gaps outer -2
+gaps top -2
 
 
 for_window [class="^.*"] border pixel 3
