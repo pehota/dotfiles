@@ -54,7 +54,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --no-line-number --igno
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive', { 'on': 'Gdiffsplit' }
 
 Plug 'unblevable/quick-scope'
 Plug 'alvan/vim-closetag'
@@ -81,19 +81,24 @@ Plug 'scrooloose/nerdcommenter'
 
 " coc.nvim {{{
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-nmap <leader>rn <Plug>(coc-rename)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> ]w <Plug>(coc-diagnostic-next)
-nmap <silent> [w <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>rf <Plug>(coc-refactor)
-nmap <silent> <leader>? :call CocAction('doHover')<CR>
-nmap <localleader>? :CocList diagnostics<CR>
-nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
-nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
-nnoremap  <silent> <Leader>t :CocList outline<CR>
+  nmap <leader>rn <Plug>(coc-rename)
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  nmap <silent> <C-\> <Plug>(coc-codeaction-line)
+  nmap <silent> ]w <Plug>(coc-diagnostic-next)
+  nmap <silent> [w <Plug>(coc-diagnostic-prev)
+  nmap <silent> <leader>rf <Plug>(coc-refactor)
+  nmap <silent> <leader>? :call CocAction('doHover')<CR>
+  nmap <localleader>? :CocList diagnostics<CR>
+  nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
+  nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
+  nnoremap  <silent> <Leader>t :CocList outline<CR>
+" }}}
+
+" nvim-lsp {{{
+" Plug 'neovim/nvim-lsp'
 " }}}
 
 " Rooter {{{
@@ -113,11 +118,11 @@ Plug 'mhinz/vim-signify'
 " }}}
 
 " NERDTree Sytax Highlight {{{
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-  let g:NERDTreeFileExtensionHighlightFullName = 1
-  let g:NERDTreeExactMatchHighlightFullName = 1
-  let g:NERDTreePatternMatchHighlightFullName = 1
-  let g:NERDTreeLimitedSyntax = 1
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+  " let g:NERDTreeFileExtensionHighlightFullName = 1
+  " let g:NERDTreeExactMatchHighlightFullName = 1
+  " let g:NERDTreePatternMatchHighlightFullName = 1
+  " let g:NERDTreeLimitedSyntax = 1
 " }}}
 
 
@@ -131,7 +136,33 @@ if !g:isHeadlessMode
 endif
 " }}}
 
+Plug 'git@work:ebot7/botlang-vim'
+
 call plug#end()
+
+" lsp {{{
+" :lua << END
+  " require'nvim_lsp'.cssls.setup{}
+  " require'nvim_lsp'.elmls.setup{}
+  " require'nvim_lsp'.hie.setup{}
+  " require'nvim_lsp'.html.setup{}
+  " require'nvim_lsp'.rls.setup{}
+  " require'nvim_lsp'.tsserver.setup{}
+  " require'nvim_lsp'.vimls.setup{}
+  " require'nvim_lsp'.vuels.setup{}
+" END
+
+
+" nnoremap <silent> <c-]>       <cmd>lua vim.lsp.buf.declaration()<CR>
+" nnoremap <silent> gd          <cmd>lua vim.lsp.buf.definition()<CR>
+" nnoremap <silent> <leader>?   <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> gD          <cmd>lua vim.lsp.buf.implementation()<CR>
+" nnoremap <silent> <c-k>       <cmd>lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <silent> gy          <cmd>lua vim.lsp.buf.type_definition()<CR>
+" nnoremap <silent> gr          <cmd>lua vim.lsp.buf.references()<CR>
+" nnoremap <silent> g0          <cmd>lua vim.lsp.buf.document_symbol()<CR>
+" nnoremap <silent> gW          <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+" }}}
 
 " Session Management
 " automatically load and save session on start/exit.

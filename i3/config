@@ -106,8 +106,8 @@ bindsym $mod+Shift+BackSpace scratchpad show
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $wsChat 3: Chat
-set $wsSpotify 4: Spotify
+set $wsChat " 3:Chat "
+set $wsSpotify " 4:Spotify "
 
 set $ws1 1
 set $ws2 2

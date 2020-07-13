@@ -6,7 +6,8 @@ TITLE="_scratchpad"
 
 if ! pgrep -f "$TITLE"; then
 	# i3-msg "exec --no-startup-id i3-sensible-terminal --class '$TITLE'"
-	i3-msg "exec --no-startup-id st -c '$TITLE' -f 'Source Code Pro:size=12'"
+	i3-msg "exec --no-startup-id st -c '$TITLE'"
+	# i3-msg "exec --no-startup-id st -c '$TITLE' -f 'Source Code Pro:size=12'"
 	sleep 0.5
 fi
 
