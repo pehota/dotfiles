@@ -16,16 +16,16 @@ call plug#begin()
 
 " NERDTree {{{
 Plug 'scrooloose/nerdtree'
-let NERDTreeShowHidden = 1
-let NERDTreeMinimalUI = 0
-let NERDTreeDirArrows = 0
-let NERDTreeIgnore = ['\.bs.js$', '\.git', '\.exrc', '\.DS_Store', 'node_modules', 'elm-stuff', 'package-lock.json', 'yarn.lock', '.cache']
-" Automatically delete buffers for nodes deleted from the tree
-let NERDTreeAutoDeleteBuffer = 1
-" Automatically close NERDTree on file open
-let NERDTreeQuitOnOpen = 1
-" Automatically close NERDTree if it's the only open window
-au bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+  let NERDTreeShowHidden = 1
+  let NERDTreeMinimalUI = 0
+  let NERDTreeDirArrows = 0
+  let NERDTreeIgnore = ['\.bs.js$', '\.git', '\.exrc', '\.DS_Store', 'node_modules', 'elm-stuff', 'package-lock.json', 'yarn.lock', '.cache']
+  " Automatically delete buffers for nodes deleted from the tree
+  let NERDTreeAutoDeleteBuffer = 1
+  " Automatically close NERDTree on file open
+  let NERDTreeQuitOnOpen = 1
+  " Automatically close NERDTree if it's the only open window
+  au bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " }}}
 
 " Colorsheme
@@ -34,22 +34,22 @@ Plug 'dkasak/gruvbox'
 " Lightline {{{
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
-let g:lightline = { 'active': {} }
-let g:lightline.active.left = [ ['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified'], [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ] ]
-let g:lightline.component_function = { 'gitbranch': 'fugitive#head' }
-let g:lightline.separator = { 'left': '', 'right': '' }
-let g:lightline.subseparator = { 'left': '', 'right': '' }
-let g:lightline.colorscheme = 'gruvbox'
-let g:lightline.tabline = { 'left': [[ 'tabs' ]], 'right': [[ 'close' ]] }
+  let g:lightline = { 'active': {} }
+  let g:lightline.active.left = [ ['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified'], [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ] ]
+  let g:lightline.component_function = { 'gitbranch': 'fugitive#head' }
+  let g:lightline.separator = { 'left': '', 'right': '' }
+  let g:lightline.subseparator = { 'left': '', 'right': '' }
+  let g:lightline.colorscheme = 'gruvbox'
+  let g:lightline.tabline = { 'left': [[ 'tabs' ]], 'right': [[ 'close' ]] }
 " }}}
 
 " Fzf {{{
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-let g:fzf_command_prefix = 'Fzf'
-" disable statusline overriding
-let g:fzf_nvim_statusline = 0
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --no-line-number --ignore-file ~/.gitignore'
+  let g:fzf_command_prefix = 'Fzf'
+  " disable statusline overriding
+  let g:fzf_nvim_statusline = 0
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --no-line-number --ignore-file ~/.gitignore'
 " }}}
 
 Plug 'tpope/vim-surround'
@@ -81,25 +81,25 @@ Plug 'scrooloose/nerdcommenter'
 
 " coc.nvim {{{
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-nmap <leader>rn <Plug>(coc-rename)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> ]w <Plug>(coc-diagnostic-next)
-nmap <silent> [w <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>rf <Plug>(coc-refactor)
-nmap <silent> <leader>? :call CocAction('doHover')<CR>
-nmap <localleader>? :CocList diagnostics<CR>
-nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
-nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
-nnoremap  <silent> <Leader>t :CocList outline<CR>
+  nmap <leader>rn <Plug>(coc-rename)
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  nmap <silent> ]w <Plug>(coc-diagnostic-next)
+  nmap <silent> [w <Plug>(coc-diagnostic-prev)
+  nmap <silent> <leader>rf <Plug>(coc-refactor)
+  nmap <silent> <leader>? :call CocAction('doHover')<CR>
+  nmap <localleader>? :CocList diagnostics<CR>
+  nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
+  nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
+  nnoremap  <silent> <Leader>t :CocList outline<CR>
 " }}}
 
 " Rooter {{{
 Plug 'airblade/vim-rooter'
-let g:rooter_silent_chdir = 1
-let g:rooter_patterns = ['.git/', 'package.json', 'elm-package.json', 'elm.json', 'stack.yaml']
+  let g:rooter_silent_chdir = 1
+  let g:rooter_patterns = ['.git/', 'package.json', 'elm-package.json', 'elm.json', 'stack.yaml']
 " }}}
 
 " Signify {{{
@@ -300,38 +300,43 @@ au BufRead,BufNewFile *.json set filetype=json
 " }}}
 
 " Bindings {{{
-nnoremap  <silent> <C-j> :+10<CR>
-vmap      <silent> <C-j> 10j<CR>
-nnoremap  <silent> <C-k> :-10<CR>
-vnoremap  <silent> <C-k> 10k<CR>
-imap      <silent> jj <ESC>
-nnoremap  <silent> <Leader><Leader>s <ESC>:w<CR>
-nmap      <silent> <Leader><Esc> :noh<CR>
-nmap      <silent> <Leader>bd :bufdo bd<CR><CR>
-map       <silent> <C-b> :NERDTreeToggleVCS<CR>
-nmap      <silent> <C-l> :NERDTreeFind<CR>
-nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
-nnoremap  <silent> <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
-" nnoremap  <silent> <C-p> :FzfFiles<CR>
-nnoremap  <silent> <C-h> :FzfHistory<CR>
-nnoremap  <silent> <Leader>a :FzfRg<CR>
-nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
-nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
+  nnoremap  <silent> <C-j> :+10<CR>
+  vmap      <silent> <C-j> 10j<CR>
+  nnoremap  <silent> <C-k> :-10<CR>
+  vnoremap  <silent> <C-k> 10k<CR>
+  imap      <silent> jj <ESC>
+  nnoremap  <silent> <Leader><Leader>s <ESC>:w<CR>
+  nmap      <silent> <Leader><Esc> :noh<CR>
+  nmap      <silent> <Leader>bd :bufdo bd<CR><CR>
+  map       <silent> <C-b> :NERDTreeToggleVCS<CR>
+  nmap      <silent> <C-l> :NERDTreeFind<CR>
+  nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
+  " nnoremap  <silent> <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
+  nnoremap  <silent> <C-p> :FzfFiles<CR>
+  nnoremap  <silent> <C-h> :FzfHistory<CR>
+  nnoremap  <silent> <Leader>a :FzfRg<CR>
+  nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
+  nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
 
-nnoremap  <silent> <Leader>= <C-w>=
+  nnoremap  <silent> <Leader>= <C-w>=
 
-nnoremap <silent> <Leader>+ :tab split<CR>
+  nnoremap <silent> <Leader>+ :tab split<CR>
+
+  " Move visual block
+  vnoremap J :m '>+1<CR>gv=gv
+  vnoremap K :m '<-2<CR>gv=gv
+
 " }}}
 
 " Commands abbreviations {{{
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
-cnoreabbrev Qall! qall!
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev wQ wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qall qall
+  cnoreabbrev W! w!
+  cnoreabbrev Q! q!
+  cnoreabbrev Qall! qall!
+  cnoreabbrev Wq wq
+  cnoreabbrev Wa wa
+  cnoreabbrev wQ wq
+  cnoreabbrev WQ wq
+  cnoreabbrev W w
+  cnoreabbrev Q q
+  cnoreabbrev Qall qall
 " }}}

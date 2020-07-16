@@ -12,6 +12,7 @@
         "diagnosticsOnSaveOnly": true
       }
     },
+<<<<<<< Updated upstream
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],
@@ -40,6 +41,21 @@
         "languageServerHaskell": {
           "hlintOn": true
         }
+=======
+    "haskell": {
+      "enable": true,
+      "command": "hie-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": [
+        "*.cabal",
+        "stack.yaml",
+        "cabal.project",
+        "package.yaml"
+      ],
+      "filetypes": ["hs", "lhs", "haskell"],
+      "initializationOptions": {
+        "languageServerHaskell": {}
+>>>>>>> Stashed changes
       }
     }
   },
@@ -67,11 +83,11 @@
   "typescript.updateImportsOnFileMove.enable": true,
   "codeLens.enable": true,
   "prettier.eslintIntegration": true,
-  "prettier.requireConfig": true,
+  "prettier.requireConfig": false,
   "eslint.autoFixOnSave": true,
   "eslint.quiet": true,
   "eslint.options": {
-    "useEslintrc": true
+    "useEslintrc": false
   },
   "css.validate": false,
   "stylelint.enable": true,

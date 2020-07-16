@@ -261,3 +261,5 @@ tags
 
 # SSL related files
 *.pem
+
+.git

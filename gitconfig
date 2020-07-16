@@ -1,6 +1,7 @@
 [core]
   excludesfile = ~/.gitignore
   quotepath = false
+	filemode = false
 [user]
   name = Dimitar Apostolov
   email =
@@ -66,3 +67,5 @@
   autocorrect = 0
 [init]
   templatedir = ~/.git_templates
+[includeIf "gitdir:~/Work/job/git/"]
+  path = ~/Work/job/git/.gitconfig
