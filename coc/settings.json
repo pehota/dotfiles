@@ -12,7 +12,6 @@
         "diagnosticsOnSaveOnly": true
       }
     },
-<<<<<<< Updated upstream
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],
@@ -41,21 +40,6 @@
         "languageServerHaskell": {
           "hlintOn": true
         }
-=======
-    "haskell": {
-      "enable": true,
-      "command": "hie-wrapper",
-      "args": ["--lsp"],
-      "rootPatterns": [
-        "*.cabal",
-        "stack.yaml",
-        "cabal.project",
-        "package.yaml"
-      ],
-      "filetypes": ["hs", "lhs", "haskell"],
-      "initializationOptions": {
-        "languageServerHaskell": {}
->>>>>>> Stashed changes
       }
     }
   },
