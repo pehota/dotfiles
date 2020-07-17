@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 if(! (command -v fish &> /dev/null)); then
-  echo "Installing fishi shell ..."
-  pamac install --no-confirm fish
+  echo "Installing fish shell ..."
+  pamac install fish
 fi
 
 # Install oh-my-fish if needed
@@ -23,3 +23,10 @@ fi
 # Install om-my-fish packages
 fish -c "omf install"
 
+PATH_TO_FISH_BIN=$(command -v fish)
+
+# Add fish to allowed shells
+(echo $PATH_TO_FISH_BIN | sudo tee -a /etc/shells) &> /dev/null
+
+# Set fish as the default shell
+sudo chsh -s $PATH_TO_FISH_BIN $(whoami) 

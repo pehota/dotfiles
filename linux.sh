@@ -50,7 +50,7 @@ for c in "${!commands_map[@]}"
 
 if [[ -n "$commands_to_install" ]]; then
   echo "Installing $commands_to_install"
-  pamac install --no-confirm $commands_to_install
+  pamac install $commands_to_install
 fi
 
 # link rofi

@@ -34,12 +34,20 @@ if [[ ! -f ~/.dotfiles/.backup/init.vim ]]; then
 fi
 
 [ ! -L ~/.config/nvim/coc-settings.json ] && {
-  mv ~/.config/nvim/coc-settings.json ~/.dotfiles/.backup/ &> /dev/null
+  if [[ -f ~/.config/nvim/coc-settings.json ]]; then
+    mv ~/.config/nvim/coc-settings.json ~/.dotfiles/.backup/ &> /dev/null
+  fi
   ln -sf ~/.dotfiles/coc/settings.json ~/.config/nvim/coc-settings.json
 }
 
 [ ! -L ~/.config/coc/extensions/package.json ] && {
-  mv ~/.config/coc/extensions/package.json ~/.dotfiles/.backup/coc-extensions.json &> /dev/null
+  if [[ ! -d ~/.config/coc/extensions ]]; then
+    mkdir -p ~/.config/coc/extensions
+  fi
+
+  if [[ -f ~/.config/coc/extensions/package.json ]]; then
+    mv ~/.config/coc/extensions/package.json ~/.dotfiles/.backup/coc-extensions.json &> /dev/null
+  fi
   ln -sf ~/.dotfiles/coc/extensions.json ~/.config/coc/extensions/package.json
 }
 

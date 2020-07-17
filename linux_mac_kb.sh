@@ -5,7 +5,7 @@ echo "Patching mac keyboard ..."
 
 if (! (command -v dkms &> /dev/null)); then
   echo "Installing dkms ..."
-  sudo pamac -S dkms
+  sudo pamac install dkms
 fi
 
 if [[ -n "$(sudo dkms status hid-apple-patched)" ]]; then
@@ -13,21 +13,25 @@ if [[ -n "$(sudo dkms status hid-apple-patched)" ]]; then
   exit 0
 fi
 
+MOD_NAME=hid_apple
+PATCH_REPO="https://github.com/free5lot/hid-apple-patched.git"
+INSTALLATION_FOLDER=~/.tmp/$(basename $PATCH_REPO .git)
+
 mkdir -p ~/.tmp
 cd ~/.tmp
 
-PATCH_REPO="https://github.com/free5lot/hid-apple-patched.git"
+if [[ -d "$INSTALLATION_FOLDER" ]]; then
+  rm -rf "$INSTALLATION_FOLDER"
+fi
 
 echo "Cloning patch ..."
-git clone "$PATCH_REPO" 2> /dev/null
-cd "$(basename $PATCH_REPO .git)"
+git clone "$PATCH_REPO" 
+cd $INSTALLATION_FOLDER
 
-"Installing patch ..."
+echo "Installing patch ..."
 sudo dkms add . 2> /dev/null
 sudo dkms build hid-apple/1.0
 sudo dkms install hid-apple/1.0
-
-MOD_NAME=hid_apple
 
 echo "Updating related modprobe config ..."
 {
