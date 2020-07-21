@@ -62,10 +62,12 @@ if [[ -z "$TERMINAL" ]]; then
   } >> /dev/null
 fi
 
-# Fix apps windows rendering
+# Fix applications windows rendering
 {
   echo "export QT_AUTO_SCREEN_SCALE_FACTOR=0"
   echo "export \"QT_SCREEN_SCALE_FACTORS=1;1\""
 } >> ~/.profile
 
 . ./bluetooth.sh
+
+. ./setup-printing.sh
