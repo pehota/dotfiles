@@ -14,7 +14,7 @@ if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-if (! (command -v pip > /dev/null) ); then
+if (! (isPackageInstalled pip) ); then
   echo "Installing pip ..."
   sudo easy_install pip
 fi
