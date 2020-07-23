@@ -1,14 +1,16 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-if (! (command -v docker &> /dev/null) ); then
-  echo "Installing docker ..."
-  pamac install docker
-fi
+set -e
 
-if (! (command -v docker-compose &> /dev/null) ); then
-  echo "Installing docker-compose ..."
-  pamac install docker-compose
-fi
+source ./utils.sh
+
+declare -A packages=(
+  ["docker"]="docker-bin"
+  ["docker-compose"]="docker-compose-bin"
+  ["ctop"]="ctop-bin"
+)
+
+installPackages packages
 
 if (! (command -v ctop &> /dev/null) ); then
   echo "Installing ctop ..."
@@ -19,9 +21,9 @@ echo "Fixing docker permissions ..."
 sudo gpasswd -a "$(whoami)" docker
 sudo groupadd -f docker || true
 sudo usermod -aG docker "$(whoami)"
+echo "User '$(whoami)' will have to log out and log in again in order for permissions to take effect.\n"
 
 echo "Enabling docker service ..."
-sudo systemctl enable docker
-sudo systemctl start docker
+sudo systemctl enable --now docker
 
-echo "Done"
+echo "Done.\n"

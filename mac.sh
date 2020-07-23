@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+source ./utils.sh
+
 # Install the font for Powerline
 if [ ! -f "/Users/$(whoami)/Library/Fonts/Hack Regular Nerd Font Complete.ttf" ]; then
   cp "$HOME/.dotfiles/Hack Regular Nerd Font Complete.ttf" "/Users/$(whoami)/Library/Fonts"
 fi
 
-if (! (command -v brew > /dev/null) ); then
+if (! (isPackageInstalled "brew") ); then
   echo "Installing brew ..."
 
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"

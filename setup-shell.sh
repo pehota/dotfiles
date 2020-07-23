@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-if(! (command -v fish &> /dev/null)); then
+source ./utils.sh
+
+if(! (isPackageInstalled fish)); then
   echo "Installing fish shell ..."
-  pamac install fish
+  installPackage fish
 fi
 
 # Install oh-my-fish if needed

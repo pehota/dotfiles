@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
 # set -e
 
+source ./utils.sh
+
 # Create a backup folder where all existing dotfiles will be saved to
 mkdir -p ~/.dotfiles/.backup
 
-# Sound driver and firmware
-pamac install sof-firmware alsa-ucm-conf pulseaudio pulseaudio-alsa
-
-# Fonts
-pamac install ttf-font-awesome ttf-font-awesome-4 ttf-windows ttf-apple-emoji
-
-declare -A commands_map=(
+declare -A packages=(
   ["xautolock"]="xautolock"
   ["dunst"]="dunst"
   ["picom"]="picom"
@@ -25,23 +21,7 @@ declare -A commands_map=(
   ["feh"]="feh"
 )
 
-commands_to_install=""
-
-for c in "${!commands_map[@]}"
-do
-  if (! (command -v "$c" &> /dev/null)); then
-    if [[ -n "$commands_to_install" ]]; then
-      commands_to_install="$commands_to_install ${commands_map[$c]}"
-    else
-      commands_to_install="${commands_map[$c]}"
-    fi
-  fi
-done
-
-if [[ -n "$commands_to_install" ]]; then
-  echo "Installing $commands_to_install"
-  pamac install $commands_to_install
-fi
+installPackages packages
 
 if [[ -d ~/.i3 ]]; then
   mv ~/.i3 ~/.dotfiles/.backup/ &> /dev/null

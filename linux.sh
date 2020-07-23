@@ -8,15 +8,16 @@ if [ ! -f "$HOME/.local/share/fonts/Hack Regular Nerd Font Complete.ttf" ]; then
   cp "$HOME/.dotfiles/Hack Regular Nerd Font Complete.ttf" ~/.local/share/fonts/
 fi
 
-pamac install otf-nerd-fonts-fira-code
+# Make sure the current user has the correct groups
+sudo gpasswd -a $(whoami) video
 
 # Install pamac if needed
-if(! (command -v pamac &> /dev/null)); then
+if [[ $(isPackageInstalled pamac) = false ]]; then
   echo "Installing pamac ..."
   sudo pacman -S pamac
 fi
 
-declare -A commands_map=(
+declare -A packages=(
   ["autorandr"]="autorandr" # conigure monitors
   ["bat"]="bat" # cat replacement
   ["cmus"]="cmus"
@@ -25,7 +26,7 @@ declare -A commands_map=(
   ["fish"]="fish" # Friendly Interactive SHell
   ["git"]="git"
   ["kitty"]="kitty"
-  ["nvim"]="neovim"
+  ["nvim"]="neovim" # Vim Improved
   ["playerctl"]="playerctl"
   ["preload"]="preload"
   ["python3"]="python3" # needed for neovim
@@ -37,23 +38,7 @@ declare -A commands_map=(
   ["unclutter"]="unclutter" # Hides the mouse cursor
 )
 
-commands_to_install=""
-
-for c in "${!commands_map[@]}"
-  do
-    if (! (command -v "$c" &> /dev/null)); then
-      if [[ -n "$commands_to_install" ]]; then
-	commands_to_install="$commands_to_install ${commands_map[$c]}"
-      else
-	commands_to_install="${commands_map[$c]}"
-      fi
-    fi
-  done
-
-if [[ -n "$commands_to_install" ]]; then
-  echo "Installing $commands_to_install"
-  pamac install $commands_to_install
-fi
+installPackages packages
 
 # link rofi
 [ ! -L ~/.config/rofi ] && {

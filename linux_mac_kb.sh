@@ -3,9 +3,9 @@ set -e
 
 echo "Patching mac keyboard ..."
 
-if (! (command -v dkms &> /dev/null)); then
+if (! (isPackageInstalled dkms)); then
   echo "Installing dkms ..."
-  sudo pamac install dkms
+  installPackage dkms
 fi
 
 if [[ -n "$(sudo dkms status hid-apple-patched)" ]]; then

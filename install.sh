@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 
-function checkOs {
-  if [[ "$(uname)" == "$1" ]]; then
-    echo true
-  else
-    echo false
-  fi
-}
+source ./utils.sh
 
 IS_MAC=$(checkOs "Darwin")
 IS_LINUX=$(checkOs "Linux")

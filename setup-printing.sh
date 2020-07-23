@@ -2,8 +2,8 @@
 
 PRINTER_PACKAGE="manjaro-printer"
 
-if (! (command -v "$PRINTER_PACKAGE" &> /dev/null)); then
-  pamac install "$PRINTER_PACKAGE" 
+if (! (isPackageInstalled $PRINTER_PACKAGE)); then
+  installPackage $PRINTER_PACKAGE
 fi
 
 # Add the current user to the sys group
