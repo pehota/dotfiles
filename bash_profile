@@ -5,8 +5,6 @@ export PATH="$HOME/.mongodb/bin:$PATH"
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/.local/bin"
 
-[ -s ~/.rvm/scripts/rvm ] && source ~/.rvm/scripts/rvm # Load RVM into a shell session *as a function*
-
 export EDITOR=nvim
 # export TERM=screen-256color
 
@@ -27,21 +25,14 @@ alias tmux='tmux -2 -u'
 alias cdg='cd ~/Work/job/git'
 alias cdw='cd ~/Work'
 alias ll='ls -al'
-alias wmuc='curl -4 http://wttr.in/Munich'
-alias wsof='curl -4 http://wttr.in/Sofia'
-alias wcph='curl -4 http://wttr.in/Fredensborg'
-alias wobnova='curl -4 http://wttr.in/Obnova'
 alias weather='curl -4 http://wttr.in/'
 alias vimdiff='nvim -d'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 source ~/.dotfiles/git-completion.bash
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-[ -s rbenv ] && eval "$(rbenv init -)"
-export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
-
 export PATH="$HOME/.cargo/bin:$PATH"
+
 if [ "$DESKTOP_SESSION" = "i3" ]; then
   eval "$(ssh-agent -s)" &> /dev/null
   # export "$(gnome-keyring-daemon -s)"
