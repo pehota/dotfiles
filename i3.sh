@@ -27,20 +27,9 @@ if [[ -d ~/.i3 ]]; then
   mv ~/.i3 ~/.dotfiles/.backup/ &> /dev/null
 fi
 
-if [ ! -L ~/.config/i3 ]; then
-  mv ~/.config/i3 ~/.dotfiles/.backup/ &> /dev/null
-  ln -s ~/.dotfiles/i3 ~/.config
-fi
-
-if [ ! -L ~/.config/picom ]; then
-  mv ~/.config/picom ~/.dotfiles/.backup/ &> /dev/null
-  ln -s ~/.dotfiles/picom ~/.config
-fi
-
-if [ ! -L ~/.config/dunst ]; then
-  mv ~/.config/dunst ~/.dotfiles/.backup/ &> /dev/null
-  ln -s ~/.dotfiles/dunst ~/.config
-fi
+createSimlink i3 ~/.config
+createSimlink picom ~/.config
+createSimlink dunst ~/.config
 
 if [[ -z "$TERMINAL" ]]; then
   echo "Adding \$TERMINAL environment variable which requires \`sudo\`"

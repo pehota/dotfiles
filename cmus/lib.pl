@@ -1,5 +1,4 @@
 http://stream.bnr.bg:8011/horizont.aac.m3u
-http://coderadio-relay.freecodecamp.org/radio/8010/radio.mp3
-http://stream.radioreklama.bg:80/radio1.aac
-http://stream.radioreklama.bg:80/radio1rock.aac
+http://stream.radioreklama.bg/radio1rock_low.ogg.m3u
 http://s10.voscast.com:9878/;
+http://stream.radioreklama.bg/radio1_low.ogg.m3u

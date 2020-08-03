@@ -2,9 +2,6 @@
 
 source ./utils.sh
 
-IS_MAC=$(checkOs "Darwin")
-IS_LINUX=$(checkOs "Linux")
-
 if [[ "$IS_MAC" = false && "$IS_LINUX" = false ]]; then
   echo "Unsupported OS"
   exit 1

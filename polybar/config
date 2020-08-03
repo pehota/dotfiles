@@ -17,11 +17,11 @@
 ;==========================================================
 
 [colors]
-background = ${xrdb:color0:#282828}
-background-alt = ${xrdb:color8:#fb4934}
-;foreground = ${xrdb:color15:#222}
-foreground = #fbf1c7
-foreground-alt = #ebdbb2
+background = #ebdbb2
+background-alt = #fb4934
+foreground = #504945
+foreground-alt = #928374
+focus = #d65d0e
 primary = #fbf1c7
 secondary = #fbf1c7
 alert = #cc241d
@@ -31,7 +31,7 @@ transparent = #00000000
 enable-ipc = true
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 28
+height = 30
 ;offset-x = 1%
 ;offset-y = 1%
 ; radius = 6.0
@@ -40,27 +40,30 @@ fixed-center = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
-line-color = #f00
+line-size = 2
+line-color = ${colors.foreground}
 
 border-size = 0
 border-bottom-size = 1
 border-color = ${colors.transparent}
 
 padding-left = 0
-padding-right = 2
+padding-right = 0
 
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = "Hack Nerd Font:style=Regular:pixelsize=11;3"
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;2
-font-2 = siji:pixelsize=10;3
-font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=12;3"
+font-0 = "SF Pro Display:style=Bold:pixelsize=14;3"
+font-1 = "SF Pro Display:style=Bold:pixelsize=12;3"
+font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=14;4"
+font-3 = "SF Pro Display:style=Regular:pixelsize=12;3"
+# font-0 = "Hack Nerd Font:style=Regular:pixelsize=16;2"
+# font-1 = unifont:fontformat=truetype:size=8:antialias=false;2
+# font-2 = siji:pixelsize=10;3
 
-modules-left = i3
-modules-center = xwindow
-modules-right = xkeyboard memory cpu wlan eth battery pulseaudio temperature date powermenu
+modules-left = i3 xwindow
+;modules-center =
+modules-right = xkeyboard memory cpu battery pulseaudio temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -83,17 +86,22 @@ cursor-scroll = ns-resize
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:50:...%
+label-empty = ·
+
+format = | %{T4}<label>%{T-}
+format-foreground = ${colors.foreground}
+format-padding = 0
 
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
 
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground}
 ; format-background = #197a9e
 ; format-prefix-background = #197a9e
 #
-; format-prefix-underline = ${colors.secondary}
+; format-underline = ${colors.foreground}
 
 label-layout = %layout%
 ; label-layout-underline = ${colors.secondary}
@@ -117,8 +125,9 @@ label-unmounted-foreground = ${colors.foreground-alt}
 type = internal/bspwm
 
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
-; label-focused-underline= ${colors.primary}
+label-focused-background = ${colors.background}
+label-focused-foreground = ${colors.foreground}
+label-focused-underline = ${colors.focus}
 label-focused-padding = 2
 
 label-occupied = %index%
@@ -133,7 +142,7 @@ label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
 ; Separator in between workspaces
-; label-separator = |
+label-separator = · 
 
 [module/i3]
 type = internal/i3
@@ -142,7 +151,7 @@ index-sort = true
 wrapping-scroll = false
 
 ; Only show workspaces on the same output as the bar
-;pin-workspaces = true
+pin-workspaces = true
 
 label-mode-padding = 2
 label-mode-foreground = #000
@@ -151,12 +160,15 @@ label-mode-background = ${colors.primary}
 ; focused = Active workspace on focused monitor
 label-focused = %index%
 label-focused-background = ${module/bspwm.label-focused-background}
-; label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-foreground = ${module/bspwm.label-focused-foreground}
+label-focused-underline = ${module/bspwm.label-focused-underline}
 label-focused-padding = ${module/bspwm.label-focused-padding}
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
+label-unfocused = %{T2}%index%%{T-}
+# label-unfocused = %index%
 label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+label-unfocused-foreground = ${colors.foreground-alt}
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
@@ -170,8 +182,14 @@ label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 ; Separator in between workspaces
-; label-separator = |
+label-separator = · 
 
+# ws-icon-0 = ♚
+# ws-icon-1 = ♛
+# ws-icon-2 = 3;♜
+# ws-icon-3 = 4;♝
+# ws-icon-4 = 5;♞
+# ws-icon-default = ♟
 
 [module/mpd]
 type = internal/mpd
@@ -214,21 +232,25 @@ interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 ; format-underline = #f90000
+; format-underline = ${colors.foreground}
 label =  %percentage:2%%
+label-warn-foreground = ${colors.alert}
 
 [module/memory]
 type = internal/memory
 interval = 2
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.focus}
 ; format-underline = #4bffdc
-label =  %percentage_used%%
+; format-underline = ${colors.foreground}
+label =  %gb_used%
 
 [module/wlan]
 type = internal/network
 interface = wlp3s0
 interval = 3.0
 
+; format-underline = ${colors.foreground}
 format-connected = <ramp-signal> <label-connected>
 ; format-connected-underline = #9f78e1
 label-connected = %essid% (%signal%%)
@@ -294,12 +316,17 @@ use-ui-max = true
 ; Default: 5
 interval = 5
 
-format-volume = <bar-volume> <label-volume>
+; format-volume = <bar-volume> <label-volume>
+format-volume = <ramp-volume> <label-volume>
 label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
 
 label-muted = ""
-label-muted-foreground = #666
+label-muted-foreground = ${colors.alert}
+
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -321,13 +348,18 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 [module/alsa]
 type = internal/alsa
 
-format-volume = <label-volume> <bar-volume>
+; format-volume = <label-volume> <bar-volume>
+format-volume = <ramp-volume> <bar-volume>
 label-volume = VOL
 label-volume-foreground = ${root.foreground}
 
 format-muted-prefix = \f6a9
 format-muted-foreground = ${colors.foreground-alt}
 label-muted = sound muted
+
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -394,16 +426,17 @@ warn-temperature = 60
 format = <ramp> <label>
 ; format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
-; format-warn-underline = ${self.format-underline}
+; format-warn-underline = ${self.; format-underline}
 
 label = %temperature-c%
 label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
+label-warn-foreground = ${colors.alert}
+# label-base-foreground = ${colors.foreground}
 
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+# ramp-foreground = ${colors.foreground-alt}
 
 [module/powermenu]
 type = custom/menu

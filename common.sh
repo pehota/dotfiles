@@ -1,6 +1,24 @@
 #!/usr/bin/env bash
 
-mkdir -p ~/.dotfiles/.backup
+source ./utils.sh
+
+# Install common packages
+declare -A packages=(
+  ["bat"]="bat" # Improved cat
+  ["cmus"]="cmus" # Music player
+  ["curl"]="curl"
+  ["exa"]="exa" # Improved ls
+  ["fish"]="fish" # Friendly Interactive SHell
+  ["git"]="git"
+  ["kitty"]="kitty" # Terminal
+  ["neomutt"]="neomutt" # Mail client
+  ["nvim"]="neovim" # Vim Improved
+  ["python3"]="python3" # needed for neovim
+  ["rg"]="ripgrep" # fast file search
+  ["shellcheck"]="shellcheck" # shell LSP
+  ["tmux"]="tmux" # Terminal multiplexer
+)
+installPackages packages
 
 # Install the tmux plugin manager
 if [[ ! -d ~/.tmux/plugins/tpm ]]; then
@@ -33,23 +51,8 @@ if [[ ! -f ~/.dotfiles/.backup/init.vim ]]; then
   echo "source ~/.dotfiles/vimrc" >> ~/.config/nvim/init.vim
 fi
 
-[ ! -L ~/.config/nvim/coc-settings.json ] && {
-  if [[ -f ~/.config/nvim/coc-settings.json ]]; then
-    mv ~/.config/nvim/coc-settings.json ~/.dotfiles/.backup/ &> /dev/null
-  fi
-  ln -sf ~/.dotfiles/coc/settings.json ~/.config/nvim/coc-settings.json
-}
-
-[ ! -L ~/.config/coc/extensions/package.json ] && {
-  if [[ ! -d ~/.config/coc/extensions ]]; then
-    mkdir -p ~/.config/coc/extensions
-  fi
-
-  if [[ -f ~/.config/coc/extensions/package.json ]]; then
-    mv ~/.config/coc/extensions/package.json ~/.dotfiles/.backup/coc-extensions.json &> /dev/null
-  fi
-  ln -sf ~/.dotfiles/coc/extensions.json ~/.config/coc/extensions/package.json
-}
+createSimlink coc/settings.json ~/.config/nvim/coc-settings.json
+createSimlink coc/extensions.json ~/.config/coc/extensions/package.json
 
 # Rerun plug installation on nvim
 echo "Installing nvim plugins ..."

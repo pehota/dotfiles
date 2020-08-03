@@ -20,64 +20,21 @@ if (! (isPackageInstalled "brew") ); then
   } >> ~/.bashrc
 fi
 
-declare -A commands_map=(
-["git"]="git"
-["curl"]="curl"
-["fish"]="fish"
-["tmux"]="tmux"
-["exa"]="exa"
-["bat"]="bat"
-["python3"]="python3"
-["nvim"]="neovim"
-["rg"]="ripgrep"
-["fnm"]="Schniz/tap/fnm" # Fast Node Manager - nvm replacement
-["reattach-to-user-namespace"]="reattach-to-user-namespace"
-["urlview"]="urlview"
-["shellcheck"]="shellcheck"
-["cmus"]="cmus"
+declare -A packages=(
+  ["fnm"]="Schniz/tap/fnm" # Fast Node Manager - nvm replacement
+  ["reattach-to-user-namespace"]="reattach-to-user-namespace"
+  ["urlview"]="urlview"
 )
+installPackages packages
 
-
-declare -A cask_commands_map=(
+declare -A cask_packages=(
 ["karabiner-elements"]="karabiner-elements"
 ["kitty"]="kitty"
 ["alacritty"]="alacritty"
 )
+installPackages cask_packages
 
-commands_to_install=""
-cask_commands_to_install=""
-
-for c in "${!commands_map[@]}"
-do
-  if (! (command -v "$c" &> /dev/null)); then
-    if [[ -n "$commands_to_install" ]]; then
-      commands_to_install="$commands_to_install ${commands_map[$c]}"
-    else
-      commands_to_install="${commands_map[$c]}"
-    fi
-  fi
-done
-
-for c in "${!cask_commands_map[@]}"
-do
-  if (! (command -v "$c" &> /dev/null)); then
-    if [[ -n "$cask_commands_to_install" ]]; then
-      cask_commands_to_install="$cask_commands_to_install ${cask_commands_map[$c]}"
-    else
-      cask_commands_to_install="${cask_commands_map[$c]}"
-    fi
-  fi
-done
-
-if [[ -n "$cask_commands_to_install" ]]; then
-  echo "Installing $cask_commands_to_install"
-  brew install "$cask_commands_to_install"
-fi
-
-[ ! -L  ~/.config/karabiner ] && {
-  mv ~/.config/karabiner ~/.dotfiles/.backup/ &> /dev/null
-  ln -sf ~/.dotfiles/karabiner ~/.config
-}
+createSimlink karabiner ~/.config
 
 # Configure git to use the credentials from the keychain
 git config --global credential.helper osxkeychain

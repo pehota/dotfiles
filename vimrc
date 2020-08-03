@@ -193,7 +193,7 @@ set smartcase
 set nu
 set mouse=n
 set clipboard+=unnamedplus
-set guifont=FiraCode\ Nerd\ Font:h12
+set guifont=Hack\ Nerd\ Font:h12
 set backspace=2
 " Position splits below and right
 set splitright
@@ -237,9 +237,6 @@ set wildignore+=**/dist/**
 set wildignore+=**/*.bs.js
 set wildignore+=**/yarn.lock
 set wildignore+=**/package-lock.json
-
-" Show search results in a split
-set inccommand=split
 
 colorscheme gruvbox
 " transparent background for vim

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source ./utils.sh
+
 if [[ "enabled" != $(systemctl is-enabled bluetooth) ]]; then
   echo "Enabling bluetooth service ..."
   sudo systemctl enable bluetooth
@@ -18,4 +20,5 @@ fi
 echo "AutoEnable=true" | sudo tee -a /etc/bluetooth/main.conf > /dev/null
 
 echo "Installing bluetooth utilities ..."
-pamac install pulseaudio-bluetooth blueman
+installPackage pulseaudio-bluetooth
+installPackage blueman

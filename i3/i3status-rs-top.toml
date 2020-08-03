@@ -1,8 +1,11 @@
 [[block]]
-block = "keyboard_layout"
-driver = "kbddbus"
-format = " {layout}"
-interval = 0.25
+block = "sound"
+step_width = 1
+
+[[block]]
+block = "custom"
+command = "xkblayout-state print %s"
+interval = 1
 
 [[block]]
 block = "battery"
@@ -32,19 +35,21 @@ memory_mem = " "
 cpu = " "
 
 [theme]
-name = "plain"
+name = "gruvbox-light"
 
-[theme.overrides]
-separator = " #  "
-separator_fg = "#a89984"
-separator_bg = "#504945"
-idle_fg = "#fbf1c7"
-idle_bg = "#504945"
-info_fg = "#fbf1c7"
-info_bg = "#504945"
-good_fg = "#fbf1c7"
-good_bg = "#504945"
-warning_fg = "#cc241d"
-warning_bg = "#504945"
-critical_fg = "#cc241d"
-critical_bg = "#504945"
+[icons]
+name = "awesome5"
+
+# [theme.overrides]
+# separator_bg = "#fbf1c7"
+# separator_fg = "#fbf1c7"
+# idle_bg = "#fbf1c7"
+# idle_fg = "#32302f"
+# info_bg = "#fbf1c7"
+# info_fg = "#32302f"
+# good_bg = "#fbf1c7"
+# good_fg = "#32302f"
+# warning_fg = "#cc241d"
+# warning_bg = "#fbf1c7"
+# critical_fg = "#cc241d"
+# critical_bg = "#32302f"

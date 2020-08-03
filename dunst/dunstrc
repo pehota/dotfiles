@@ -1,5 +1,5 @@
 [global]
-    font = DejaVu Sans Mono, FontAwesome 10
+    font = DejaVu Sans Mono for Powerline, FontAwesome 10
     # allow a small subset of html markup:
     # <b>bold</b>
     # <i>italic</i>
