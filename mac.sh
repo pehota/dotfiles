@@ -30,6 +30,7 @@ declare -A commands_map=(
 ["python3"]="python3"
 ["nvim"]="neovim"
 ["rg"]="ripgrep"
+["fnm"]="Schniz/tap/fnm" # Fast Node Manager - nvm replacement
 ["reattach-to-user-namespace"]="reattach-to-user-namespace"
 ["urlview"]="urlview"
 ["shellcheck"]="shellcheck"
