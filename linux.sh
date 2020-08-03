@@ -35,6 +35,7 @@ declare -A packages=(
   ["rofi"]="rofi" # dmenu
   ["shellcheck"]="shellcheck" # shell LSP
   ["tmux"]="tmux"
+  ["fnm"]="fnm-bin" # Fast Node Manager - nvm replacement
   ["unclutter"]="unclutter" # Hides the mouse cursor
 )
 
