@@ -11,7 +11,7 @@ fi
 
 # Install oh-my-fish if needed
 # We need to use `fish` in order to detect if `omf` is installed
-omf_check=$(fish -c "test (omf version); and echo 0; or echo 1")
+omf_check=$(fish -c "test (type -t omf); and echo 0; or echo 1")
 
 if [[ "$omf_check" -ne "0" ]]; then
   echo "Installing oh-my-fish ..."
@@ -19,10 +19,7 @@ if [[ "$omf_check" -ne "0" ]]; then
 fi
 
 # link oh-my-fish config
-[ ! -L ~/.config/omf ] && {
-  mv ~/.config/omf ~/.dotfiles/.backup/ &> /dev/null
-  ln -sf ~/.dotfiles/omf ~/.config
-}
+createSimlink omf ~/.config
 
 # Install oh-my-fish packages
 fish -c "omf install"

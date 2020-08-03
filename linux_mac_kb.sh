@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+source ./utils.sh
+
 echo "Patching mac keyboard ..."
 
 if (! (isPackageInstalled dkms)); then
