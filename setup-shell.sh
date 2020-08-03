@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 source ./utils.sh
 
 if(! (isPackageInstalled fish)); then

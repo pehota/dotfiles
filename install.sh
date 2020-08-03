@@ -10,6 +10,11 @@ if [[ "$IS_MAC" = false && "$IS_LINUX" = false ]]; then
   exit 1
 fi
 
+if [[ -z "$BASH_VERSINFO" ]]; then
+  echo "Please run the script in bash"
+  exit 0
+fi
+
 if [[ "${BASH_VERSINFO:-0}" -le 3 ]]; then
   echo "Bash version is too old. Please upgrade to v4 or higher."
   exit 1
@@ -18,7 +23,6 @@ fi
 
 . ./link.sh
 
-# Install brew if necessary
 if [[ "$IS_MAC" = true ]]; then
   . ./mac.sh
 else
@@ -32,5 +36,3 @@ if [[ "$DESKTOP_SESSION" = "i3" ]]; then
 fi
 
 echo "Done"
-
-# # TODO: Add GIT completion
