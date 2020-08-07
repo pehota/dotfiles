@@ -43,8 +43,7 @@ focus_on_window_activation focus
 bindsym $mod+Return exec i3-sensible-terminal
 
 # Scratchpad terminal (small size, can be hidden)
-for_window [class="_scratchpad"] border 1pixel sticky enable floating enable move scratchpad absolute position center fullscreen
-bindsym $mod+minus exec ~/.config/i3/i3-scratchpad-terminal.sh
+bindsym $mod+minus exec --no-startup-id ~/.config/i3/i3-scratchpad-terminal.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -248,6 +247,16 @@ mode "$mode_system" {
     bindsym Control+bracketleft mode "default"
 }
 bindsym $mod+Shift+e mode "$mode_system"
+
+set $tools_mode Tools: (m) mail
+mode "$tools_mode" {
+    bindsym m exec --no-startup-id ~/.config/i3/i3-scratchpad-terminal.sh neomutt & i3-msg mode "default"
+
+    # Esc to go back to normal mode
+    bindsym Escape mode "default"
+    bindsym Control+bracketleft mode "default"
+}
+bindsym $mod+t mode "$tools_mode"
 
 set $mode_power DPMS on (+) / off (-)
 mode "$mode_power" {
