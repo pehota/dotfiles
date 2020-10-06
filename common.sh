@@ -2,6 +2,24 @@
 
 source ./utils.sh
 
+# Install common packages
+declare -A packages=(
+  ["bat"]="bat" # Improved cat
+  ["cmus"]="cmus" # Music player
+  ["curl"]="curl"
+  ["exa"]="exa" # Improved ls
+  ["fish"]="fish" # Friendly Interactive SHell
+  ["git"]="git"
+  ["kitty"]="kitty" # Terminal
+  ["neomutt"]="neomutt" # Mail client
+  ["nvim"]="neovim" # Vim Improved
+  ["python3"]="python3" # needed for neovim
+  ["rg"]="ripgrep" # fast file search
+  ["shellcheck"]="shellcheck" # shell LSP
+  ["tmux"]="tmux" # Terminal multiplexer
+)
+installPackages packages
+
 # Install the tmux plugin manager
 if [[ ! -d ~/.tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

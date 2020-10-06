@@ -27,7 +27,7 @@
   clear-repo = "!sh -c 'git branch | grep -v \"\\*\" | grep -v master | grep -v develop | xargs -n 1 git branch -D'"
   richlog = log --all --graph --decorate --oneline --simplify-by-decoration
   update = "!sh -c 'git fetch --prune && git pull --rebase'"
-  rot = "!sh -c 'git diff-index HEAD --quiet --exit-code; NEEDS_STASH=$?; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash; else echo \"Nothing to stash.\"; fi; git checkout \"$0\" && git pull origin \"$0\";git co -;git rebase - && if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash pop; fi;'"
+  rot = "!sh -c 'git diff-index HEAD --quiet --exit-code; NEEDS_STASH=$?; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash; else echo \"Nothing to stash.\"; fi; git checkout \"$0\" && git pull --rebase origin \"$0\";git co -;git rebase - && if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash pop; fi;'"
   roti = "!sh -c 'git rebase -i HEAD~$(git rev-list --count $0..HEAD)'"
   cbn = "!sh -c 'git symbolic-ref --short HEAD | pbcopy'"
   ss = stash save -u
@@ -63,6 +63,7 @@
 ; This will show you all the commits at the tips of your commit graph which are no longer referenced from any branch or tag 
 ; every lost commit, including every stash commit you’ve ever created, will be somewhere in that graph.
   detached-commits = "!sh -c 'git log $0 --oneline --decorate $( git fsck --no-reflog | awk \"/dangling commit/ {print \\$3}\" )'"
+	mt = mergetool
 [help]
   autocorrect = 0
 [init]

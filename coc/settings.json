@@ -26,16 +26,8 @@
     "haskell": {
       "command": "hie-wrapper",
       "args": ["--lsp"],
-      "rootPatterns": [
-        "stack.yaml",
-        "cabal.config",
-        "package.yaml"
-      ],
-      "filetypes": [
-        "hs",
-        "lhs",
-        "haskell"
-      ],
+      "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
+      "filetypes": ["hs", "lhs", "haskell"],
       "initializationOptions": {
         "languageServerHaskell": {
           "hlintOn": true
@@ -43,6 +35,8 @@
       }
     }
   },
+  "lua.enable": true,
+  "lua.commandPath": "/usr/bin/lua",
   "diagnostic.refreshOnInsertMode": false,
   "diagnostic.refreshAfterSave": false,
   "diagnostic.maxWindowHeight": 20,
@@ -71,7 +65,7 @@
   "eslint.autoFixOnSave": true,
   "eslint.quiet": true,
   "eslint.options": {
-    "useEslintrc": false
+    "useEslintrc": true
   },
   "css.validate": false,
   "stylelint.enable": true,

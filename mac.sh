@@ -21,20 +21,9 @@ if (! (isPackageInstalled "brew") ); then
 fi
 
 declare -A packages=(
-["git"]="git"
-["curl"]="curl"
-["fish"]="fish"
-["tmux"]="tmux"
-["exa"]="exa"
-["bat"]="bat"
-["python3"]="python3"
-["nvim"]="neovim"
-["rg"]="ripgrep"
-["fnm"]="Schniz/tap/fnm" # Fast Node Manager - nvm replacement
-["reattach-to-user-namespace"]="reattach-to-user-namespace"
-["urlview"]="urlview"
-["shellcheck"]="shellcheck"
-["cmus"]="cmus"
+  ["fnm"]="Schniz/tap/fnm" # Fast Node Manager - nvm replacement
+  ["reattach-to-user-namespace"]="reattach-to-user-namespace"
+  ["urlview"]="urlview"
 )
 installPackages packages
 

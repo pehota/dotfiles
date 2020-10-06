@@ -8,3 +8,7 @@ if status is-interactive
     source ~/.fishrc
   end
 end
+
+# fnm
+set PATH /home/dimitar/.fnm $PATH
+fnm env --multi | source
