@@ -53,8 +53,15 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " }}}
 
 Plug 'tpope/vim-surround'
+" Adjust 'shiftwidth' and 'expandtab' heuristically
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+" vim-vinegar {{{
+Plug 'tpope/vim-vinegar' 
+  let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+" }}}
+
 
 Plug 'unblevable/quick-scope'
 Plug 'alvan/vim-closetag'
@@ -65,19 +72,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ervandew/supertab'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 Plug 'zivyangll/git-blame.vim', { 'on': 'GitBlame' }
 Plug 'mbbill/undotree'
-
-
-
-
-" NERDCommenter {{{
-Plug 'scrooloose/nerdcommenter'
-  " Add spaces after comment delimiters by default
-  let g:NERDSpaceDelims = 1
-" }}}
 
 " coc.nvim {{{
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -110,14 +107,6 @@ Plug 'mhinz/vim-signify'
   let g:signify_sign_delete_first_line = g:signify_sign_delete
   let g:signify_sign_change            = '~'
   let g:signify_sign_changedelete      = g:signify_sign_change
-" }}}
-
-" NERDTree Sytax Highlight {{{
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-  let g:NERDTreeFileExtensionHighlightFullName = 1
-  let g:NERDTreeExactMatchHighlightFullName = 1
-  let g:NERDTreePatternMatchHighlightFullName = 1
-  let g:NERDTreeLimitedSyntax = 1
 " }}}
 
 
@@ -203,7 +192,7 @@ set smartcase
 set nu
 set mouse=n
 set clipboard+=unnamedplus
-set guifont=Hack\ Nerd\ Font\ Complete:h12
+set guifont=Hack\ Nerd\ Font:h12
 set backspace=2
 " Position splits below and right
 set splitright
@@ -216,17 +205,14 @@ filetype plugin indent on
 " Visual
 syntax on
 set completeopt=menu
-set gcr=a:blinkon1
 set tabstop=2
 set softtabstop=0
-set shiftwidth=2
 set switchbuf=usetab,vsplit
 set autoindent
-set expandtab
 set visualbell
 set showcmd
 set cursorline " Highlight current line
-set guicursor=n:blinkon1
+set guicursor+=n:blinkon1
 set laststatus=2
 set wildmenu
 set t_Co=256
@@ -235,7 +221,7 @@ set number
 set relativenumber
 set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
-set go-=L " Removes left hand scroll bar
+set guioptions-=L " Removes left hand scroll bar
 set nojoinspaces
 set showmatch
 set updatetime=100
@@ -243,19 +229,19 @@ set updatetime=100
 set path+=**
 " Ignore some folders
 set wildignore+=**/node_modules/**
-set wildignore+=**/.git/**
+set wildignore+=**/elm-stuff/**
+set wildignore+=**/debug/**
 set wildignore+=**/build/**
 set wildignore+=**/dist/**
+set wildignore+=**/*.bs.js
+set wildignore+=**/yarn.lock
+set wildignore+=**/package-lock.json
 
 colorscheme gruvbox
-highlight SignColumn guibg=NONE ctermbg=NONE
-highlight Directory guibg=darkgrey ctermfg=darkgrey
 " transparent background for vim
 highlight Normal ctermbg=NONE
-
-if g:colors_name == 'molokai'
-  highlight MatchParen cterm=bold ctermbg=none ctermfg=208
-endif
+" transarent background for signs column
+highlight SignColumn guibg=NONE ctermbg=NONE
 
 " Disable modeline
 set nomodeline
@@ -283,8 +269,7 @@ augroup folding
 augroup END
 
 " File type specific settings {{{
-au FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee,typescript,typescript.tsx setlocal shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=81
-au FileType sh setlocal expandtab
+au FileType html,htmldjango,css,scss,less,sass,stylus,json,javascript,coffee,typescript,typescript.tsx setlocal tabstop=2 softtabstop=2 colorcolumn=81
 " Collapse folds for vim files
 augroup vimrc
   au!
@@ -311,21 +296,17 @@ au BufRead,BufNewFile *.json set filetype=json
   map       <silent> <C-b> :NERDTreeToggleVCS<CR>
   nmap      <silent> <C-l> :NERDTreeFind<CR>
   nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
-  " nnoremap  <silent> <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
-  nnoremap  <silent> <C-p> :FzfFiles<CR>
+  nnoremap  <silent> <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
+  " nnoremap  <silent> <C-p> :FzfFiles<CR>
   nnoremap  <silent> <C-h> :FzfHistory<CR>
   nnoremap  <silent> <Leader>a :FzfRg<CR>
   nmap <silent> <Leader>f :FzfRg <C-R><C-W><CR>
   nnoremap  <silent> <Leader><Leader>b :FzfBuffers<CR>
-
   nnoremap  <silent> <Leader>= <C-w>=
-
   nnoremap <silent> <Leader>+ :tab split<CR>
-
   " Move visual block
   vnoremap J :m '>+1<CR>gv=gv
   vnoremap K :m '<-2<CR>gv=gv
-
 " }}}
 
 " Commands abbreviations {{{
