@@ -1,4 +1,5 @@
 set -e EDITOR; set -Ux EDITOR (command -v nvim)
+set -e VISUAL; set -Ux VISUAL (command -v nvim)
 
 if status is-interactive
   # Key bindings: vim and default emacs
