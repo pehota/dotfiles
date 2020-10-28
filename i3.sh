@@ -10,6 +10,7 @@ declare -A commands_map=(
   ["picom"]="picom"
   ["i3lock"]="i3lock"
   ["i3status-rs"]="i3status-rust-git"
+  ["kbdd"]="kbdd-git"
   ["light"]="light"
   ["redshift"]="redshift"
   ["scrot"]="scrot"
