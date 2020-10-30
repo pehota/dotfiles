@@ -32,7 +32,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # Scratchpad terminal (small size, can be hidden)
 for_window [class="_scratchpad"] border 1pixel sticky enable floating enable move scratchpad absolute position center fullscreen
-bindsym $mod+minus exec ~/.dotfiles/i3/i3-scratchpad-terminal.sh
+bindsym $mod+minus exec ~/.dotfiles/i3/singleton.sh i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -171,6 +171,7 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+0 workspace $wsChat
+bindsym $mod+9 workspace $wsMusic
 
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace number $ws1
@@ -196,8 +197,6 @@ bindsym $mod+Shift+8 move container to workspace number $ws8; workspace $ws8
 assign [class="Ferdi"] $wsChat
 assign [class="ViberPC"] $wsChat
 assign [class="Spotify"] $wsMusic
-assign [class="cmus"] $wsMusic
-assign [class="mail"] $wsMail
 # assign [class="Skype"] $wsChat
 
 # Open specific applications in floating mode
@@ -279,9 +278,6 @@ mode "resize" {
         bindsym Control+bracketleft mode "default"
 }
 
-# Lock screen
-bindsym $mod+9 exec --no-startup-id blurlock
-
 # Print a section of the screen and save it to the clipboard
 bindsym $mod+Control+Shift+4 --release exec "scrot -z -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 # Print a section of the screen and save it to a file on the Desktop
@@ -312,6 +308,8 @@ exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id setxkbmap -option grp:alt_shift_toggle -layout "us,bg(phonetic)"
 exec_always --no-startup-id /usr/bin/kbdd
 # exec_always --no-startup-id exec i3-workspace-names-daemon
+
+exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper.jpg
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -447,19 +445,21 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-set $tools_mode Tools: (m) Mail, (c) Calendar, (a) Audio
-mode "$tools_mode" {
-    bindsym m exec --no-startup-id ~/.dotfiles/i3/i3-scratchpad-terminal.sh neomutt & i3-msg mode "default"
-    bindsym c exec --no-startup-id ~/.dotfiles/i3/i3-scratchpad-terminal.sh calcurse & i3-msg mode "default"
-    # bindsym w exec --no-startup-id ~/.dotfiles/i3/i3-scratchpad-terminal.sh weechat & i3-msg mode "default"
-    bindsym a exec --no-startup-id ~/.dotfiles/i3/i3-scratchpad-terminal.sh cmus & i3-msg mode "default"
+# set $tools_mode Tools: (m) Mail, (c) Calendar, (a) Audio
+set $launcher_mode Launch: (m) Mail, (c) Calendar, (a) cmus, (s) Spotify
+mode "$launcher_mode" {
+    bindsym m exec --no-startup-id ~/.dotfiles/i3/singleton.sh neomutt wza<jk & i3-msg mode "default"
+    bindsym c exec --no-startup-id ~/.dotfiles/i3/singleton.sh calcurse & i3-msg mode "default"
+    bindsym w exec --no-startup-id ~/.dotfiles/i3/singleton.sh weechat & i3-msg mode "default"
+    bindsym a exec --no-startup-id ~/.dotfiles/i3/singleton.sh cmus $wsMusic & i3-msg mode "default"
+    bindsym s exec --no-startup-id ~/.dotfiles/i3/singleton.sh spt $wsMusic & i3-msg mode "default"
 
 		# back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
     bindsym Control+bracketleft mode "default"
 }
-bindsym $mod+Shift+t mode "$tools_mode"
+bindsym $mod+Shift+t mode "$launcher_mode"
 
 set $mode_power DPMS on (+) / off (-)
 mode "$mode_power" {
