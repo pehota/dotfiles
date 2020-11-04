@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+# set -e
 
 # Create a backup folder where all existing dotfiles will be saved to
 mkdir -p ~/.dotfiles/.backup

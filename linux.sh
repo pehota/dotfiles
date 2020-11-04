@@ -58,6 +58,12 @@ fi
   mv ~/.config/rofi ~/.dotfiles/.backup/ &> /dev/null
   ln -sf ~/.dotfiles/rofi ~/.config
 }
- . ./setup-shell.sh
 
- . ./setup-ranger.sh
+. ./add-swap-file.sh
+
+# Support for external Apple keyboards
+. ./linux_mac_kb.sh
+
+. ./setup-shell.sh
+
+. ./setup-ranger.sh
