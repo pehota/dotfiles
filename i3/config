@@ -161,6 +161,8 @@ set $ws8 8
 set $wsMusic "10: "
 set $wsChat "11: "
 
+# exec_always --no-startup-id i3-msg "workspace $wsChat; layout tabbed"
+
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -196,7 +198,10 @@ bindsym $mod+Shift+8 move container to workspace number $ws8; workspace $ws8
 # Open applications on specific workspaces
 assign [class="Ferdi"] $wsChat
 assign [class="ViberPC"] $wsChat
+assign [class="Teams"] $wsChat
 assign [class="Spotify"] $wsMusic
+# assign [class="cmus"] $wsMusic
+# assign [class="mail"] $wsMail
 # assign [class="Skype"] $wsChat
 
 # Open specific applications in floating mode
@@ -225,6 +230,7 @@ for_window [class="(?i)System-config-printer.py"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Etcher"] floating enable
+# for_window [class="spt"] move container to workspace $wsMusic; workspace $wsMusic
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -239,7 +245,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym l exec --no-startup-id betterlockscreen -l blur, mode "default"
     bindsym s exec --no-startup-id i3exit suspend, mode "default"
     bindsym u exec --no-startup-id i3exit switch_user, mode "default"
     bindsym e exec --no-startup-id i3exit logout, mode "default"
@@ -301,11 +307,11 @@ exec --no-startup-id pamac-tray
 # exec_always --no-startup-id sbxkb
 # exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
-exec --no-startup-id xautolock -time 10 -locker blurlock
+exec --no-startup-id xautolock -time 10 -locker "betterlockscreen -l"
 exec --no-startup-id redshift -t 6500:3500
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec_always --no-startup-id setxkbmap -option grp:alt_shift_toggle -layout "us,bg(phonetic)"
+exec_always --no-startup-id setxkbmap -model pc104 -layout us,bg -variant ,phonetic -option grp:alt_shift_toggle
 exec_always --no-startup-id /usr/bin/kbdd
 # exec_always --no-startup-id exec i3-workspace-names-daemon
 
