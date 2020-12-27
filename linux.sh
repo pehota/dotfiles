@@ -8,6 +8,8 @@ if [ ! -f "$HOME/.local/share/fonts/Hack Regular Nerd Font Complete.ttf" ]; then
   cp "$HOME/.dotfiles/Hack Regular Nerd Font Complete.ttf" ~/.local/share/fonts/
 fi
 
+pamac install otf-nerd-fonts-fira-code
+
 # Install pamac if needed
 if(! (command -v pamac &> /dev/null)); then
   echo "Installing pamac ..."
