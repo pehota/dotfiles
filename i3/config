@@ -81,6 +81,8 @@ focus_follows_mouse no
 # Disable window cycling/wrapping
 focus_wrapping no
 
+bindsym $mod+c move absolute position center
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -134,6 +136,9 @@ bindsym $mod+Shift+s sticky toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+
+# focus the parent container
+bindsym $mod+d focus child
 
 # Make the currently focused window a scratchpad
 bindsym $mod+BackSpace move scratchpad
@@ -452,11 +457,9 @@ mode "$mode_gaps_outer" {
 }
 
 # set $tools_mode Tools: (m) Mail, (c) Calendar, (a) Audio
-set $launcher_mode Launch: (m) Mail, (c) Calendar, (a) cmus, (s) Spotify
+set $launcher_mode Launch: (n) Notes, (a) cmus, (s) Spotify
 mode "$launcher_mode" {
-    bindsym m exec --no-startup-id ~/.dotfiles/i3/singleton.sh neomutt wza<jk & i3-msg mode "default"
-    bindsym c exec --no-startup-id ~/.dotfiles/i3/singleton.sh calcurse & i3-msg mode "default"
-    bindsym w exec --no-startup-id ~/.dotfiles/i3/singleton.sh weechat & i3-msg mode "default"
+    bindsym n exec --no-startup-id ~/.dotfiles/i3/singleton.sh siimplenote scratchpad 0 & i3-msg mode "default"
     bindsym a exec --no-startup-id ~/.dotfiles/i3/singleton.sh cmus $wsMusic & i3-msg mode "default"
     bindsym s exec --no-startup-id ~/.dotfiles/i3/singleton.sh spt $wsMusic & i3-msg mode "default"
 
