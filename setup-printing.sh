@@ -2,7 +2,7 @@
 
 PRINTER_PACKAGE="manjaro-printer"
 
-if (! (isPackageInstalled $PRINTER_PACKAGE)); then
+if (! (isPackageInstalled $PRINTER_PACKAGE) ); then
   installPackage $PRINTER_PACKAGE
 fi
 

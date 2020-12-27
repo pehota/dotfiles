@@ -23,6 +23,18 @@ declare -A packages=(
 
 installPackages packages
 
+# Sound driver and firmware
+installPackage sof-firmware
+installPackage alsa-ucm-conf
+installPackage pulseaudio
+installPackage pulseaudio-alsa
+
+# Fonts
+installPackage ttf-font-awesome
+installPackage ttf-font-awesome-4
+installPackage ttf-windows
+tinstallPackage tf-apple-emoji
+
 if [[ -d ~/.i3 ]]; then
   mv ~/.i3 ~/.dotfiles/.backup/ &> /dev/null
 fi

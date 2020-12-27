@@ -11,7 +11,7 @@ fi
 
 # Install oh-my-fish if needed
 # We need to use `fish` in order to detect if `omf` is installed
-OMF_CHECK=$(fish -c "test (type -t omf); and echo 0; or echo 1")
+OMF_CHECK=$(fish -c "test (omf version); and echo 0; or echo 1")
 
 if [[ "$OMF_CHECK" -ne "0" ]]; then
   echo "Installing oh-my-fish ..."

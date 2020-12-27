@@ -4,12 +4,8 @@
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-# font pango:monospace 10
-# font pango:DroidSansMonoForPowerline Nerd Font 10
-font pango:SF Pro Display 12
-
+# set default desktop layout (default is tiling)
+# workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 default_border pixel 1
@@ -35,15 +31,57 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 # Scratchpad terminal (small size, can be hidden)
-# for_window [class="_scratchpad"] border 1pixel sticky enable floating enable move scratchpad absolute position center fullscreen
-bindsym $mod+minus exec --no-startup-id ~/.config/i3/i3-scratchpad-terminal.sh
+for_window [class="_scratchpad"] border 1pixel sticky enable floating enable move scratchpad absolute position center fullscreen
+bindsym $mod+minus exec ~/.dotfiles/i3/singleton.sh i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start rofi launcher if present
-bindsym $mod+space exec --no-startup-id "(rofi && rofi -combi-modi \\"window,drun\\" -show combi -modi combi -show-icons -drun-match-fields name) || dmenu-run"
-bindsym $mod+shift+n exec --no-startup-id "(rofi && sh ~/.config/rofi/menus/wifi.sh)"
+# start program launcher
+bindsym $mod+space exec --no-startup-id "rofi -combi-modi \\"window,drun\\" -show combi -modi combi -show-icons -drun-match-fields name"
+
+
+# launch categorized menu
+bindsym $mod+z exec --no-startup-id morc_menu
+
+################################################################################################
+## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
+################################################################################################
+
+exec --no-startup-id volumeicon
+bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+#exec --no-startup-id pulseaudio
+#exec --no-startup-id pa-applet
+#bindsym $mod+Ctrl+m exec pavucontrol
+
+################################################################################################
+
+# Screen brightness controls
+# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+
+# Start Applications
+bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
+bindsym $mod+F2 exec palemoon
+bindsym $mod+F3 exec pcmanfm
+# bindsym $mod+F3 exec ranger
+bindsym $mod+Shift+F3 exec pcmanfm_pkexec
+bindsym $mod+F5 exec terminal -e 'mocp'
+bindsym $mod+t exec --no-startup-id pkill picom
+bindsym $mod+Ctrl+t exec --no-startup-id picom -b
+bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+bindsym Print exec --no-startup-id i3-scrot
+bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
+bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+# bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
+bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+
+focus_follows_mouse no
+
+# Disable window cycling/wrapping
+focus_wrapping no
+
+bindsym $mod+c move absolute position center
 
 # change focus
 bindsym $mod+h focus left
@@ -250,91 +288,11 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym Control+bracketleft mode "default"
 }
-#1d202100
-bindsym $mod+r mode "resize"
-
-# Windows colors        border  bground text    indicator child_border
-client.focused          #7c6f64 #7c6f64 #fbf1c7 #ebdbb2   #a89984
-client.unfocused        #3c3836 #3c3836 #928374 #928374   #928374
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-set $bar_font font pango:SF Pro Display Bold 16
-set $bar_height 28
-set $bar_background #fbf1c7
-set $bar_statusline #a89984
-set $bar_separator  #fbf1c7
-
-bar {
-    $bar_font
-    i3bar_command i3bar
-    position top
-    status_command i3status-rs ~/.config/i3/i3status-rs-top.toml
-		# status_command i3status
-    height $bar_height
-    workspace_min_width $bar_height
-    # Disable mouse wheel in status bar 
-    bindsym button4 nop
-    bindsym button5 nop
-    colors {
-        background $bar_background
-        statusline $bar_statusline
-        separator  $bar_separator
-
-        focused_workspace  #665c45 #665c45 #fbf1c7
-        active_workspace   #7c6f64 #7c6f64 #fbf1c7
-        inactive_workspace $bar_background $bar_background #a89984
-        urgent_workspace   #cc241d #cc241d #a89984
-        binding_mode       #d79921 #d79921 $bar_background
-    }
-}
-# exec_always --no-startup-id ~/.config/polybar/launch.sh
-
-set $locker i3lock -c 000000
-
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id $locker && systemctl suspend, mode "default"
-    bindsym e exec --no-startup-id (i3lock -c 000000) && i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $locker && systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
-
-    # Esc to go back to normal mode
-    bindsym Escape mode "default"
-    bindsym Control+bracketleft mode "default"
-}
-bindsym $mod+Shift+e mode "$mode_system"
-
-set $tools_mode Tools: (m) Mail; (c) Calendar (w) Weechat (a) Audio
-mode "$tools_mode" {
-    bindsym m exec --no-startup-id ~/.config/i3/i3-scratchpad-terminal.sh neomutt & i3-msg mode "default"
-    bindsym c exec --no-startup-id ~/.config/i3/i3-scratchpad-terminal.sh calcurse & i3-msg mode "default"
-    bindsym w exec --no-startup-id ~/.config/i3/i3-scratchpad-terminal.sh weechat & i3-msg mode "default"
-    bindsym a exec --no-startup-id ~/.config/i3/i3-scratchpad-terminal.sh cmus & i3-msg mode "default"
-
-    # Esc to go back to normal mode
-    bindsym Escape mode "default"
-    bindsym Control+bracketleft mode "default"
-}
-bindsym $mod+Shift+t mode "$tools_mode"
-
-set $mode_power DPMS on (+) / off (-)
-mode "$mode_power" {
-    bindsym plus exec --no-startup-id xset +dpms && xautolock -enable && dunstify 'Screen suspend is enabled.', mode "default"
-    bindsym minus exec --no-startup-id xset -dpms && xautolock -disable && dunstify 'Screen suspend is disabled', mode "default"
-
-    # Esc to go back to normal mode
-    bindsym Escape mode "default"
-    bindsym Control+bracketleft mode "default"
-}
-bindsym $mod+p mode "$mode_power"
 
 # Print a section of the screen and save it to the clipboard
 bindsym $mod+Control+Shift+4 --release exec "scrot -z -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 # Print a section of the screen and save it to a file on the Desktop
-bindsym $mod+$alt+4 --release exec "scrot -z -s ~/Desktop/screenshot-$(date +%F_%T).png"
+bindsym $mod+Control+4 --release exec "scrot -z -s ~/Desktop/screenshot-$(date +%F_%T).png"
 # Print the current window and save it to the clipboard
 bindsym Print --release exec "scrot -z /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 # Print the current window to a file

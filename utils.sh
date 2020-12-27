@@ -12,33 +12,30 @@ BACKUP_DIR=~/.dotfiles/.backup
 # Create a backup folder where all existing dotfiles will be saved to
 mkdir -p $BACKUP_DIR
 
-IS_MAC=$(checkOs "Darwin")
-IS_LINUX=$(checkOs "Linux")
-
-function checkOs {
+checkOs() {
   if [[ "$(uname)" == "$1" ]]; then
-    echo true
+    echo "1"
   else
-    echo false
+    echo "0"
   fi
 }
 
 IS_MAC=$(checkOs "Darwin")
 IS_LINUX=$(checkOs "Linux")
 
-function isPackageInstalled {
+isPackageInstalled() {
   test $(type -t "$1" 2> /dev/null)
 }
 
-function installPackage {
-  if [[ "$IS_MAC" = true ]]; then
+installPackage() {
+  if [[ "$IS_MAC" == "1" ]]; then
     brew install "$1"
   else
     pamac install $1
   fi
 }
 
-function installPackages {
+installPackages() {
   local -n packages_ref=$1
   local packages_to_install=""
 
@@ -59,7 +56,7 @@ function installPackages {
   fi
 }
 
-function createSimlink {
+createSimlink() {
   # $source should be either a full path or a relative path under ~/.dotfiles
   local source=$1
   local target="$2"

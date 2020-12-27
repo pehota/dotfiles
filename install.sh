@@ -2,7 +2,7 @@
 
 source ./utils.sh
 
-if [[ "$IS_MAC" = false && "$IS_LINUX" = false ]]; then
+if [[ "$IS_MAC" == "0" && "$IS_LINUX" == "0" ]]; then
   echo "Unsupported OS"
   exit 1
 fi
@@ -20,7 +20,7 @@ fi
 
 . ./link.sh
 
-if [[ "$IS_MAC" = true ]]; then
+if [[ "$IS_MAC" == "1" ]]; then
   . ./mac.sh
 else
   . ./linux.sh
@@ -28,7 +28,7 @@ fi
 
 . ./common.sh
 
-if [[ "$DESKTOP_SESSION" = "i3" ]]; then
+if [[ "$DESKTOP_SESSION" == "i3" ]]; then
   . ./i3.sh
 fi
 

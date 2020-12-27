@@ -8,6 +8,8 @@ if [ ! -f "$HOME/.local/share/fonts/Hack Regular Nerd Font Complete.ttf" ]; then
   cp "$HOME/.dotfiles/Hack Regular Nerd Font Complete.ttf" ~/.local/share/fonts/
 fi
 
+installPackage "otf-nerd-fonts-fira-code"
+
 # Make sure the current user has the correct groups
 sudo gpasswd -a $(whoami) video
 
