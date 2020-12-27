@@ -62,5 +62,5 @@ nvim --headless +CocInstall +qall
 if [ -n "$TMUX" ]; then
   . ~/.tmux/plugins/tpm/bindings/install_plugins
 else
-  echo "Install tmux plugins by running: . ~/.tmux/plugins/tpm/bindings/install_plugins"
+  echo "Install tmux plugins by running: . ~/.tmux/plugins/tpm/bindings/install_plugins inside a tmux session"
 fi

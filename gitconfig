@@ -3,7 +3,7 @@
   quotepath = false
 	filemode = false
 [user]
-  name = Dimitar Apostolov
+	name = Dimitar Apostolov
   email =
   useconfigonly = true
 [merge]
@@ -24,10 +24,10 @@
 [alias]
   cp = cherry-pick
   co = checkout
-  clear-repo = "!sh -c 'git branch | grep -v \"\\*\" | grep -v master | grep -v develop | xargs -n 1 git branch -D'"
+  gone = "!sh -c 'git branch | grep -v \"\\*\" | grep -v master | grep -v develop | grep -v staging | xargs -n 1 git branch -D'"
   richlog = log --all --graph --decorate --oneline --simplify-by-decoration
   update = "!sh -c 'git fetch --prune && git pull --rebase'"
-  rot = "!sh -c 'git diff-index HEAD --quiet --exit-code; NEEDS_STASH=$?; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash; else echo \"Nothing to stash.\"; fi; git checkout \"$0\" && git pull origin \"$0\";git co -;git rebase - && if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash pop; fi;'"
+  rot = "!sh -c 'git diff-index HEAD --quiet --exit-code; NEEDS_STASH=$?; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash; else echo \"Nothing to stash.\"; fi; git checkout \"$0\" && git pull --rebase origin \"$0\";git co -;git rebase - && if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash pop; fi;'"
   roti = "!sh -c 'git rebase -i HEAD~$(git rev-list --count $0..HEAD)'"
   cbn = "!sh -c 'git symbolic-ref --short HEAD | pbcopy'"
   ss = stash save -u
@@ -40,17 +40,15 @@
   rb = branch -m
   rcb = "!sh -c 'CURRENT_BRANCH=$(git symbolic-ref --short HEAD ) &&  git rb $CURRENT_BRANCH $0 && unset CURRENT_BRANCH'"
   unstage = reset HEAD
-  bm = "!sh -c 'git branch --merged | grep -v \"\\*\" | grep -v master | grep -v edge | grep -v develop'"
+  bm = "!sh -c 'git branch --merged | grep -v \"\\*\" | grep -v master | grep -v edge | grep -v develop | grep -v staging'"
   cm = "!sh -c 'git bm | xargs -n 1 git branch -d'"
   ulc = reset --soft HEAD~ #undoes the last, not-pushed commit
   pss = "push -u origin HEAD"
   deployed = "!f(){ git branch -r --contains $1 | cut -f1 -d'/' | sort | uniq; }; f"
   ri = "!sh -c 'git rebase -i HEAD~$0'"
   ai = add -i
-  ; ls = "!sh -c '(git brunch || git branch)'"
-  ; ls = "branch"
-  ls = "!sh -c '(git branch | fzf-tmux -d 20 | xargs git checkout) || git branch'"
-  lsr = "!sh -c '(git branch -r | fzf-tmux -d 20 | sed \"s/origin\\///g\" | xargs git checkout) || git branch -r'"
+  ls = "!sh -c 'git branch | fzf-tmux -d 20 | xargs -ro git checkout'"
+  lsr = "!sh -c 'git branch -r | fzf-tmux -d 20 | sed \"s/origin\\///g\" | xargs -ro git checkout'"
   cc = "!sh -c 'git cherry -v $0 | grep +'"
   commend = commit --amend --no-edit
   please = push --force-with-lease origin HEAD

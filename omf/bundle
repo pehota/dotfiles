@@ -1,8 +1,8 @@
 package bang-bang
 package bass
 package foreign-env
+package fzf
 package https://github.com/danhper/fish-ssh-agent
-package https://github.com/FabioAntunes/fish-nvm
 package pisces
 package z
 theme default

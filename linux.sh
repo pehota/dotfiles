@@ -8,6 +8,8 @@ if [ ! -f "$HOME/.local/share/fonts/Hack Regular Nerd Font Complete.ttf" ]; then
   cp "$HOME/.dotfiles/Hack Regular Nerd Font Complete.ttf" ~/.local/share/fonts/
 fi
 
+pamac install otf-nerd-fonts-fira-code
+
 # Install pamac if needed
 if(! (command -v pamac &> /dev/null)); then
   echo "Installing pamac ..."
@@ -58,6 +60,12 @@ fi
   mv ~/.config/rofi ~/.dotfiles/.backup/ &> /dev/null
   ln -sf ~/.dotfiles/rofi ~/.config
 }
- . ./setup-shell.sh
 
- . ./setup-ranger.sh
+. ./add-swap-file.sh
+
+# Support for external Apple keyboards
+. ./linux_mac_kb.sh
+
+. ./setup-shell.sh
+
+. ./setup-ranger.sh

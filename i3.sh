@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
-set -e
+# set -e
 
 # Create a backup folder where all existing dotfiles will be saved to
 mkdir -p ~/.dotfiles/.backup
+
+# Sound driver and firmware
+pamac install sof-firmware alsa-ucm-conf pulseaudio pulseaudio-alsa
+
+# Fonts
+pamac install ttf-font-awesome ttf-font-awesome-4 ttf-windows ttf-apple-emoji
 
 declare -A commands_map=(
   ["xautolock"]="xautolock"
@@ -10,6 +16,7 @@ declare -A commands_map=(
   ["picom"]="picom"
   ["i3lock"]="i3lock"
   ["i3status-rs"]="i3status-rust-git"
+  ["kbdd"]="kbdd-git"
   ["light"]="light"
   ["redshift"]="redshift"
   ["scrot"]="scrot"

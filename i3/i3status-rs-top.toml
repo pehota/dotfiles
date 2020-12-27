@@ -1,12 +1,7 @@
-icons = "awesome"
-
 [[block]]
-block = "sound"
-step_width = 1
-
-[[block]]
-block = "custom"
-command = "xkblayout-state print %s"
+block = "keyboard_layout"
+driver = "kbddbus"
+format = " {layout}"
 interval = 0.25
 
 [[block]]
@@ -23,27 +18,33 @@ block = "memory"
 format_mem = "{Mup}%"
 format_swap = "{SUp}%"
 
-[[bluetooth]]
-block = "bluetooth"
 
 [[block]]
 block = "time"
 interval = 60
 format = "%a %d %b %R"
 
+[icons]
+name = "awesome5"
+
+[icons.overrides]
+memory_mem = " "
+cpu = " "
+
 [theme]
 name = "plain"
 
 [theme.overrides]
-separator_fg = "#32302f"
-separator_bg = "#32302f"
+separator = " #  "
+separator_fg = "#a89984"
+separator_bg = "#504945"
 idle_fg = "#fbf1c7"
-idle_bg = "#32302f"
+idle_bg = "#504945"
 info_fg = "#fbf1c7"
-info_bg = "#32302f"
+info_bg = "#504945"
 good_fg = "#fbf1c7"
-good_bg = "#32302f"
+good_bg = "#504945"
 warning_fg = "#cc241d"
-warning_bg = "#32302f"
+warning_bg = "#504945"
 critical_fg = "#cc241d"
-critical_bg = "#32302f"
+critical_bg = "#504945"
