@@ -10,7 +10,9 @@ if (! (isPackageInstalled dkms)); then
   installPackage dkms
 fi
 
-if [[ -n "$(sudo dkms status hid-apple-patched)" ]]; then
+MODULE="hid-apple/1.0"
+
+if [[ -n "$(sudo dkms status ${MODULE})" ]]; then
   echo "Keyboard patch is already applied"
   exit 0
 fi
@@ -31,9 +33,9 @@ git clone "$PATCH_REPO"
 cd $INSTALLATION_FOLDER
 
 echo "Installing patch ..."
-sudo dkms add . 2> /dev/null
-sudo dkms build hid-apple/1.0
-sudo dkms install hid-apple/1.0
+sudo dkms add .
+sudo dkms build "$MODULE"
+sudo dkms install "$MODULE"
 
 echo "Updating related modprobe config ..."
 {
