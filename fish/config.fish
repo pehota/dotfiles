@@ -16,4 +16,4 @@ end
 
 # fnm
 set PATH /home/dimitar/.fnm $PATH
-fnm env --multi | source
+fnm env | source
