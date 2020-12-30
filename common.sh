@@ -5,6 +5,7 @@ source ./utils.sh
 # Install common packages
 declare -A packages=(
   ["bat"]="bat" # Improved cat
+  ["bash-language-server"]="bash-language-server"
   ["cmus"]="cmus" # Music player
   ["curl"]="curl"
   ["exa"]="exa" # Improved ls
