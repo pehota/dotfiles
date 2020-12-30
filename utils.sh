@@ -51,14 +51,13 @@ installPackages() {
   done
 
   if [[ -n "$packages_to_install" ]]; then
-    echo "Installing $packages_to_install ...\n"
     installPackage $packages_to_install
   fi
 }
 
 createSimlink() {
   # $source should be either a full path or a relative path under ~/.dotfiles
-  local source=$1
+  local source="$1"
   local target="$2"
 
   # If no target is provided - use the name of the source
