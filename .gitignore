@@ -6,6 +6,13 @@ cmus/command-history
 karabiner/automatic_backups
 __pycache__
 */**/__init__.py
-fish/*
-!fish/config.fish
-!fish/fishfile
+fish/completions
+fish/functions/*
+fish/fish_variables
+!fish/functions/fish_prompt.fish
+!fish/functions/e.fish
+!fish/functions/cvb.fish
+!fish/functions/ll.fish
+!fish/functions/weather.fish
+fish/conf.d/**
+!fish/conf.d/fnm.fish

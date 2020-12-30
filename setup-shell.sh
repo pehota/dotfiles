@@ -9,20 +9,17 @@ if (! (isPackageInstalled fish)); then
   installPackage fish
 fi
 
-# Install oh-my-fish if needed
-# We need to use `fish` in order to detect if `omf` is installed
-OMF_CHECK=$(fish -c "test (omf version); and echo 0; or echo 1")
+# Install fish plugin manager
+# We need to use `fish` in order to detect if the plugin manager is installed
+PLUGIN_MANAGER_INSTALLED=$(fish -c "test (type -t fisher) = 'function'; and echo 1; or echo 0")
 
-if [[ "$OMF_CHECK" -ne "0" ]]; then
-  echo "Installing oh-my-fish ..."
-  curl -L https://get.oh-my.fish | fish
+if [[ "$PLUGIN_MANAGER_INSTALLED" -ne "1" ]]; then
+  echo "Installing fisher ..."
+  fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
 fi
 
-# link oh-my-fish config
-createSimlink omf ~/.config
-
-# Install oh-my-fish packages
-fish -c "omf install"
+# Install packages
+fish -c "cat $WORKING_DIR/fish/fish_plugins | fisher install"
 
 PATH_TO_SHELL_BIN=$(command -v fish)
 
