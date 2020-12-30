@@ -5,7 +5,6 @@ source ./utils.sh
 # Install common packages
 declare -A packages=(
   ["bat"]="bat" # Improved cat
-  ["bash-language-server"]="bash-language-server"
   ["cmus"]="cmus" # Music player
   ["curl"]="curl"
   ["exa"]="exa" # Improved ls
@@ -59,8 +58,15 @@ createSimlink coc/extensions.json ~/.config/coc/extensions/package.json
 echo "Installing nvim plugins ..."
 nvim --noplugin --headless +PlugInstall +qall
 
-echo "Installing coc extensions ..."
-nvim --headless +CocInstall +qall
+if (isPackageInstalled "npm"); then
+  echo "Installing coc extensions ..."
+  cd  ~/.config/coc/extensions
+  npm i > /dev/null
+  cd $WORKING_DIR > /dev/null
+  nvim --headless +CocUpdate +qall
+else
+  echo "Install coc extensions manually"
+fi
 
 # Install the tmux plugins if tmux is running (highly unlikely)
 if [ -n "$TMUX" ]; then

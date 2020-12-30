@@ -12,12 +12,6 @@
         "diagnosticsOnSaveOnly": true
       }
     },
-    "bash": {
-      "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
-    },
     "efm": {
       "command": "efm-langserver",
       "args": [],
@@ -35,10 +29,7 @@
       }
     }
   },
-  "lua.enable": true,
-  "lua.commandPath": "/usr/bin/lua",
   "diagnostic.refreshOnInsertMode": false,
-  "diagnostic.refreshAfterSave": false,
   "diagnostic.maxWindowHeight": 20,
   "suggest.maxCompleteItemCount": 5,
   "coc.preferences.formatOnSaveFiletypes": [
@@ -69,6 +60,5 @@
   },
   "css.validate": false,
   "stylelint.enable": true,
-  "stylelint.filetypes": ["css", "less", "scss", "sass", "vue", "html"],
-  "vetur.useWorkspaceDependencies": true
+  "stylelint.filetypes": ["css", "less", "scss", "sass", "vue", "html"]
 }
