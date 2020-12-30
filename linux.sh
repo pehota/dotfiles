@@ -2,14 +2,6 @@
 
 source ./utils.sh
 
-# Install the font for Powerline
-if [ ! -f "$HOME/.local/share/fonts/Hack Regular Nerd Font Complete.ttf" ]; then
-  mkdir -p "$HOME/.local/share/fonts"
-  cp "$HOME/.dotfiles/Hack Regular Nerd Font Complete.ttf" ~/.local/share/fonts/
-fi
-
-installPackage "otf-nerd-fonts-fira-code"
-
 # Make sure the current user has the correct groups
 sudo gpasswd -a $(whoami) video
 
@@ -18,6 +10,8 @@ if [[ $(isPackageInstalled pamac) = false ]]; then
   echo "Installing pamac ..."
   sudo pacman -S pamac
 fi
+
+installPackage "otf-nerd-fonts-fira-code"
 
 declare -A packages=(
   ["autorandr"]="autorandr" # conigure monitors

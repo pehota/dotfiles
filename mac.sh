@@ -2,11 +2,6 @@
 
 source ./utils.sh
 
-# Install the font for Powerline
-if [ ! -f "/Users/$(whoami)/Library/Fonts/Hack Regular Nerd Font Complete.ttf" ]; then
-  cp "$HOME/.dotfiles/Hack Regular Nerd Font Complete.ttf" "/Users/$(whoami)/Library/Fonts"
-fi
-
 if (! (isPackageInstalled "brew") ); then
   echo "Installing brew ..."
 
@@ -20,6 +15,8 @@ if (! (isPackageInstalled "brew") ); then
   } >> ~/.bashrc
 fi
 
+installPackage "homebrew/cask-fonts/font-fira-code-nerd-font"
+
 declare -A packages=(
   ["fnm"]="Schniz/tap/fnm" # Fast Node Manager - nvm replacement
   ["reattach-to-user-namespace"]="reattach-to-user-namespace"
@@ -28,9 +25,9 @@ declare -A packages=(
 installPackages packages
 
 declare -A cask_packages=(
-["karabiner-elements"]="karabiner-elements"
-["kitty"]="kitty"
-["alacritty"]="alacritty"
+  ["karabiner-elements"]="karabiner-elements"
+  ["kitty"]="kitty"
+  ["alacritty"]="alacritty"
 )
 installPackages cask_packages
 
