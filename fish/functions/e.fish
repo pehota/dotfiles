@@ -1,4 +1,4 @@
-# Defined in /tmp/fish.sRfrbZ/e.fish @ line 2
+# Defined in /tmp/fish.pEKuIE/e.fish @ line 2
 function e
- fzf --preview "bat --color=always --style=numbers {}" | xargs -ro nvim
+ f nvim
 end

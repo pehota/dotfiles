@@ -10,6 +10,7 @@ fish/completions
 fish/functions/*
 fish/fish_variables
 !fish/functions/fish_prompt.fish
+!fish/functions/f.fish
 !fish/functions/e.fish
 !fish/functions/cvb.fish
 !fish/functions/ll.fish
