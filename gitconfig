@@ -24,7 +24,7 @@
 [alias]
   cp = cherry-pick
   co = checkout
-  gone = "!sh -c 'git branch | grep -v \"\\*\" | grep -v master | grep -v develop | grep -v staging | xargs -n 1 git branch -D'"
+  gone = "!sh -c 'git branch | grep -v \"\\*\" | grep -v master | grep -v main | grep -v develop | grep -v staging | xargs -n 1 git branch -D'"
   richlog = log --all --graph --decorate --oneline --simplify-by-decoration
   update = "!sh -c 'git fetch --prune && git pull --rebase'"
   rot = "!sh -c 'git diff-index HEAD --quiet --exit-code; NEEDS_STASH=$?; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash; else echo \"Nothing to stash.\"; fi; git checkout \"$0\" && git pull --rebase origin \"$0\";git co -;git rebase - && if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash pop; fi;'"
@@ -40,7 +40,7 @@
   rb = branch -m
   rcb = "!sh -c 'CURRENT_BRANCH=$(git symbolic-ref --short HEAD ) &&  git rb $CURRENT_BRANCH $0 && unset CURRENT_BRANCH'"
   unstage = reset HEAD
-  bm = "!sh -c 'git branch --merged | grep -v \"\\*\" | grep -v master | grep -v edge | grep -v develop | grep -v staging'"
+  bm = "!sh -c 'git branch --merged | grep -v \"\\*\" | grep -v master | grep -v main | grep -v edge | grep -v develop | grep -v staging'"
   cm = "!sh -c 'git bm | xargs -n 1 git branch -d'"
   ulc = reset --soft HEAD~ #undoes the last, not-pushed commit
   pss = "push -u origin HEAD"
@@ -55,7 +55,6 @@
   st = status --short --branch
   cam = commit -am
   lb = "!sh -c 'git shortlog -s | sort -nr'"
-  debranch = "!sh -c 'git branch | grep -v master | xargs git branch -D'"
   cim = commit -m
   dc = "!sh -c 'git diff --name-only $0 | wc -l'"
 ; This will show you all the commits at the tips of your commit graph which are no longer referenced from any branch or tag 
