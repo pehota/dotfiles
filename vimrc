@@ -121,6 +121,11 @@ if !g:isHeadlessMode
 endif
 " }}}
 
+
+" Prisma support {{{
+Plug 'pantharshit00/vim-prisma'
+" }}}
+
 call plug#end()
 
 " Session Management
@@ -191,7 +196,7 @@ set incsearch
 set ignorecase
 set smartcase
 set nu
-set mouse=n
+set mouse=
 set clipboard+=unnamedplus
 set guifont=Hack\ Nerd\ Font:h12
 set backspace=2
@@ -237,6 +242,9 @@ set wildignore+=**/dist/**
 set wildignore+=**/*.bs.js
 set wildignore+=**/yarn.lock
 set wildignore+=**/package-lock.json
+
+" Show search results in a split
+set inccommand=split
 
 colorscheme gruvbox
 " transparent background for vim
