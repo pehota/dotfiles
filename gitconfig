@@ -24,7 +24,7 @@
 [alias]
   cp = cherry-pick
   co = checkout
-  gone = "!sh -c 'git branch | grep -v \"\\*\" | grep -v master | grep -v main | grep -v develop | grep -v staging | xargs -n 1 git branch -D'"
+  gone = "!sh -c 'git branch | grep -v \"\\*\" | grep -v master | grep -v main | grep -v develop | grep -v staging | xargs -n 1 git branch -D 2>/dev/null'"
   richlog = log --all --graph --decorate --oneline --simplify-by-decoration
   update = "!sh -c 'git fetch --prune && git pull --rebase'"
   rot = "!sh -c 'git diff-index HEAD --quiet --exit-code; NEEDS_STASH=$?; if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash; else echo \"Nothing to stash.\"; fi; git checkout \"$0\" && git pull --rebase origin \"$0\";git co -;git rebase - && if [ \"$NEEDS_STASH\" -eq \"1\" ] ; then git stash pop; fi;'"
@@ -65,5 +65,6 @@
   autocorrect = 0
 [init]
   templatedir = ~/.git_templates
+	defaultBranch = main
 [includeIf "gitdir:~/Work/job/git/"]
   path = ~/Work/job/git/.gitconfig
