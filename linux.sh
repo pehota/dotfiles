@@ -22,6 +22,7 @@ declare -A packages=(
   ["rofi"]="rofi" # dmenu replacement
   ["unclutter"]="unclutter" # Hides the mouse cursor
   ["refind-install"]="refind" # Boot manager
+  ["haskell-language-server-wrapper"]="haskell-language-server-bin"
 )
 installPackages packages
 

@@ -18,14 +18,18 @@
       "filetypes": ["vim", "erb", "eruby", "markdown"]
     },
     "haskell": {
-      "command": "hie-wrapper",
+      "command": "haskell-language-server-wrapper",
       "args": ["--lsp"],
-      "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
-      "filetypes": ["hs", "lhs", "haskell"],
+      "rootPatterns": [
+        "*.cabal",
+        "stack.yaml",
+        "cabal.project",
+        "package.yaml",
+        "hie.yaml"
+      ],
+      "filetypes": ["haskell", "lhaskell"],
       "initializationOptions": {
-        "languageServerHaskell": {
-          "hlintOn": true
-        }
+        "haskell": {}
       }
     }
   },
@@ -38,6 +42,7 @@
     "typescriptreact",
     "javascript",
     "javascriptreact",
+    "javascript.node",
     "json",
     "haskell",
     "css",
@@ -60,5 +65,6 @@
   },
   "css.validate": false,
   "stylelint.enable": true,
-  "stylelint.filetypes": ["css", "less", "scss", "sass", "vue", "html"]
+  "stylelint.filetypes": ["css", "less", "scss", "sass", "vue", "html"],
+  "sql.database": "postgresql"
 }
