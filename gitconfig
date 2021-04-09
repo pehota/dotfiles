@@ -61,6 +61,9 @@
 ; every lost commit, including every stash commit you’ve ever created, will be somewhere in that graph.
   detached-commits = "!sh -c 'git log $0 --oneline --decorate $( git fsck --no-reflog | awk \"/dangling commit/ {print \\$3}\" )'"
 	mt = mergetool
+  shows = "!sh -c 'git show \"stash@{$0}\" $@'"
+  pops = "!sh -c 'git stash pop \"stash@{$0}\" $@'"
+  cos = "!sh -c 'git checkout \"stash@{$0}\" $@'"
 [help]
   autocorrect = 0
 [init]
