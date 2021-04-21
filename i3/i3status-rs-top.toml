@@ -1,4 +1,13 @@
 [[block]]
+block = "music"
+buttons = ["play"]
+interface_name_exclude = [".*chromium.*"]
+dynamic_width = true
+hide_when_empty = true
+marquee_speed = 1
+format = "{player}: {combo}"
+
+[[block]]
 block = "keyboard_layout"
 driver = "kbddbus"
 format = " {layout}"
@@ -15,8 +24,8 @@ interval = 2
 
 [[block]]
 block = "memory"
-format_mem = "{Mup}%"
-format_swap = "{SUp}%"
+format_mem = "{mem_used_percents}"
+format_swap = "{swap_used_percents}"
 
 
 [[block]]
