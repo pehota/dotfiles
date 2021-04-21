@@ -15,7 +15,6 @@ declare -A packages=(
   ["nvim"]="neovim" # Vim Improved
   ["python3"]="python3" # needed for neovim
   ["rg"]="ripgrep" # fast file search
-  ["shellcheck"]="shellcheck" # shell LSP
   ["tmux"]="tmux" # Terminal multiplexer
 )
 installPackages packages
