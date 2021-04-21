@@ -33,7 +33,7 @@ installPackage pulseaudio-alsa
 installPackage ttf-font-awesome
 installPackage ttf-font-awesome-4
 installPackage ttf-windows
-tinstallPackage tf-apple-emoji
+installPackage ttf-apple-emoji
 
 if [[ -d ~/.i3 ]]; then
   mv ~/.i3 ~/.dotfiles/.backup/ &> /dev/null
@@ -42,6 +42,7 @@ fi
 createSimlink i3 ~/.config
 createSimlink picom ~/.config
 createSimlink dunst ~/.config
+createSimlink xprofile
 
 if [[ -z "$TERMINAL" ]]; then
   echo "Adding \$TERMINAL environment variable which requires \`sudo\`"
