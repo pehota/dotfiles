@@ -16,7 +16,7 @@ interval = 0.25
 [[block]]
 block = "battery"
 driver = "upower"
-format = "{percentage}% {time}"
+format = "{percentage} {time}"
 
 [[block]]
 block = "cpu"
