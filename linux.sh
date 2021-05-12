@@ -23,6 +23,7 @@ declare -A packages=(
   ["unclutter"]="unclutter" # Hides the mouse cursor
   ["refind-install"]="refind" # Boot manager
   ["bash-language-server"]="bash-language-server"
+  ["direnv"]="direnv-bin"
 )
 installPackages packages
 

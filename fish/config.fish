@@ -10,3 +10,7 @@ if status is-interactive
     source ~/.fishrc
   end
 end
+
+if test (command -v direnv)
+  direnv hook fish | source
+end
