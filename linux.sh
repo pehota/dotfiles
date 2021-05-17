@@ -24,6 +24,7 @@ declare -A packages=(
   ["refind-install"]="refind" # Boot manager
   ["bash-language-server"]="bash-language-server"
   ["direnv"]="direnv-bin"
+  ["zoxide"]="zoxide-bin"
 )
 installPackages packages
 

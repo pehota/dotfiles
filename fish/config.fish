@@ -14,3 +14,7 @@ end
 if test (command -v direnv)
   direnv hook fish | source
 end
+
+if test (command -v zoxide)
+  zoxide init fish | source
+end
