@@ -28,6 +28,7 @@ installPackage sof-firmware
 installPackage alsa-ucm-conf
 installPackage pulseaudio
 installPackage pulseaudio-alsa
+installPackage apulse
 
 # Fonts
 installPackage ttf-font-awesome

@@ -31,7 +31,7 @@ installPackages packages
 # link rofi
 createSimlink rofi ~/.config
 
- . ./setup-shell.sh
+. ./setup-shell.sh
 
 . ./add-swap-file.sh
 
@@ -41,3 +41,5 @@ createSimlink rofi ~/.config
 . ./setup-shell.sh
 
 . ./setup-ranger.sh
+
+. ./setup-players.sh
