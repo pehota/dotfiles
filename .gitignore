@@ -17,3 +17,4 @@ fish/fish_variables
 !fish/functions/weather.fish
 fish/conf.d/**
 !fish/conf.d/fnm.fish
+plugged
