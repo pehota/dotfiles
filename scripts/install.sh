@@ -17,16 +17,7 @@ if [[ "${BASH_VERSINFO:-0}" -le 3 ]]; then
   exit 1
 fi
 
-
-. ./link.sh
-
-if [[ "$IS_MAC" == "1" ]]; then
-  . ./mac.sh
-else
-  . ./linux.sh
-fi
-
-. ./common.sh
+exec ./install-packages.sh
 
 if [[ "$DESKTOP_SESSION" == "i3" ]]; then
   . ./i3.sh
