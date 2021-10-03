@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -e
-
 WORKING_DIR=~/.dotfiles
 BACKUP_DIR="$WORKING_DIR/.backup"
 
@@ -13,26 +11,19 @@ BACKUP_DIR=~/.dotfiles/.backup
 mkdir -p $BACKUP_DIR
 
 checkOs() {
-  if [[ "$(uname)" == "$1" ]]; then
-    echo "1"
+  if [[ "$(uname)" == "Darwin" ]]; then
+    return 0
   else
-    echo "0"
+    return 1
   fi
 }
 
-IS_MAC=$(checkOs "Darwin")
-IS_LINUX=$(checkOs "Linux")
-
 isPackageInstalled() {
-  test $(type -t "$1" 2> /dev/null)
+  test $(type -t "$1") || brew list -q -1 "$1" 2> /dev/null
 }
 
 installPackage() {
-  if [[ "$IS_MAC" == "1" ]]; then
-    brew install "$1"
-  else
-    pamac install $1
-  fi
+  brew install "$1"
 }
 
 installPackages() {

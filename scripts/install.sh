@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-source ./utils.sh
+SCRIPTS_FOLDER=$(dirname "$0")
 
-if [[ "$IS_MAC" == "0" && "$IS_LINUX" == "0" ]]; then
+source "$SCRIPTS_FOLDER/utils.sh"
+
+if [[ ! checkOs ]]; then
   echo "Unsupported OS"
   exit 1
 fi
@@ -17,10 +19,6 @@ if [[ "${BASH_VERSINFO:-0}" -le 3 ]]; then
   exit 1
 fi
 
-exec ./install-packages.sh
-
-if [[ "$DESKTOP_SESSION" == "i3" ]]; then
-  . ./i3.sh
-fi
+exec "$SCRIPTS_FOLDER/install-packages.sh"
 
 echo "Done"
