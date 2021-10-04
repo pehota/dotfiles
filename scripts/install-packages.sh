@@ -6,7 +6,7 @@ SCRIPTS_FOLDER=$(dirname "$0")
 PACKAGES_FOLDER="$(dirname $SCRIPTS_FOLDER)/dotfiles"
 
 STOW_DIR="$PACKAGES_FOLDER"
-STOW_TARGET="$(dirname $SCRIPTS_FOLDER)/test-stow" # $HOME
+STOW_TARGET="$HOME"
 
 source "$SCRIPTS_FOLDER/utils.sh"
 
