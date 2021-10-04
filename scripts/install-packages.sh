@@ -1,45 +1,38 @@
 #!/usr/bin/env bash
 
-source ./utils.sh
+set -e
 
-# Make sure the current user has the correct groups
-sudo gpasswd -a $(whoami) video
+SCRIPTS_FOLDER=$(dirname "$0") 
+PACKAGES_FOLDER="$(dirname $SCRIPTS_FOLDER)/dotfiles"
 
-# Install pamac if needed
-if [[ $(isPackageInstalled pamac) = false ]]; then
-  echo "Installing pamac ..."
-  sudo pacman -S pamac
-fi
+STOW_DIR="$PACKAGES_FOLDER"
+STOW_TARGET="$(dirname $SCRIPTS_FOLDER)/test-stow" # $HOME
 
-installPackage "otf-nerd-fonts-fira-code"
+source "$SCRIPTS_FOLDER/utils.sh"
 
-declare -A packages=(
-  ["autorandr"]="autorandr" # conigure monitors
-  ["fnm"]="fnm-bin" # Fast Node Manager - nvm replacement
-  ["playerctl"]="playerctl"
-  ["preload"]="preload"
-  ["ranger"]="ranger" # file browser
-  ["rofi"]="rofi" # dmenu replacement
-  ["unclutter"]="unclutter" # Hides the mouse cursor
-  ["refind-install"]="refind" # Boot manager
-  ["bash-language-server"]="bash-language-server"
-  ["direnv"]="direnv-bin"
-  ["zoxide"]="zoxide-bin"
-)
-installPackages packages
+for package in $PACKAGES_FOLDER/*/; do
+  package_name=$(basename $package)
+  stow_dir="$STOW_DIR"
+  stow_target="$STOW_TARGET"
 
-# link rofi
-createSimlink rofi ~/.config
+  if (! (isPackageInstalled $package_name)); then
+    if [[ -f "$package/pre-install" ]]; then
+      exec "$package/pre-install"
+      stow_dir="$package"
+      package_name="content"
+    fi
 
-. ./setup-shell.sh
+    echo "Installing $package_name ..."
+    installPackage $package_name > /dev/null
 
-. ./add-swap-file.sh
-
-# Support for external Apple keyboards
-. ./linux_mac_kb.sh
-
-. ./setup-shell.sh
-
-. ./setup-ranger.sh
-
-. ./setup-players.sh
+    if [[ -f "$package/post-install" ]]; then
+      exec "$package/post-install"
+      stow_dir="$package"
+      package_name="content"
+    fi
+    echo "done"
+  else
+    echo "$package_name already installed"
+  fi
+  stow -d "$stow_dir" -t "$stow_target" "$package_name"
+done
