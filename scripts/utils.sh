@@ -18,6 +18,14 @@ checkOs() {
   fi
 }
 
+installPackageManager() {
+  # Install brew if needed
+  if (!(isPackageInstalled "brew")); then
+    echo "Installing brew ..."
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+}
+
 isPackageInstalled() {
   test $(type -t "$1") || brew list -q -1 "$1" 2> /dev/null
 }

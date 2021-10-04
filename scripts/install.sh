@@ -19,6 +19,8 @@ if [[ "${BASH_VERSINFO:-0}" -le 3 ]]; then
   exit 1
 fi
 
+installPackageManager
+
 exec "$SCRIPTS_FOLDER/install-packages.sh"
 
 echo "Done"
