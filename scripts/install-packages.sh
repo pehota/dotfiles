@@ -22,20 +22,20 @@ for package in $PACKAGES_FOLDER/*/; do
   fi
 
   if (! (isPackageInstalled $package_name)); then
+    echo "Installing $package_name ..."
+
     if [[ -f "$package/pre-install" ]]; then
-      exec "$package/pre-install"
+      source "$package/pre-install"
     fi
 
-    echo "Installing $package_name ..."
     installPackage $package_name > /dev/null
 
     if [[ -f "$package/post-install" ]]; then
-      exec "$package/post-install"
+      source "$package/post-install"
     fi
     echo "done"
   else
     echo "$package_name already installed"
   fi
-  echo "stow -d "$stow_dir" -t "$stow_target" "$stow_package""
   stow -d "$stow_dir" -t "$stow_target" "$stow_package"
 done
