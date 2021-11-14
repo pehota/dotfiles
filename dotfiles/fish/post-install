@@ -2,13 +2,6 @@
 
 set -e
 
-source ./utils.sh
-
-if (! (isPackageInstalled fish)); then
-  echo "Installing fish shell ..."
-  installPackage fish
-fi
-
 # Install fish plugin manager
 # We need to use `fish` in order to detect if the plugin manager is installed
 PLUGIN_MANAGER_INSTALLED=$(fish -c "test (type -t fisher) = 'function'; and echo 1; or echo 0")
@@ -19,7 +12,7 @@ if [[ "$PLUGIN_MANAGER_INSTALLED" -ne "1" ]]; then
 fi
 
 # Install packages
-fish -c "cat $WORKING_DIR/fish/fish_plugins | fisher install"
+fish -c "cat $HOME/.config/fish/fish_plugins | fisher install"
 
 PATH_TO_SHELL_BIN=$(command -v fish)
 
