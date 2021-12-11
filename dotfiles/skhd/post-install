@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "Starting skhd service ..."
+brew services start skhd
