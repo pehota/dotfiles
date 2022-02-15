@@ -30,12 +30,14 @@ for package in $PACKAGES_FOLDER/*/; do
 
     installPackage $package_name > /dev/null
 
+    stow -d "$stow_dir" -t "$stow_target" "$stow_package"
+
     if [[ -f "$package/post-install" ]]; then
       source "$package/post-install"
     fi
     echo "done"
   else
+    stow -d "$stow_dir" -t "$stow_target" "$stow_package"
     echo "$package_name already installed"
   fi
-  stow -d "$stow_dir" -t "$stow_target" "$stow_package"
 done
