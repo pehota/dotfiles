@@ -26,6 +26,14 @@ installPackageManager() {
   fi
 }
 
+bootstrap() {
+  installPackageManager
+
+  if (!(isPackageInstalled "stow")); then
+    installPackage "stow"
+  fi
+}
+
 isPackageInstalled() {
   test $(type -t "$1") || brew list -q -1 "$1" 2> /dev/null
 }

@@ -19,7 +19,7 @@ if [[ "${BASH_VERSINFO:-0}" -le 3 ]]; then
   exit 1
 fi
 
-installPackageManager
+bootstrap
 
 source "$SCRIPTS_FOLDER/install-utils.sh"
 
