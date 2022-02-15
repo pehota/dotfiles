@@ -79,41 +79,6 @@ Plug 'hrsh7th/nvim-compe'
 
 Plug 'google/vim-searchindex'
 
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  resolve_timeout = 800;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = {
-    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    max_width = 120,
-    min_width = 60,
-    max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1,
-  };
-
-  source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    vsnip = true;
-    ultisnips = true;
-    luasnip = true;
-  };
-}
-
-
 Plug 'jiangmiao/auto-pairs'
 Plug('tpope/vim-commentary', { on = 'Commentary' })
 Plug 'tpope/vim-surround'
@@ -156,8 +121,6 @@ end })
 -- tree-sitter {{{
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = 'TSUpdate' })
 
-local ts = require 'nvim-treesitter.configs'
-ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
 -- }}}
 
 -- Plug 'simrat39/rust-tools.nvim'
@@ -167,6 +130,73 @@ ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
 Plug 'ojroques/nvim-lspfuzzy'
 Plug 'neovim/nvim-lspconfig'
 
+
+-- Plug 'nvim-lua/plenary.nvim'
+-- Plug 'nvim-telescope/telescope.nvim'
+
+-- Fzf {{{
+Plug 'junegunn/fzf.vim'
+Plug('junegunn/fzf', { run = fn['fzf#install'] })
+
+-- g.fzf_command_prefix = 'Fzf'
+-- disable statusline overriding
+g.fzf_nvim_statusline = 0
+
+g['$FZF_DEFAULT_COMMAND'] = 'rg --files --hidden --follow --no-line-number --ignore-file ~/.gitignore'
+
+-- }}}
+
+Plug 'scrooloose/nerdtree'
+Plug 'dkasak/gruvbox'
+
+-- Adjust 'shiftwidth' and 'expandtab' heuristically
+Plug 'tpope/vim-sleuth'
+Plug('numtostr/BufOnly.nvim', { on = 'BufOnly' })
+Plug 'tpope/vim-commentary'
+
+
+vim.call('plug#end')
+
+-- compe setup
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  resolve_timeout = 800;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = {
+    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+    max_width = 120,
+    min_width = 60,
+    max_height = math.floor(vim.o.lines * 0.3),
+    min_height = 1,
+  };
+
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    vsnip = true;
+    ultisnips = true;
+    luasnip = true;
+  };
+}
+
+-- Treesitter setup
+local ts = require 'nvim-treesitter.configs'
+ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
+
+-- LSP setup
 local lsp = require 'lspconfig'
 local lspfuzzy = require 'lspfuzzy'
 
@@ -291,30 +321,6 @@ map('n', '<localleader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 -- map('n', '<localleader>a', '<cmd>Telescope lsp_code_actions theme=get_cursor<CR>')
 map('n', '<localleader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
 -- }}}
-
--- Plug 'nvim-lua/plenary.nvim'
--- Plug 'nvim-telescope/telescope.nvim'
-
--- Fzf {{{
-Plug 'junegunn/fzf.vim'
-Plug('junegunn/fzf', { run = fn['fzf#install'] })
-
--- g.fzf_command_prefix = 'Fzf'
--- disable statusline overriding
-g.fzf_nvim_statusline = 0
-
-g['$FZF_DEFAULT_COMMAND'] = 'rg --files --hidden --follow --no-line-number --ignore-file ~/.gitignore'
-
--- }}}
-
-Plug 'scrooloose/nerdtree'
-Plug 'dkasak/gruvbox'
-
--- Adjust 'shiftwidth' and 'expandtab' heuristically
-Plug 'tpope/vim-sleuth'
-Plug('numtostr/BufOnly.nvim', { on = 'BufOnly' })
-
-vim.call('plug#end')
 
 -- require('telescope').setup {
 --   defaults = {

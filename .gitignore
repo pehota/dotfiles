@@ -18,3 +18,4 @@ __pycache__
 **/fish/conf.d/**
 !**/fish/conf.d/fnm.fish
 plugged
+node_modules

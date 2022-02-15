@@ -246,7 +246,10 @@ set wildignore+=**/package-lock.json
 " Show search results in a split
 set inccommand=split
 
-colorscheme gruvbox
+if !g:isHeadlessMode 
+  colorscheme gruvbox
+endif
+
 " transparent background for vim
 highlight Normal ctermbg=NONE
 " transarent background for signs column
@@ -302,8 +305,8 @@ au BufRead,BufNewFile *.json set filetype=json
   nnoremap  <silent> <Leader><Leader>s <ESC>:w<CR>
   nmap      <silent> <Leader><Esc> :noh<CR>
   nmap      <silent> <Leader>bd :bufdo bd<CR><CR>
-  map       <silent> <C-b> :NERDTreeToggleVCS<CR>
-  nmap      <silent> <C-l> :NERDTreeFind<CR>
+  map       <silent> <Leader>d :NERDTreeToggleVCS<CR>
+  nmap      <silent> <Leader>l :NERDTreeFind<CR>
   nnoremap  <silent> <Leader>bc :FzfBCommits<CR>
   nnoremap  <silent> <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
   " nnoremap  <silent> <C-p> :FzfFiles<CR>
