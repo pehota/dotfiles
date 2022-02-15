@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+tpm_dir="~/.tmux/plugins/tpm"
+
+if [[ ! -d "$tpm_dir" ]]; then
+  # Install tpm
+  git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
+fi
+
+"$tpm_dir/bin/install_plugins"
