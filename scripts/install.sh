@@ -21,6 +21,8 @@ fi
 
 installPackageManager
 
-exec "$SCRIPTS_FOLDER/install-packages.sh"
+source "$SCRIPTS_FOLDER/install-utils.sh"
+
+source "$SCRIPTS_FOLDER/install-packages.sh"
 
 echo "Done"
