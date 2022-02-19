@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source utils.sh
 
 # Install vim-plug
 plug_dir="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim"
@@ -10,6 +11,14 @@ fi
 # Install nvim plugins
 nvim --headless +PlugInstall +qall
 
+# Install coc extensions
+coc_extensions_file="$HOME/.config/coc/extensions/package.json"
+
+if [[ -f "$coc_extensions_file" ]] && (isPackageInstalled "npm"); then
+	cd $(dirname "$coc_extensions_file")
+	npm i
+	cd -
+fi
 
 if [[ "$(type -t npm)" = "file" ]]; then
 	# Install all plugins
