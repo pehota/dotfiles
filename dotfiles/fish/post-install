@@ -14,6 +14,9 @@ fi
 # Install packages
 fish -c "cat $HOME/.config/fish/fish_plugins | fisher install"
 
+# Install completions
+fish -c "fish_update_completions"
+
 PATH_TO_SHELL_BIN=$(command -v fish)
 
 # Add shell to allowed shells if needed
