@@ -12,5 +12,10 @@ declare -A packages=(
   ["python3"]="python3" # needed for neovim
   ["rg"]="ripgrep" # fast file search
   ["appcleaner"]="appcleaner" # Uninstall apps not installed with brew
+  ["direnv"]="direnv" # folder specific shel environment
 )
 installPackages packages
+
+
+installPackage "homebrew/cask-fonts/font-fira-code-nerd-font"
+installPackage "homebrew/cask-fonts/font-jetbrains-mono-nerd-font"
