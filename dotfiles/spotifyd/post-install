@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-echo "Starting spotifyd service ..."
-brew services start spotifyd
