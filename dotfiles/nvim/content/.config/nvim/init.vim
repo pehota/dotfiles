@@ -198,7 +198,7 @@ set smartcase
 set nu
 set mouse=
 set clipboard+=unnamedplus
-set guifont=Hack\ Nerd\ Font:h12
+set guifont=FiraCode\ Nerd\ Font:h12
 set backspace=2
 " Position splits below and right
 set splitright
