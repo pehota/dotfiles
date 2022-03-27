@@ -13,6 +13,7 @@ declare -A packages=(
   ["rg"]="ripgrep" # fast file search
   ["appcleaner"]="appcleaner" # Uninstall apps not installed with brew
   ["direnv"]="direnv" # folder specific shel environment
+  ["fzf"]="fzf" # fast file search
 )
 installPackages packages
 
