@@ -30,3 +30,28 @@ if (!(isPackageInstalled "python3")); then
 fi
 
 python3 -m pip install --user --upgrade neovim
+
+# Install LSPs
+if (!(isPackageInstalled "lua-language-server")); then
+	installPackage "lua-language-server"
+fi
+
+declare -A packages=(
+  ["elm"]="elm@latest"
+  ["elm-test"]="elm-test"
+  ["elm-format"]="elm-format"
+  ["elm-language-server"]="@elm-tooling/elm-language-server"
+  ["prisma-language-server"]="@prisma/language-server"
+  ["vim-language-server"]="vim-language-server"
+  ["bash-language-server"]="bash-language-server"
+  ["eslint_d"]="eslint_d"
+  ["prettierd"]="prettierd"
+)
+
+
+for package in "${!packages[@]}"
+  do
+    if (! (isPackageInstalled "$package")); then
+	npm i -g "${packages[$package]}"
+    fi
+done
