@@ -31,7 +31,7 @@
   roti = "!sh -c 'git rebase -i HEAD~$(git rev-list --count $0..HEAD)'"
   cbn = "!sh -c 'git symbolic-ref --short HEAD | pbcopy'"
   ss = stash save -u
-  sl = stash list
+  sl = !sh -c \"git stash list | fzf-tmux -d 20 | sed 's/:.*//g' | xargs -ro git stash pop\"
   sd = stash drop
   sa = stash apply
   sp = stash pop
