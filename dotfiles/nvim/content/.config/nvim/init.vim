@@ -97,7 +97,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Rooter {{{
 Plug 'airblade/vim-rooter'
   let g:rooter_silent_chdir = 1
-  let g:rooter_patterns = ['.git/', 'package.json', 'elm-package.json', 'elm.json', 'stack.yaml']
+  let g:rooter_patterns = ['.git/', 'stack.yaml']
 " }}}
 
 " Signify {{{
