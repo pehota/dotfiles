@@ -17,6 +17,9 @@ fish -c "cat $HOME/.config/fish/fish_plugins | fisher install"
 # Install completions
 fish -c "fish_update_completions"
 
+# Disable fish greeting
+fish -c "set -U fish_greeting"
+
 PATH_TO_SHELL_BIN=$(command -v fish)
 
 # Add shell to allowed shells if needed
