@@ -17,8 +17,10 @@ __pycache__
 !**/fish/functions/ll.fish
 !**/fish/functions/weather.fish
 **/fish/conf.d/**
+**/fish/fishd.tmp*
 !**/fish/conf.d/fnm.fish
 plugged
 node_modules
 **/coc
 !**/coc/extensions/package.json
+**/raycast/extensions/**
