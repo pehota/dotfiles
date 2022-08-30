@@ -1,48 +1,12 @@
 #!/usr/bin/env bash
-source utils.sh
 
-# Install vim-plug
-plug_dir="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim"
-
-if [[ ! -d "$plug_dir" ]]; then
-	curl -fLo "${plug_dir}" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
-
-# Install nvim plugins
-nvim --headless +PlugInstall +qall
-
-# Install coc extensions
-coc_extensions_file="$HOME/.config/coc/extensions/package.json"
-
-if [[ -f "$coc_extensions_file" ]] && (isPackageInstalled "npm"); then
-	cd $(dirname "$coc_extensions_file")
-	npm i
-	cd -
-fi
-
-if [[ "$(type -t npm)" = "file" ]]; then
-	# Install all plugins
-	npm i -g neovim
-fi
-
-if (!(isPackageInstalled "python3")); then
-	installPackage "python3"
-fi
-
-python3 -m pip install --user --upgrade neovim
-
-# Install LSPs
-if (!(isPackageInstalled "lua-language-server")); then
-	installPackage "lua-language-server"
-fi
+source ./scripts/utils.sh
 
 declare -A packages=(
   ["elm"]="elm@latest"
   ["elm-test"]="elm-test"
   ["elm-format"]="elm-format"
   ["elm-language-server"]="@elm-tooling/elm-language-server"
-  ["prisma-language-server"]="@prisma/language-server"
-  ["vim-language-server"]="vim-language-server"
   ["bash-language-server"]="bash-language-server"
   ["eslint_d"]="eslint_d"
   ["prettierd"]="prettierd"
@@ -52,6 +16,6 @@ declare -A packages=(
 for package in "${!packages[@]}"
   do
     if (! (isPackageInstalled "$package")); then
-	npm i -g "${packages[$package]}"
+      npm i -g "${packages[$package]}"
     fi
 done

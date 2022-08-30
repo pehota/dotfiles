@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [[ -e ~/.local/share/nvim ]]; then
+  rm -rf ~/.local/share/nvim
+fi
+
+if [[ -e ~/.config/nvim ]]; then
+  rm -rf ~/.config/nvim.orig 2> /dev/null
+  mv ~/.config/nvim ~/.config/nvim.orig
+fi
+
+git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
