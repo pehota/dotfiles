@@ -7,6 +7,12 @@ M.user = {
       require "custom.lspconfig"
     end,
   },
+  ["jose-elias-alvarez/null-ls.nvim"] = {
+    after = "nvim-lspconfig",
+    config = function()
+      require "custom.plugins.null-ls"
+    end,
+  },
   ["williamboman/mason.nvim"] = {
     ensure_installed = {
       -- lua stuff
