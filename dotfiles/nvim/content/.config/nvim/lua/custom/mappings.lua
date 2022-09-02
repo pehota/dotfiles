@@ -10,7 +10,8 @@ M.global = {
 M.telescope = {
   n = {
     ["<C-p>"] = { "<cmd> Telescope find_files <CR>", "find files" },
-    ["<leader>f"] = { "<cmd> Telescope live_grep <C-R><C-W><CR>", "grep text under cursor" },
+    ["<leader>a"] = { "<cmd> Telescope live_grep <CR>", "live grep" },
+
   }
 }
 
@@ -65,6 +66,7 @@ M.disabled = {
     ["<C-r>"] = "",
     ["K"] = "",
     ["<leader>ff"] = "",
+    ["<leader>fw"] = "",
     ["<leader>ra"] = "",
     ["<leader>rn"] = ""
   }
