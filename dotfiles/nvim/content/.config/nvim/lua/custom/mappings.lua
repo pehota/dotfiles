@@ -31,13 +31,13 @@ M.lspconfig = {
 		},
 		["[w"] = {
 			function()
-				vim.lsp.diagnostic.goto_prev()
+				vim.diagnostic.goto_prev()
 			end,
 			"lsp go to previous diagnostic issue",
 		},
 		["]w"] = {
 			function()
-				vim.lsp.diagnostic.goto_next()
+				vim.diagnostic.goto_next()
 			end,
 			"lsp go to next diagnostic issue",
 		},
