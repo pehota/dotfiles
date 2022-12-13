@@ -22,7 +22,6 @@ vim.o.termguicolors = true -- True color support
 vim.o.wildmode = "list:longest" -- Command-line completion mode
 vim.o.list = true -- Show some invisible characters (tabs...)
 vim.o.wrap = false -- Disable line wrap
--- vim.o.foldmethod = "indent" -- Create folds by default
 
 vim.o.guifont = "FiraCode Nerd Font:12"
 
@@ -41,10 +40,10 @@ vim.api.nvim_create_autocmd("VimResized", {
 	command = "wincmd =",
 })
 
--- vim.api.nvim_create_autocmd("BufEnter", {
--- 	pattern = "*",
--- 	command = "normal zR",
--- })
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = { "*.ts", "*.js", "*.tsx", "*.jsx", "*.rs" },
+	command = "setlocal foldmethod=indent | normal zR",
+})
 
 -- Autochange currdir
 -- vim.cmd 'au BufEnter * lcd %:p:h'
