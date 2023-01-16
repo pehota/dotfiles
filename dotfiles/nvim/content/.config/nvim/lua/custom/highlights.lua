@@ -11,9 +11,13 @@ M.hl_add = {
 }
 
 M.hl_add = {
+	CursorLineNr = {
+		bg = "transparent",
+		fg = "grey",
+	},
 	LineNr = {
 		bg = "transparent",
-		fg = "lightgrey",
+		fg = "light_grey",
 	},
 }
 

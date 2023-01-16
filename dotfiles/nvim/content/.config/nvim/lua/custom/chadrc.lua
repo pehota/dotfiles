@@ -6,7 +6,7 @@ local M = {}
 -- example of changing theme:
 
 M.ui = {
-  theme = "sweetpastel",
+  theme = "gruvbox_material",
   hl_override = require("custom.highlights").hl_override,
   hl_add = require("custom.highlights").hl_add,
 }
