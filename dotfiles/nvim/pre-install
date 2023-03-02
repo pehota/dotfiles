@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
-if [[ -e ~/.local/share/nvim ]]; then
-  rm -rf ~/.local/share/nvim
-fi
+for folder in ~/.config/nvim ~/.local/state/nvim ~/.local/share/nvim ~/.cache/nvim; do
+	rm -rf "$folder.bak" 2>/dev/null
 
-if [[ -e ~/.config/nvim ]]; then
-  rm -rf ~/.config/nvim.orig 2> /dev/null
-  mv ~/.config/nvim ~/.config/nvim.orig
-fi
+	if [[ -e $folder ]]; then
+		mv $folder "$folder.bak"
+	fi
+done
 
-git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+git clone https://github.com/LazyVim/starter ~/.config/nvim
