@@ -9,3 +9,5 @@ for folder in ~/.config/nvim ~/.local/state/nvim ~/.local/share/nvim ~/.cache/nv
 done
 
 git clone https://github.com/LazyVim/starter ~/.config/nvim
+
+rm -rf ~/.config/nvim/lua ~/.config/nvim/.git
