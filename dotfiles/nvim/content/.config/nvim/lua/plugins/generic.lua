@@ -1,5 +1,8 @@
 return {
 	{
+		"numToStr/BufOnly.nvim",
+	},
+	{
 		"echasnovski/mini.indentscope",
 		opts = {
 			draw = {
