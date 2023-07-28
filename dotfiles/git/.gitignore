@@ -265,3 +265,5 @@ tags
 .git
 
 .envrc
+
+.sqlfluff
