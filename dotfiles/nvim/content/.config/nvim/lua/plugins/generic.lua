@@ -27,6 +27,8 @@ return {
 				ensure_installed = {
 					"actionlint",
 					"bash-language-server",
+					"dockerfile-language-server",
+					"docker-compose-language-service",
 					"elm-language-server",
 					"eslint_d",
 					"flake8",
@@ -40,22 +42,62 @@ return {
 					"stylua",
 					"terraform-ls",
 					-- "typescript-language-server",
+					"sqlls",
+					"sqlfluff",
 				},
+				automatic_installation = true,
 			},
 		},
 		{
 			"jose-elias-alvarez/null-ls.nvim",
 			opts = function()
 				local null_ls = require("null-ls")
+				require("lspconfig").tsserver.setup({
+					on_attach = function(client)
+						client.resolved_capabilities.document_formatting = false
+					end,
+					importModuleSpecifier = "relative",
+				})
 				return {
 					sources = {
 						null_ls.builtins.formatting.prettierd,
 						null_ls.builtins.formatting.stylua,
 						null_ls.builtins.formatting.shfmt,
 						null_ls.builtins.diagnostics.flake8,
+						null_ls.builtins.diagnostics.sqlfluff,
+						null_ls.builtins.formatting.sqlfluff,
 					},
 				}
 			end,
+		},
+		{
+			"nvim-treesitter/nvim-treesitter",
+			opts = {
+				ensure_installed = {
+					"bash",
+					"c",
+					"dockerfile",
+					"hcl",
+					"html",
+					"javascript",
+					"json",
+					"json5",
+					"jsonc",
+					"lua",
+					"luadoc",
+					"luap",
+					"markdown",
+					"python",
+					"query",
+					"regex",
+					"terraform",
+					"tsx",
+					"typescript",
+					"vim",
+					"vimdoc",
+					"yaml",
+				},
+			},
 		},
 	},
 }
