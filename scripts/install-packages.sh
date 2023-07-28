@@ -28,7 +28,9 @@ for package in $PACKAGES_FOLDER/*/; do
       source "$package/pre-install"
     fi
 
-    installPackage $package_name > /dev/null
+    if [[ ! -f "$package/.noinstall" ]]; then
+      installPackage $package_name > /dev/null
+    fi
 
     stow -d "$stow_dir" -t "$stow_target" "$stow_package"
 
