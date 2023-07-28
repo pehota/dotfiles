@@ -4,7 +4,7 @@
 
 local function map(mode, lhs, rhs, opts)
 	local keys = require("lazy.core.handler").handlers.keys
-	---@cast keys LazyKeysHandler
+	-- @cast keys LazyKeysHandler
 	-- do not create the keymap if a lazy keys handler exists
 	if not keys.active[keys.parse({ lhs, mode = mode }).id] then
 		opts = opts or {}
@@ -14,3 +14,4 @@ local function map(mode, lhs, rhs, opts)
 end
 
 map("n", "<C-p>", "<cmd>Telescope find_files<cr>", { silent = true, desc = "Find Files" })
+map("n", "<Space>bd", "<cmd>bufdo bd!<cr>", { silent = false, desc = "Delete all buffers" })
