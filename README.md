@@ -14,4 +14,7 @@ These are the configurations that I am using across a couple of operating system
 1. Clone the repository to "$HOME_DIR/.dotfiles"
 1. Checkout the OS-specific branch that you need
 1. In the terminal go to "$HOME_DIR/.dotfiles"
-1. Run "sh ./scripts/install.sh"
+1. From there run the following command:
+   ```bash
+   sh ./scripts/install.sh
+   ```
