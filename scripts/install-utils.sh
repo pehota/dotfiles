@@ -8,7 +8,7 @@ source "$SCRIPTS_FOLDER/utils.sh"
 declare -A packages=(
 	["bat"]="bat" # Improved cat
 	["curl"]="curl"
-	["exa"]="exa"               # Improved ls
+	["eza"]="eza"               # Improved ls
 	["python3"]="python3"       # needed for neovim
 	["rg"]="ripgrep"            # fast file search
 	["appcleaner"]="appcleaner" # Uninstall apps not installed with brew
