@@ -16,8 +16,8 @@ source ~/.dotfiles/git-prompt.sh
 PS1="\[$(tput bold)\]\[$(tput setaf 2)\]\[$(tput setaf 3)\]\w\$(__git_ps1 '\[\033[1;32;1m\] (%s)\[\033[0m\]')\[$(tput setaf 2)\]\\$ \[$(tput sgr0)\]"
 export PS1
 
-if [ -f "$(command -v exa)" ]; then
-  alias ls='exa --group-directories-first'
+if [ -f "$(command -v eza)" ]; then
+	alias ls='eza --group-directories-first'
 fi
 
 alias reboot-shell='source ~/.bash_profile'
@@ -34,7 +34,7 @@ source ~/.dotfiles/git-completion.bash
 export PATH="$HOME/.cargo/bin:$PATH"
 
 if [ "$DESKTOP_SESSION" = "i3" ]; then
-  eval "$(ssh-agent -s)" &> /dev/null
-  # export "$(gnome-keyring-daemon -s)"
-  ssh-add ~/.ssh/*_rsa &> /dev/null
+	eval "$(ssh-agent -s)" &>/dev/null
+	# export "$(gnome-keyring-daemon -s)"
+	ssh-add ~/.ssh/*_rsa &>/dev/null
 fi
