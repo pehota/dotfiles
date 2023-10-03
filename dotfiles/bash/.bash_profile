@@ -6,15 +6,6 @@ export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/.local/bin"
 
 export EDITOR=nvim
-# export TERM=screen-256color
-
-# Git branch in prompt.
-# Nicer bash prefix with git branch
-export GIT_PS1_SHOWDIRTYSTATE=1
-source ~/.dotfiles/git-prompt.sh
-# Custom bash prompt via kirsle.net/wizards/ps1.html
-PS1="\[$(tput bold)\]\[$(tput setaf 2)\]\[$(tput setaf 3)\]\w\$(__git_ps1 '\[\033[1;32;1m\] (%s)\[\033[0m\]')\[$(tput setaf 2)\]\\$ \[$(tput sgr0)\]"
-export PS1
 
 if [ -f "$(command -v eza)" ]; then
 	alias ls='eza --group-directories-first'
