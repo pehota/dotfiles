@@ -49,28 +49,6 @@ return {
 			},
 		},
 		{
-			"nvimtools/none-ls.nvim",
-			opts = function()
-				local null_ls = require("null-ls")
-				require("lspconfig").tsserver.setup({
-					on_attach = function(client)
-						client.resolved_capabilities.document_formatting = false
-					end,
-					importModuleSpecifier = "relative",
-				})
-				return {
-					sources = {
-						null_ls.builtins.formatting.prettierd,
-						null_ls.builtins.formatting.stylua,
-						null_ls.builtins.formatting.shfmt,
-						null_ls.builtins.diagnostics.flake8,
-						null_ls.builtins.diagnostics.sqlfluff,
-						null_ls.builtins.formatting.sqlfluff,
-					},
-				}
-			end,
-		},
-		{
 			"nvim-treesitter/nvim-treesitter",
 			opts = {
 				ensure_installed = {
