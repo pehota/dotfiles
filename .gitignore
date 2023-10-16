@@ -25,3 +25,4 @@ node_modules
 **/coc
 !**/coc/extensions/package.json
 **/raycast/extensions/**
+dotfiles/nvim/content/.config/nvim/lua/.luarc.json
