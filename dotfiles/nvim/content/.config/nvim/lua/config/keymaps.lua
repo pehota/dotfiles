@@ -15,3 +15,4 @@ end
 
 map("n", "<C-p>", "<cmd>Telescope find_files<cr>", { silent = true, desc = "Find Files" })
 map("n", "<Space>bd", "<cmd>bufdo bd!<cr>", { silent = false, desc = "Delete all buffers" })
+vim.cmd("iunmap <Tab>")
