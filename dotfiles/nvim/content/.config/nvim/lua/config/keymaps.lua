@@ -2,17 +2,26 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-local function map(mode, lhs, rhs, opts)
-	local keys = require("lazy.core.handler").handlers.keys
-	-- @cast keys LazyKeysHandler
-	-- do not create the keymap if a lazy keys handler exists
-	if not keys.active[keys.parse({ lhs, mode = mode }).id] then
-		opts = opts or {}
-		opts.silent = opts.silent ~= false
-		vim.keymap.set(mode, lhs, rhs, opts)
-	end
+local unmap = vim.keymap.del
+
+local map = function(modes, keymap, cmd, opts)
+  if opts == nil then
+    opts = {}
+  end
+
+  if opts.unique == nil then
+    opts.unique = true
+  end
+
+  if opts.overwriteExisting == true then
+    unmap(modes, keymap)
+    opts.overwriteExisting = nil
+  end
+
+  vim.keymap.set(modes, keymap, cmd, opts)
 end
 
 map("n", "<C-p>", "<cmd>Telescope find_files<cr>", { silent = true, desc = "Find Files" })
-map("n", "<Space>bd", "<cmd>bufdo bd!<cr>", { silent = false, desc = "Delete all buffers" })
-vim.cmd("iunmap <Tab>")
+map("n", "<Space>bd", "<cmd>bufdo bd!<cr>", { silent = false, desc = "Delete all buffers", overwriteExisting = true })
+
+unmap("i", "<Tab>")
