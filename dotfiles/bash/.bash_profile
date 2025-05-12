@@ -8,7 +8,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export EDITOR=nvim
 
 if [ -f "$(command -v eza)" ]; then
-	alias ls='eza --group-directories-first'
+    alias ls='eza --group-directories-first'
 fi
 
 alias reboot-shell='source ~/.bash_profile'
@@ -25,7 +25,7 @@ source ~/.dotfiles/git-completion.bash
 export PATH="$HOME/.cargo/bin:$PATH"
 
 if [ "$DESKTOP_SESSION" = "i3" ]; then
-	eval "$(ssh-agent -s)" &>/dev/null
-	# export "$(gnome-keyring-daemon -s)"
-	ssh-add ~/.ssh/*_rsa &>/dev/null
+    eval "$(ssh-agent -s)" &>/dev/null
+    # export "$(gnome-keyring-daemon -s)"
+    ssh-add ~/.ssh/*_rsa &>/dev/null
 fi
