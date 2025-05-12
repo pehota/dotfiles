@@ -4,3 +4,6 @@
 vim.g.loaded_node_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
+
+-- do not warn for incorrect plugins order
+vim.g.lazyvim_check_order = false
