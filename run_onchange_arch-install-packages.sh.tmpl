@@ -1,0 +1,10 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+# Packages: {{ .packages.arch | join " " }}
+set -euo pipefail
+
+yay -S --needed --noconfirm \
+{{- range $i, $pkg := .packages.arch }}
+  {{ $pkg }}{{ if lt (add1 $i) (len $.packages.arch) }} \{{ end }}
+{{- end }}
+{{ end -}}

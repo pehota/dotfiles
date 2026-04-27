@@ -1,0 +1,6 @@
+packages:
+  arch:
+    - claude-code
+    - bun-bin
+    - ferdium
+    - enpass-bin
