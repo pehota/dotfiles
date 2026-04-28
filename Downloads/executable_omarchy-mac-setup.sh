@@ -213,7 +213,7 @@ bind = SUPER, v, layoutmsg, preselect d
 bind = SUPER, b, layoutmsg, preselect r
 
 # Toggle split layout (i3: $mod+e)
-bind = SUPER, e, togglesplit
+bind = SUPER, e, layoutmsg, togglesplit
 
 # Close window (i3: $mod+Shift+q, mapped to Super+q for comfort)
 bind = SUPER, q, killactive
