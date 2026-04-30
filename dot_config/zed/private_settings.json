@@ -1,0 +1,99 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "project_panel": {
+    "dock": "right"
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
+  "base_keymap": "VSCode",
+  "formatter": "language_server",
+  "icon_theme": "Zed (Default)",
+  "agent": {
+    "dock": "left",
+    "default_profile": "plan-tdd",
+    "profiles": {
+      "doc-gen": {
+        "name": "doc-gen",
+        "tools": {
+                    "thinking": true,
+                    "read_file": true,
+                    "list_directory": true,
+                    "find_path": true,
+                    "edit_file": true,
+                    "create_directory": true
+                },
+        "enable_all_context_servers": false,
+        "context_servers": {}
+      },
+      "plan-tdd": {
+        "name": "plan-tdd",
+        "tools": {
+                    "thinking": true,
+                    "read_file": true,
+                    "find_path": false,
+                    "fetch": false,
+                    "edit_file": true,
+                    "diagnostics": false,
+                    "delete_path": false,
+                    "create_directory": false,
+                    "copy_path": false
+                },
+        "enable_all_context_servers": false,
+        "context_servers": {}
+      }
+    },
+    "always_allow_tool_actions": true,
+    "model_parameters": [],
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4.1"
+    },
+  },
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "edit_predictions": {
+    "mode": "eager",
+    "copilot": {
+      "proxy": null,
+      "proxy_no_verify": null
+    },
+    "enabled_in_text_threads": false
+  },
+  "theme": "Gruvbox Dark",
+  "buffer_font_size": 13,
+  "buffer_font_family": "Fira Code",
+  "terminal": {
+    "dock": "right",
+    "copy_on_select": true,
+    "font_size": 12
+  },
+  "format_on_save": "on",
+  // VIM related settings BOF
+  "vim_mode": true,
+  "cursor_blink": false,
+  "relative_line_numbers": true,
+  "scrollbar": {
+    "show": "never"
+  },
+  // allow cursor to reach edges of screen
+  "vertical_scroll_margin": 0,
+  "vim": {
+    "use_system_clipboard": "always"
+  }
+  // VIM related settings EOF
+}

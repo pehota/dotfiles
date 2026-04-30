@@ -1,0 +1,54 @@
+# Repo management files — not dotfiles
+scripts/
+assets/
+.backup/
+.git/
+.gitignore
+Brewfile
+migrate-to-chezmoi.plan.md
+2024-12-26.rayconfig
+
+# tmux — plugins are installed by run_once_after_install-tpm.sh, not managed here
+dot_tmux/plugins/
+
+# nvim — only manage custom lua files; everything else is LazyVim boilerplate
+dot_config/nvim/dot_git/
+dot_config/nvim/init.lua
+dot_config/nvim/lazy-lock.json
+dot_config/nvim/lazyvim.json
+dot_config/nvim/dot_gitignore
+dot_config/nvim/dot_neoconf.json
+dot_config/nvim/stylua.toml
+dot_config/nvim/LICENSE
+dot_config/nvim/README.md
+dot_config/nvim/spell/
+
+# fish — plugin-generated files (managed by fisher, not by us)
+dot_config/fish/fish_variables
+dot_config/fish/fishd.tmp.*
+dot_config/fish/empty_fish_variables*
+dot_config/fish/completions/symlink_docker.fish
+dot_config/fish/completions/symlink_kubectl.fish
+dot_config/fish/conf.d/fish_frozen_theme.fish
+dot_config/fish/conf.d/fish-ssh-agent.fish
+dot_config/fish/conf.d/fnm.fish
+dot_config/fish/conf.d/fzf.fish
+dot_config/fish/conf.d/pisces.fish
+dot_config/fish/conf.d/z.fish
+dot_config/fish/functions/__bass.py
+dot_config/fish/functions/__fzf_*.fish
+dot_config/fish/functions/__fzfcmd.fish
+dot_config/fish/functions/__ssh_agent_*.fish
+dot_config/fish/functions/__z*.fish
+dot_config/fish/functions/_pisces_*.fish
+dot_config/fish/functions/bass.fish
+dot_config/fish/functions/fenv.fish
+dot_config/fish/functions/fenv.main.fish
+dot_config/fish/functions/fisher.fish
+dot_config/fish/themes/
+
+# karabiner — auto-generated backups
+dot_config/private_karabiner/private_automatic_backups/
+
+# zed — backup file
+dot_config/zed/private_settings_backup.json

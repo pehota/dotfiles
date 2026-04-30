@@ -1,0 +1,42 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-`": "terminal_panel::ToggleFocus",
+      "ctrl-p": "file_finder::Toggle"
+    }
+  },
+  {
+    // put key-bindings here if you want them to work in normal & visual mode
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      "ctrl-p": "file_finder::Toggle"
+    }
+  },
+  {
+    // put key-bindings here if you want them to work in normal mode
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      "] d": "editor::GoToDiagnostic",
+      "[ d": "editor::GoToPrevDiagnostic",
+      "g D": "editor::GoToDefinitionSplit",
+      "g Y": "editor::GoToTypeDefinitionSplit",
+      "g r": "editor::FindAllReferences",
+      "g y": "editor::GoToTypeDefinition",
+      "space c a": "editor::ToggleCodeActions",
+      "space c f": "editor::Format",
+      "space c r": "editor::Rename",
+      "ctrl-n": [
+        "editor::SelectNext",
+        {
+          "replace_newest": false
+        }
+      ]
+    }
+  },
+  {
+    "bindings": {
+      "alt +": "workspace::ToggleZoom"
+    }
+  }
+]

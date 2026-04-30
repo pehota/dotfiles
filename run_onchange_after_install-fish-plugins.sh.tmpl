@@ -1,0 +1,17 @@
+#!/bin/sh
+# chezmoi re-runs this script when fish_plugins changes
+# hash: {{ include "dot_config/fish/fish_plugins" | sha256sum }}
+
+# Install fnm if not present
+command -v fnm >/dev/null 2>&1 || brew install fnm
+
+# Install fisher if not present
+fish -c "functions -q fisher || curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
+
+# Sync plugins from fish_plugins file
+fish -c "fisher update"
+
+# Set fish as default shell if not already
+FISH_PATH="$(command -v fish)"
+grep -qF "$FISH_PATH" /etc/shells || echo "$FISH_PATH" | sudo tee -a /etc/shells
+[ "$SHELL" != "$FISH_PATH" ] && chsh -s "$FISH_PATH"
