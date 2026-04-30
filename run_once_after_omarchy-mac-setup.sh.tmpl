@@ -1,4 +1,5 @@
 #!/bin/bash
+{{ if eq .chezmoi.os "linux" -}}
 # Only run on Apple hardware (detected via DMI vendor).
 {{ $vendor := trimAll "\n" (output "cat" "/sys/class/dmi/id/sys_vendor") -}}
 {{ if ne $vendor "Apple Inc." -}}
@@ -6,3 +7,6 @@ echo "Not a Mac — skipping omarchy-mac-setup."
 exit 0
 {{ end -}}
 sudo ~/Downloads/omarchy-mac-setup.sh
+{{ else -}}
+echo "Not Linux — skipping omarchy-mac-setup."
+{{ end -}}
