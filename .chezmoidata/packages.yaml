@@ -1,0 +1,43 @@
+packages:
+  arch:
+    - claude-code
+    - bun-bin
+    - ferdium
+    - enpass-bin
+    - wtype
+    - eza
+    - fnm
+    - fish
+    - neovim
+    - tmux
+    - chezmoi
+    - bat
+    - direnv
+    - fzf
+    - python
+    - ripgrep
+  darwin:
+    formulas:
+      - chezmoi
+      - bash
+      - bat
+      - direnv
+      - eza
+      - fish
+      - fnm
+      - fzf
+      - neovim
+      - python@3.10
+      - ripgrep
+      - tmux
+      - bun
+      - claude-code
+    casks:
+      - alacritty
+      - ferdium
+      - enpass
+      - font-fira-code-nerd-font
+      - font-jetbrains-mono-nerd-font
+      - karabiner-elements
+      - raycast
+      - zed

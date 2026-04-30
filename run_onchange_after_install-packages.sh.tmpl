@@ -1,0 +1,16 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+# Packages: {{ .packages.darwin.formulas | join " " }} {{ .packages.darwin.casks | join " " }}
+{{ range .packages.darwin.formulas -}}
+brew install {{ . }}
+{{ end -}}
+{{ range .packages.darwin.casks -}}
+brew install --cask {{ . }}
+{{ end -}}
+
+{{ else if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+# Packages: {{ .packages.arch | join " " }}
+set -euo pipefail
+yay -S --needed --noconfirm {{ .packages.arch | join " " }}
+{{ end -}}

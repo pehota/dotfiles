@@ -2,13 +2,10 @@
 scripts/
 assets/
 .backup/
-.git/
-.gitignore
-Brewfile
 migrate-to-chezmoi.plan.md
 2024-12-26.rayconfig
 
-# tmux — plugins are installed by run_once_after_install-tpm.sh, not managed here
+# tmux — plugins installed by run_once_after_install-tpm.sh
 dot_tmux/plugins/
 
 # nvim — only manage custom lua files; everything else is LazyVim boilerplate
@@ -52,3 +49,21 @@ dot_config/private_karabiner/private_automatic_backups/
 
 # zed — backup file
 dot_config/zed/private_settings_backup.json
+
+# Linux-only
+{{ if ne .chezmoi.os "linux" }}
+dot_config/hypr
+dot_config/waybar
+dot_config/mako
+dot_config/omarchy
+Downloads
+run_once_after_omarchy-mac-setup.sh.tmpl
+{{ end }}
+
+# macOS-only
+{{ if ne .chezmoi.os "darwin" }}
+dot_config/alacritty
+dot_config/private_karabiner
+dot_config/zed
+run_once_before_install-homebrew.sh
+{{ end }}

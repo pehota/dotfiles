@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+USER_NAME=$(git config user.name)
+USER_EMAIL=$(git config user.email)
+
+
+if [[ -z "$USER_NAME" ]]; then
+  printf "Please set the user name for this project\ngit config user.email USER_NAME"
+  exit 1
+fi
+
+if [[ -z "$USER_EMAIL" ]]; then
+  printf "Please set the user email for this project\ngit config user.email USER_EMAIL"
+  exit 1
+fi
+
+# Continue with the rest of the hook
+exec "$@"
