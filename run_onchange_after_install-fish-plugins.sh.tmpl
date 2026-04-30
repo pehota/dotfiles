@@ -13,5 +13,7 @@ fish -c "fisher update"
 
 # Set fish as default shell if not already
 FISH_PATH="$(command -v fish)"
-grep -qF "$FISH_PATH" /etc/shells || echo "$FISH_PATH" | sudo tee -a /etc/shells
-[ "$SHELL" != "$FISH_PATH" ] && chsh -s "$FISH_PATH"
+if [ "$SHELL" != "$FISH_PATH" ]; then
+  grep -qF "$FISH_PATH" /etc/shells || echo "$FISH_PATH" | sudo tee -a /etc/shells
+  chsh -s "$FISH_PATH"
+fi
