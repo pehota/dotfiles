@@ -257,6 +257,9 @@ submap = resize
   bind  = , Escape, submap, reset
 submap = reset
 
+# Ctrl+[ → Escape globally (wtype injects a clean Escape; requires wtype package)
+bind = CTRL, bracketleft, exec, wtype -k escape
+
 # <<< i3-compat block
 
 # Rebind SUPER ALT+F (was: Full width) to SUPER SHIFT+=
@@ -329,6 +332,7 @@ echo "    Super+Shift+hjkl    Swap window"
 echo "    Super+q             Close window"
 echo "    Super+e             Toggle split"
 echo "    Super+r             Resize mode (hjkl/arrows, Enter/Esc to exit)"
+echo "    Ctrl+[              Escape (global)"
 echo "    Super+1-0           Switch workspace"
 echo "    Super+Shift+1-0     Move window to workspace"
 echo ""

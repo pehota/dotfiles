@@ -4,3 +4,4 @@ packages:
     - bun-bin
     - ferdium
     - enpass-bin
+    - wtype
