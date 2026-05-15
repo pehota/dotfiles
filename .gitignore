@@ -18,6 +18,7 @@ __pycache__
 !**/fish/functions/ll.fish
 !**/fish/functions/weather.fish
 !**/fish/functions/__switch_node_version.fish
+!**/fish/functions/cz.fish
 **/fish/conf.d/**
 **/fish/fishd.tmp*
 !**/fish/conf.d/fnm.fish
