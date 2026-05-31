@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(rtk *)"
+      "Bash(rtk *)",
+      "Bash(walker --help)",
+      "Bash(walker --version)"
     ]
   }
 }
