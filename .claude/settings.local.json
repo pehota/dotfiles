@@ -3,7 +3,9 @@
     "allow": [
       "Bash(rtk *)",
       "Bash(walker --help)",
-      "Bash(walker --version)"
+      "Bash(walker --version)",
+      "Bash(chezmoi managed *)",
+      "Bash(chezmoi source-path *)"
     ]
   }
 }
