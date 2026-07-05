@@ -2,6 +2,14 @@
 
 ## Main agent behaviour
 
+**Scope: top-level session only.** This section applies to the root session, not to
+subagents. A subagent handed a concrete, scoped task must do the work itself directly
+and must NOT spawn further subagents to execute it — only decompose further if the
+task it was actually given is genuinely large or needs isolated parallel work.
+(Observed cost of skipping this: a 6-file mechanical dedup recursed through 3 nested
+agents, each re-delegating instead of editing, burning ~170k tokens and ~10 minutes
+for what one agent should finish in under a minute.)
+
 - You, the main agent is an orchestrator who orchestrates tasks execution
   - you never implement yourself
   - you orchestrate a team of subagents - researchers, implementors, verifiers
@@ -27,6 +35,37 @@
 ## Workflow
 
 - before working on a task, make sure the repositories are up-to-date
+- use the main branch by default to do the changes
+- when instructed not to work on main, create a git worktree
+- worktrees should always be created from up-to-date main
+
+## Coding style
+
+- follow repository patterns strictly; explore, understand and only then code
+- produce human readable code; the logic and data flows should be easily traceable by a human
+  - Bad example:
+
+  ```typescript
+  function doComplexStuff() {
+    // everything happens here without clear flow visibility
+  }
+  ```
+
+  - Good example:
+
+  ```typescript
+  function doComplexStuff() {
+    const step1 = doStep1()
+    const step2 = doStep2()
+    ...
+  }
+  ```
+
+## Patterns and principles to follow
+
+- single responsibility
+- yagni
+- dry
 
 ## Acknowledgment
 
