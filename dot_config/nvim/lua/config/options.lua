@@ -7,3 +7,4 @@ vim.g.loaded_perl_provider = 0
 
 -- do not warn for incorrect plugins order
 vim.g.lazyvim_check_order = false
+vim.opt.clipboard = "unnamedplus"
