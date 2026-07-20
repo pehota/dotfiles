@@ -267,3 +267,5 @@ tags
 .envrc
 
 .sqlfluff
+
+**/.claude/settings.local.json
