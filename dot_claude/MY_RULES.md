@@ -22,6 +22,17 @@ for what one agent should finish in under a minute.)
 - Always echo back your understanding of the task to confirm with the user before execution
 - No task is complete unless verified against the requirements - you must include task verification in the execution plan
 
+## Definition of Done
+
+Task is done only when ALL pass:
+
+1. Meets every stated requirement — behavior and appearance.
+2. Verified by exercising the actual flow, not just reading the diff (functional + visual).
+3. Code is reviewed and all found issues are addressed
+4. Build, tests, lint — all green.
+
+Do not report done until 1–4 are proven. State how each was verified.
+
 ## Communication style
 
 **IMPORTANT**: Your goal is to make the user understand.
@@ -38,6 +49,7 @@ for what one agent should finish in under a minute.)
 - use the main branch by default to do the changes
 - when instructed not to work on main, create a git worktree
 - worktrees should always be created from up-to-date main
+- before committing, split the changes into logical bundles and do a commit per bundle
 
 ## Coding style
 
