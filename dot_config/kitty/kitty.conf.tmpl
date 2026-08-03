@@ -1,9 +1,7 @@
 # vim:fileencoding=utf-8:ft=conf:foldmethod=marker
 
-{{ if eq .chezmoi.os "linux" -}}
 include ~/.config/omarchy/current/theme/kitty.conf
-{{ end -}}
-#: Fonts {{ "{{" }}{
+#: Fonts {{{
 
 #: kitty has very powerful font management. You can configure
 #: individual font faces and even specify special fonts for particular
@@ -25,14 +23,8 @@ include ~/.config/omarchy/current/theme/kitty.conf
 #:     italic_font      Operator Mono Book Italic
 #:     bold_italic_font Operator Mono Medium Italic
 
-{{ if eq .chezmoi.os "linux" -}}
 font_family JetBrainsMono Nerd Font
 font_size 9.0
-{{ else -}}
-font_family FiraCode Nerd Font
-font_size 12.0
-{{ end -}}
-
 #: Font size (in pts)
 
 # adjust_line_height  0
@@ -64,11 +56,11 @@ font_size 12.0
 #: monitor DPI to arrive at a pixel value. There must be four values
 #: corresponding to thin, normal, thick, and very thick lines.
 
-#: }{{ "}}" }}
+#: }}}
 
 confirm_os_window_close 0
 
-#: Cursor customization {{ "{{" }}{
+#: Cursor customization {{{
 
 # cursor #cccccc
 
@@ -87,9 +79,9 @@ confirm_os_window_close 0
 #: specified number of seconds of keyboard inactivity. Set to zero to
 #: never stop blinking.
 
-#: }{{ "}}" }}
+#: }}}
 
-#: Scrollback {{ "{{" }}{
+#: Scrollback {{{
 
 # scrollback_lines 2000
 
@@ -111,9 +103,9 @@ scrollback_pager less --chop-long-lines --RAW-CONTROL-CHARS +INPUT_LINE_NUMBER
 #: Modify the amount scrolled by the mouse wheel or touchpad. Use
 #: negative numbers to change scroll direction.
 
-#: }{{ "}}" }}
+#: }}}
 
-#: Mouse {{ "{{" }}{
+#: Mouse {{{
 
 # url_color #0087BD
 # url_style curly
@@ -141,6 +133,9 @@ copy_on_select yes
 #: as all programs, including websites open in your browser can read
 #: the contents of the clipboard.
 
+
+paste_actions confirm-if-large
+
 # rectangle_select_modifiers ctrl+alt
 
 #: The modifiers to use rectangular selection (i.e. to select text in
@@ -167,9 +162,9 @@ copy_on_select yes
 #: Set the active window to the window under the mouse when moving the
 #: mouse around
 
-#: }{{ "}}" }}
+#: }}}
 
-#: Performance tuning {{ "{{" }}{
+#: Performance tuning {{{
 
 # repaint_delay 10
 
@@ -197,9 +192,9 @@ copy_on_select yes
 #: keyboard repeat rate, you may notice some slight input latency. If
 #: so, set this to no.
 
-#: }{{ "}}" }}
+#: }}}
 
-#: Terminal bell {{ "{{" }}{
+#: Terminal bell {{{
 
 # enable_audio_bell yes
 
@@ -222,9 +217,9 @@ copy_on_select yes
 #: windows in the tab and the window is not the currently focused
 #: window
 
-#: }{{ "}}" }}
+#: }}}
 
-#: Window layout {{ "{{" }}{
+#: Window layout {{{
 
 # remember_window_size  yes
 # initial_window_width  640
@@ -276,13 +271,8 @@ window_margin_width 0.0
 #: visible. Negative values will cause the value of
 #: window_margin_width to be used instead.
 
-{{ if eq .chezmoi.os "linux" -}}
 window_padding_width 14
 hide_window_decorations yes
-{{ else -}}
-window_padding_width 0.0
-{{ end -}}
-
 #: The window padding (in pts) (blank area between the text and the
 #: window border)
 
@@ -304,9 +294,9 @@ window_padding_width 0.0
 #: Fade the text in inactive windows by the specified amount (a number
 #: between zero and one, with zero being fully faded).
 
-#: }{{ "}}" }}
+#: }}}
 
-#: Tab bar {{ "{{" }}{
+#: Tab bar {{{
 
 # tab_bar_edge bottom
 
@@ -345,10 +335,9 @@ window_padding_width 0.0
 
 #: Tab bar colors and styles
 
-#: }{{ "}}" }}
+#: }}}
 
-#: Color scheme {{ "{{" }}{
-{{ if eq .chezmoi.os "linux" -}}
+#: Color scheme {{{
 map ctrl+insert copy_to_clipboard
 map shift+insert paste_from_clipboard
 allow_remote_control yes
@@ -360,11 +349,10 @@ tab_bar_edge bottom
 tab_bar_style powerline
 tab_powerline_style slanted
 tab_title_template {title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}
-{{ end -}}
 include ./gruvbox-dark.conf
-# }{{ "}}" }}
+# }}}
 
-#: Advanced {{ "{{" }}{
+#: Advanced {{{
 
 # shell .
 
@@ -426,9 +414,9 @@ include ./gruvbox-dark.conf
 #: you are doing, not because you read some advice on Stack Overflow
 #: to change it.
 
-#: }{{ "}}" }}
+#: }}}
 
-#: OS specific tweaks {{ "{{" }}{
+#: OS specific tweaks {{{
 
 # macos_titlebar_color system
 
@@ -454,13 +442,6 @@ include ./gruvbox-dark.conf
 #: depends on the window manager, as it is the job of the window
 #: manager/compositor to draw window decorations.
 
-{{ if eq .chezmoi.os "darwin" -}}
-macos_option_as_alt yes
-map alt+left send_text all \x1b\x62
-map alt+right send_text all \x1b\x66
-{{ end -}}
-
-
 #: Use the option key as an alt key. With this set to no, kitty will
 #: use the macOS native Option+Key = unicode character behavior. This
 #: will break any Alt+key keyboard shortcuts in your terminal
@@ -481,9 +462,9 @@ map alt+right send_text all \x1b\x66
 #: Disable this if you want kitty top-level (OS) windows to not be
 #: resizable on macOS.
 
-#: }{{ "}}" }}
+#: }}}
 
-#: Keyboard shortcuts {{ "{{" }}{
+#: Keyboard shortcuts {{{
 
 #: For a list of key names, see: GLFW keys
 #: <http://www.glfw.org/docs/latest/group__keys.html>. The name to use
@@ -532,7 +513,7 @@ map alt+right send_text all \x1b\x66
 #: You can have kitty remove all shortcut definition seen up to this
 #: point. Useful, for instance, to remove the default shortcuts.
 
-#: Clipboard {{ "{{" }}{
+#: Clipboard {{{
 
 # map cmd+c        copy_to_clipboard
 # map kitty_mod+c  copy_to_clipboard
@@ -553,9 +534,9 @@ map alt+right send_text all \x1b\x66
 
 #:     map kitty_mod+y new_window less @selection
 
-#: }{{ "}}" }}
+#: }}}
 
-#: Scrolling {{ "{{" }}{
+#: Scrolling {{{
 
 # map kitty_mod+up        scroll_line_up
 # map kitty_mod+k         scroll_line_up
@@ -576,9 +557,9 @@ map alt+right send_text all \x1b\x66
 
 #:     map kitty_mod+y new_window @ansi less +G -R
 
-#: }{{ "}}" }}
+#: }}}
 
-#: Window management {{ "{{" }}{
+#: Window management {{{
 
 map kitty_mod+enter new_window_with_cwd
 
@@ -611,9 +592,9 @@ map kitty_mod+enter new_window_with_cwd
 # map kitty_mod+8 eighth_window
 # map kitty_mod+9 ninth_window
 # map kitty_mod+0 tenth_window
-#: }{{ "}}" }}
+#: }}}
 
-#: Tab management {{ "{{" }}{
+#: Tab management {{{
 
 # map kitty_mod+right next_tab
 # map kitty_mod+left  previous_tab
@@ -632,9 +613,9 @@ map kitty_mod+enter new_window_with_cwd
 #: Just as with new_window above, you can also pass the name of
 #: arbitrary commands to run when using new_tab and use
 #: new_tab_with_cwd.
-#: }{{ "}}" }}
+#: }}}
 
-#: Layout management {{ "{{" }}{
+#: Layout management {{{
 
 # map kitty_mod+l next_layout
 
@@ -642,9 +623,9 @@ map kitty_mod+enter new_window_with_cwd
 
 #:     map ctrl+alt+t goto_layout tall
 #:     map ctrl+alt+s goto_layout stack
-#: }{{ "}}" }}
+#: }}}
 
-#: Font sizes {{ "{{" }}{
+#: Font sizes {{{
 
 #: You can change the font size for all top-level kitty windows at a
 #: time or only the current one.
@@ -660,9 +641,9 @@ map kitty_mod+enter new_window_with_cwd
 #: To setup shortcuts to change only the current window's font size::
 
 #:     map kitty_mod+f6 change_font_size current 10.0
-#: }{{ "}}" }}
+#: }}}
 
-#: Select and act on visible text {{ "{{" }}{
+#: Select and act on visible text {{{
 
 #: Use the hints kitten to select text and either pass it to an
 #: external program or insert it into the terminal or copy it to the
@@ -701,9 +682,9 @@ map kitty_mod+enter new_window_with_cwd
 
 #: The hints kitten has many more modes of operation that you can map
 #: to different shortcuts. For a full description see kittens/hints.
-#: }{{ "}}" }}
+#: }}}
 
-#: Miscellaneous {{ "{{" }}{
+#: Miscellaneous {{{
 
 # map kitty_mod+f11    toggle_fullscreen
 # map kitty_mod+u      input_unicode_character
@@ -741,8 +722,8 @@ map kitty_mod+enter new_window_with_cwd
 #:     map ctrl+alt+a send_text normal Word\x1b[H
 #:     map ctrl+alt+a send_text application Word\x1bOH
 
-#: }{{ "}}" }}
+#: }}}
 
-# }{{ "}}" }}
+# }}}
 #
 map alt++  goto_layout stack
