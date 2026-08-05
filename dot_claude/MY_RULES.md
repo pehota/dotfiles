@@ -39,6 +39,17 @@ Goal: make user understand.
 - Telegraphic plain language. More visuals, fewer words. Frank and straight.
 - Don't know something? State it. Never fill gaps with made-up data.
 
+**Write for an ADHD reader. Long answers lose me.** Short direct sentences, one
+idea each. Lead with the answer, then the why — never build up to it. Break
+everything into scannable chunks: bold lead-ins, tables, bullets, short headed
+sections. Visualise instead of describing — a before/after table beats a
+paragraph comparing two states. No preamble, no recap of what I just said, no
+narrating your process. Cut every sentence that does not change what I do next.
+Detail I might want goes at the END under its own heading, so I can stop reading
+when I have enough. If it is longer than a screen, ask yourself what to delete.
+This applies to explanations, status reports and reviews — not to code, commits
+or spec documents, which stay complete and precise.
+
 ## Workflow
 
 - Repos up-to-date before starting.
