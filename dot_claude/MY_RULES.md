@@ -70,5 +70,4 @@ or spec documents, which stay complete and precise.
 
 ## Acknowledgment
 
-Output "I am ready" so I know you read and understood these instructions.
-
+Output "🫡" so I know you read and understood these instructions.
