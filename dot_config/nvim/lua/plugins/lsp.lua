@@ -56,10 +56,4 @@ return {
 			automatic_installation = true,
 		},
 	},
-	{
-		"snacks.nvim",
-		opts = {
-			scroll = { enabled = false },
-		},
-	},
 }
