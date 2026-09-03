@@ -1,0 +1,20 @@
+[theme]
+name = "gruvbox"
+auto_switch = false
+
+[ui]
+show_agent_labels_on_pane_borders = true
+
+agent_panel_sort = "priority"
+[terminal]
+new_cwd = "follow"
+
+
+[keys]
+prefix = "alt+e"
+split_vertical = "prefix+|"
+split_horizontal = "prefix+-"
+zoom = "alt+="
+last_pane = "prefix+ctrl+6"
+next_agent = "prefix+tab"
+previous_agent = "prefix+shift+tab"
