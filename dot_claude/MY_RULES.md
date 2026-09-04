@@ -19,8 +19,12 @@ Task done only when ALL pass:
 
 1. Meets every stated requirement — behavior and appearance.
 2. Verified by exercising actual flow, not just reading diff (functional + visual).
-3. Code reviewed by a FRESH agent (clean context, independent — not self-review),
-   all found issues addressed.
+3. Code reviewed by a FRESH agent (clean context, independent — not self-review).
+   Fix only findings that **block correctness**: bugs, security holes, broken
+   behaviour, spec violations. Everything else (style, naming, minor doc wording,
+   defensive-code nits, "could be cleaner") is NOT auto-fixed — batch them and
+   raise to me with a fix/skip recommendation and reason. I decide. Never
+   silently fix or silently drop a non-blocking finding.
 4. Build, tests, lint — all green.
 
 No "done" until 1–4 proven. **State how each verified.**
