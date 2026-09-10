@@ -1,3 +1,4 @@
+onboarding = false
 [theme]
 name = "gruvbox"
 auto_switch = false
@@ -6,6 +7,7 @@ auto_switch = false
 show_agent_labels_on_pane_borders = true
 
 agent_panel_sort = "priority"
+status_indicators = "symbols"
 [terminal]
 new_cwd = "follow"
 
@@ -18,3 +20,8 @@ zoom = "alt+="
 last_pane = "prefix+ctrl+6"
 next_agent = "prefix+tab"
 previous_agent = "prefix+shift+tab"
+switch_workspace = "prefix+1..9"
+switch_tab = "prefix+shift+1..9"
+
+[ui.toast]
+delivery = "system"
