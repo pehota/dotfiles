@@ -25,3 +25,9 @@ if not string match -q -- "$PNPM_HOME/bin" $PATH
   set -gx PATH "$PNPM_HOME/bin" $PATH
 end
 # pnpm end
+
+# node: fnm must load after ~/.fishrc, which prepends /opt/homebrew/bin (brew node shadows the shim)
+if test (command -v fnm)
+    fnm env | source
+    __switch_node_version
+end
