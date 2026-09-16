@@ -59,6 +59,7 @@ or spec documents, which stay complete and precise.
 - Repos up-to-date before starting.
 - Work on main by default. When told not to, use git worktree created from up-to-date main.
 - Before committing, split changes into logical bundles — one commit per bundle.
+- Create media-aware diagrams - ASCII in terminal, mermaid in markdown, etc
 
 ## Coding style
 
