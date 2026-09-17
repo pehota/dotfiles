@@ -17,11 +17,10 @@ prefix = "alt+e"
 split_vertical = "prefix+|"
 split_horizontal = "prefix+-"
 zoom = "alt+="
-last_pane = "prefix+ctrl+6"
-next_agent = "prefix+tab"
 previous_agent = "prefix+shift+tab"
 switch_workspace = "prefix+1..9"
 switch_tab = "prefix+shift+1..9"
+focus_agent = "prefix+alt+1..9"
 
 [ui.toast]
 delivery = "system"
