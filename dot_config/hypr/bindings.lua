@@ -34,9 +34,23 @@
 -- ============================================================
 
 -- Application bindings
+-- (unbind Omarchy defaults on these same combos first — Lua binds stack
+-- instead of replacing, unlike the old .conf source= chain)
+hl.unbind("SUPER + RETURN")
+hl.unbind("SUPER + ALT + RETURN")
+hl.unbind("SUPER + SHIFT + RETURN")
 o.bind("SUPER + RETURN", "Terminal", 'uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)"')
 o.bind("SUPER + ALT + RETURN", "Tmux", 'uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)" bash -c "tmux attach || tmux new -s Work"')
 o.bind("SUPER + SHIFT + RETURN", "Browser", "omarchy-launch-browser")
+hl.unbind("SUPER + SHIFT + F")
+hl.unbind("SUPER + ALT + SHIFT + F")
+hl.unbind("SUPER + SHIFT + B")
+hl.unbind("SUPER + SHIFT + ALT + B")
+hl.unbind("SUPER + SHIFT + M")
+hl.unbind("SUPER + SHIFT + N")
+hl.unbind("SUPER + SHIFT + D")
+hl.unbind("SUPER + SHIFT + O")
+hl.unbind("SUPER + SHIFT + SLASH")
 o.bind("SUPER + SHIFT + F", "File manager", "uwsm-app -- nautilus --new-window")
 o.bind("SUPER + ALT + SHIFT + F", "File manager (cwd)", 'uwsm-app -- nautilus --new-window "$(omarchy-cmd-terminal-cwd)"')
 o.bind("SUPER + SHIFT + B", "Browser", "omarchy-launch-browser")
