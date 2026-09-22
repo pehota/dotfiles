@@ -1,7 +1,7 @@
 # vim:fileencoding=utf-8:ft=conf:foldmethod=marker
 
 {{ if eq .chezmoi.os "linux" -}}
-include ~/.config/omarchy/current/theme/kitty.conf
+include ~/.local/state/omarchy/current/theme/kitty.conf
 {{ end -}}
 #: Fonts {{ "{{" }}{
 
@@ -353,6 +353,10 @@ window_padding_width 0.0
 {{ if eq .chezmoi.os "linux" -}}
 map ctrl+insert copy_to_clipboard
 map shift+insert paste_from_clipboard
+# Kitty legacy encoding sends Alt+Shift+Enter the same as Alt+Enter; send CSI-u so tmux can match M-S-Enter.
+map alt+shift+enter send_text all \e[13;4u
+# Send Shift+Enter as CSI-u so TUIs can distinguish it from Enter.
+map shift+enter send_text all \e[13;2u
 allow_remote_control yes
 cursor_shape block
 cursor_blink_interval 0
@@ -748,3 +752,6 @@ map kitty_mod+enter new_window_with_cwd
 # }{{ "}}" }}
 #
 map alt++  goto_layout stack
+
+# Allow cwd lookup from global keybindings
+listen_on unix:${XDG_RUNTIME_DIR}/omarchy-kitty-{kitty_pid}
