@@ -1,0 +1,28 @@
+#!/bin/bash
+{{ if eq .chezmoi.os "linux" -}}
+set -euo pipefail
+
+unwanted=(aether kdenlive libreoffice-fresh obs-studio pinta xournalpp)
+to_remove=()
+for pkg in "${unwanted[@]}"; do
+    pacman -Q "$pkg" >/dev/null 2>&1 && to_remove+=("$pkg")
+done
+
+if [ "${#to_remove[@]}" -gt 0 ]; then
+    sudo pacman -Rns --noconfirm "${to_remove[@]}"
+fi
+
+rm -f ~/.local/share/applications/Discord.desktop \
+      ~/.local/share/applications/HEY.desktop \
+      ~/.local/share/applications/WhatsApp.desktop \
+      ~/.local/share/applications/YouTube.desktop \
+      ~/.local/share/applications/Zoom.desktop \
+      ~/.local/share/applications/Basecamp.desktop \
+      ~/.local/share/applications/X.desktop \
+      ~/.local/share/applications/Google\ Contacts.desktop \
+      ~/.local/share/applications/Google\ Maps.desktop \
+      ~/.local/share/applications/Google\ Messages.desktop \
+      ~/.local/share/applications/Google\ Photos.desktop
+{{ else -}}
+echo "Not Linux — skipping omarchy package cleanup."
+{{ end -}}
