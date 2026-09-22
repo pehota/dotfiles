@@ -1,0 +1,37 @@
+add_newline = true
+command_timeout = 200
+format = "[$directory](green) $git_branch$git_status$status[\\$](white)"
+
+[character]
+disabled = true
+
+[directory]
+truncation_length = 3
+truncation_symbol = "…/"
+style = "green"
+format = "[$path]($style)"
+
+[git_branch]
+format = "[\\(](white)[$branch](bold purple)"
+style = "white"
+
+[git_status]
+format     = '[|$all_status$ahead_behind\)]($style)'
+style      = "white"
+ahead      = "[⇡${count}](blue)"
+diverged   = "[⇕⇡${ahead_count}⇣${behind_count}](blue)"
+behind     = "[⇣${count}](blue)"
+conflicted = "[](blue)"
+up_to_date = ""
+untracked  = "[?](blue)"
+modified   = "[+${count}](blue)"
+stashed    = ""
+staged     = ""
+renamed    = ""
+deleted    = ""
+
+[status]
+disabled = false
+format = '[\[$status\]]($style)'
+style = "red"
+success_symbol = ""

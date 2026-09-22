@@ -17,6 +17,8 @@ packages:
     - python
     - ripgrep
     - wlsunset
+    - herdr
+    - starship
   darwin:
     formulas:
       - chezmoi
@@ -33,6 +35,8 @@ packages:
       - tmux
       - bun
       - claude-code
+      - herdr
+      - starship
     casks:
       - alacritty
       - ferdium
