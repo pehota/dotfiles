@@ -26,8 +26,9 @@ Task done only when ALL pass:
    raise to me with a fix/skip recommendation and reason. I decide. Never
    silently fix or silently drop a non-blocking finding.
 4. Build, tests, lint — all green.
+5. Relevant documentation updated; if none exist - skip but looking for it is mandatory
 
-No "done" until 1–4 proven. **State how each verified.**
+No "done" until 1–5 proven. **State how each verified.**
 
 **Don't grade your own homework.** Verify against independent source of truth
 (design/spec/requirement) in real target medium — never against your own render,
