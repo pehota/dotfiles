@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# Emits starship-ready git status segment: |<symbols>) or |✓)
+# Colors are ANSI-escaped inline since starship $output has no per-char styling.
+set -euo pipefail
+
+git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
+
+status=$(git status --porcelain 2>/dev/null)
+ahead_behind=$(git rev-list --left-right --count '@{upstream}...HEAD' 2>/dev/null || echo "")
+
+blue=$'\e[34m'
+green=$'\e[32m'
+red=$'\e[31m'
+reset=$'\e[0m'
+
+if [ -z "$status" ] && [ -z "$ahead_behind" -o "$ahead_behind" = "0	0" ]; then
+    printf '|%s✓%s)' "$green" "$reset"
+    exit 0
+fi
+
+staged=0
+deleted=0
+renamed=0
+modified=0
+untracked=0
+
+while IFS= read -r line; do
+    [ -z "$line" ] && continue
+    x=${line:0:1}
+    y=${line:1:1}
+    case "$x" in
+        A) staged=$((staged+1)) ;;
+        M) staged=$((staged+1)) ;;
+        R) renamed=$((renamed+1)) ;;
+        D) deleted=$((deleted+1)) ;;
+    esac
+    case "$y" in
+        M) modified=$((modified+1)) ;;
+        D) deleted=$((deleted+1)) ;;
+    esac
+    [ "$x$y" = "??" ] && untracked=$((untracked+1))
+done <<< "$status"
+
+out="|"
+[ "$deleted" -gt 0 ] && out+="${red}✘${deleted}${reset}"
+[ "$renamed" -gt 0 ] && out+="${green}»${renamed}${reset}"
+[ "$staged" -gt 0 ] && out+="${green}●${staged}${reset}"
+[ "$modified" -gt 0 ] && out+="${blue}+${modified}${reset}"
+[ "$untracked" -gt 0 ] && out+="${blue}?${reset}"
+
+if [ -n "$ahead_behind" ] && [ "$ahead_behind" != "0	0" ]; then
+    behind=$(cut -f1 <<< "$ahead_behind")
+    ahead=$(cut -f2 <<< "$ahead_behind")
+    if [ "$ahead" -gt 0 ] && [ "$behind" -gt 0 ]; then
+        out+="${blue}⇕⇡${ahead}⇣${behind}${reset}"
+    elif [ "$ahead" -gt 0 ]; then
+        out+="${blue}⇡${ahead}${reset}"
+    elif [ "$behind" -gt 0 ]; then
+        out+="${blue}⇣${behind}${reset}"
+    fi
+fi
+
+out+=")"
+printf '%s' "$out"

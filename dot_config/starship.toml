@@ -1,6 +1,6 @@
 add_newline = true
 command_timeout = 200
-format = "[$directory](green) $git_branch$git_status$status[\\$](white)"
+format = "[$directory](green) $git_branch${custom.git_status}[\\$ ](white)"
 
 [character]
 disabled = true
@@ -15,20 +15,10 @@ format = "[$path]($style)"
 format = "[\\(](white)[$branch](bold purple)"
 style = "white"
 
-[git_status]
-format     = '[|$all_status$ahead_behind\)]($style) '
-style      = "white"
-ahead      = "[⇡${count}](blue)"
-diverged   = "[⇕⇡${ahead_count}⇣${behind_count}](blue)"
-behind     = "[⇣${count}](blue)"
-conflicted = "[](blue)"
-up_to_date = ""
-untracked  = "[?](blue)"
-modified   = "[+${count}](blue)"
-stashed    = ""
-staged     = ""
-renamed    = ""
-deleted    = ""
+[custom.git_status]
+command = "~/.config/starship/modules/git-prompt-status"
+when = "git rev-parse --is-inside-work-tree"
+format = '$output '
 
 [status]
 disabled = false
