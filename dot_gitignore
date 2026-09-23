@@ -269,3 +269,5 @@ tags
 .sqlfluff
 
 **/.claude/settings.local.json
+
+.dod/
