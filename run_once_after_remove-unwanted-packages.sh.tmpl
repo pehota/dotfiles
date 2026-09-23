@@ -2,7 +2,7 @@
 {{ if eq .chezmoi.os "linux" -}}
 set -euo pipefail
 
-unwanted=(1password 1password-cli aether kdenlive libreoffice-fresh obs-studio omarchy-fish pinta signal-desktop starship xournalpp)
+unwanted=(1password 1password-cli aether kdenlive libreoffice-fresh mise-bin obs-studio omarchy-fish pinta signal-desktop starship xournalpp)
 to_remove=()
 for pkg in "${unwanted[@]}"; do
     pacman -Q "$pkg" >/dev/null 2>&1 && to_remove+=("$pkg")

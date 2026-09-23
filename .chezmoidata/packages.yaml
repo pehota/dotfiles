@@ -18,6 +18,7 @@ packages:
     - ripgrep
     - wlsunset
     - herdr
+    - github-cli
   darwin:
     formulas:
       - chezmoi
@@ -36,6 +37,7 @@ packages:
       - claude-code
       - herdr
       - starship
+      - gh
     casks:
       - ferdium
       - enpass
