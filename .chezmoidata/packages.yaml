@@ -18,7 +18,6 @@ packages:
     - ripgrep
     - wlsunset
     - herdr
-    - starship
   darwin:
     formulas:
       - chezmoi
