@@ -24,3 +24,19 @@ focus_agent = "prefix+alt+1..9"
 
 [ui.toast]
 delivery = "system"
+
+[ui.sidebar.agents]
+rows = [
+  [
+    "state_icon",
+    { token = "$load" },
+    { token = "terminal_title_stripped", dim = false, fg = "#D9D2B9" },
+  ],
+  [
+    { token = "workspace", dim = true, bold = false },
+  ],
+  [
+    { token = "agent", dim = true },
+  ],
+]
+row_gap = 1
