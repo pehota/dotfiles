@@ -5,6 +5,7 @@ auto_switch = false
 
 [ui]
 show_agent_labels_on_pane_borders = true
+kitty_graphics = true
 
 agent_panel_sort = "priority"
 status_indicators = "symbols"
