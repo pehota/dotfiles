@@ -67,3 +67,25 @@ dot_config/private_karabiner
 dot_config/zed
 run_once_before_install-homebrew.sh
 {{ end }}
+
+# big-mac (arch remote) — only fish, herdr, nvim, gitconfig, gitignore, bash_profile, claude, ccstatusline
+{{ if eq .chezmoi.hostname "big-mac" }}
+2024-12-26.rayconfig
+assets
+Downloads
+dot_git-templates
+README.md
+run_once_after_fix-fish-function-path.sh
+run_once_after_install-tpm.sh
+run_once_after_omarchy-mac-setup.sh.tmpl
+run_once_after_remove-unwanted-packages.sh.tmpl
+run_once_before_install-homebrew.sh
+run_onchange_after_install-packages.sh.tmpl
+dot_config/hypr
+dot_config/kitty
+dot_config/omarchy
+dot_config/private_karabiner
+dot_config/tmux
+dot_config/zed
+dot_config/alacritty
+{{ end }}
