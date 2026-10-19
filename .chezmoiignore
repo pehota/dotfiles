@@ -76,7 +76,6 @@ Downloads
 dot_git-templates
 README.md
 run_once_after_fix-fish-function-path.sh
-run_once_after_install-tpm.sh
 run_once_after_omarchy-mac-setup.sh.tmpl
 run_once_after_remove-unwanted-packages.sh.tmpl
 run_once_before_install-homebrew.sh
