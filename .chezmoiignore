@@ -68,7 +68,7 @@ dot_config/zed
 run_once_before_install-homebrew.sh
 {{ end }}
 
-# big-mac (arch remote) — only fish, herdr, nvim, claude, ccstatusline
+# big-mac (arch remote) — only fish, herdr, nvim, claude/MY_RULES.md, ccstatusline
 {{ if eq .chezmoi.hostname "big-mac" }}
 2024-12-26.rayconfig
 assets
@@ -79,6 +79,8 @@ dot_gitignore
 dot_git-templates
 dot_local
 README.md
+.claude/scheduled_tasks.lock
+.claude/settings.local.json
 run_once_after_fix-fish-function-path.sh
 run_once_after_omarchy-mac-setup.sh.tmpl
 run_once_after_remove-unwanted-packages.sh.tmpl
