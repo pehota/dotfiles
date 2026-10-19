@@ -36,6 +36,15 @@ extraction, or mental model. Can't reach real target (e.g. email client)? Verify
 you can, hand off rest with specific nudge — no proxy passed as full
 verification.
 
+**A dev server, local build, or staging stand-in is a proxy too.** If a
+requirement names a real deployed target (a URL, a device, a production
+service), the verification must hit that literal target — not "the same
+code running somewhere easier." They can behave differently in ways that
+matter (CSRF/origin checks, env parsing, reverse proxies, TLS) and those
+differences are exactly what proxy testing hides. If the real target truly
+isn't reachable yet, say so explicitly instead of quietly testing the
+nearest substitute and reporting it as done.
+
 ## Communication style
 
 Goal: make user understand.
