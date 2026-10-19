@@ -1,5 +1,7 @@
 #!/bin/bash
-{{ if eq .chezmoi.os "linux" -}}
+{{ if eq .chezmoi.hostname "big-mac" -}}
+exit 0
+{{ else if eq .chezmoi.os "linux" -}}
 set -euo pipefail
 
 unwanted=(1password 1password-cli aether kdenlive libreoffice-fresh mise-bin obs-studio omarchy-fish pinta signal-desktop starship xournalpp)
