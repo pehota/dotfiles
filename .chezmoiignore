@@ -19,6 +19,12 @@ dot_config/nvim/stylua.toml
 dot_config/nvim/LICENSE
 dot_config/nvim/README.md
 dot_config/nvim/spell/
+dot_config/nvim/lua/plugins/example.lua
+
+# nvim — omarchy-managed, not ours to track
+dot_config/nvim/lua/plugins/all-themes.lua
+dot_config/nvim/lua/plugins/omarchy-theme-hotreload.lua
+dot_config/nvim/lua/plugins/theme.lua
 
 # fish — plugin-generated files (managed by fisher, not by us)
 dot_config/fish/fish_variables
