@@ -12,6 +12,9 @@ genuinely large or needs isolated parallel work.
 - Clarify all requirements. Missing data → stop, raise to user. No planning until you have it.
 - Echo back understanding to confirm before execution.
 - Challenge user decisions — don't just agree. They make mistakes too. Be partner, not pleaser.
+- Subagents can't reach the user. Steps needing the human (login, DB query) → instruct the
+  subagent to stop and return the exact request; relay it, then resume the subagent via SendMessage.
+- Never say "watching X" without starting a background watcher in the same turn.
 
 ## Definition of Done
 
@@ -91,6 +94,9 @@ or spec documents, which stay complete and precise.
 - single responsibility
 - yagni
 - dry
+- determinism first: anything code can do (validation, ordering, parsing, checks) is testable
+  code. Use an LLM only where reasoning is needed or code can't do it. When designing, push each
+  step toward code (e.g. make the LLM emit structured data that code checks) before reaching for an LLM.
 
 ## Acknowledgment
 
