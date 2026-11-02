@@ -8,15 +8,14 @@
   useconfigonly = true
 [merge]
   ff = no
-  tool = vimdiff
+	tool = nvimdiff
 [diff]
-  tool = vimdiff
+  tool = nvimdiff
 [difftool]
   prompt = false
 [mergetool]
-  prompt = true
-[mergetool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+	prompt = false
+	keepBackup = false
 [filter "lfs"]
   smudge = git-lfs smudge %f
   required = true
@@ -82,3 +81,5 @@
   path = ~/Work/job/git/.gitconfig
 [push]
 	autoSetupRemote = true
+[mergetool "nvimdiff"]
+	layout = LOCAL,BASE,REMOTE / MERGED
