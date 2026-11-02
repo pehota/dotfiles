@@ -45,6 +45,14 @@ differences are exactly what proxy testing hides. If the real target truly
 isn't reachable yet, say so explicitly instead of quietly testing the
 nearest substitute and reporting it as done.
 
+## Cleanup
+
+Before reporting done, clean up what YOU or your subagents created: processes and
+apps you started (dev servers, browsers, chrome-devtools/Chrome instances, background
+jobs), temp files, scratch worktrees. Close browser pages/instances you opened.
+**Only your own** — never kill or delete anything you didn't start (identify by PID
+or path you recorded). Subagents clean up their own before returning.
+
 ## Communication style
 
 Goal: make user understand.
