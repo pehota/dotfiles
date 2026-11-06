@@ -44,6 +44,18 @@ Scripts that run automatically:
 | `run_once_after_install-tpm.sh`                   | Once, clones TPM to `~/.config/tmux/plugins/tpm` |
 | `run_once_after_omarchy-mac-setup.sh.tmpl`        | Once, on MacBooks running omarchy (Linux only)   |
 
+## Claude Code
+
+`~/.claude` holds the Claude Code rules (`MY_RULES.md`), profile and writing voice (`ME.md`, `ME_VOICE.md`), and the prompt nudges (`nudges/`).
+
+`nudges/nudge.sh` is a `UserPromptSubmit` hook. It shows a one-line self-improvement nudge, at most once per pattern per day. It never blocks the prompt. State and hit log stay local in `~/.local/state/claude-nudges/`. Tests: `bash ~/.claude/nudges/test_nudge.sh`.
+
+`settings.json` is not managed by chezmoi. Register the hook once per machine (needs `jq`) by adding this entry to `hooks.UserPromptSubmit`:
+
+```json
+{ "hooks": [{ "type": "command", "command": "[ -e ~/.claude/nudges/nudge.sh ] || exit 0; bash ~/.claude/nudges/nudge.sh", "timeout": 5 }] }
+```
+
 ## Updating
 
 ```sh
