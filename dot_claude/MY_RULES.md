@@ -15,10 +15,17 @@ genuinely large or needs isolated parallel work.
 - Subagents can't reach the user. Steps needing the human (login, DB query) → instruct the
   subagent to stop and return the exact request; relay it, then resume the subagent via SendMessage.
 - Never say "watching X" without starting a background watcher in the same turn.
+- A question, review or exploration is not a task: answer only, no edits, no commits.
+- Plan, then wait for an explicit go (or `/dod:define`). Plan mode not required.
+- Under an explicit "full autonomy" grant: skip echo-back and check-ins. Still stop for push,
+  destructive/shared infra, secrets.
+- Stop exactly where told (after commit, at push, after each step).
+- No `tasks/lessons.md`, no `tasks/todo.md`. Persist a correction as enforcement (hook, script,
+  CLAUDE.md rule), one rule per correction, after asking me.
 
 ## Definition of Done
 
-Task done only when ALL pass:
+Applies to behaviour changes and features. Done only when ALL pass:
 
 1. Meets every stated requirement — behavior and appearance.
 2. Verified by exercising actual flow, not just reading diff (functional + visual).
@@ -29,9 +36,15 @@ Task done only when ALL pass:
    raise to me with a fix/skip recommendation and reason. I decide. Never
    silently fix or silently drop a non-blocking finding.
 4. Build, tests, lint — all green.
-5. Relevant documentation updated; if none exist - skip but looking for it is mandatory
+5. Relevant documentation updated; if none exist - skip but looking for it is mandatory.
+   Docs: enough to recreate from scratch; done when a cold reader can do the task with it.
+   Behaviour, never transient status or UI copy.
 
 No "done" until 1–5 proven. **State how each verified.**
+
+- Small/config/docs/prototype work: no contract, but still verify and state the checks.
+- Waivers come only from my explicit words; never infer one. Waiver ("no dod") = no contract,
+  still verify.
 
 **Don't grade your own homework.** Verify against independent source of truth
 (design/spec/requirement) in real target medium — never against your own render,
@@ -47,6 +60,31 @@ matter (CSRF/origin checks, env parsing, reverse proxies, TLS) and those
 differences are exactly what proxy testing hides. If the real target truly
 isn't reachable yet, say so explicitly instead of quietly testing the
 nearest substitute and reporting it as done.
+
+### Verification rules
+
+- Verify current state: fetch origin first, re-check HEAD at each phase, re-verify the committed
+  HEAD after hooks.
+- UI: design (Figma at work) is truth. Any deviation is a fail only I can accept. Token audit
+  first; assert computed styles in the DOM; screenshots are for the record. Real e2e in Chrome
+  DevTools MCP, never N/A.
+- Removing or hiding an affordance is a behaviour change: needs my sign-off, even inside a bug fix.
+- Prefer a real run with rollback over a dry-run that costs real data. Back up data first. Use
+  the least sensitive environment that proves it.
+- After a fix: name the root cause.
+
+### Tests
+
+- TDD for logic only. No tests for logs, copy or PoCs. Repo-specific TDD rules still apply
+  within that scope.
+- Test real behaviour, not a library or mock. Every test asserts. Never weaken assertions.
+
+### Review loops
+
+- Blocking findings only. Max 2 review-fix rounds, then escalate to me. No re-review after
+  trivial changes.
+- Review/eval loops: label findings broken vs polish. Only polish left → propose stopping.
+  Re-run only what a change affects.
 
 ## Cleanup
 
@@ -81,9 +119,46 @@ or spec documents, which stay complete and precise.
 ## Workflow
 
 - Repos up-to-date before starting.
-- Work on main by default. When told not to, use git worktree created from up-to-date main.
+- Trunk-based: work and commit on main by default (docs straight to main); rebase or
+  fast-forward, never merge. PR only when I say so.
+- Worktree only when I ask: create it from up-to-date main, verify its base is current main;
+  never delete it before the work is transplanted.
 - Before committing, split changes into logical bundles — one commit per bundle.
+- Push = deploy. Never push unless asked, autonomy included. I push and say so; then watch the
+  pipeline and verify the target.
 - Create media-aware diagrams - ASCII in terminal, mermaid in markdown, etc
+
+## Agents & tools
+
+- Each subagent does only its role. Verifier/debugger never edit. Kill finished implementors
+  before verifying.
+- Advice under autonomy → clean adversarial subagent.
+- Existing scripts, skills and tools first (MCPs, CLIs, browser). Never write your own
+  replacement; never ask me to do a step you can do.
+- Once I run my own app, start nothing and never restart it. A port conflict is your process
+  until proven otherwise.
+- Secrets: never read `.env` or tokens. I set them; "trust me" means do not check.
+
+## Work context
+
+- No staging for CFC: local main → I push → prod.
+- Ticket flow: clarify → `/dod:define` → implement → prod runbook as Jira comment → I push →
+  fresh subagent runs it.
+- Prod DB/logins are mine: give exact read-only SQL, no transaction noise. Justify prod access
+  step by step.
+- Version bumps via `pnpm install`. Datadog: `pup` CLI, never the MCP.
+- No breaking change without my sign-off.
+- Tickets: problem + behaviour ACs for a cold agent, no file paths. Assign to me. PR body: what
+  was checked and how.
+- Out-of-scope findings → follow-up ticket. Maintenance-mode repos (network-app): security only.
+
+## Home context
+
+- `homelab-setup` is the umbrella repo; ask before creating a new one.
+- Use the repo's SSH and env-var scripts. Destructive ops on live infra: hand me the script; I run it.
+- Config as code; survives restart and reinstall. Zero config warnings; remove unused
+  integrations with all entities.
+- Watch LLM and API cost; no needless calls to external services.
 
 ## Coding style
 
@@ -99,6 +174,12 @@ or spec documents, which stay complete and precise.
 - determinism first: anything code can do (validation, ordering, parsing, checks) is testable
   code. Use an LLM only where reasoning is needed or code can't do it. When designing, push each
   step toward code (e.g. make the LLM emit structured data that code checks) before reaching for an LLM.
+
+## Most violated
+
+- Done without real evidence · pushed unasked · review loops on small changes · ignored existing
+  tooling · scope beyond my words · left processes/agents running · echo-back, bare answers to
+  closed questions.
 
 ## Acknowledgment
 
