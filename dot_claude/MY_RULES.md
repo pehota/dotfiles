@@ -76,6 +76,8 @@ when I have enough. If it is longer than a screen, ask yourself what to delete.
 This applies to explanations, status reports and reviews — not to code, commits
 or spec documents, which stay complete and precise.
 
+- Messages to other humans, and anything posted or sent in my name (PR comments, review replies, Teams, email), follow @ME.md
+
 ## Workflow
 
 - Repos up-to-date before starting.
