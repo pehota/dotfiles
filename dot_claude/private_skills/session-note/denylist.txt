@@ -1,0 +1,11 @@
+# session-note denylist: one term or regex (Oniguruma, as jq uses) per line. Matched
+# case-insensitively against every string in facts.json AFTER normalisation (NFKC, zero-width and
+# other format characters removed, whitespace runs squeezed to one space). A hit rejects the note.
+# Blank lines and # lines are ignored.
+
+# Company-internal hosts. A filename such as settings.local.json is not a host.
+\b[\w-]+\.(corp|internal|local)\.(?!(json|ya?ml|toml|md|txt|env|ini|conf|cfg|xml|lock|ts|js|sh|py)\b)[\w.-]+
+\.rds\.amazonaws\.com
+\.cluster-[\w]+\.
+
+# ADD CUSTOMER AND PERSON NAMES HERE (one per line)
