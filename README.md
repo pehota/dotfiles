@@ -46,15 +46,16 @@ Scripts that run automatically:
 
 ## Claude Code
 
-`~/.claude` holds the Claude Code rules (`MY_RULES.md`), profile and writing voice (`ME.md`, `ME_VOICE.md`), and the prompt nudges (`nudges/`).
+`~/.claude` holds the Claude Code rules (`MY_RULES.md`), profile and writing voice (`ME.md`, `ME_VOICE.md`).
 
-`nudges/nudge.sh` is a `UserPromptSubmit` hook. It shows a one-line self-improvement nudge, at most once per pattern per day. It never blocks the prompt. State and hit log stay local in `~/.local/state/claude-nudges/`. Tests: `bash ~/.claude/nudges/test_nudge.sh`.
+The prompt nudges come from the `nudges` plugin in [pehota-plugins](https://github.com/pehota/claude-plugins), not from this repo. Install once per machine:
 
-`settings.json` is not managed by chezmoi. Register the hook once per machine (needs `jq`) by adding this entry to `hooks.UserPromptSubmit`:
-
-```json
-{ "hooks": [{ "type": "command", "command": "[ -e ~/.claude/nudges/nudge.sh ] || exit 0; bash ~/.claude/nudges/nudge.sh", "timeout": 5 }] }
 ```
+/plugin marketplace add pehota/claude-plugins
+/plugin install nudges@pehota-plugins
+```
+
+`.chezmoiremove` deletes the old deployed copy (`~/.claude/nudges/`) on `chezmoi update`. If you registered the old manual hook, remove its `hooks.UserPromptSubmit` entry (command `bash ~/.claude/nudges/nudge.sh`) from `~/.claude/settings.json`, which chezmoi does not manage.
 
 ## Updating
 

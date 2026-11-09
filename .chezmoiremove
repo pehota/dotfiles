@@ -1,0 +1,4 @@
+# Paths chezmoi deletes from the target on apply/update (deployed copies of things no longer managed here)
+
+# Nudges moved to the `nudges` plugin in pehota-plugins
+.claude/nudges
