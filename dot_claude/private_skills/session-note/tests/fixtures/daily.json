@@ -1,0 +1,30 @@
+{
+  "sessions": [
+    {
+      "session_ids": ["aaaaaaaa-0000-4000-8000-000000000001"],
+      "title": "Flaky date test (work)",
+      "status": "done",
+      "progress": "Fixed a timezone assumption and added a regression test.",
+      "learnings": ["Pin the timezone in tests that touch dates."],
+      "bottlenecks": ["The first commit attempt was rejected."],
+      "next_steps": ["Watch the next pipeline run"]
+    },
+    {
+      "session_ids": ["bbbbbbbb-0000-4000-8000-000000000002"],
+      "title": "Design doc draft (personal tooling)",
+      "status": "in-progress",
+      "progress": "Drafted the doc.",
+      "learnings": [],
+      "bottlenecks": [],
+      "next_steps": []
+    }
+  ],
+  "how_i_worked": {
+    "blockers": [
+      { "what": "A cleanup command was blocked by a deny rule.", "rec": "Add a narrow allow rule for build folder cleanup." }
+    ],
+    "automate": [
+      { "what": "I ran the verify command by hand after each fix.", "rec": "Let the agent run verify before reporting done." }
+    ]
+  }
+}
