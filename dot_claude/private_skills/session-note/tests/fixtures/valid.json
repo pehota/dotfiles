@@ -1,24 +1,15 @@
 {
-  "title": "Widget pipeline spike",
+  "title": "Widget pipeline spike (personal tooling)",
   "session_name": "widget-spike",
   "status": "in-progress",
-  "outcome": "Pipeline prototype runs end to end; see docs/README.md headline findings.",
-  "done": [
-    { "item": "Prototype builder", "evidence": "tests/run.sh green" }
+  "progress": "The pipeline prototype runs end to end. Waiting on my review.",
+  "learnings": [
+    "Prove a rewrite matches the old tool by running both side by side on planted cases.",
+    "Keep the builder in bash; it stays readable."
   ],
-  "decisions": [
-    { "decision": "Keep builder in bash", "by": "Dimitar", "date": "2026-11-06" }
-  ],
-  "open": [
-    { "question": "Split exporter into its own script?", "rec": "Yes, once a second format exists." }
-  ],
+  "bottlenecks": ["The exporter format was unclear until late."],
   "next_steps": [
-    "Run tests/run.sh and fix the first red test",
+    "Run the tests and fix the first red one",
     "Commit in logical bundles"
-  ],
-  "links": [
-    { "label": "Spec", "target": "https://example.atlassian.net/browse/PROJ-12" },
-    { "label": "Handoff", "target": "docs/HANDOFF.md" }
-  ],
-  "touched_paths": []
+  ]
 }
