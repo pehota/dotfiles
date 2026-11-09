@@ -100,3 +100,8 @@ dot_config/tmux
 dot_config/zed
 dot_config/alacritty
 {{ end }}
+
+# session-note daily launchd job: this Mac only
+{{ if not (stat (joinPath .chezmoi.homeDir "Work/job/git")) }}
+Library/LaunchAgents/local.claude.session-note-daily.plist
+{{ end }}
