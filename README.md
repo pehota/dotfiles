@@ -57,6 +57,16 @@ The prompt nudges come from the `nudges` plugin in [pehota-plugins](https://gith
 
 `.chezmoiremove` deletes the old deployed copy (`~/.claude/nudges/`) on `chezmoi update`. If you registered the old manual hook, remove its `hooks.UserPromptSubmit` entry (command `bash ~/.claude/nudges/nudge.sh`) from `~/.claude/settings.json`, which chezmoi does not manage.
 
+`skills/session-note/` writes Claude Code sessions into the Obsidian brain inbox as progress, learnings, bottlenecks and next steps: one session on "dump this", a whole day on "daily summary". A script gate (`scripts/note.sh`) blocks work identifiers and figures before anything is written. Behaviour, schema and gate rules: `~/.claude/skills/session-note/SKILL.md`. Tests: `bash ~/.claude/skills/session-note/tests/run.sh` (no LLM calls); `tests/scenario.sh` and `tests/e2e.sh` call Sonnet.
+
+The daily run is a launchd job, managed only on this Mac (`.chezmoiignore` gates it by hostname): `~/Library/LaunchAgents/local.claude.session-note-daily.plist` runs `scripts/daily.sh` at 23:00 and logs to `~/Library/Logs/session-note-daily.log`. After the first `chezmoi apply`, register it once:
+
+```sh
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/local.claude.session-note-daily.plist
+```
+
+After a plist change: `launchctl bootout gui/$(id -u)/local.claude.session-note-daily`, then the bootstrap again. On a machine without `~/Work/job/git`, set `SESSION_NOTE_WORK_ROOT` to an empty folder, or the gate fails loudly.
+
 ## Updating
 
 ```sh

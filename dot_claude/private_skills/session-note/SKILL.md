@@ -1,62 +1,126 @@
 ---
 name: session-note
-description: Writes the current Claude Code session as one Obsidian pointer note. Use only when the user explicitly asks, e.g. "dump session", "dump this", "dump this into brain", "brain dump this session" (or close wording), or runs /session-note. Never on your own initiative.
+description: Writes Claude Code sessions into the Obsidian brain inbox as progress and learnings, never work details. Single mode for the current session ("dump session", "dump this", "dump this into brain", "brain dump this session"); daily mode for all of a day's sessions ("summarise today", "summarize today", "daily summary", optionally with a date). Also runs via /session-note. Use only when the user explicitly asks. Never on your own initiative.
 ---
 
 # Session note
 
-A **pointer note** records where the work stands and points at where the data lives. Every fact sits behind a company login (Jira, repo, Miro, Confluence, artifact); the note itself holds none of it.
+A session note gives the evening brain processor just enough context: **progress, learnings, bottlenecks, next steps**. The vault syncs beyond the work machine, so the note holds no work identifiers at all.
 
-## Steps
+## Modes
 
-1. **Sanitise first (mandatory).** Before writing any JSON, list every proper noun and every figure you are about to write. Replace customer and person names (except Dimitar) with roles: "a customer", "a CM", "the reviewer". Drop each figure and point at its source instead. Only then go to step 2. The script gate is the backstop, not the filter.
-2. Write `facts.json` to the scratchpad, following the schema and pointer rules below.
-3. Run:
+| Says | Mode | Writes |
+| --- | --- | --- |
+| "dump session", "dump this (into brain)" | single | `<title> <date>.md`, upserted by session id |
+| "summarise today", "summarize today", "daily summary [for YYYY-MM-DD]" | daily | `claude sessions <date>.md`; a rerun overwrites it |
 
-   ```bash
-   bash ~/.claude/skills/session-note/scripts/note.sh <scratchpad>/facts.json
+Both write to `~/Work/mine/obsidian-vault/brain/inbox` (override: `SESSION_NOTE_DIR`). A launchd job runs daily mode by itself at 23:00 (see "Scheduled run").
+
+## Policy (both modes)
+
+Write, in plain short sentences:
+- **progress**: where the work stands, one or two sentences
+- **learnings**: what worked, what to repeat or avoid, phrased so they hold beyond this task
+- **bottlenecks**: what slowed the work down
+- **next steps**: the first is what to do on resume
+
+Label each title with its area in brackets, generic: "Faster linting (work)", "Session restore (personal)", "Read-only database skill (work tooling)".
+
+Keep out. The script gate rejects all of these:
+- work repo names (every folder name in `~/Work/job/git/`), product, customer and person names (Dimitar is the one exception)
+- commit SHAs, ticket keys (`ABC-123`), any URL, hostnames, paths into work repos, tool names that identify internal systems
+- every number except dates, times, versions with `v`/`version` in front and filenames: no counts, volumes, spend, durations, "step 2", "round 2 of 2", "frame 7". Spelled-out counts ("two rounds", "twenty tickets") and a number word after a label ("round two") too. "one" is fine.
+- secrets, tokens, connection strings, IPs, emails, copied doc text
+
+**Sanitise first (mandatory).** Before writing any JSON, list every proper noun and every number you are about to write. Replace names with roles or generic labels ("the linter", "a customer", "the reviewer"), drop the numbers. The script gate is the backstop, not the filter.
+
+## Running the scripts
+
+Create and fix `facts.json` with the Write or Edit tool. Run each script as one plain `bash ~/.claude/skills/session-note/scripts/<script> ...` command: no `cat`, `sed`, heredocs, pipes or chained commands. Headless and scheduled runs allow exactly these and deny the rest.
+
+## Single mode
+
+1. Sanitise, then write `facts.json` to the scratchpad:
+
+   ```json
+   {
+     "title": "Faster linting (work)",
+     "session_name": "faster-lint",
+     "status": "in-progress",
+     "progress": "Switched linting to a faster tool. Waiting on review.",
+     "learnings": ["Prove a replacement linter matches the old one by planting violations and running both."],
+     "bottlenecks": ["Main moved fast, so the branch needed rebasing more than once."],
+     "next_steps": ["Merge after approval", "Start the test-cleaner skill"]
+   }
    ```
 
-   The script validates, runs the redaction gate, fills id/model/date/repo, and upserts by session id (same session → same file overwritten).
-4. On a `REJECT` or `SCHEMA` line: rewrite that field as a pointer and rerun. Done when it exits 0.
-5. Tell the user the printed path. Nothing else.
+   All keys required except `session_name`; arrays may be empty. `status`: `in-progress` | `done` | `blocked`. No other keys.
+2. Run `bash ~/.claude/skills/session-note/scripts/note.sh <scratchpad>/facts.json`. It validates, gates and upserts by `CLAUDE_CODE_SESSION_ID` (same session, same file).
+3. On a `REJECT` or `SCHEMA` line: rewrite that field without the flagged part and rerun. Done when it exits 0.
+4. Tell the user the printed path. Nothing else.
 
-## Pointer rules
+## Daily mode
 
-Write:
-- outcomes, and decisions with their date and a `by` role (see schema)
-- open questions, each with your recommendation
-- next steps; the first is what to do on resume
-- the user's own reasoning
-- links: Jira keys, repo-relative or absolute local paths, Miro/Confluence/Claude-artifact URLs, commit SHAs
+1. Run `bash ~/.claude/skills/session-note/scripts/digest.sh [YYYY-MM-DD]` (no date: today; before 06:00: yesterday). It prints JSON: per session the project folder, first/last local time, my prompts, the last assistant texts and commit messages, plus script-computed figures. The current session is excluded. Zero sessions: tell the user and stop.
+2. Read the digest. Write one section per topic: a session, or several sessions on the same topic grouped together. Skip sessions with nothing worth keeping. The project folder tells you the area (`-Users-...-Work-job-git-...` is work); never copy it.
+3. Write the day's **How I worked** findings, about how Dimitar works *with* the AI:
+   - `blockers`: avoidable blockers: corrections, re-asks, wrong direction, slow handoffs. Read them from the prompts ("no, I meant", repeated asks, long waits).
+   - `automate`: steps to automate or delegate: repeated manual steps, checks he ran himself that the agent could run.
+   - Exactly one `rec` each. Do not write any figures; the script adds them.
+4. Sanitise, then write `facts.json`:
 
-Keep out (point at the source instead, e.g. "see discovery/README.md headline findings"):
-- names of customers and people; the user, Dimitar, is the one exception
-- figures from internal systems or prod: counts, volumes, spend, headcount, response times, record counts, line/node tallies
-- copied doc or page text
-- secrets, tokens, connection strings, internal hostnames/IPs, emails
+   ```json
+   {
+     "sessions": [
+       {
+         "session_ids": ["<session_id from the digest>"],
+         "title": "Faster linting (work)",
+         "status": "in-progress",
+         "progress": "Switched linting to a faster tool. Waiting on review.",
+         "learnings": ["When main moves fast, expect to rebase more than once before merging."],
+         "bottlenecks": [],
+         "next_steps": ["Merge after approval"]
+       }
+     ],
+     "how_i_worked": {
+       "blockers": [{ "what": "I re-explained the scope after the agent widened it.", "rec": "State the scope in the first prompt." }],
+       "automate": [{ "what": "I ran the test suite myself before each commit.", "rec": "Let the agent run it before reporting done." }]
+     }
+   }
+   ```
 
-A `done` item carries its evidence: the test, check, or review that proved it. No evidence → it goes in `open`.
+   `session_ids` must be ids from the digest, each used once. No other keys anywhere.
+5. Run `bash ~/.claude/skills/session-note/scripts/note.sh --daily <date> <scratchpad>/facts.json`. On `REJECT`/`SCHEMA`: fix and rerun until it exits 0.
+6. Tell the user the printed path. Nothing else.
 
-Drop counts and figures; point at the source instead. The gate rejects any digit that is not part of a date, time, version, ticket/initiative key, SHA, UUID, URL, path, `localhost:port` or "round N of M" / "step N", and spelled-out counts ("two rounds", "twenty tickets") too. Name things instead of numbering them ("the legend frame", not "frame 7").
+`--dry-run` (first argument) runs every check and prints the note without writing it.
 
-## facts.json
+## What the scripts add
 
-All keys required except `session_name`; arrays may be empty. `status`: `in-progress` | `done` | `blocked`. `decisions[].by`: `Dimitar` | `team` | `reviewer` | `owner` | `product`.
+| Part | Source |
+| --- | --- |
+| Frontmatter: single `id`, `source: claude-session`, `created`; daily `source`, `created` | note.sh |
+| Per section `Time:` line: first to last local time, active, waiting on me, my messages, permission denials | digest.sh numbers, inserted after the gate |
+| How I worked `Sessions:` and `Time:` lines (parallel time counted once) | digest.sh numbers, inserted after the gate |
+| Single mode `## Resume` with `claude --resume <id>` | note.sh |
 
-```json
-{
-  "title": "Digital OS discovery",
-  "session_name": "digital-os-discovery",
-  "status": "in-progress",
-  "outcome": "Discovery docs reviewed; Miro map built. See discovery/README.md headline findings.",
-  "done": [{ "item": "Discovery docs", "evidence": "independent review passed" }],
-  "decisions": [{ "decision": "Support handling is the first OS capability", "by": "Dimitar", "date": "2026-11-06" }],
-  "open": [{ "question": "Keep dependency lines on the overview frame?", "rec": "Keep; they show what everything depends on." }],
-  "next_steps": ["Run /dod:verify", "Commit in logical bundles"],
-  "links": [{ "label": "Discovery", "target": "/abs/path/digital-os/discovery/README.md" }],
-  "touched_paths": ["/abs/path/digital-os/discovery"]
-}
-```
+Figures, as digest.sh computes them: **active** sums the gaps between consecutive transcript entries that day, a gap over 30 minutes counts as away; **waiting on me** sums the gaps from the entry before each of my messages to that message (same cap); **my messages** counts typed prompts, slash commands and `!` shell input; **permission denials** counts tool calls rejected by me, a deny rule or the auto-mode classifier (approved prompts leave no trace in the transcript). A grouped section adds up its sessions. Sessions are picked by entry timestamp (Europe/Berlin date), not file mtime; subagent transcripts, sidechain entries and headless runs (`-private-tmp*`, `-private-var-folders-*`, `*-scratchpad-*` folders, `claude -p` sessions) are excluded.
 
-`touched_paths` must be absolute. They feed the `repo` frontmatter (git top-level folder names; non-git paths skipped). A path inside a git worktree reports the worktree's folder name, not the main repo's.
+## The gate (note.sh)
+
+Every LLM-written string is NFKC-normalised, stripped of invisible format characters and whitespace-squeezed, then checked for: secrets, tokens, PEM keys, connection strings, IPv4/IPv6, emails, internal hosts (`.corp`, `.internal`, `.local`, ...), URLs, hostnames, commit SHAs, ticket keys, work repo names (built at run time from the folder names in `SESSION_NOTE_WORK_ROOT`, default `~/Work/job/git`), `denylist.txt` terms, number words and any digit outside dates, times, `v`/`version` versions, filenames and `localhost:port`. `settings.local.json` is a filename, not a host. Exit codes: 0 ok, 1 environment, 2 usage/schema, 3 reject. `note.sh --recheck <note.md>` re-gates a written note: a line passes untouched only in the exact shape the script makes.
+
+On a machine without work repos, set `SESSION_NOTE_WORK_ROOT` to an empty folder; a missing root fails loudly.
+
+## Scheduled run
+
+`scripts/daily.sh` is the launchd entry point (`~/Library/LaunchAgents/local.claude.session-note-daily.plist`, 23:00 daily; a run missed while asleep runs on wake, and before 06:00 it summarises the day before). It runs one `claude -p --model sonnet --safe-mode` with only Read, Write inside a temp dir, and Bash limited to `digest.sh` and `note.sh --dry-run`, then writes the note itself with `note.sh --daily`. On any failure or reject it writes nothing, appends the reason to `~/Library/Logs/session-note-daily.log` and shows a macOS notification.
+
+Run it by hand: `launchctl kickstart -k gui/$(id -u)/local.claude.session-note-daily`, or `bash ~/.claude/skills/session-note/scripts/daily.sh [YYYY-MM-DD]`.
+
+## Tests
+
+- `bash ~/.claude/skills/session-note/tests/run.sh`: gate, schema, digest selection and figures, daily rendering, wrapper (stubbed claude and osascript). No LLM calls.
+- `bash ~/.claude/skills/session-note/tests/scenario.sh`: real headless Sonnet runs of both modes and a planted leak. Costs a few Sonnet calls.
+- `bash ~/.claude/skills/session-note/tests/e2e.sh`: kickstarts the launchd job and checks today's real note in the inbox. Writes one real note.
+- `tests/evals.md`: LLM behaviour cases, graded by properties.
