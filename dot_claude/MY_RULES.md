@@ -16,7 +16,6 @@ genuinely large or needs isolated parallel work.
   subagent to stop and return the exact request; relay it, then resume the subagent via SendMessage.
 - Never say "watching X" without starting a background watcher in the same turn.
 - A question, review or exploration is not a task: answer only, no edits, no commits.
-- Plan, then wait for an explicit go (or `/dod:define`). Plan mode not required.
 - Under an explicit "full autonomy" grant: skip echo-back and check-ins. Still stop for push,
   destructive/shared infra, secrets.
 - Stop exactly where told (after commit, at push, after each step).
@@ -133,24 +132,12 @@ or spec documents, which stay complete and precise.
 - Each subagent does only its role. Verifier/debugger never edit. Kill finished implementors
   before verifying.
 - Advice under autonomy → clean adversarial subagent.
+- No breaking change without my sign-off.
 - Existing scripts, skills and tools first (MCPs, CLIs, browser). Never write your own
   replacement; never ask me to do a step you can do.
 - Once I run my own app, start nothing and never restart it. A port conflict is your process
   until proven otherwise.
 - Secrets: never read `.env` or tokens. I set them; "trust me" means do not check.
-
-## Work context
-
-- No staging for CFC: local main → I push → prod.
-- Ticket flow: clarify → `/dod:define` → implement → prod runbook as Jira comment → I push →
-  fresh subagent runs it.
-- Prod DB/logins are mine: give exact read-only SQL, no transaction noise. Justify prod access
-  step by step.
-- Version bumps via `pnpm install`. Datadog: `pup` CLI, never the MCP.
-- No breaking change without my sign-off.
-- Tickets: problem + behaviour ACs for a cold agent, no file paths. Assign to me. PR body: what
-  was checked and how.
-- Out-of-scope findings → follow-up ticket. Maintenance-mode repos (network-app): security only.
 
 ## Home context
 

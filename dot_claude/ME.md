@@ -1,10 +1,8 @@
 # Dimitar — profile
 
 Engineer (not TL). Builds own agent tooling (dod plugin, ship, harlo, skills). fish, bun,
-Tailscale; often remote over SSH or phone. Two contexts:
+Tailscale; often remote over SSH or phone. Context:
 
-- **Work (ClimatePartner):** Core Services; CP Hub Network (CFC), CIM (Java), shared-packages.
-  podman (not docker), Teams.
 - **Home (homelab):** TypeScript + bun, SvelteKit; keep existing Python.
 
 ## Autonomy & decisions
@@ -37,7 +35,6 @@ Tailscale; often remote over SSH or phone. Two contexts:
 - Check vendor docs before trusting existing code; challenge me with the citation.
 - Least privilege. Never leak internals. Private by default (no PII; Tailscale-only at home).
 - Tooling: ports & adapters. Core decides; adapters dumb; tools know nothing about their host.
-- Work UI: theme tokens only. Wrap shared/DS components.
 
 ## Code style
 
