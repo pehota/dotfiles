@@ -85,9 +85,10 @@ session_digest() {
     def cut($n): if length > $n then .[0:$n] + "..." else . end;
     def text_of: if type == "string" then .
       elif type == "array" then [.[] | select(.type == "text") | .text] | join(" ") else "" end;
-    # my_prompt -> the prompt text when this entry is a message I sent, else empty
+    # my_prompt -> the prompt text when this entry is a message I sent, else empty.
+    # The auto-compaction summary is a plain-text user entry Claude Code writes itself.
     def my_prompt:
-      select(.type == "user" and .isMeta != true)
+      select(.type == "user" and .isMeta != true and .isCompactSummary != true)
       | .message.content
       | select(type == "string" or (type == "array" and all(.[]; .type != "tool_result")))
       | text_of | sub("^\\s+"; "")

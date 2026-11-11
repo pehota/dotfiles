@@ -359,6 +359,11 @@ test_digest_figures() {
   check "m: session A figures: gaps over 30 min skipped, wait = turn end -> my next message (got $a)" '[ "$a" = "[44,25,4,1]" ]'
   check "m: session B figures: rule denial counted (got $b)" '[ "$b" = "[20,5,2,1]" ]'
   check "m: day figures: parallel time counted once (got $d)" '[ "$d" = "[2,44,25,6,2]" ]'
+
+  run_digest "2026-11-02" || true
+  local c; c="$(jq -c '.sessions[0] | [.my_messages, .waiting_min]' "$TMP/digest.json")"
+  check "m: compaction summary is not my message (got $c)" '[ "$c" = "[1,0]" ]'
+  check "m: compaction summary not in prompts" '[ "$(jq -c ".sessions[0].prompts" "$TMP/digest.json")" = "[\"Plan the export\"]" ]'
 }
 
 test_digest_default_date() {
