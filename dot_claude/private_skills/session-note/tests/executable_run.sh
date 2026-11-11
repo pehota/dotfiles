@@ -193,6 +193,18 @@ test_work_identifiers() {
   expect_reject "k: subdomain hostname"   "hostname"    '.progress = "the api.github.io page"'
   expect_reject "k: ssh git remote host"  "hostname"    '.progress = "Cloned git@github.com:org/repo.git"'
   expect_reject "k: uuid now a sha shape" "commit sha"  '.progress = "run 0b1c2d3e-4f5a-6b7c-8d9e-0f1a2b3c4d5e"'
+
+  # any alphabetic TLD is a host, not a fixed list
+  local host
+  for host in portal.acme.it shop.acme.es api.acme.pl app.acme.fi jira.acme.ca vault.acme.systems acme.zone PORTAL.ACME.IT; do
+    expect_reject "k: host $host" "hostname" ".progress = \"Checked $host first.\""
+  done
+  expect_reject "k: host at sentence end"     "hostname" '.progress = "Moved to acme.zone."'
+  expect_reject "k: host with digit labels"   "hostname" '.progress = "Called 1.acme.it"'
+  expect_pass   "k: abbreviations, versions and sentence joins are not hosts" \
+    '.progress = "Kept the gate strict, e.g. for hosts, i.e. names, etc. Tried v2.1.rc and version 1.0.0.RELEASE, then done.Next we test U.S. spelling and a.m. slots."'
+  expect_pass   "k: file names with known extensions are not hosts" \
+    '.progress = "Edited settings.local.json, docker-compose.override.yml, pyproject.toml, app.config.ts, run.sh, setup.py, notes.final.md, server.log, styles.scss and Node.js docs."'
 }
 
 # --- (g) figure gate: any digit outside dates, times, versions, filenames ----

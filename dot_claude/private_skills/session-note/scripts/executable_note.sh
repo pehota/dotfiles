@@ -140,7 +140,9 @@ redaction_findings() {
       {class: "internal hostname", re: "(?i)\\b[a-z0-9-]+(?:\\.[a-z0-9-]+)*\\.(?:internal|local|corp|lan|intranet)(?!\\.(?:json|ya?ml|toml|md|txt|env|ini|conf|cfg|xml|lock|properties|ts|js|mjs|cjs|tsx|jsx|sh|py|rb|go|sql|bak)\\b)(?:\\.[a-z0-9-]+)*\\b"},
       # work identifiers: links and commits point into company systems
       {class: "url", re: "(?i)\\b[a-z][a-z0-9+.-]*://\\S*"},
-      {class: "hostname", re: "(?i)\\b(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+(?:com|net|org|io|dev|app|ai|cloud|co|de|eu|uk|us|ch|at|nl|fr|info|biz|gov|edu|tech|xyz|me|so|gg|ly|tv|page|site|online|digital)\\b(?![.-][a-z0-9])"},
+      # any dotted name ending in an alphabetic TLD (2+ letters, all lower or all upper case so "done.Next" is a
+      # sentence join); the label before the TLD needs a letter (not "1.0.0.RELEASE"); a file extension is no TLD
+      {class: "hostname", re: "\\b(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\\.)*(?=[A-Za-z0-9-]*[A-Za-z])[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\\.(?!(?i:json|jsonl|ya?ml|toml|md|mdx|txt|env|ini|conf|cfg|xml|lock|properties|ts|js|mjs|cjs|tsx|jsx|sh|py|rb|go|sql|bak|log|csv|html?|css|scss|java|kt|gradle|vue|svelte|png|jpe?g|gif|svg|plist|diff|patch)\\b)(?:[a-z]{2,}|[A-Z]{2,})\\b(?![.-][A-Za-z0-9])"},
       {class: "commit sha", re: "(?i)\\b(?=[0-9a-f]*[0-9])(?=[0-9a-f]*[a-f])[0-9a-f]{7,40}\\b"},
       {class: "ticket key", re: "\\b[A-Z]+-\\d+\\b"}
     ];
