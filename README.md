@@ -59,7 +59,7 @@ The prompt nudges come from the `nudges` plugin in [pehota-plugins](https://gith
 
 `skills/session-note/` writes Claude Code sessions into the Obsidian brain inbox as progress, learnings, bottlenecks and next steps: one session on "dump this", a whole day on "daily summary". A script gate (`scripts/note.sh`) blocks work identifiers and figures before anything is written. Behaviour, schema and gate rules: `~/.claude/skills/session-note/SKILL.md`. Tests: `bash ~/.claude/skills/session-note/tests/run.sh` (no LLM calls); `tests/scenario.sh` and `tests/e2e.sh` call Sonnet.
 
-The daily run is a launchd job, managed only on this Mac (`.chezmoiignore` gates it by hostname): `~/Library/LaunchAgents/local.claude.session-note-daily.plist` runs `scripts/daily.sh` at 23:00 and logs to `~/Library/Logs/session-note-daily.log`. After the first `chezmoi apply`, register it once:
+The daily run is a launchd job, managed only on a machine that has `~/Work/job/git` (`.chezmoiignore` checks for that folder, so no machine name is committed): `~/Library/LaunchAgents/local.claude.session-note-daily.plist` runs `scripts/daily.sh` at 23:00 and logs to `~/Library/Logs/session-note-daily.log`. After the first `chezmoi apply`, register it once:
 
 ```sh
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/local.claude.session-note-daily.plist

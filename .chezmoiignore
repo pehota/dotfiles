@@ -101,7 +101,7 @@ dot_config/zed
 dot_config/alacritty
 {{ end }}
 
-# session-note daily launchd job: this Mac only
+# session-note daily launchd job: only on the machine that has the work repos folder
 {{ if not (stat (joinPath .chezmoi.homeDir "Work/job/git")) }}
 Library/LaunchAgents/local.claude.session-note-daily.plist
 {{ end }}
