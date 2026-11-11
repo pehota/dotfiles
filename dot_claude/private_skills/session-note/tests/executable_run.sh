@@ -199,6 +199,12 @@ test_work_identifiers() {
   for host in portal.acme.it shop.acme.es api.acme.pl app.acme.fi jira.acme.ca vault.acme.systems acme.zone PORTAL.ACME.IT; do
     expect_reject "k: host $host" "hostname" ".progress = \"Checked $host first.\""
   done
+  # a mixed-case TLD is still a TLD
+  expect_reject "k: host Acme.Com"            "hostname" '.progress = "Checked Acme.Com today"'
+  expect_reject "k: host Portal.Acme.Io"      "hostname" '.progress = "Checked Portal.Acme.Io today"'
+  expect_reject "k: host jira.acme.Com"       "hostname" '.progress = "Opened jira.acme.Com"'
+  expect_pass   "k: sentence join, file names, versions and abbreviations still pass" \
+    '.progress = "Tests done.Next I edit README.md and settings.local.json, try v2.1.rc, e.g. hosts, i.e. names, etc."'
   expect_reject "k: host at sentence end"     "hostname" '.progress = "Moved to acme.zone."'
   expect_reject "k: host with digit labels"   "hostname" '.progress = "Called 1.acme.it"'
   expect_pass   "k: abbreviations, versions and sentence joins are not hosts" \
