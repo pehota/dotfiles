@@ -236,13 +236,13 @@ render_daily() {
     def clock: if type == "string" and test("^[0-2][0-9]:[0-5][0-9]$") then . else error("time is not HH:MM") end;
     def dur: (if type == "number" then floor else error("duration is not a number") end) as $m
       | if $m >= 60 then "\($m / 60 | floor)h \($m % 60 | tostring | if length == 1 then "0" + . else . end)m" else "\($m)m" end;
-    def figures: "active \(.active_min | dur) · waiting on me \(.waiting_min | dur) · my messages \(.my_messages | num) · permission denials \(.permission_denials | num)";
+    def figures: "session time \(.session_min | dur) · waiting on me \(.waiting_min | dur) · my messages \(.my_messages | num) · permission denials \(.permission_denials | num)";
     ($digest[0].sessions | map({key: .session_id, value: .}) | from_entries) as $by_id
     | [ "---", "source: claude-session", "created: \($date)", "---", "",
         "# Claude sessions \($date)", "",
         ( .sessions[] | [$by_id[.session_ids[]]] as $s
           | ([$s[].first] | min | clock) as $first | ([$s[].last] | max | clock) as $last
-          | { active_min: ([$s[].active_min] | add), waiting_min: ([$s[].waiting_min] | add),
+          | { session_min: ([$s[].session_min] | add), waiting_min: ([$s[].waiting_min] | add),
               my_messages: ([$s[].my_messages] | add), permission_denials: ([$s[].permission_denials] | add) } as $f
           | "## \(.title)\n\n- **Status:** \(.status)\n- **Progress:** \(.progress)\n"
             + (.learnings | list("Learnings")) + "\n" + (.bottlenecks | list("Bottlenecks")) + "\n"
@@ -259,7 +259,7 @@ render_daily() {
 # script_shaped_line <line> -> exit 0 when the line is one note.sh itself makes from non-LLM data
 script_shaped_line() {
   local dur='([0-9]+h [0-9]{2}m|[0-9]+m)'
-  local figs="active $dur · waiting on me $dur · my messages [0-9]+ · permission denials [0-9]+"
+  local figs="session time $dur · waiting on me $dur · my messages [0-9]+ · permission denials [0-9]+"
   [[ "$1" =~ ^(---|source:\ claude-session|created:\ [0-9]{4}-[0-9]{2}-[0-9]{2}|id:\ [0-9a-f-]{36})$ ]] \
     || [[ "$1" =~ ^-\ \*\*Sessions:\*\*\ [0-9]+$ ]] \
     || [[ "$1" =~ ^-\ \*\*Time:\*\*\ ([0-2][0-9]:[0-5][0-9]\ to\ [0-2][0-9]:[0-5][0-9]\ ·\ )?$figs$ ]] \

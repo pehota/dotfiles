@@ -287,7 +287,7 @@ test_schema() {
   expect_reject "e: multi-line title"           "SCHEMA" '.title = "a\nb"'
   # every LLM-written string is one line, so none can inject a heading or a fake figures line
   expect_reject "e: multi-line progress"        "SCHEMA" '.progress = "Done.\n## How I worked"'
-  expect_reject "e: carriage return progress"   "SCHEMA" '.progress = "Done.\r- **Time:** active 1m"'
+  expect_reject "e: carriage return progress"   "SCHEMA" '.progress = "Done.\r- **Time:** session time 1m"'
   expect_reject "e: multi-line learning"        "SCHEMA" '.learnings[0] = "Keep it.\n## Resume"'
   expect_reject "e: multi-line bottleneck"      "SCHEMA" '.bottlenecks[0] = "Slow.\n# x"'
   expect_reject "e: multi-line next step"       "SCHEMA" '.next_steps[0] = "Run it.\n## Links"'
@@ -373,16 +373,16 @@ test_digest_selection() {
   run_digest "2026-11-07" || true
   check "l: UTC 23:05 counts for the next local day" '[ "$(jq -r "[.sessions[].session_id] | join(\",\")" "$TMP/digest.json")" = "$SID_A" ]'
   run_digest "2026-11-04" || true
-  check "l: empty day -> zero sessions, zero figures" '[ "$(jq -c "[(.sessions|length), .day.sessions, .day.active_min]" "$TMP/digest.json")" = "[0,0,0]" ]'
+  check "l: empty day -> zero sessions, zero figures" '[ "$(jq -c "[(.sessions|length), .day.sessions, .day.session_min]" "$TMP/digest.json")" = "[0,0,0]" ]'
   check "l: bad date -> exit 2" '! run_digest "06.11.2026" && grep -q "YYYY-MM-DD" "$TMP/err"'
 }
 
 test_digest_figures() {
   run_digest "$DAY" || true
   local a b d
-  a="$(jq -c '.sessions[0] | [.active_min, .waiting_min, .my_messages, .permission_denials]' "$TMP/digest.json")"
-  b="$(jq -c '.sessions[1] | [.active_min, .waiting_min, .my_messages, .permission_denials]' "$TMP/digest.json")"
-  d="$(jq -c '.day | [.sessions, .active_min, .waiting_min, .my_messages, .permission_denials]' "$TMP/digest.json")"
+  a="$(jq -c '.sessions[0] | [.session_min, .waiting_min, .my_messages, .permission_denials]' "$TMP/digest.json")"
+  b="$(jq -c '.sessions[1] | [.session_min, .waiting_min, .my_messages, .permission_denials]' "$TMP/digest.json")"
+  d="$(jq -c '.day | [.sessions, .session_min, .waiting_min, .my_messages, .permission_denials]' "$TMP/digest.json")"
   check "m: session A figures: gaps over 30 min skipped, wait = turn end -> my next message (got $a)" '[ "$a" = "[44,25,4,1]" ]'
   check "m: session B figures: rule denial counted (got $b)" '[ "$b" = "[20,5,2,1]" ]'
   check "m: day figures: parallel time counted once (got $d)" '[ "$d" = "[2,44,25,6,2]" ]'
@@ -411,8 +411,8 @@ test_daily_note() {
   local heads; heads="$(grep -E '^#{1,2} ' "$f" | tr '\n' '|')"
   check "o: headings (got $heads)" '[ "$heads" = "# Claude sessions $DAY|## Flaky date test (work)|## Design doc draft (personal tooling)|## How I worked|" ]'
   check "o: per-session sections" 'grep -qxF -- "- **Progress:** Fixed a timezone assumption and added a regression test." "$f" && grep -qxF -- "  - Pin the timezone in tests that touch dates." "$f" && grep -qxF -- "  - The first commit attempt was rejected." "$f" && grep -qxF -- "  1. Watch the next pipeline run" "$f"'
-  check "o: session time line from digest" 'grep -qxF -- "- **Time:** 00:10 to 09:31 · active 44m · waiting on me 25m · my messages 4 · permission denials 1" "$f"'
-  check "o: day figures from digest" 'grep -qxF -- "- **Sessions:** 2" "$f" && grep -qxF -- "- **Time:** active 44m · waiting on me 25m · my messages 6 · permission denials 2" "$f"'
+  check "o: session time line from digest" 'grep -qxF -- "- **Time:** 00:10 to 09:31 · session time 44m · waiting on me 25m · my messages 4 · permission denials 1" "$f"'
+  check "o: day figures from digest" 'grep -qxF -- "- **Sessions:** 2" "$f" && grep -qxF -- "- **Time:** session time 44m · waiting on me 25m · my messages 6 · permission denials 2" "$f"'
   check "o: blockers and automate with one rec each" 'grep -qxF -- "  - A cleanup command was blocked by a deny rule. **Rec:** Add a narrow allow rule for build folder cleanup." "$f" && grep -qxF -- "  - I ran the verify command by hand after each fix. **Rec:** Let the agent run verify before reporting done." "$f"'
   check "o: no session ids or project folders rendered" '! grep -qE "aaaaaaaa|bbbbbbbb|Work-alpha|Work-beta" "$f"'
   check "o: written note passes the re-check" 'run_note "$dir" - --recheck "$f"'
@@ -423,7 +423,7 @@ test_daily_note() {
 
   mutate_daily '.sessions[0].session_ids += ["bbbbbbbb-0000-4000-8000-000000000002"] | .sessions |= [.[0]]'
   run_note "$TMP/o-group" "$SID_SELF" --daily "$DAY" "$TMP/case.json" || true
-  check "o: grouped sessions add up their figures" 'grep -qxF -- "- **Time:** 00:10 to 09:31 · active 1h 04m · waiting on me 30m · my messages 6 · permission denials 2" "$(cat "$TMP/out")"'
+  check "o: grouped sessions add up their figures" 'grep -qxF -- "- **Time:** 00:10 to 09:31 · session time 1h 04m · waiting on me 30m · my messages 6 · permission denials 2" "$(cat "$TMP/out")"'
 
   local dry="$TMP/o-dry"
   check "o: --dry-run checks and prints, writes nothing" 'run_note "$dry" "$SID_SELF" --dry-run --daily "$DAY" "$DAILY_FACTS" && [ "$(md_count "$dry")" = 0 ] && grep -qF "## How I worked" "$TMP/out"'
@@ -441,8 +441,8 @@ test_daily_schema() {
   expect_daily_reject "p: session id used twice"         "SCHEMA" '.sessions[1].session_ids = ["aaaaaaaa-0000-4000-8000-000000000001"]'
   expect_daily_reject "p: malformed session id"          "SCHEMA" '.sessions[0].session_ids = ["not-a-uuid"]'
   expect_daily_reject "p: empty session_ids"             "SCHEMA" '.sessions[0].session_ids = []'
-  expect_daily_reject "p: LLM cannot supply figures"     "SCHEMA" '.sessions[0].active_min = 5'
-  expect_daily_reject "p: LLM cannot supply day figures" "SCHEMA" '.how_i_worked.figures = "active 9h"'
+  expect_daily_reject "p: LLM cannot supply figures"     "SCHEMA" '.sessions[0].session_min = 5'
+  expect_daily_reject "p: LLM cannot supply day figures" "SCHEMA" '.how_i_worked.figures = "session time 9h"'
   expect_daily_reject "p: blocker without rec"           "SCHEMA" '.how_i_worked.blockers[0] |= del(.rec)'
   expect_daily_reject "p: automate wrong type"           "SCHEMA" '.how_i_worked.automate = "x"'
   expect_daily_reject "p: missing how_i_worked"          "SCHEMA" 'del(.how_i_worked)'

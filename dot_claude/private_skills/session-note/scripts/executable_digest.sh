@@ -16,9 +16,10 @@
 #   - the session running this script (CLAUDE_CODE_SESSION_ID)
 #
 # Figures (per session; the day merges overlapping time of parallel sessions once):
-#   active_min      sum of gaps between consecutive entries that day, gaps over 30 min count as away
-#   waiting_min     sum of gaps from the entry before one of my messages to that message (turn end -> my
-#                   reply), same 30 min cap
+#   session_min     "session time": sum of gaps between consecutive entries that day, gaps over 30 min count
+#                   as away; includes autonomous agent work, so it is not my time
+#   waiting_min     "waiting on me": sum of gaps from the entry before one of my messages to that message
+#                   (turn end -> my reply), same 30 min cap; the human-attributable figure
 #   my_messages     my prompts that day (typed text, slash commands, ! shell input)
 #   permission_denials  tool calls denied: rejected by me, by a deny rule, or by the auto-mode classifier
 #
@@ -133,7 +134,7 @@ session_digest() {
             project: $project,
             first: ($day[0].t | strflocaltime("%H:%M")),
             last: ($day[-1].t | strflocaltime("%H:%M")),
-            active_min: ($active | seconds / 60 | round),
+            session_min: ($active | seconds / 60 | round),
             waiting_min: ($waits | seconds / 60 | round),
             my_messages: ($prompts | length),
             permission_denials: ([$day[] | denials] | add // 0),
@@ -162,7 +163,7 @@ day_digest() {
         idle_gap_min: ($idle / 60),
         day: {
           sessions: ($s | length),
-          active_min: ([$s[]._active[]] | union_seconds / 60 | round),
+          session_min: ([$s[]._active[]] | union_seconds / 60 | round),
           waiting_min: ([$s[]._waits[]] | union_seconds / 60 | round),
           my_messages: ([$s[].my_messages] | add // 0),
           permission_denials: ([$s[].permission_denials] | add // 0)

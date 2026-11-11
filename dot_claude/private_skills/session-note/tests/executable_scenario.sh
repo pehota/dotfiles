@@ -56,11 +56,11 @@ scenario_daily() {
     '[ "$n_status" = $((sections - 1)) ] && [ "$(grep -c "^- \*\*Progress:\*\* " "$f")" = "$n_status" ] && [ "$(grep -c "^- \*\*Learnings:\*\*" "$f")" = "$n_status" ] && [ "$(grep -c "^- \*\*Bottlenecks:\*\*" "$f")" = "$n_status" ] && [ "$(grep -c "^- \*\*Next:\*\*" "$f")" = "$n_status" ] && [ "$n_time" = "$n_status" ]'
 
   (unset CLAUDE_CODE_SESSION_ID; bash "$SKILL/scripts/digest.sh" "$DAY") >"$TMP/a-digest.json"
-  local d_active d_waiting d_msgs d_denials d_sessions
-  read -r d_active d_waiting d_msgs d_denials d_sessions < <(jq -r '.day | "\(.active_min) \(.waiting_min) \(.my_messages) \(.permission_denials) \(.sessions)"' "$TMP/a-digest.json")
+  local d_session d_waiting d_msgs d_denials d_sessions
+  read -r d_session d_waiting d_msgs d_denials d_sessions < <(jq -r '.day | "\(.session_min) \(.waiting_min) \(.my_messages) \(.permission_denials) \(.sessions)"' "$TMP/a-digest.json")
   check "a: How I worked sessions equal digest.sh" 'grep -qxF -- "- **Sessions:** $d_sessions" "$f"'
   check "a: How I worked figures equal digest.sh" \
-    'grep -qxF -- "- **Time:** active $(dur "$d_active") · waiting on me $(dur "$d_waiting") · my messages $d_msgs · permission denials $d_denials" "$f"'
+    'grep -qxF -- "- **Time:** session time $(dur "$d_session") · waiting on me $(dur "$d_waiting") · my messages $d_msgs · permission denials $d_denials" "$f"'
   check "a: blockers and automate sections" 'grep -q "^- \*\*Avoidable blockers:\*\*" "$f" && grep -q "^- \*\*Automate or delegate:\*\*" "$f"'
   check "a: gate re-check passes" 'bash "$SKILL/scripts/note.sh" --recheck "$f" >/dev/null'
   cp "$f" "$TMP/a-note.md"

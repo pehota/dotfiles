@@ -100,11 +100,11 @@ Create and fix `facts.json` with the Write or Edit tool. Run each script as one 
 | Part | Source |
 | --- | --- |
 | Frontmatter: single `id`, `source: claude-session`, `created`; daily `source`, `created` | note.sh |
-| Per section `Time:` line: first to last local time, active, waiting on me, my messages, permission denials | digest.sh numbers, inserted after the gate |
+| Per section `Time:` line: first to last local time, session time, waiting on me, my messages, permission denials | digest.sh numbers, inserted after the gate |
 | How I worked `Sessions:` and `Time:` lines (parallel time counted once) | digest.sh numbers, inserted after the gate |
 | Single mode `## Resume` with `claude --resume <id>` | note.sh |
 
-Figures, as digest.sh computes them: **active** sums the gaps between consecutive transcript entries that day, a gap over 30 minutes counts as away; **waiting on me** sums the gaps from the entry before each of my messages to that message (same cap); **my messages** counts typed prompts, slash commands and `!` shell input; **permission denials** counts tool calls rejected by me, a deny rule or the auto-mode classifier (approved prompts leave no trace in the transcript). A grouped section adds up its sessions. Sessions are picked by entry timestamp (Europe/Berlin date), not file mtime; subagent transcripts, sidechain entries and headless runs (`-private-tmp*`, `-private-var-folders-*`, `*-scratchpad-*` folders, `claude -p` sessions) are excluded.
+Figures, as digest.sh computes them: **session time** sums the gaps between consecutive transcript entries that day, a gap over 30 minutes counts as away; it includes autonomous agent work, so it is not my time; **waiting on me** sums the gaps from the entry before each of my messages to that message (same cap), the figure that is mine; **my messages** counts typed prompts, slash commands and `!` shell input; **permission denials** counts tool calls rejected by me, a deny rule or the auto-mode classifier (approved prompts leave no trace in the transcript). A grouped section adds up its sessions. Sessions are picked by entry timestamp (Europe/Berlin date), not file mtime; subagent transcripts, sidechain entries and headless runs (`-private-tmp*`, `-private-var-folders-*`, `*-scratchpad-*` folders, `claude -p` sessions) are excluded.
 
 ## The gate (note.sh)
 
