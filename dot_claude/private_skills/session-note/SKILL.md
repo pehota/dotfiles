@@ -54,7 +54,7 @@ Create and fix `facts.json` with the Write or Edit tool. Run each script as one 
    }
    ```
 
-   All keys required except `session_name`; arrays may be empty. `status`: `in-progress` | `done` | `blocked`. No other keys.
+   All keys required except `session_name`; arrays may be empty. `status`: `in-progress` | `done` | `blocked`. No other keys. Every string is one line: a line break anywhere is a `SCHEMA` reject, in both modes.
 2. Run `bash ~/.claude/skills/session-note/scripts/note.sh <scratchpad>/facts.json`. It validates, gates and upserts by `CLAUDE_CODE_SESSION_ID` (same session, same file).
 3. On a `REJECT` or `SCHEMA` line: rewrite that field without the flagged part and rerun. Done when it exits 0.
 4. Tell the user the printed path. Nothing else.

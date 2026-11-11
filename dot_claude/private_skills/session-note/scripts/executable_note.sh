@@ -39,21 +39,22 @@ die() { local code="$1"; shift; printf 'note.sh: %s\n' "$*" >&2; exit "$code"; }
 # jq definitions shared by both schemas
 readonly JQ_SCHEMA_LIB='
   def nonempty: type == "string" and (gsub("\\s"; "") | length > 0);
-  def oneline: nonempty and (test("[\\n\\r]") | not);
+  # every LLM-written string is one line: a line break could start a heading or a fake figures line
+  def oneline: nonempty and (test("[\\n\\r\u000b\u000c\u0085\u2028\u2029]") | not);
   def strings_array($name):
-    if type == "array" and all(.[]; nonempty) then empty else "\($name): array of non-empty strings required" end;
+    if type == "array" and all(.[]; oneline) then empty else "\($name): array of non-empty single-line strings required" end;
   def each_obj($name; $keys):
     if type != "array" then "\($name): array required"
     else to_entries[]
       | select((.value | type) != "object" or (.value | keys - $keys | length > 0)
-               or any($keys[] as $k | .value[$k]; nonempty | not))
-      | "\($name)[\(.key)]: needs exactly non-empty \($keys | join(", "))"
+               or any($keys[] as $k | .value[$k]; oneline | not))
+      | "\($name)[\(.key)]: needs exactly non-empty single-line \($keys | join(", "))"
     end;
   def unknown_keys($allowed; $where): keys - $allowed | .[] | "unknown key\($where): \(.)";
   def session_fields($p):
     (if .title | oneline then empty else "\($p)title: non-empty single-line string required" end),
     (if .status | IN("in-progress", "done", "blocked") then empty else "\($p)status: must be in-progress|done|blocked" end),
-    (if .progress | nonempty then empty else "\($p)progress: non-empty string required" end),
+    (if .progress | oneline then empty else "\($p)progress: non-empty single-line string required" end),
     (.learnings | strings_array("\($p)learnings")),
     (.bottlenecks | strings_array("\($p)bottlenecks")),
     (.next_steps | strings_array("\($p)next_steps"));'
