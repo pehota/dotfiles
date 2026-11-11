@@ -484,22 +484,28 @@ setup_daily_stubs() {
 #!/usr/bin/env bash
 prompt="$2"
 facts="$(printf '%s' "$prompt" | grep -oE '/[^ ]*/facts\.json' | head -1)"
+day="$(printf '%s' "$prompt" | grep -oE 'daily mode for [0-9]{4}-[0-9]{2}-[0-9]{2}' | grep -oE '[0-9-]{10}$')"
 printf '%s\n' "$*" >"$STUB_ARGS"
+printf '%s\n' "$day" >>"$STUB_ARGS.days"
 [ -n "${STUB_FAIL:-}" ] && exit 7
-cp "$STUB_FACTS" "$facts"
+# STUB_FACTS_DIR/<date>.json wins over STUB_FACTS, so a catch-up run can get facts for each day
+if [ -n "${STUB_FACTS_DIR:-}" ] && [ -f "$STUB_FACTS_DIR/$day.json" ]; then cp "$STUB_FACTS_DIR/$day.json" "$facts"
+else cp "$STUB_FACTS" "$facts"; fi
 echo '{"result":"ok"}'
 EOF
   chmod +x "$TMP/stubbin/osascript" "$TMP/stubbin/claude"
 }
 
-# run_daily <outdir> [date]; returns exit code
+# run_daily <outdir> [date]; raw dir is $RAW (default an empty temp dir); returns exit code
 run_daily() {
   local dir="$1"; shift
-  mkdir -p "$dir"
+  mkdir -p "$dir" "${RAW:-$TMP/raw-empty}"
   (
     export PATH="$TMP/stubbin:$PATH" SESSION_NOTE_DIR="$dir" CLAUDE_PROJECTS_DIR="$TMP/projects" \
+      SESSION_NOTE_RAW_DIR="${RAW:-$TMP/raw-empty}" \
       SESSION_NOTE_DENYLIST="$TMP/denylist.txt" SESSION_NOTE_WORK_ROOT="$TMP/work-root" \
       SESSION_NOTE_LOG="$TMP/daily.log" STUB_ARGS="$TMP/claude.args" STUB_FACTS="${STUB_FACTS:-$DAILY_FACTS}"
+    [ -z "${NOW:-}" ] || export SESSION_NOTE_NOW="$NOW"
     unset CLAUDE_CODE_SESSION_ID
     bash "$DAILY" "$@"
   ) >"$TMP/out" 2>"$TMP/err"
@@ -530,6 +536,42 @@ test_daily_wrapper() {
   check "r: day without sessions -> no claude call, nothing written, exit 0" 'run_daily "$TMP/r-empty" "2026-11-04" && [ ! -e "$TMP/claude.args" ] && [ "$(md_count "$TMP/r-empty")" = 0 ] && [ ! -e "$TMP/osascript.calls" ]'
 }
 
+# --- (s) daily.sh catch-up: a missed evening run is summarised on the next run ---
+
+test_daily_catchup() {
+  local next="2026-11-07" late days
+  late="$(TZ=UTC date -j -f '%Y-%m-%dT%H:%M:%S' '2026-11-07T22:00:00' +%s)"   # 23:00 Berlin on the 7th
+  mkdir -p "$TMP/stubfacts"
+  cp "$DAILY_FACTS" "$TMP/stubfacts/$DAY.json"
+  jq '.sessions |= [.[0]]' "$DAILY_FACTS" >"$TMP/stubfacts/$next.json"   # only session A is active on the 7th
+
+  local dir="$TMP/s-missed"; rm -f "$TMP/claude.args.days"
+  check "s: yesterday missing from inbox and raw -> exit 0" 'NOW="$late" STUB_FACTS_DIR="$TMP/stubfacts" run_daily "$dir"'
+  days="$(tr '\n' ',' <"$TMP/claude.args.days" 2>/dev/null || true)"
+  check "s: yesterday summarised first, then today (got $days)" '[ "$days" = "$DAY,$next," ]'
+  check "s: both notes written" '[ -f "$dir/claude sessions $DAY.md" ] && [ -f "$dir/claude sessions $next.md" ] && [ "$(md_count "$dir")" = 2 ]'
+
+  local raw="$TMP/s-raw"; dir="$TMP/s-inraw"; mkdir -p "$raw"; rm -f "$TMP/claude.args.days"
+  printf '%s\n' '---' 'source: claude-session' "created: $DAY" '---' 'processed' >"$raw/claude sessions $DAY.md"
+  check "s: yesterday already in raw -> exit 0" 'RAW="$raw" NOW="$late" STUB_FACTS_DIR="$TMP/stubfacts" run_daily "$dir"'
+  check "s: yesterday in raw is not regenerated" '[ "$(cat "$TMP/claude.args.days")" = "$next" ] && [ ! -e "$dir/claude sessions $DAY.md" ] && grep -qx processed "$raw/claude sessions $DAY.md"'
+
+  dir="$TMP/s-ininbox"; mkdir -p "$dir"; rm -f "$TMP/claude.args.days"
+  printf '%s\n' '---' 'source: claude-session' "created: $DAY" '---' 'kept' >"$dir/claude sessions $DAY.md"
+  NOW="$late" STUB_FACTS_DIR="$TMP/stubfacts" run_daily "$dir" || true
+  check "s: yesterday in inbox is not regenerated" '[ "$(cat "$TMP/claude.args.days")" = "$next" ] && grep -qx kept "$dir/claude sessions $DAY.md" && [ -f "$dir/claude sessions $next.md" ]'
+
+  dir="$TMP/s-explicit"; rm -f "$TMP/claude.args.days"
+  STUB_FACTS_DIR="$TMP/stubfacts" run_daily "$dir" "$next" || true
+  check "s: an explicit date runs that day only" '[ "$(cat "$TMP/claude.args.days")" = "$next" ] && [ "$(md_count "$dir")" = 1 ]'
+
+  dir="$TMP/s-fail"; rm -f "$TMP/osascript.calls" "$TMP/claude.args.days"
+  jq '.sessions[0].title = "acme-portal fix (work)"' "$DAILY_FACTS" >"$TMP/stubfacts/$DAY.json"
+  local rc; NOW="$late" STUB_FACTS_DIR="$TMP/stubfacts" run_daily "$dir" && rc=0 || rc=$?
+  check "s: failed catch-up -> exit 1, notification for that day" '[ "$rc" = 1 ] && grep -q "display notification.*$DAY" "$TMP/osascript.calls"'
+  check "s: failed catch-up still writes today" '[ ! -e "$dir/claude sessions $DAY.md" ] && [ -f "$dir/claude sessions $next.md" ]'
+}
+
 # --- main -------------------------------------------------------------------
 
 main() {
@@ -552,6 +594,7 @@ main() {
   test_daily_schema
   test_recheck
   test_daily_wrapper
+  test_daily_catchup
   echo "---"
   echo "passed: $PASS  failed: $FAIL"
   [ "$FAIL" = 0 ]

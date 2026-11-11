@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # End-to-end: kickstart the real launchd job, wait for it, check the real inbox note.
 # Usage: tests/e2e.sh   (exit 0 = green). Writes one real note for the job's date (today, or yesterday
-# before 06:00) into ~/Work/mine/obsidian-vault/brain/inbox. Costs one Sonnet run.
+# before 06:00) into ~/Work/mine/obsidian-vault/brain/inbox. Costs one Sonnet run, two when the day
+# before has no note in the inbox or raw (catch-up); the check waits for the job's own date.
 set -euo pipefail
 
 readonly HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -24,7 +25,7 @@ main() {
   launchctl kickstart -k "$TARGET"
   local waited=0 result=""
   while [ "$waited" -lt "$WAIT_SECONDS" ]; do
-    result="$(tail -n "+$((step1_lines + 1))" "$LOG" 2>/dev/null | grep -E '^[0-9T:+-]+ (ok|FAIL) ' | tail -1 || true)"
+    result="$(tail -n "+$((step1_lines + 1))" "$LOG" 2>/dev/null | grep -E "^[0-9T:+-]+ (ok .*claude sessions $step1_date\\.md|ok no sessions on $step1_date|FAIL )" | tail -1 || true)"
     [ -z "$result" ] || break
     sleep 10; waited=$((waited + 10))
   done
