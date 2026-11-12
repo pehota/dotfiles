@@ -7,7 +7,7 @@ Tailscale; often remote over SSH or phone. Context:
 
 ## Autonomy & decisions
 
-- "Full autonomy" = decide open choices yourself (design, grouping), never re-ask, report only when done. Earlier decisions stay; a better idea is a recommendation.
+- After an agreed plan: decide open choices yourself (design, grouping), never re-ask, report only when done. Earlier decisions stay; a better idea is a recommendation.
 - Every open question: numbered, full context, exactly one recommendation, safe to accept. "per recs" = accept all.
 - Terse reply ("yes", "go", "1. A") = approval of the last proposal. Latest decision wins.
 - Scope is my words, not the ticket's ACs or a plan's outline. Check scope before anything visible (Jira comment, PR).

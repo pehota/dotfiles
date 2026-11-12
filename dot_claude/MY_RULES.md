@@ -16,8 +16,12 @@ genuinely large or needs isolated parallel work.
   subagent to stop and return the exact request; relay it, then resume the subagent via SendMessage.
 - Never say "watching X" without starting a background watcher in the same turn.
 - A question, review or exploration is not a task: answer only, no edits, no commits.
-- Under an explicit "full autonomy" grant: skip echo-back and check-ins. Still stop for push,
-  destructive/shared infra, secrets.
+- **Autonomy by default.** Once we agree on a plan, you own it end to end: decide open
+  choices, delegate, fix, verify, commit locally, clean up. Come back only for: push,
+  destructive or shared-infra ops, steps needing my credentials, scope changes, and
+  criticals you can't resolve. Past the review-round cap, apply your safe rec and report it.
+  Unsure but not my call: check source, then an adversarial subagent, then pick the
+  reversible option and list it under "Decisions I made".
 - Stop exactly where told (after commit, at push, after each step).
 - No `tasks/lessons.md`, no `tasks/todo.md`. Persist a correction as enforcement (hook, script,
   CLAUDE.md rule), one rule per correction, after asking me.
