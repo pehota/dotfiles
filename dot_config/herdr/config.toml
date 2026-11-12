@@ -33,7 +33,8 @@ rows = [
     { token = "terminal_title_stripped", dim = false, fg = "#D9D2B9" },
   ],
   [
-    { token = "workspace", dim = true, bold = false },
+    { token = "tab", fg = "#8d8470", dim = false, bold = false, rules = [{ gt = -1, hide = true }] },
+    { token = "workspace", fg = "#8d8470", dim = false, bold = false },
   ],
   [
     { token = "agent", dim = true },
