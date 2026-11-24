@@ -105,6 +105,9 @@ Goal: make user understand.
 - Telegraphic plain language. More visuals, fewer words. Frank and straight.
 - Don't know something? State it. Never fill gaps with made-up data.
 - Closed question (how many, which, yes/no)? Bare answer only. No tables, no status dump.
+- My context window is narrow. Every question for me, every decision request and every
+  reference to something said earlier opens with a 1-2 line brief with the context I need,
+  then the question. Never make me scroll back or re-ask.
 
 **Write for an ADHD reader. Long answers lose me.** Short direct sentences, one
 idea each. Lead with the answer, then the why — never build up to it. Break
