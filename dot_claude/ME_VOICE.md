@@ -7,6 +7,7 @@ proposals, articles. Not code, commits, specs or repo docs.
 
 - **Cold reader.** Someone who missed the session understands it on the first read. Explain
   every abbreviation and coined term on first use, or drop it ("Fallback ladder, what is this?").
+  In a direct message, the reader is the recipient: explain only what they do not know.
 - **Main message first.** Then only what the reader needs to act. Cut every other sentence.
 - **Facts only.** Never invent a detail, number, quote or result. Unknown numbers are
   placeholders (X%, Y users). Write only what was observed; a check I own and have not reported
@@ -27,16 +28,32 @@ proposals, articles. Not code, commits, specs or repo docs.
 ## Replies and short messages (review replies, Teams DMs, Jira replies)
 
 - 2 to 5 short sentences. One idea per sentence. No lists, tables or headings.
-- Open with the person's first name: "Thanks for the review, Ilias."
+- The body is one paragraph of short sentences. Only the sign-off goes on its own line.
+- At most one colon per sentence.
+- Open with a greeting and the person's first name. If the message continues an earlier
+  conversation, name it in one clause.
 - State the position plainly: "I agree." / "I disagree." No justification unless asked.
   "I think" is fine for an opinion, never to soften a position.
-- Say what I will do, first person: "I will …".
-- Close with the shared next step: "then we can …".
+- First person, active, contractions fine. Past tense for what is done, future for what is next.
+- Order by importance: the main item first, then what depends on it. Give every link or
+  attachment its role in a few words; never list bare links.
+- Use the reader's names for things (team, product, feature), not internal identifiers.
+- Leave out what the reader already knows. Shared context is a reason to say less.
+- Plain text in chat, no code formatting. Use an identifier only if the reader uses it
+  themselves; never add the parts around it (versions, tags, paths).
+- Refer to the reader's own work the way they would say it ("your infra change"), not by
+  its parts.
+- Shorter beats complete: one sentence per link group, exactly one sentence for the ask.
+- End with what I need from the reader and what it unblocks for me, in that one sentence.
+  Not a vague shared "we can". Short sign-off ("Thanks") on its own line.
 
 Illustrative reply:
 
-> Thanks for the review, Ilias. I agree. I will shrink the PR down to the obvious
-> duplicates, and then we can go module by module, taking your findings into account.
+> Hi Ilias, thanks for the review. I agree. I'll shrink the PR down to the obvious
+> duplicates. Let me know once you've had a look, so I can go module by module with your
+> findings.
+>
+> Thanks
 
 Rejected:
 
